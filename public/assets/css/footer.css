@@ -1,0 +1,42 @@
+footer{
+    width: 100%;
+}
+
+
+
+.img_facade{
+    width: 100%;
+    height: 100px;
+    background: url("../images/facade.png") center ;
+}
+
+.container_cabinet{
+    height: 300px;
+    background: #4E5055;
+    padding: 18px;
+    
+}
+
+.content_cabinet ul{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.content_cabinet{
+    position: relative;
+    height: 300px;
+    color:white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    }
+.footer_content-btnRdv {
+    height: 100px;
+}
+.btn_footer{
+    height: 25px;
+    background-color: white;
+    display: block;
+}
