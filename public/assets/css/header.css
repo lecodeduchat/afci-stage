@@ -1,16 +1,78 @@
 header{
     width:100%;
 }
+/* HEADER NAVIGATION AND BUTTON RDV */
 .header_content{
     width:100%;
     height:51px;
     border-bottom: 1px solid #ddd;
+    display: flex;
+    flex-direction: row;
 }
+.header_content .main_menu,
+.header_content-btnRdv
+{
+    width:50%;
+    height: 50px;
+}
+.header_content .main_menu{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-family: 'Montserrat';
+    font-size: 14px;
+    font-weight: bold;
+    padding-left: 18px;
+}
+.header_content .main_menu-btn{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.header_content .main_menu-btn .fa-bars{
+    font-size:24px;
+    padding-right: 18px;
+}
+.header_content .main_menu-list{
+    display:none;
+    list-style:none;
+    position:absolute;
+    top:51px;
+    left:0;
+    background-color: var(--main-bg-color-purple);
+    width:50%;
+    height: 200px; /* 50px par nombre de li */
+}
+.header_content .main_menu-list--open{
+    display: block;
+}
+.main_menu-item{
+    height:50px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 18px;
+}
+.main_menu-link{
+    font-size: 15px;
+    font-weight: bold;
+}
+.header_content-btnRdv{
+    background-color: var(--main-bg-color-lavender);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+/* HEADER LOGO */
 .header_logo{
     display: flex;
     flex-direction: row;
     width:100%;
     height:80px;
+    border-bottom: 2px solid #ddd;
 }
 .header_logo-img{
     width:80px;
@@ -24,7 +86,6 @@ header{
     justify-content: center;
     align-items: center;
     height:80px;
-    background: pink;
 }
 .header_logo-text .name{
     font-family: 'Sauna-bold';
