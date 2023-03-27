@@ -2,10 +2,56 @@
 @import url("footer.css");
 *, ::before, ::after {margin: 0;padding: 0;box-sizing: border-box;}
 
- header{
-    background-color: chartreuse;
- }
+:root{
+   --main-color-lavender: #B260B4;
+   --main-color-purple: #625EBC;
+   --main-color-gray: #4E5055;
+   --main-color-light-gray: #ddd;
+   --main-color-blue: #46BAD2;
+   --main-color-vanilla: #FFECAD;
+   --main-bg-color-lavender: rgba(178,96,180,1);
+   --main-bg-color-purple: rgba(98,94,188,1);
+   --main-bg-color-gray: rgba(78,80,85,1);
+   --main-bg-color-blue: rgba(70,186,210,1);
+   --main-bg-color-vanilla: rgba(255,236,173,1);
+}
 
- footer{
-    background-color: lightblue;
+body{
+   font-family:Verdana, Geneva, Tahoma, sans-serif;
+   font-size:14px;
+}
+@font-face {
+   font-family: 'Sauna-bold';
+   src: url('../fonts/sauna-bold.otf');
+}
+@font-face{
+   font-family: 'Montserrat';
+   src: url('../fonts/Montserrat/Montserrat/Montserrat-Regular.ttf');
+   font-weight: normal;
+}
+@font-face{
+   font-family: 'Montserrat';
+   src: url('../fonts/Montserrat/Montserrat/Montserrat-Bold.ttf');
+   font-weight: bold;
+}
+@font-face{
+   font-family: 'Montserrat';
+   src: url('../fonts/Montserrat/Montserrat/Montserrat-SemiBold.ttf');
+   font-weight: 500;
  }
+@font-face{
+   font-family: 'Libre Baskerville';
+   src: url('../fonts/Libre_Baskerville/LibreBaskerville-Italic.ttf');
+   font-style:italic;
+}
+a.link, a.btn{
+   text-decoration: none;
+   color: #000;
+}
+a.btn{
+   
+   color: #fff;
+   font-family: 'Montserrat';
+   font-weight: bold;
+   font-size: 14px;
+}
