@@ -1,4 +1,6 @@
- *, ::before, ::after {margin: 0;padding: 0;box-sizing: border-box;}
+@import url("header.css");
+@import url("footer.css");
+*, ::before, ::after {margin: 0;padding: 0;box-sizing: border-box;}
 
  header{
     background-color: chartreuse;
