@@ -1,0 +1,273 @@
+/* HOME BLOC ------------------------------------------------------------- */
+.home_container{
+    position:relative;
+    background: url('../images/cabinet-01.jpg') center/cover no-repeat;
+    height:300px;
+}
+.home_container::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(178,96,180,0.4);
+}
+.home_content{
+    position:relative;
+    width: 50%;
+    height: 100%;
+    margin-left:50%;
+    background-color: rgba(255,255,255,0.8);
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center; */
+}
+.home_content::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -80px;  /* left = border-left + border-right*/
+    width: 0;
+    height: 100%;
+    border-left: 40px solid transparent;
+    border-top: 150px solid transparent;
+    border-right: 40px solid rgba(255,255,255,0.8);
+    border-bottom: 150px solid rgba(255,255,255,0.8);
+}
+.home_content-text{
+    position:absolute;
+    right:10%;
+    top:30%;
+    height:60%;
+    width:200px;
+    text-align: center;
+    margin: 0 auto;
+    line-height: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size:12px;
+}
+.home_content-text span{
+    font-weight: bold;
+}
+/*  QUOTE BLOC --------------------------------------------------------------- */
+.quote_container{
+    background-color: var(--main-bg-color-purple);
+    height:80px;
+    
+}
+.quote_content{
+    height:100%;
+    color:white;
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 14px, 1.4rem);
+    line-height: 30px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 10px; 
+}
+/* ABOUT BLOC ------------------------------------------------------------------ */
+.about_container{
+    width:100%;
+}
+.about_content-title{
+    margin-top:30px;
+    margin-bottom: 30px;
+}
+.about_content-photos{
+    position:relative;
+    width:290px;
+    height: 300px;
+    margin:0 auto;
+}
+.about_content-photos-1{
+    position:absolute;
+    top:0;
+    left:0;
+    background: url('../images/cabinet-01.jpg') center/cover no-repeat;
+    width:200px;
+    height:200px;
+    border-radius: 50%;
+}
+.about_content-photos-2{
+    position:absolute;
+    top:40px;
+    left:120px;
+    background: url('../images/cabinet-02.jpg') center/cover no-repeat;
+    width:180px;
+    height:180px;
+    border-radius: 50%;
+    border: 8px solid white;
+}
+.about_content-photos-3{
+    position:absolute;
+    top:120px;
+    left:60px;
+    background: url('../images/charlotte-profil.png') center/cover no-repeat;
+    width:180px;
+    height:180px;
+    border-radius: 50%;
+    border: 8px solid white;
+}
+.about_content-text{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 14px;
+    line-height: 24px;
+    padding-bottom: 32px;
+}
+.about_content-text .readMore{
+    width:150px;
+    height:50px;
+    border-radius: 10px;
+    font-weight: bold;
+    color:white;
+    background-color: var(--main-bg-color-lavender);
+    text-align: center;
+    line-height: 50px;
+    margin: 18px auto; 
+}
+/* BLOC SEPARATOR PHOTOS ------------------------------------------------------------ */
+.separator-photos{
+    width:100%;
+    height: 90px;
+    display: flex;
+    flex-direction: row;
+}
+.separator-photo{
+    width:33%;
+    height: 100%;
+}
+.separator-photo:nth-of-type(1){
+    background: url('../images/sportif.webp') center/cover no-repeat;
+    display:none;
+}
+.separator-photo:nth-of-type(2){
+    background: url('../images/femme-enceinte.webp') center/cover no-repeat;
+}
+.separator-photo:nth-of-type(3){
+    background: url('../images/adolescents.webp') center/cover no-repeat;
+    display:none;
+}
+.separator-photo:nth-of-type(4){
+    background: url('../images/pediatrie.webp') center/cover no-repeat;
+}
+.separator-photo:nth-of-type(5){
+    background: url('../images/senoir.webp') center/cover no-repeat;
+}
+.separator-photo:nth-of-type(6){
+    background: url('../images/manipulation-02.jpg') center/cover no-repeat;
+    display:none;
+}
+/* BLOC FORWHOM --------------------------------------------------------------------- */
+.forWhom_content-title{
+    margin-top:30px;
+    margin-bottom: 20px;
+}
+.forWhom_content{
+    padding-bottom: 32px;
+}
+@media screen and (min-width: 450px) {
+    .home_content-text{
+        width:100%;
+        position:relative;
+        right:0;
+        top:20%;
+    }
+}
+@media screen and (min-width: 768px) {
+    .home_content-text{
+        font-size: 14px;
+    }
+    .quote_container{
+        height:100px;
+    }
+    .quote_content{
+        font-size: 18px;
+    }
+    .separator-photos{
+        height: 150px;
+    }
+    .separator-photo{
+        width:25%;
+        height: 100%;
+    }
+    .separator-photo:nth-of-type(3){
+        display:block;
+    }
+}
+@media screen and (min-width: 998px) {
+    .separator-photo:nth-of-type(6){
+        display:block;
+    }
+    .about_content{
+        display:flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    .about_content-title{
+        width:100%;
+    }
+    .about_content-text{
+        width:50%;
+    }
+    .about_content-photos{
+        margin: 0 10%;
+        width:30%;
+    }
+    .about_content-photos-1{
+        left:auto;
+        right: 112px;
+    }
+    .about_content-photos-2{
+        left:auto;
+        right: -8px;
+    }
+    .about_content-photos-3{
+        left:auto;
+        right: 60px;
+    }
+    .about_content-text{
+        padding-bottom: 0;
+    }
+}
+@media screen and (min-width: 1200px) {
+    .home_container{
+        height: 600px;
+    }
+    .home_content::before{
+        left: -150px;  /* left = border-left + border-right*/
+        border-left: 75px solid transparent;
+        border-top: 300px solid transparent;
+        border-right: 75px solid rgba(255,255,255,0.8);
+        border-bottom: 300px solid rgba(255,255,255,0.8);
+    }
+    .home_content-text{
+        width:50%;
+        margin-left:10%;
+        /* margin-right: 60%; */
+    }
+    .quote_content{
+        font-size: 24px;
+    }
+    .about_content{
+        width: 1200px;
+        margin:0 auto;
+    }
+    .separator-photo:nth-of-type(1){
+        display:block;
+    }
+    .forWhom_content{
+        width:1200px;
+        margin:0 auto;
+    }
+}
+@media screen and (min-width: 1300px) {
+
+}

@@ -18,7 +18,11 @@ header{
     width: 100%;
      height: 50px;
 }
-
+.header_content .main_menu:hover,
+    .header_content-btnRdv:hover
+    {
+        cursor: pointer;
+    }
 .header_content .main_menu{
     display: flex;
     flex-direction: row;
@@ -81,7 +85,7 @@ header{
 .header_logo-img{
     width:80px;
     height:80px;
-    background: #fff url('../images/logo-chiro.png') center/50% no-repeat;
+    background:url('../images/logo-chiro.png') center/50% no-repeat;
 }
 .header_logo-text{
     width:calc(100% - 80px);
@@ -112,6 +116,7 @@ header{
     {
         width: 200px;
     }
+    
     .main_menu{
         grid-column: 1/2;
     }
@@ -156,47 +161,79 @@ header{
         justify-content: flex-end;
         padding-right: 18px;
     }
+    .header_content .main_menu-list{
+        top:130px;
+        right:0;
+        left:auto;
+        width: 300px;
+    }
     .header_content-btnRdv{
         max-width:200px;
     }
 }
 @media screen and (min-width: 1200px) {
     .header_container{
+        width: 1200px;
+        margin: 0 auto;
         grid-template-columns: 400px 1fr;
     }
-    .header_content,
-    .header_logo{
-        max-width: 1200px;
-        margin: 0 auto;
-    }
     .header_content{
+        grid-column: 2/3;
         display: grid;
         grid-template-columns: 1fr 200px;
-        grid-column: 2/3;
-        
     }
     .header_content-btnRdv{
-        width:200px;
+        width:100%;
+        grid-column: 2/3; /* obligatoire quand on utilise grid-template-columns */
     }
     .header_content .main_menu{
+        position:relative;
         height:130px;
-        width:auto;
+        width: auto;
+        grid-column: 1/2;
         padding-right: 0;
     }
     .header_content .main_menu-list{
-        width:100%;
-        height:100%;
+        position:relative;
         top:0;
+        width:100%;
+         /* min-width:500px; */
+        height:100%;
         display:flex;
         flex-direction: row;
         justify-content: space-around;
         align-items: center;
-        position:relative;
         background-color: #fff;
     }
     .header_content .main_menu-item{
+        position:relative;
         padding-left: 0;
     }
+    /* .header_content .main_menu-item:hover{
+        border-bottom: 2px solid var(--main-color-purple);
+    } */
+    .header_content .main_menu-item:hover .main_menu-link::after{
+        content:"";
+        display:block;
+        position:absolute;
+        bottom:0;
+        left:0;
+        width:1%;
+        height:3px;
+        background-color: var(--main-bg-color-purple);
+        animation: 0.4s linear 0s forwards animMenu;
+    }
+    @keyframes animMenu{
+        from{
+            width:1%;
+            left:50%;
+        }
+        to{
+            width:100%;
+            left:0%;
+        }
+    }
+
     .header_content .main_menu-btn{
         display: none;
     }
