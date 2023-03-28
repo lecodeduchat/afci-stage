@@ -1,7 +1,8 @@
 "use strict";
-console.log("coucou");
+// Ouverture et fermeture du menu principale ---------------------------------
 const btnMainMenu = document.querySelector(".main_menu-btn");
 const mainMenu = document.querySelector(".main_menu-list");
+const burger = btnMainMenu.querySelector(".fa-bars");
 
 btnMainMenu.addEventListener("click", function () {
   console.log("click");
@@ -9,6 +10,7 @@ btnMainMenu.addEventListener("click", function () {
 });
 
 
+// Google Map ---------------------------------------------------------------
 let map;
 const haubourdin = { lat: 50.611784712322354, lng: 2.975147782208914 };
 

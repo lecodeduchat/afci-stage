@@ -50,6 +50,7 @@ header{
     background-color: var(--main-bg-color-purple);
     width:50%;
     height: 200px; /* 50px par nombre de li */
+    z-index: 3;
 }
 .header_content .main_menu-list--open{
     display: block;
