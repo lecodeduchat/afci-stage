@@ -54,7 +54,7 @@
 }
 /*  QUOTE BLOC --------------------------------------------------------------- */
 .quote_container{
-    background-color: var(--main-bg-color-purple);
+    background-color: var(--main-bg-color-purple-light);
     height:80px;
     
 }
@@ -188,7 +188,7 @@
         height:100px;
     }
     .quote_content{
-        font-size: 18px;
+        font-size: 22px;
     }
     .separator-photos{
         height: 150px;

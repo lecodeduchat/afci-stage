@@ -11,7 +11,9 @@
    --main-color-blue: #46BAD2;
    --main-color-vanilla: #FFECAD;
    --main-bg-color-lavender: rgba(178,96,180,1);
-   --main-bg-color-purple: rgba(98,94,188,0.6);
+   --main-bg-color-lavender-light: rgba(178,96,180,0.4);
+   --main-bg-color-purple: rgba(98,94,188,1);
+   --main-bg-color-purple-light: rgba(98,94,188,0.6);
    --main-bg-color-gray: rgba(78,80,85,1);
    --main-bg-color-blue: rgba(70,186,210,1);
    --main-bg-color-vanilla: rgba(255,236,173,1);
