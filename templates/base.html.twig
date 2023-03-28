@@ -14,11 +14,14 @@
             <link href="/assets/fontawesome/css/fontawesome.css" rel="stylesheet">
             <link href="/assets/fontawesome/css/brands.css" rel="stylesheet">
             <link href="/assets/fontawesome/css/solid.css" rel="stylesheet">
+            
         {% endblock %}
 
         {% block javascripts %}
             {# {{ encore_entry_script_tags('app') }} #}
+            <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWh921gdpP63AAGNR6wB9ZENUwOCF7nPU&callback=initMap" defer></script>
             <script src="/assets/js/script.js" defer></script>
+            
         {% endblock %}
     </head>
     <body>
