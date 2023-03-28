@@ -1,5 +1,6 @@
 @import url("header.css");
 @import url("footer.css");
+@import url("home.css");
 *, ::before, ::after {margin: 0;padding: 0;box-sizing: border-box;}
 
 :root{
@@ -10,7 +11,7 @@
    --main-color-blue: #46BAD2;
    --main-color-vanilla: #FFECAD;
    --main-bg-color-lavender: rgba(178,96,180,1);
-   --main-bg-color-purple: rgba(98,94,188,1);
+   --main-bg-color-purple: rgba(98,94,188,0.6);
    --main-bg-color-gray: rgba(78,80,85,1);
    --main-bg-color-blue: rgba(70,186,210,1);
    --main-bg-color-vanilla: rgba(255,236,173,1);
@@ -44,12 +45,25 @@ body{
    src: url('../fonts/Libre_Baskerville/LibreBaskerville-Italic.ttf');
    font-style:italic;
 }
-a.link, a.btn{
+.link, .btn{
    text-decoration: none;
    color: #fff;
 }
-a.btn{
+.btn{
    font-family: 'Montserrat';
    font-weight: bold;
    font-size: 14px;
+}
+h2{
+   font-family: 'Sauna-bold';
+   font-size: 32px;
+   color: var(--main-color-lavender);
+   text-align: center;
+   padding: 6px 0;
+}
+p{
+   font-family: Verdana, Geneva, Tahoma, sans-serif;
+   font-size: 14px;
+   line-height: 24px;
+   padding:18px;
 }
