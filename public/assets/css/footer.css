@@ -34,9 +34,26 @@ footer{
     }
 .footer_content-btnRdv {
     height: 100px;
+    position: relative;
+    left: 36px;
 }
 .btn_footer{
-    height: 25px;
-    background-color: white;
+    padding-top: 10px;
+    height: 60px;
+    width: 280px;
+    text-align: center;
+    background-color: rgba(255,236,173,1);
     display: block;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+/*  google maps  */
+.map_container{
+    height: 300px;
+    width: 100%;
+}
+
+#map{
+    height: 100%;
 }
