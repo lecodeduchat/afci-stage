@@ -1,71 +1,145 @@
 @import url("header.css");
 @import url("footer.css");
 @import url("home.css");
-*, ::before, ::after {margin: 0;padding: 0;box-sizing: border-box;}
-
-:root{
-   --main-color-lavender: #B260B4;
-   --main-color-purple: #625EBC;
-   --main-color-gray: #4E5055;
-   --main-color-light-gray: #ddd;
-   --main-color-blue: #46BAD2;
-   --main-color-vanilla: #FFECAD;
-   --main-bg-color-lavender: rgba(178,96,180,1);
-   --main-bg-color-lavender-light: rgba(178,96,180,0.4);
-   --main-bg-color-purple: rgba(98,94,188,1);
-   --main-bg-color-purple-light: rgba(98,94,188,0.6);
-   --main-bg-color-gray: rgba(78,80,85,1);
-   --main-bg-color-blue: rgba(70,186,210,1);
-   --main-bg-color-vanilla: rgba(255,236,173,1);
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body{
-   font-family:Verdana, Geneva, Tahoma, sans-serif;
-   font-size:14px;
+:root {
+  --main-color-lavender: #b260b4;
+  --main-color-purple: #625ebc;
+  --main-color-gray: #4e5055;
+  --main-color-light-gray: #ddd;
+  --main-color-blue: #46bad2;
+  --main-color-vanilla: #ffecad;
+  --main-bg-color-lavender: rgba(178, 96, 180, 1);
+  --main-bg-color-lavender-light: rgba(178, 96, 180, 0.4);
+  --main-bg-color-purple: rgba(98, 94, 188, 1);
+  --main-bg-color-purple-light: rgba(98, 94, 188, 0.6);
+  --main-bg-color-gray: rgba(78, 80, 85, 1);
+  --main-bg-color-blue: rgba(70, 186, 210, 1);
+  --main-bg-color-vanilla: rgba(255, 236, 173, 1);
+}
+
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 14px;
 }
 @font-face {
-   font-family: 'Sauna-bold';
-   src: url('../fonts/sauna-bold.otf');
+  font-family: "Sauna-bold";
+  src: url("../fonts/sauna-bold.otf");
 }
-@font-face{
-   font-family: 'Montserrat';
-   src: url('../fonts/Montserrat/Montserrat-Regular.ttf');
-   font-weight: normal;
+@font-face {
+  font-family: "Montserrat";
+  src: url("../fonts/Montserrat/Montserrat-Regular.ttf");
+  font-weight: normal;
 }
-@font-face{
-   font-family: 'Montserrat';
-   src: url('../fonts/Montserrat/Montserrat-Bold.ttf');
-   font-weight: bold;
+@font-face {
+  font-family: "Montserrat";
+  src: url("../fonts/Montserrat/Montserrat-Bold.ttf");
+  font-weight: bold;
 }
-@font-face{
-   font-family: 'Montserrat';
-   src: url('../fonts/Montserrat/Montserrat-SemiBold.ttf');
-   font-weight: 500;
- }
-@font-face{
-   font-family: 'Libre Baskerville';
-   src: url('../fonts/Libre_Baskerville/LibreBaskerville-Italic.ttf');
-   font-style:italic;
+@font-face {
+  font-family: "Montserrat";
+  src: url("../fonts/Montserrat/Montserrat-SemiBold.ttf");
+  font-weight: 500;
 }
-.link, .btn{
-   text-decoration: none;
-   color: #fff;
+@font-face {
+  font-family: "Libre Baskerville";
+  src: url("../fonts/Libre_Baskerville/LibreBaskerville-Italic.ttf");
+  font-style: italic;
 }
-.btn{
-   font-family: 'Montserrat';
-   font-weight: bold;
-   font-size: 14px;
+.link,
+.btn {
+  text-decoration: none;
+  color: #fff;
 }
-h2{
-   font-family: 'Sauna-bold';
-   font-size: 32px;
-   color: var(--main-color-lavender);
-   text-align: center;
-   padding: 6px 0;
+
+h2 {
+  font-family: "Sauna-bold";
+  font-size: 32px;
+  color: var(--main-color-lavender);
+  text-align: center;
+  padding: 6px 0;
 }
-p{
-   font-family: Verdana, Geneva, Tahoma, sans-serif;
-   font-size: 14px;
-   line-height: 24px;
-   padding:18px;
+p {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 14px;
+  line-height: 24px;
+  padding: 18px;
+}
+/* ANIMATION BUTTONS CALL-ACTION ----------------------------------------------------- */
+.btn {
+  width: 200px;
+  font-family: "Montserrat";
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 50px;
+  text-align: center;
+  height: 50px;
+  border: none;
+  outline: none;
+  background-color: var(--main-bg-color-lavender);
+  color: #fff;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+}
+.btn::before {
+  position: absolute;
+  content: "";
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  left: -2px;
+  top: -2px;
+  background: linear-gradient(
+    124deg,
+    #ff2400,
+    #e81d1d,
+    #e8b71d,
+    #e3e81d,
+    #1de840,
+    #1ddde8,
+    #2b1de8,
+    #dd00f3,
+    #dd00f3
+  );
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  animation: animBtnRdv 20s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 10px;
+}
+.btn:hover::before {
+  opacity: 1;
+}
+.btn::after {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: var(--main-bg-color-lavender);
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+@keyframes animBtnRdv {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
 }
