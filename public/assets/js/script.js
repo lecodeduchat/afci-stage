@@ -25,7 +25,7 @@ window.addEventListener("scroll", () => {
     headerContent.style.borderBottom = "0px solid #ddd";
   } else {
     gradientColorBar.style.position = "relative";
-    gradientColorBar.style.top = "";
+    gradientColorBar.style.top = "auto";
     headerContent.style.borderBottom = "1px solid #ddd";
   }
   if (window.scrollY > 150 && window.innerWidth > 768) {
