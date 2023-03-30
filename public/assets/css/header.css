@@ -136,11 +136,18 @@ header {
   );
   z-index: 6;
 }
-.gradient-color-bar--fixed {
+/* .test {
+  height: 10px;
   position: fixed;
   top: 50px;
   left: 0;
-  z-index: 4;
+  z-index: 6;
+} */
+.gradient-color-bar--fixed-mobile {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  z-index: 6;
 }
 @media screen and (min-width: 380px) {
   .header_content {
@@ -168,11 +175,48 @@ header {
   }
 }
 @media screen and (min-width: 768px) {
-  header {
+  /* AU SCROLL DE LA PAGE - modification du header grâce à la class .header--fixed */
+  .header--fixed {
     position: fixed;
     top: 0;
     left: 0;
+    height: 58px;
   }
+  .header--fixed .header_container {
+    grid-template-rows: 58px;
+  }
+  .header--fixed .header_content {
+    height: 58px;
+  }
+  .header--fixed .header_logo {
+    height: 58px;
+  }
+  .header--fixed .header_logo-img {
+    width: 58px;
+    height: 58px;
+  }
+  .header--fixed .header_logo-text {
+    width: calc(100% - 58px);
+    height: 58px;
+  }
+  .header--fixed .header_logo-text .name {
+    font-size: clamp(0.8rem, 18px, 1.6rem);
+    line-height: 30px;
+  }
+  .header--fixed .header_logo-text .profession {
+    font-size: clamp(0.6rem, 12px, 1.2rem);
+    line-height: 20px;
+  }
+  .gradient-color-bar--fixed {
+    position: fixed;
+    top: 58px;
+    left: 0;
+    z-index: 4;
+  }
+  .main_menu-list--fixed {
+    top: 60px;
+  }
+  /* HEADER normal version tablette */
   .header_container {
     display: grid;
     grid-template-columns: 384px 1fr 384px;
@@ -188,21 +232,6 @@ header {
     height: 130px;
     align-items: center;
     margin-top: 0;
-  }
-  .header_logo-fixed {
-    height: 58px;
-  }
-  .header_logo-fixed .header_logo-img {
-    width: 58px;
-    height: 58px;
-  }
-  .header_logo-fixed .header_logo-text .name {
-    font-size: 20px;
-    line-height: 20px;
-  }
-  .header_logo-fixed .header_logo-text .profession {
-    font-size: 10px;
-    line-height: 10px;
   }
   .header_logo-img {
     width: 130px;
@@ -269,9 +298,6 @@ header {
     position: relative;
     padding-left: 0;
   }
-  /* .header_content .main_menu-item:hover{
-        border-bottom: 2px solid var(--main-color-purple);
-    } */
   .header_content .main_menu-item:hover .main_menu-link::after {
     content: "";
     display: block;
@@ -306,7 +332,6 @@ header {
       left: 0%;
     }
   }
-
   .header_content .main_menu-btn {
     display: none;
   }
@@ -315,5 +340,46 @@ header {
   }
   .main_menu-link.link {
     color: var(--main-color-purple);
+  }
+  /* AU SCROLL DE LA PAGE - modification du header grâce à la class .header--fixed */
+  .header--fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100px;
+  }
+  .header--fixed .header_container {
+    grid-template-rows: 100px;
+  }
+  .header--fixed .header_content {
+    height: 100px;
+  }
+  .header--fixed .header_logo {
+    height: 100px;
+  }
+  .header--fixed .header_logo-img {
+    width: 100px;
+    height: 100px;
+  }
+  .header--fixed .header_logo-text {
+    width: calc(100% - 100px);
+    height: 100px;
+  }
+  .header--fixed .header_logo-text .name {
+    font-size: clamp(0.8rem, 18px, 1.6rem);
+    line-height: 30px;
+  }
+  .header--fixed .header_logo-text .profession {
+    font-size: clamp(0.6rem, 12px, 1.2rem);
+    line-height: 20px;
+  }
+  .header--fixed .main_menu {
+    height: 100px;
+  }
+  .gradient-color-bar--fixed {
+    position: fixed;
+    top: 100px;
+    left: 0;
+    z-index: 4;
   }
 }

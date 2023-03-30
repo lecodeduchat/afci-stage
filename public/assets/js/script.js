@@ -17,27 +17,28 @@ const headerContent = document.querySelector(".header_content");
 const headerLogo = document.querySelector(".header_logo");
 const mainMenuList = document.querySelector(".main_menu-list");
 const gradientColorBar = document.querySelector(".gradient-color-bar");
+const windowHeight = window.innerHeight;
 
 window.addEventListener("scroll", () => {
+  // Position fixe du menu sur mobile
   if (window.scrollY > 80 && window.innerWidth < 768) {
-    gradientColorBar.style.position = "fixed";
-    gradientColorBar.style.top = "50px";
-    headerContent.style.borderBottom = "0px solid #ddd";
+    gradientColorBar.classList.add("gradient-color-bar--fixed-mobile");
   } else {
-    gradientColorBar.style.position = "relative";
-    gradientColorBar.style.top = "";
-    headerContent.style.borderBottom = "1px solid #ddd";
+    gradientColorBar.classList.remove("gradient-color-bar--fixed-mobile");
   }
-  if (window.scrollY > 150 && window.innerWidth > 768) {
-    // headerLogo.classList.add("header_logo-fixed");
-    // header.style.height = headerContent.style.height = "58px";
-    // mainMenuList.style.top = "58px";
-    // gradientColorBar.style.top = "58px";
+  // Position fixe du menu sur tablette et desktop
+  if (window.scrollY > windowHeight && window.innerWidth > 768) {
+    header.classList.add("header--fixed");
+    gradientColorBar.classList.add("gradient-color-bar--fixed");
+    if (window.innerWidth < 1200) {
+      mainMenuList.classList.add("main_menu-list--fixed");
+    }
   } else {
-    // headerLogo.classList.remove("header_logo-fixed");
-    // header.style.height = headerContent.style.height = "130px";
-    // gradientColorBar.style.top = "130px";
-    // mainMenuList.style.top = "130px";
+    header.classList.remove("header--fixed");
+    gradientColorBar.classList.remove("gradient-color-bar--fixed");
+    if (window.innerWidth < 1200) {
+      mainMenuList.classList.remove("main_menu-list--fixed");
+    }
   }
 });
 
