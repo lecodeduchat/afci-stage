@@ -1,5 +1,5 @@
 ﻿sep=;
-"id_patient";"name";"email";"phone";"adresse";"zip_code";"ville";"birthday";"comment";"countryphone_id";"avis_sended";"timezone_name";"is_blacklisted";"parent_id";"type_relation";"metadata";"tenant_id"
+"id";"name";"email";"phone";"adresse";"zip_code";"ville";"birthday";"comment";"countryphone_id";"avis_sended";"timezone_name";"is_blacklisted";"parent_id";"type_relation";"metadata";"tenant_id"
 "";"durnez bruno";"bruno.durnez@sfr.fr";"+33 6 63 59 80 12";"";"";"";"";"";"1";"1";"Europe/Paris";"";"";"";"";""
 "";"sauvage evelyne";"evelynedidier59112@gmail.com";"+33 6 48 39 09 45";"";"";"";"";"";"1";"1";"Europe/Paris";"";"";"";"";""
 "";"BELGUENDOUZ Samy";"belguendouzdallal@gmail.com";"+33 7 62 15 65 39";"";"";"";"";"";"1";"1";"Europe/Paris";"";"";"";"";""
