@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CaresRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CaresRepository::class)]
@@ -18,6 +19,9 @@ class Cares
 
     #[ORM\Column]
     private ?int $price = null;
+
+    #[ORM\Column(type: Types::TIME_MUTABLE)]
+    private ?\DateTimeInterface $duration = null;
 
     public function getId(): ?int
     {
@@ -44,6 +48,18 @@ class Cares
     public function setPrice(int $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getDuration(): ?\DateTimeInterface
+    {
+        return $this->duration;
+    }
+
+    public function setDuration(\DateTimeInterface $duration): self
+    {
+        $this->duration = $duration;
 
         return $this;
     }

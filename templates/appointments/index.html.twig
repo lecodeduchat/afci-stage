@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rendez-vous
+{% endblock %}
+
+{% block body %}
+
+
+	<div class="container">
+		<div class="content content_appointment">
+			<h3>Prendre rendez-vous en ligne</h3>
+			<div class="cares_choice">Séances</div>
+			<div class="firstCare">
+				<span>1ère visite</span>
+				<span>
+					<i class="fa-solid fa-chevron-right firstCareChevron"></i>
+				</span>
+			</div>
+			<ul class="firstCare_list">
+				{% for care in firstCares %}
+					<li class="care_item">
+						<div class="care_title">{{ care.name }}</div>
+						<div class="care_duration">
+							<i class="fa-solid fa-clock"></i>
+							{% set duration = care.duration|format_datetime('none','short', locale='fr') %}
+							{# slice(3,) affiche la variable duration à partir de la position 3 : 00:45 (01234) #}
+							{{ duration|slice(3,) }}
+							minutes
+						</div>
+						<div class="care_price">
+							<i class="fa-solid fa-euro-sign"></i>
+							{{ care.price }}
+							- Chèque et espèces
+						</div>
+						<div class="care_btn">
+							<button class="btn btn-reservation">Réserver</button>
+						</div>
+					</li>
+				{% endfor %}
+			</ul>
+			<div class="secondCare">
+				<span>Suivi de consultations</span>
+				<span>
+					<i class="fa-solid fa-chevron-right secondCareChevron"></i>
+				</span>
+			</div>
+			<ul class="secondCare_list">
+
+				{% for care in secondCares %}
+					<li class="care_item">
+						<div class="care_title">{{ care.name }}</div>
+						<div class="care_duration">
+							<i class="fa-solid fa-clock"></i>
+							{% set duration = care.duration|format_datetime('none','short', locale='fr') %}
+							{# slice(3,) affiche la variable duration à partir de la position 3 : 00:45 (01234) #}
+							{{ duration|slice(3,) }}
+							minutes
+						</div>
+						<div class="care_price">
+							<i class="fa-solid fa-euro-sign"></i>
+							{{ care.price }}
+							- Chèque et espèces
+						</div>
+						<div class="care_btn">
+							<button class="btn btn-reservation">Réserver</button>
+						</div>
+					</li>
+
+				{% endfor %}
+			</ul>
+		</div>
+	</div>{# <table class="table">
+																																																																																												        <thead>
+																																																																																												            <tr>
+																																																																																												                <th>Id</th>
+																																																																																												                <th>Time</th>
+																																																																																												                <th>Date</th>
+																																																																																												                <th>actions</th>
+																																																																																												            </tr>
+																																																																																												        </thead>
+																																																																																												        <tbody>
+																																																																																												        {% for appointment in appointments %}
+																																																																																												            <tr>
+																																																																																												                <td>{{ appointment.id }}</td>
+																																																																																												                <td>{{ appointment.time ? appointment.time|date('H:i:s') : '' }}</td>
+																																																																																												                <td>{{ appointment.date ? appointment.date|date('Y-m-d') : '' }}</td>
+																																																																																												                <td>
+																																																																																												                    <a href="{{ path('app_appointments_show', {'id': appointment.id}) }}">show</a>
+																																																																																												                    <a href="{{ path('app_appointments_edit', {'id': appointment.id}) }}">edit</a>
+																																																																																												                </td>
+																																																																																												            </tr>
+																																																																																												        {% else %}
+																																																																																												            <tr>
+																																																																																												                <td colspan="4">no records found</td>
+																																																																																												            </tr>
+																																																																																												        {% endfor %}
+																																																																																												        </tbody>
+																																																																																												    </table>
+																																																																																												
+																																																																																												    <a href="{{ path('app_appointments_new') }}">Create new</a> #}{% endblock %}
