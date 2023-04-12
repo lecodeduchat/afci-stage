@@ -18,33 +18,22 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `chiro-old-base`
+-- Base de données : `chiro`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `clients`
+-- Structure de la table `old_customers`
 --
 
-CREATE TABLE `clients` (
-  `id_client` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `phone` varchar(50) NOT NULL,
-  `adresse` varchar(255) NOT NULL,
-  `zip_code` varchar(11) NOT NULL,
-  `ville` varchar(255) NOT NULL,
-  `birthday` varchar(11) NOT NULL,
-  `parent_id` int(11) NOT NULL,
-  `type_relation` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 --
--- Déchargement des données de la table `clients`
+-- Déchargement des données de la table `old_customers`
 --
 
-INSERT INTO `clients` (`id_client`, `name`, `email`, `phone`, `adresse`, `zip_code`, `ville`, `birthday`, `parent_id`, `type_relation`) VALUES
+INSERT INTO `old_customers` (`id`, `name`, `email`, `phone`, `address`, `zip_code`, `ville`, `birthday`, `parent_id`, `type_relation`) VALUES
 (1, 'durnez bruno', 'bruno.durnez@sfr.fr', '+33 6 63 59 80 12', '', '', '', '', 0, ''),
 (2, 'sauvage evelyne', 'evelynedidier59112@gmail.com', '+33 6 48 39 09 45', '', '', '', '', 0, ''),
 (3, 'BELGUENDOUZ Samy', 'belguendouzdallal@gmail.com', '+33 7 62 15 65 39', '', '', '', '', 0, ''),
@@ -805,7 +794,7 @@ INSERT INTO `clients` (`id_client`, `name`, `email`, `phone`, `adresse`, `zip_co
 (758, 'maxime coucke', '', '', '', '', '', '', 0, ''),
 (759, 'Véronique Golik', '', '+33 6 23 79 07 13', '', '', '', '', 0, ''),
 (760, 'fouzia benkaddour', '', '', '', '', '', '', 0, '');
-INSERT INTO `clients` (`id_client`, `name`, `email`, `phone`, `adresse`, `zip_code`, `ville`, `birthday`, `parent_id`, `type_relation`) VALUES
+INSERT INTO `old_customers` (`id`, `name`, `email`, `phone`, `address`, `zip_code`, `ville`, `birthday`, `parent_id`, `type_relation`) VALUES
 (761, 'Paco Acquette', 'pauline512@neuf.fr', '+33 6 28 80 28 60', '163 rue de bethune', '62232', 'HINGES', '', 0, ''),
 (762, 'sophia meriaux', '', '+33 6 95 32 60 17', '', '', '', '', 0, ''),
 (763, 'gustave bossaert', '', '', '', '', '', '', 0, ''),
@@ -1416,7 +1405,7 @@ INSERT INTO `clients` (`id_client`, `name`, `email`, `phone`, `adresse`, `zip_co
 (1368, 'Adam Kayser Druon', 'chloekayser96@gmail.com', '+33 6 49 29 96 65', '3 rue donfut', '62300', 'LENS', '', 0, ''),
 (1369, 'Samira Mebrouki', 'benmessaoudsam@gmail.com', '+33 7 81 20 07 69', 'App 75 H.L.M. st genis des Tanyères', '66000', 'Perpignan ', '', 0, ''),
 (1370, 'Chloé Jagoury', 'pluchart.cindy15@gmail.com', '+33 6 71 06 61 60', '30 rue leon Gambetta', '59185', 'PROVIN', '', 0, '');
-INSERT INTO `clients` (`id_client`, `name`, `email`, `phone`, `adresse`, `zip_code`, `ville`, `birthday`, `parent_id`, `type_relation`) VALUES
+INSERT INTO `old_customers` (`id`, `name`, `email`, `phone`, `address`, `zip_code`, `ville`, `birthday`, `parent_id`, `type_relation`) VALUES
 (1371, 'César Deladoeuille', '', '+33 6 50 93 55 74', '', '', '', '', 0, ''),
 (1372, 'laurence defever', 'lolo2703@free.fr', '+33 6 26 81 69 30', '33 rue Jean Jaurès', '59320', 'EMMERIN', '', 0, ''),
 (1373, 'Clémence Moreau', 'moreau_clemence@hotmail.fr', '+33 6 46 40 05 81', '19 Rue de la Paix', '59170', 'CROIX', '', 0, ''),
@@ -1821,7 +1810,7 @@ INSERT INTO `clients` (`id_client`, `name`, `email`, `phone`, `adresse`, `zip_co
 (1772, 'Marinette Duthoit', '', '+33 6 71 87 74 59', '', '', '', '', 0, ''),
 (1773, 'Antoine Caulleret', '', '', '', '', '', '', 0, ''),
 (1774, 'sylvie jenkinson', '', '', '', '', '', '', 0, '');
-INSERT INTO `clients` (`id_client`, `name`, `email`, `phone`, `adresse`, `zip_code`, `ville`, `birthday`, `parent_id`, `type_relation`) VALUES
+INSERT INTO `old_customers` (`id`, `name`, `email`, `phone`, `address`, `zip_code`, `ville`, `birthday`, `parent_id`, `type_relation`) VALUES
 (1775, 'Marguerite DUHAYON', 'maggy.duhayon@hotmail.fr', '+33 6 80 66 57 85', '91 avenue du 14 juillet', '59139', 'wattignies', '', 0, ''),
 (1776, 'Mareva Wannepain', 'mareva.wan@gmail.com', '+33 6 11 14 18 94', '28 rue Louis Pasteur', '62590', 'oignies', '', 0, ''),
 (1777, 'Comoglu Ouria', 'comogluouria@gmail.com', '+33 6 76 91 40 17', '106 rue Roger Bouvry', '59113', 'Seclin', '', 0, ''),
@@ -2223,7 +2212,7 @@ INSERT INTO `clients` (`id_client`, `name`, `email`, `phone`, `adresse`, `zip_co
 (2173, 'Gérald Popowicz', 'gg59320@live.fr', '+33 6 19 48 29 39', '23bis rue fidele lhermitte', '59320', 'Haubourdin ', '', 0, ''),
 (2174, 'Cindy beudin', 'chmicindy@hotmail.com', '+33 6 20 44 94 21', '261 rue du Grand Manoir', '59158', 'THUN ST AMAND', '', 0, ''),
 (2175, 'Orlane Alberti', 'alberti.orlane@free.fr', '+33 6 70 58 25 44', '2 rue Saint Exupéry', '59320', 'Emmerin', '', 0, '');
-INSERT INTO `clients` (`id_client`, `name`, `email`, `phone`, `adresse`, `zip_code`, `ville`, `birthday`, `parent_id`, `type_relation`) VALUES
+INSERT INTO `old_customers` (`id`, `name`, `email`, `phone`, `address`, `zip_code`, `ville`, `birthday`, `parent_id`, `type_relation`) VALUES
 (2176, 'Nathalie Patinier', 'nathethub2008@live.fr', '+33 6 03 28 93 29', '4 RUE DE SANTES', '59320', 'HAUBOURDIN', '2022-12-21', 0, ''),
 (2177, 'Antony Thuillier', '', '+33 6 28 50 20 29', '', '', '', '', 0, ''),
 (2178, 'Z Emmanuel', 'ebeudin@sas-montaigne.com', '+33 6 79 08 12 28', '303 rue Augustin Bay', '59690', 'VIEUX CONDE', '', 0, ''),
@@ -2622,7 +2611,7 @@ INSERT INTO `clients` (`id_client`, `name`, `email`, `phone`, `adresse`, `zip_co
 (2571, 'Marilyn Decruyenaere', 'marilyn.decruyenaere@wanadoo.fr', '+33 6 80 75 26 93', '1 rue Gabriel Péri', '59179', 'Fenain', '1974-10-22', 0, ''),
 (2572, 'Laetitia LEFEBVRE', 'laeti59320@gmail.com', '+33 7 71 18 33 59', '11 avenue De Lattre de Tassigny', '59320', 'Haubourdin', '', 0, ''),
 (2573, 'Charlotte Burietz', 'quentin.burietz@gmail.com', '+33 6 52 67 83 01', '1009 rue des lauwets', '62840', 'SAILLY SUR LA LYS', '', 0, '');
-INSERT INTO `clients` (`id_client`, `name`, `email`, `phone`, `adresse`, `zip_code`, `ville`, `birthday`, `parent_id`, `type_relation`) VALUES
+INSERT INTO `old_customers` (`id`, `name`, `email`, `phone`, `address`, `zip_code`, `ville`, `birthday`, `parent_id`, `type_relation`) VALUES
 (2574, 'Salim Charif', 'charif.salim@gmail.com', '+33 6 25 01 34 42', '11 rue du Faubourg de Béthune', '59000', 'LILLE', '', 0, ''),
 (2575, 'Mélissa Pirard', 'melissapirard@yahoo.fr', '+33 6 48 50 77 84', '25, Rambla des Calissons', '34070', 'Montpellier ', '', 0, ''),
 (2576, 'helene hashemi', 'hhashemi@yahoo.fr', '+33 6 44 06 37 94', '', '', '', '', 0, ''),
@@ -2935,21 +2924,18 @@ INSERT INTO `clients` (`id_client`, `name`, `email`, `phone`, `adresse`, `zip_co
 --
 
 --
--- Index pour la table `clients`
+-- Index pour la table `old_customers`
 --
-ALTER TABLE `clients`
-  ADD PRIMARY KEY (`id_client`);
+
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT pour la table `clients`
+-- AUTO_INCREMENT pour la table `old_customers`
 --
-ALTER TABLE `clients`
-  MODIFY `id_client` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2880;
-COMMIT;
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
