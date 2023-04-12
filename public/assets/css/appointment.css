@@ -1,0 +1,70 @@
+.content_appointment {
+  width: 300px;
+  margin: 0 auto;
+  padding-bottom: 20px;
+}
+.content_appointment h3 {
+  color: black;
+  margin: 20px 0;
+}
+.content_appointment ul {
+  list-style: none;
+}
+.cares_choice,
+.firstCare,
+.secondCare {
+  background-color: var(--main-bg-color-vanilla);
+  height: 50px;
+  font-family: "Montserrat";
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 48px;
+  padding: 0 12px;
+  border-bottom: 1px solid #ddd;
+}
+.cares_choice {
+  width: 100px;
+  text-align: center;
+  border-radius: 10px 10px 0 0;
+  border: 1px solid #ddd;
+}
+.firstCare,
+.secondCare {
+  display: flex;
+  justify-content: space-between;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+.firstCare_list,
+.secondCare_list {
+  display: none;
+}
+.firstCare_list--open,
+.secondCare_list--open {
+  display: block;
+}
+.care_item {
+  padding: 9px 12px;
+  border: 1px solid #ddd;
+  border-top: none;
+}
+.care_title {
+  font-weight: bold;
+}
+.care_item .fa-clock {
+  color: var(--main-color-blue);
+}
+.care_title,
+.care_duration,
+.care_price {
+  margin-bottom: 6px;
+}
+.care_btn {
+  display: flex;
+  justify-content: flex-end;
+}
+.btn.btn-reservation {
+  width: 100px;
+  border-radius: 0px;
+  margin-top: 6px;
+}

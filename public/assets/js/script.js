@@ -5,7 +5,6 @@ const mainMenu = document.querySelector(".main_menu-list");
 const burger = btnMainMenu.querySelector(".fa-bars");
 
 btnMainMenu.addEventListener("click", function () {
-  console.log(burger);
   mainMenu.classList.toggle("main_menu-list--open");
   burger.classList.toggle("fa-xmark");
   burger.classList.toggle("fa-bars");
@@ -86,3 +85,22 @@ function initMap() {
     });
   });
 }
+
+// Ouverture des onglets de la page "Rendez-vous" ---------------------------
+const firstCare = document.querySelector(".firstCare");
+const firstCareList = document.querySelector(".firstCare_list");
+const firstCareChevron = document.querySelector(".firstCareChevron");
+const secondCare = document.querySelector(".secondCare");
+const secondCareList = document.querySelector(".secondCare_list");
+const secondCareChevron = document.querySelector(".secondCareChevron");
+
+firstCare.addEventListener("click", function () {
+  firstCareList.classList.toggle("firstCare_list--open");
+  firstCareChevron.classList.toggle("fa-chevron-down");
+  firstCareChevron.classList.toggle("fa-chevron-right");
+});
+secondCare.addEventListener("click", function () {
+  secondCareList.classList.toggle("secondCare_list--open");
+  secondCareChevron.classList.toggle("fa-chevron-down");
+  secondCareChevron.classList.toggle("fa-chevron-right");
+});
