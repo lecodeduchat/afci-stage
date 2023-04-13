@@ -61,7 +61,13 @@ body {
   text-decoration: none;
   color: #fff;
 }
-
+h1 {
+  font-family: "Sauna-bold";
+  font-size: 42px;
+  color: var(--main-color-lavender);
+  text-align: center;
+  padding: 22px 0;
+}
 h2 {
   font-family: "Sauna-bold";
   font-size: 32px;
@@ -76,6 +82,14 @@ h3 {
   color: var(--main-color-lavender);
   text-align: center;
   padding: 6px 0;
+}
+h4 {
+  font-family: "Montserrat";
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: bold;
+  color: white;
+  padding: 18px 0;
 }
 p {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -95,6 +109,19 @@ p {
 }
 .open {
   display: block;
+}
+/* LAYOUT --------------------------------------------------------------------------- */
+.container {
+  width: 100%;
+  min-height: 400px;
+}
+@media screen and (min-width: 768px) {
+}
+@media screen and (min-width: 1200px) {
+  .content {
+    width: 1200px;
+    margin: 0 auto;
+  }
 }
 /* ANIMATION BUTTONS CALL-ACTION ----------------------------------------------------- */
 .btn {
@@ -165,16 +192,5 @@ p {
   }
   100% {
     background-position: 0 0;
-  }
-}
-.container {
-  width: 100%;
-}
-@media screen and (min-width: 768px) {
-}
-@media screen and (min-width: 1200px) {
-  .content {
-    width: 1200px;
-    margin: 0 auto;
   }
 }
