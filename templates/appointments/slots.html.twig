@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rendez-vous
+{% endblock %}
+
+{% block body %}
+	<div class="container container_slots">
+		<div class="content">
+			<h3>Prendre rendez-vous en ligne</h3>
+			<div class="slots_content">
+				<div class="slots_title">Sélectionner votre créneau</div>
+				<div class="slots_cares">
+					<select name="cares" id="cares">
+						{% for care in cares %}
+							{% if care.id == id %}
+								<option value="{{ care.id }}" checked>{{ care.name }}</option>
+							{% else %}
+								<option value="{{ care.id }}">{{ care.name }}</option>
+							{% endif %}
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

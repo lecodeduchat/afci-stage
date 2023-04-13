@@ -1,7 +1,7 @@
 .content_appointment {
   width: 300px;
   margin: 0 auto;
-  padding-bottom: 20px;
+  padding-bottom: 80px;
 }
 .content_appointment h3 {
   color: black;
@@ -67,4 +67,38 @@
   width: 100px;
   border-radius: 0px;
   margin-top: 6px;
+}
+.container_slots h3 {
+  color: black;
+  line-height: 60px;
+}
+.slots_content {
+  width: 330px;
+  margin: 0 auto;
+}
+.slots_title {
+  background-color: var(--main-bg-color-vanilla);
+  border: 1px solid #ddd;
+  border-radius: 10px 10px 0 0;
+  height: 50px;
+  line-height: 48px;
+  text-align: center;
+  font-family: "Montserrat";
+  font-weight: 700;
+  font-size: 14px;
+}
+.slots_cares {
+  border: 1px solid #ddd;
+  border-top: none;
+}
+.slots_cares select {
+  display: block;
+  width: 276px;
+  height: 50px;
+  margin: 12px auto;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #eee;
+  padding-left: 12px;
+  padding-right: 12px;
 }

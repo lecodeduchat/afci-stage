@@ -11,16 +11,25 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/rendez-vous')]
+#[Route('/rendez-vous', name: 'appointments_')]
 class AppointmentsController extends AbstractController
 {
-    #[Route('/', name: 'app_appointments_index', methods: ['GET'])]
+    #[Route('/', name: 'index', methods: ['GET'])]
     public function index(AppointmentsRepository $appointmentsRepository, CaresRepository $caresRepository): Response
     {
         return $this->render('appointments/index.html.twig', [
             'appointments' => $appointmentsRepository->findAll(),
             'firstCares' => $caresRepository->findByExampleField('Première%'),
             'secondCares' => $caresRepository->findByExampleField('Suivi%'),
+        ]);
+    }
+    #[Route('/{id}', name: 'slots', methods: ['GET'])]
+    public function slots(AppointmentsRepository $appointmentsRepository, CaresRepository $caresRepository): Response
+    {
+        return $this->render('appointments/slots.html.twig', [
+            'appointments' => $appointmentsRepository->findAll(),
+            'cares' => $caresRepository->findAll(),
+            'id' => 'id'
         ]);
     }
 

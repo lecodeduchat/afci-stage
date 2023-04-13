@@ -57,6 +57,12 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?bool $is_blocked = false;
 
+    public function __construct()
+    {
+        // Pour le champ created_at, on ajoute la date du jour
+        $this->created_at = new \DateTimeImmutable();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

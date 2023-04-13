@@ -20,9 +20,10 @@ class RegistrationController extends AbstractController
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, UsersAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
     {
         $user = new Users();
-        // $created_at ajouté manuellement car le trait ne fonctionne pas !!!
-        $created_at = new \DateTimeImmutable();
-        $user->setCreatedAt($created_at);
+        // $created_at ajouté manuellement car il manquait la fonction construct dans Users !!!
+        // $created_at = new \DateTimeImmutable();
+        // $user->setCreatedAt($created_at);
+
         // Injections des rôles par défaut
         $user->setRoles(['ROLE_USER']);
         $form = $this->createForm(RegistrationFormType::class, $user);
