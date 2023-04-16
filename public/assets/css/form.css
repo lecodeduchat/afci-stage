@@ -1,0 +1,63 @@
+.container_register {
+  background-color: var(--main-bg-color-vanilla);
+  padding-bottom: 40px;
+}
+.content_register h3 {
+  color: black;
+  text-align: left;
+  padding-top: 20px;
+}
+.form_users-bg {
+  border-radius: 0 0 10px 10px;
+}
+.form_users {
+  background-color: var(--main-bg-color-blue-light);
+  width: 1200px;
+  margin: 0 auto;
+  padding: 32px;
+  border-radius: 0 0 10px 10px;
+}
+.form_users label {
+  display: block;
+  width: 300px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 25px;
+}
+.form-control,
+input[type="password"] {
+  width: 300px;
+  height: 52px;
+  line-height: 50px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+  padding-left: 12px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 25px;
+  color: black;
+}
+.tabs {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  background-color: white;
+  border-radius: 10px 10px 0 0;
+  border-bottom: 1px solid #ddd;
+}
+.tabs_item {
+  width: 50%;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+}
+.tabs_item.active {
+  background-color: var(--main-bg-color-blue-light);
+  border-radius: 10px 10px 0 0;
+}

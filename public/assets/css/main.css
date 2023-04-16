@@ -1,6 +1,8 @@
 @import url("header.css");
 @import url("footer.css");
 @import url("home.css");
+@import url("form.css");
+@import url("appointment.css");
 *,
 ::before,
 ::after {
@@ -22,6 +24,7 @@
   --main-bg-color-purple-light: rgba(98, 94, 188, 0.6);
   --main-bg-color-gray: rgba(78, 80, 85, 1);
   --main-bg-color-blue: rgba(70, 186, 210, 1);
+  --main-bg-color-blue-light: rgba(70, 186, 210, 0.4);
   --main-bg-color-vanilla: rgba(255, 236, 173, 1);
 }
 
@@ -58,7 +61,13 @@ body {
   text-decoration: none;
   color: #fff;
 }
-
+h1 {
+  font-family: "Sauna-bold";
+  font-size: 42px;
+  color: var(--main-color-lavender);
+  text-align: center;
+  padding: 22px 0;
+}
 h2 {
   font-family: "Sauna-bold";
   font-size: 32px;
@@ -66,11 +75,53 @@ h2 {
   text-align: center;
   padding: 6px 0;
 }
+h3 {
+  font-family: "Sauna-bold";
+  font-size: 24px;
+  line-height: 28px;
+  color: var(--main-color-lavender);
+  text-align: center;
+  padding: 6px 0;
+}
+h4 {
+  font-family: "Montserrat";
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: bold;
+  color: white;
+  padding: 18px 0;
+}
 p {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 14px;
   line-height: 24px;
   padding: 18px;
+}
+.bg-white {
+  background-color: #fff;
+}
+.text-default {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 28px;
+  margin-bottom: 20px;
+}
+.open {
+  display: block;
+}
+/* LAYOUT --------------------------------------------------------------------------- */
+.container {
+  width: 100%;
+  min-height: 400px;
+}
+@media screen and (min-width: 768px) {
+}
+@media screen and (min-width: 1200px) {
+  .content {
+    width: 1200px;
+    margin: 0 auto;
+  }
 }
 /* ANIMATION BUTTONS CALL-ACTION ----------------------------------------------------- */
 .btn {
