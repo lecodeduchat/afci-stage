@@ -5,7 +5,7 @@
 
 {% block body %}
 	<div class="container container_slots">
-		<div class="content">
+		<div class="content content_appointment">
 			<h3>Prendre rendez-vous en ligne</h3>
 			<div class="slots_content">
 				<div class="slots_title">Sélectionner votre créneau</div>
@@ -19,6 +19,48 @@
 							{% endif %}
 						{% endfor %}
 					</select>
+				</div>
+				<div class="slots_dates">
+					{% set day = "now"|date() %}
+					{# J'affiche les 6 prochains jours ouvrés (donc sans le dimanche) #}
+					{% for i in 1..7 %}
+						{# "N" donne le numéro du jour dans la semaine avec lundi = 0 #}
+						{# Si "N" égale 7 c'est que l'on est un dimanche, donc on passe au jour suivant #}
+							{% if day|date("N") == 7 %}
+						{% set day = day|date_modify("+1 day") %}
+						{% endif %}
+						{% set numDay = day|date("N") %}
+						{% set nameDay = days[numDay-1] %}
+						{# "m" donne le numéro du mois avec janvier = 0 #}
+						{% set numMonth = day|date("m")%}
+						{% set nameMonth = months[numMonth-1] %}
+							<div class="slots_date"> <span>{{ nameDay }}
+								{{ day|date("j") }}
+								{{ nameMonth }}
+								{{ day|date("Y")}}</span>
+							<span>
+								<i class="fa-solid fa-chevron-right"></i>
+							</span>
+						</div>
+						<div class="slots_times">
+							{% for i in 1..6 %}
+								{% set rdv_exist = false %}
+								{% for rdv in appointments %}
+									{% if time|date("H:i") == rdv.time|date("H:i") %}
+										<div class="slots_time rdv">{{ rdv.time|date("H:i") }}</div>
+										{% set rdv_exit = true %}
+									{% endif %}
+								{% endfor %}
+								{% if rdv_exist == false %}
+									{# Affiche H:heure et i:minute #}
+									<div class="slots_time">
+										{{ time|date("H:i") }}</div>
+								{% endif %}
+								{% set time = time|date_modify("+30 minute") %}
+							{% endfor %}
+						</div>
+						{% set day = day|date_modify("+1 day") %}
+					{% endfor %}
 				</div>
 			</div>
 		</div>

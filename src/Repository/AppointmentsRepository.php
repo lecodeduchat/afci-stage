@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Cares;
 use App\Entity\Appointments;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Appointments>
@@ -39,28 +40,28 @@ class AppointmentsRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Appointments[] Returns an array of Appointments objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * @param \DateTimeInterface $date Date depuis laquelle on veut récupérer les rendez-vous
+     * @return Appointments[] Retourne un tableau de rendez-vous depuis une date donnée
+     */
+    public function findAllSince($date): array
+    {
+        return $this->createQueryBuilder('a')
+            ->innerJoin('App\Entity\Cares', 'c', 'WITH', 'c.id = a.care_id')
+            ->andWhere('a.date >= :val')
+            ->setParameter('val', $date)
+            ->orderBy('a.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 
-//    public function findOneBySomeField($value): ?Appointments
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?Appointments
+    //    {
+    //        return $this->createQueryBuilder('a')
+    //            ->andWhere('a.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }
