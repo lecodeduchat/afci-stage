@@ -6,6 +6,7 @@ use App\Entity\Appointments;
 use App\Form\AppointmentsType;
 use App\Repository\AppointmentsRepository;
 use App\Repository\CaresRepository;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,6 +15,32 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/rendez-vous', name: 'appointments_')]
 class AppointmentsController extends AbstractController
 {
+    private $days = [
+        'Lundi',
+        'Mardi',
+        'Mercredi',
+        'Jeudi',
+        'Vendredi',
+        'Samedi',
+        'Dimanche',
+    ];
+    private $months = [
+        'Janvier',
+        'Février',
+        'Mars',
+        'Avril',
+        'Mai',
+        'Juin',
+        'Juillet',
+        'Août',
+        'Septembre',
+        'Octobre',
+        'Novembre',
+        'Décembre'
+    ];
+
+
+
     #[Route('/', name: 'index', methods: ['GET'])]
     public function index(AppointmentsRepository $appointmentsRepository, CaresRepository $caresRepository): Response
     {
@@ -26,10 +53,21 @@ class AppointmentsController extends AbstractController
     #[Route('/{id}', name: 'slots', methods: ['GET'])]
     public function slots(AppointmentsRepository $appointmentsRepository, CaresRepository $caresRepository): Response
     {
+        // Je récupère la date du jour
+        $date = new \DateTime();
+        // Je la formate pour la passer en paramètre à la requête
+        $date = $date->format('Y-m-d');
+        $appointments = $appointmentsRepository->findAllSince($date);
+        // Création d'un timestamp à 9h00 de la date du jour
+        $time = mktime(9, 0, 0, date('m'), date('d'), date('Y'));
+        // dd(date("H:i", $time));
         return $this->render('appointments/slots.html.twig', [
-            'appointments' => $appointmentsRepository->findAll(),
+            'appointments' => $appointments,
             'cares' => $caresRepository->findAll(),
-            'id' => 'id'
+            'id' => 'id',
+            'days' => $this->days,
+            'months' => $this->months,
+            'time' => $time,
         ]);
     }
 
