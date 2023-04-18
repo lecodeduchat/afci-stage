@@ -11,6 +11,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Component\HttpFoundation\Cookie;
 
 #[Route('/rendez-vous', name: 'appointments_')]
 class AppointmentsController extends AbstractController
@@ -39,15 +41,15 @@ class AppointmentsController extends AbstractController
         'Décembre'
     ];
 
-
-
     #[Route('/', name: 'index', methods: ['GET'])]
     public function index(AppointmentsRepository $appointmentsRepository, CaresRepository $caresRepository): Response
     {
+
         return $this->render('appointments/index.html.twig', [
             'appointments' => $appointmentsRepository->findAll(),
             'firstCares' => $caresRepository->findByExampleField('Première%'),
             'secondCares' => $caresRepository->findByExampleField('Suivi%'),
+
         ]);
     }
     #[Route('/{id}', name: 'slots', methods: ['GET'])]
@@ -58,6 +60,7 @@ class AppointmentsController extends AbstractController
         // Je la formate pour la passer en paramètre à la requête
         $date = $date->format('Y-m-d');
         $appointments = $appointmentsRepository->findAllSince($date);
+        // dd($appointments[0]);
         // Création d'un timestamp à 9h00 de la date du jour
         $time = mktime(9, 0, 0, date('m'), date('d'), date('Y'));
         // dd(date("H:i", $time));

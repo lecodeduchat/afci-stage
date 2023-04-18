@@ -47,12 +47,13 @@ class AppointmentsRepository extends ServiceEntityRepository
     public function findAllSince($date): array
     {
         return $this->createQueryBuilder('a')
-            ->innerJoin('App\Entity\Cares', 'c', 'WITH', 'c.id = a.care_id')
+            ->innerJoin(Cares::class, 'c', 'WITH', 'c = a.care')
             ->andWhere('a.date >= :val')
             ->setParameter('val', $date)
             ->orderBy('a.id', 'ASC')
             ->getQuery()
             ->getResult();
+        // dd($this->createQueryBuilder('a')->getQuery()->getSQL());
     }
 
     //    public function findOneBySomeField($value): ?Appointments

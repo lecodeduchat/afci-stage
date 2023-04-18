@@ -46,6 +46,7 @@
 							{% for i in 1..6 %}
 								{% set rdv_exist = false %}
 								{% for rdv in appointments %}
+									{{ rdv.care.duration | date("i")}}
 									{% if time|date("H:i") == rdv.time|date("H:i") %}
 										<div class="slots_time rdv">{{ rdv.time|date("H:i") }}</div>
 										{% set rdv_exit = true %}

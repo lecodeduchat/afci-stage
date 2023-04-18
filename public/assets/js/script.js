@@ -1,4 +1,26 @@
 "use strict";
+// Test de sauvegarde de données dans le local storage ---------------------
+const careChoices = document.querySelectorAll(".careChoice");
+const careItems = document.querySelectorAll(".care_item");
+localStorage.setItem("test", "test");
+// careItems.forEach((careItem) => {
+//   careItem.addEventListener("click", function (e) {
+//     console.log(careItem);
+//   });
+// });
+
+careChoices.forEach((careChoice) => {
+  careChoice.addEventListener("click", function () {
+    console.log("clic");
+    $test = careChoice.getAttribute("data-set");
+    console.log($test);
+    localStorage.setItem("careChoice", $test);
+  });
+});
+if (localStorage.getItem("careChoice") !== null) {
+  console.log(localStorage.getItem("careChoice"));
+}
+console.log(localStorage.getItem("test"));
 // Ouverture et fermeture du menu principale ---------------------------------
 const btnMainMenu = document.querySelector(".main_menu-btn");
 const mainMenu = document.querySelector(".main_menu-list");

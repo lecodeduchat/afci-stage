@@ -33,7 +33,8 @@
 							- Chèque et espèces
 						</div>
 						<div class="care_btn">
-							<a href="{{ path('appointments_slots', {"id": care.id}) }}" class="btn btn-reservation">Réserver</a>
+						{# {{ path('appointments_slots', {"id": care.id}) }} #}
+							<a href="#" class="btn btn-reservation care_choice" data-set="{{ care.id }}">Réserver</a>
 						</div>
 					</li>
 				{% endfor %}
