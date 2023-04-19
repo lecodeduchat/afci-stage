@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
-
+{% block javascripts %}
+	<script src="/assets/js/appointment.js" defer></script>
+{% endblock %}
 {% block title %}Rendez-vous
 {% endblock %}
 
@@ -18,7 +20,7 @@
 			</div>
 			<ul class="firstCare_list">
 				{% for care in firstCares %}
-					<li class="care_item">
+					<li class="care_item" data-set="{{ care.id }}">
 						<div class="care_title">{{ care.name }}</div>
 						<div class="care_duration">
 							<i class="fa-solid fa-clock"></i>
@@ -33,8 +35,7 @@
 							- Chèque et espèces
 						</div>
 						<div class="care_btn">
-						{# {{ path('appointments_slots', {"id": care.id}) }} #}
-							<a href="#" class="btn btn-reservation care_choice" data-set="{{ care.id }}">Réserver</a>
+							<a href="{{ path('appointments_slots') }}" class="btn btn-reservation care_choice" data-set="{{ care.id }}">Réserver</a>
 						</div>
 					</li>
 				{% endfor %}
@@ -71,31 +72,31 @@
 			</ul>
 		</div>
 	</div>{# <table class="table">
-																																																																																																										        <thead>
-																																																																																																										            <tr>
-																																																																																																										                <th>Id</th>
-																																																																																																										                <th>Time</th>
-																																																																																																										                <th>Date</th>
-																																																																																																										                <th>actions</th>
-																																																																																																										            </tr>
-																																																																																																										        </thead>
-																																																																																																										        <tbody>
-																																																																																																										        {% for appointment in appointments %}
-																																																																																																										            <tr>
-																																																																																																										                <td>{{ appointment.id }}</td>
-																																																																																																										                <td>{{ appointment.time ? appointment.time|date('H:i:s') : '' }}</td>
-																																																																																																										                <td>{{ appointment.date ? appointment.date|date('Y-m-d') : '' }}</td>
-																																																																																																										                <td>
-																																																																																																										                    <a href="{{ path('app_appointments_show', {'id': appointment.id}) }}">show</a>
-																																																																																																										                    <a href="{{ path('app_appointments_edit', {'id': appointment.id}) }}">edit</a>
-																																																																																																										                </td>
-																																																																																																										            </tr>
-																																																																																																										        {% else %}
-																																																																																																										            <tr>
-																																																																																																										                <td colspan="4">no records found</td>
-																																																																																																										            </tr>
-																																																																																																										        {% endfor %}
-																																																																																																										        </tbody>
-																																																																																																										    </table>
-																																																																																																										
-																																																																																																										    <a href="{{ path('app_appointments_new') }}">Create new</a> #}{% endblock %}
+																																																																																																																														        <thead>
+																																																																																																																														            <tr>
+																																																																																																																														                <th>Id</th>
+																																																																																																																														                <th>Time</th>
+																																																																																																																														                <th>Date</th>
+																																																																																																																														                <th>actions</th>
+																																																																																																																														            </tr>
+																																																																																																																														        </thead>
+																																																																																																																														        <tbody>
+																																																																																																																														        {% for appointment in appointments %}
+																																																																																																																														            <tr>
+																																																																																																																														                <td>{{ appointment.id }}</td>
+																																																																																																																														                <td>{{ appointment.time ? appointment.time|date('H:i:s') : '' }}</td>
+																																																																																																																														                <td>{{ appointment.date ? appointment.date|date('Y-m-d') : '' }}</td>
+																																																																																																																														                <td>
+																																																																																																																														                    <a href="{{ path('app_appointments_show', {'id': appointment.id}) }}">show</a>
+																																																																																																																														                    <a href="{{ path('app_appointments_edit', {'id': appointment.id}) }}">edit</a>
+																																																																																																																														                </td>
+																																																																																																																														            </tr>
+																																																																																																																														        {% else %}
+																																																																																																																														            <tr>
+																																																																																																																														                <td colspan="4">no records found</td>
+																																																																																																																														            </tr>
+																																																																																																																														        {% endfor %}
+																																																																																																																														        </tbody>
+																																																																																																																														    </table>
+																																																																																																																														
+																																																																																																																														    <a href="{{ path('app_appointments_new') }}">Create new</a> #}{% endblock %}
