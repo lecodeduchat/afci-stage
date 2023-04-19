@@ -103,27 +103,38 @@
   padding-left: 12px;
   padding-right: 12px;
 }
-.slots_date {
+.slots_date-day {
   line-height: 50px;
   padding: 0 12px;
   border-bottom: 1px solid #ddd;
   display: flex;
   justify-content: space-between;
 }
+.slots_date-day:hover {
+  cursor: pointer;
+}
+.slots_date-day span:first-child::first-letter {
+  text-transform: uppercase;
+}
 .slots_times {
+  display: none;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 12px 0px;
+}
+.slots_times--open {
   display: flex;
-  justify-content: space-between;
-  margin: 12px 0;
 }
 .slots_time {
-  width: 50px;
+  width: calc(20% - 7px);
   height: 50px;
   border-radius: 10px;
   background-color: var(--main-bg-color-lavender);
   line-height: 50px;
   text-align: center;
   color: white;
+  margin: 6px 0 0 6px;
 }
-.slots_time.rdv {
-  background-color: #eee;
+.slots_time:hover {
+  cursor: pointer;
 }

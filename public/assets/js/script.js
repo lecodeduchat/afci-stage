@@ -1,26 +1,5 @@
 "use strict";
-// Test de sauvegarde de données dans le local storage ---------------------
-const careChoices = document.querySelectorAll(".careChoice");
-const careItems = document.querySelectorAll(".care_item");
-localStorage.setItem("test", "test");
-// careItems.forEach((careItem) => {
-//   careItem.addEventListener("click", function (e) {
-//     console.log(careItem);
-//   });
-// });
 
-careChoices.forEach((careChoice) => {
-  careChoice.addEventListener("click", function () {
-    console.log("clic");
-    $test = careChoice.getAttribute("data-set");
-    console.log($test);
-    localStorage.setItem("careChoice", $test);
-  });
-});
-if (localStorage.getItem("careChoice") !== null) {
-  console.log(localStorage.getItem("careChoice"));
-}
-console.log(localStorage.getItem("test"));
 // Ouverture et fermeture du menu principale ---------------------------------
 const btnMainMenu = document.querySelector(".main_menu-btn");
 const mainMenu = document.querySelector(".main_menu-list");
@@ -107,23 +86,3 @@ function initMap() {
     });
   });
 }
-
-// Ouverture des onglets de la page "Rendez-vous" ---------------------------
-const firstCare = document.querySelector(".firstCare");
-const firstCareList = document.querySelector(".firstCare_list");
-const firstCareChevron = document.querySelector(".firstCareChevron");
-const secondCare = document.querySelector(".secondCare");
-const secondCareList = document.querySelector(".secondCare_list");
-const secondCareChevron = document.querySelector(".secondCareChevron");
-
-// !TODO: déplacer le code dans un fichier à part sinon génère erreur dès la page d'accueil
-firstCare.addEventListener("click", function () {
-  firstCareList.classList.toggle("firstCare_list--open");
-  firstCareChevron.classList.toggle("fa-chevron-down");
-  firstCareChevron.classList.toggle("fa-chevron-right");
-});
-secondCare.addEventListener("click", function () {
-  secondCareList.classList.toggle("secondCare_list--open");
-  secondCareChevron.classList.toggle("fa-chevron-down");
-  secondCareChevron.classList.toggle("fa-chevron-right");
-});
