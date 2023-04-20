@@ -14,13 +14,26 @@ careChoices.forEach((careChoice) => {
 const slotsTimes = document.querySelectorAll(".slots_time");
 slotsTimes.forEach((slotsTime) => {
   slotsTime.addEventListener("click", function () {
-    let time = slotsTime.getAttribute("data-set");
+    let time = slotsTime.getAttribute("data-time");
+    let date = slotsTime.getAttribute("data-date");
+    let nameDay = slotsTime.getAttribute("data-nameDay");
     localStorage.setItem("time", time);
+    localStorage.setItem("date", date);
+    localStorage.setItem("nameDay", nameDay);
   });
 });
-// Je vérifie si le choix du type de séance n'a pas été modifié
+// Je passe à selected le type de séance choisi
 const selectCares = document.querySelector("#cares");
-if (selectCares !== null) {
+let careId = localStorage.getItem("careId");
+
+// Je vérifie si le choix du type de séance n'a pas été modifié
+if (selectCares) {
+  const options = selectCares.querySelectorAll("option");
+  options.forEach((option) => {
+    if (option.value == careId) {
+      option.setAttribute("selected", "selected");
+    }
+  });
   selectCares.addEventListener("change", function () {
     localStorage.setItem("careId", selectCares.value);
   });
@@ -61,3 +74,83 @@ days.forEach((day) => {
     dayChevron.classList.toggle("fa-chevron-right");
   });
 });
+
+// Remplissage des champs du formulaire de rendez-vous et de l'affichage de la réservation--------------------
+const reservation = document.querySelector(".reservation");
+if (reservation) {
+  const dateDiv = document.querySelector(".appointment_date");
+  const timeDiv = document.querySelector(".appointment_time");
+  const careName = document.querySelector(".reservation_infos_care");
+  const careDuration = document.querySelector(".reservation_infos_duration");
+  const carePrice = document.querySelector(".appointment_price");
+  const months = [
+    "Janvier",
+    "Février",
+    "Mars",
+    "Avril",
+    "Mai",
+    "Juin",
+    "Juillet",
+    "Août",
+    "Septembre",
+    "Octobre",
+    "Novembre",
+    "Décembre",
+  ];
+  let time = localStorage.getItem("time");
+  let date = localStorage.getItem("date");
+  let nameDay = localStorage.getItem("nameDay");
+  let nameCare;
+  let day = date.slice(8, 10);
+  let month = date.slice(5, 7);
+  let monthName = months[month - 1];
+  let year = date.slice(0, 4);
+  let hours = time.slice(0, 2);
+  let minutes = time.slice(3, 5);
+  // Mettre la première lettre en majuscule
+  nameDay = capitalizeFirstLetter(nameDay);
+  // Affichage de la date et de l'heure du rendez-vous
+  dateDiv.textContent = `${nameDay} ${day} ${monthName} ${year}`;
+  timeDiv.textContent = `${hours}h${minutes}`;
+
+  // Affichage du type de séance
+  const selectAppointmentsCare = document.querySelector("#appointments_care");
+  if (selectAppointmentsCare) {
+    const options = selectAppointmentsCare.querySelectorAll("option");
+    careId = localStorage.getItem("careId");
+    options.forEach((option) => {
+      if (option.value == careId) {
+        option.setAttribute("selected", "selected");
+      }
+    });
+  }
+
+  // Je récupère les données de la table "care" -------------------------------
+  const cares = document.querySelector("table.cares");
+  const tbody = cares.querySelector("tbody");
+  const rows = tbody.querySelectorAll("tr");
+  let dataCares = [];
+  let cpt = 0;
+  rows.forEach((row) => {
+    const items = row.querySelectorAll("td");
+    dataCares[cpt] = [];
+    items.forEach((item) => {
+      dataCares[cpt].push(item.textContent);
+    });
+    cpt++;
+  });
+
+  // Affichage des informations de la séance
+  dataCares.forEach((dataCare) => {
+    console.log(dataCare);
+    if (dataCare[0] == careId) {
+      careName.textContent = dataCare[1];
+      careDuration.textContent = dataCare[2].slice(3, 5) + " minutes";
+      carePrice.textContent = dataCare[3] + ",00";
+    }
+  });
+}
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}

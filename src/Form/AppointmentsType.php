@@ -16,9 +16,10 @@ class AppointmentsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('time')
-            ->add('date')
+            ->add('time', null, ['attr' => ['class' => 'hidden']])
+            ->add('date', null, ['attr' => ['class' => 'hidden']])
             ->add('care', EntityType::class, [
+                'attr' => ['class' => 'hidden'],
                 'class' => Cares::class,
                 'choice_label' => 'name',
                 'label' => 'Choix de la séance',
@@ -27,15 +28,6 @@ class AppointmentsType extends AbstractType
                         ->orderBy('c.name', 'ASC');
                 },
             ]);
-        // ->add('user', EntityType::class, [
-        //     'class' => Users::class,
-        //     'choice_label' => 'name',
-        //     'label' => 'Choix du client',
-        //     'query_builder' => function (UsersRepository $ur) {
-        //         return $ur->createQueryBuilder('u')
-        //             ->orderBy('u.name', 'ASC');
-        //     },
-        // ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

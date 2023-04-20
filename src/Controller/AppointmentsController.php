@@ -52,7 +52,7 @@ class AppointmentsController extends AbstractController
             'appointments' => $appointmentsRepository->findAll(),
             'firstCares' => $caresRepository->findByExampleField('Première%'),
             'secondCares' => $caresRepository->findByExampleField('Suivi%'),
-
+            'cares' => $caresRepository->findAll(),
         ]);
     }
     #[Route('/slots', name: 'slots', methods: ['GET'])]
@@ -191,8 +191,14 @@ class AppointmentsController extends AbstractController
     }
 
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
-    public function new(Request $request, AppointmentsRepository $appointmentsRepository): Response
+    public function new(Request $request, AppointmentsRepository $appointmentsRepository, CaresRepository $caresRepository): Response
     {
+        // Je vérifie que l'utilisateur est connecté , sinon je le redirige vers la page de connexion
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+        $user = $this->getUser();
+
         $appointment = new Appointments();
         $form = $this->createForm(AppointmentsType::class, $appointment);
         $form->handleRequest($request);
@@ -206,6 +212,8 @@ class AppointmentsController extends AbstractController
         return $this->render('appointments/new.html.twig', [
             'appointment' => $appointment,
             'form' => $form,
+            'cares' => $caresRepository->findAll(),
+            'user' => $user,
         ]);
     }
 
