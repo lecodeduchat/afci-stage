@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container container_slots">
+	<div class="container container_appointment container_slots">
 		<div class="content content_appointment">
 			<h3>Prendre rendez-vous en ligne</h3>
 			<div class="slots_content">
@@ -37,17 +37,16 @@
 							</div>
 							<div class="slots_times">
 								{% for slot in day['slots'] %}
-									<a href="{{ path('appointments_new')}}" class="slots_time" data-set="{{ slot|date("H:i") }}">
+									<a href="{{ path('appointments_new')}}" class="slots_time" data-nameday="{{ nameDay }}" data-date="{{ date }}" data-time="{{ slot|date("H:i") }}">
 										{{ slot|date("H:i") }}</a>
 								{% endfor %}
 							</div>
-
 						</div>
-
 					{% endfor %}
-
 				</div>
 			</div>
 		</div>
 	</div>
+
+
 {% endblock %}

@@ -3,6 +3,7 @@
 @import url("home.css");
 @import url("form.css");
 @import url("appointment.css");
+@import url("login.css");
 *,
 ::before,
 ::after {
@@ -110,11 +111,17 @@ p {
 .open {
   display: block;
 }
+.hidden {
+  visibility: hidden;
+  height: 0px;
+}
+
 /* LAYOUT --------------------------------------------------------------------------- */
 .container {
   width: 100%;
   min-height: 400px;
 }
+
 @media screen and (min-width: 768px) {
 }
 @media screen and (min-width: 1200px) {
@@ -193,4 +200,14 @@ p {
   100% {
     background-position: 0 0;
   }
+}
+/*  Messages d'erreur */
+.danger {
+  color: red;
+}
+.warning {
+  color: orange;
+}
+.success {
+  color: green;
 }

@@ -1,4 +1,10 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<div class="appointment_form">
+
+	{{ form_start(form) }}
+	{{ form_widget(form.time) }}
+	{{ form_widget(form.date) }}
+	{{ form_widget(form.care) }}
+	<button class="btn btn_appointment">Valider</button>
+	{{ form_end(form) }}
+
+</div>

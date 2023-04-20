@@ -1,12 +1,72 @@
 {% extends 'base.html.twig' %}
+{% block javascripts %}
+	<script src="/assets/js/appointment.js" defer></script>
+{% endblock %}
 
-{% block title %}New Appointments
+{% block title %}Rendez-vous
 {% endblock %}
 
 {% block body %}
-	<h1>Create new Appointments</h1>
+	<div class="container container_appointment">
+		<div class="content content_appointment">
+			<h3 class="appointment_salutation">Bonjour,
+				{{ user.firstname }}
+				{{ user.lastname }}
+			</h3>
+			<div class="appointment_message">Votre réservation n'est pas encore validée</div>
+			<div class="appointment_child">
+				<h3>La séance est pour</h3>
+				<select name="childs" id="childs">
+					<option value="">Prénom enfant 1</option>
+				</select>
+				<div class="form_new_child">Ajouter un enfant</div>
+			</div>
 
-	{{ include('appointments/_form.html.twig') }}
+			<div class="reservation">
+				<h3>Votre réservation</h3>
+				<div class="reservation_date">
+					<span class="appointment_date"></span>
+					à
+					<span class="appointment_time"></span>
+				</div>
+				<div class="reservation_infos">
+					<div class="reservation_infos_care"></div>
+					<div class="reservation_infos_duration"></div>
+					<div class="reservation_infos_price">
+						<span>
+							<strong class="appointment_price"></strong>
+							<i class="fa-solid fa-euro"></i>
+							- Chèque et espèces
+						</span>
+						<span>à régler chez le praticien lors du rdv</span>
+					</div>
+				</div>
+			</div>
+			{{ include('appointments/_form.html.twig') }}
 
-	<a href="{{ path('appointments_index') }}">back to list</a>
+			<a href="{{ path('appointments_index') }}">Retour au choix de la séance</a>
+
+		</div>
+	</div>
+	<table class="cares hidden">
+		<thead>
+			<tr>
+				<th>id</th>
+				<th>name</th>
+				<th>duration</th>
+				<th>price</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for care in cares %}
+				<tr>
+					<td>{{ care.id }}</td>
+					<td>{{ care.name }}</td>
+					<td>{{ care.duration|format_datetime('none','short', locale='fr') }}</td>
+					<td>{{ care.price }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
 {% endblock %}

@@ -1,11 +1,13 @@
+.container_appointment {
+  background-color: var(--main-bg-color-vanilla);
+}
 .content_appointment {
-  width: 300px;
-  margin: 0 auto;
+  margin: 0 12px;
   padding-bottom: 80px;
 }
 .content_appointment h3 {
   color: black;
-  margin: 20px 0;
+  padding: 20px 0;
 }
 .content_appointment ul {
   list-style: none;
@@ -13,7 +15,7 @@
 .cares_choice,
 .firstCare,
 .secondCare {
-  background-color: var(--main-bg-color-vanilla);
+  background-color: var(--main-bg-color-blue);
   height: 50px;
   font-family: "Montserrat";
   font-weight: bold;
@@ -44,6 +46,7 @@
   display: block;
 }
 .care_item {
+  background-color: white;
   padding: 9px 12px;
   border: 1px solid #ddd;
   border-top: none;
@@ -79,7 +82,8 @@
   border-radius: 10px 10px 0 0;
 }
 .slots_title {
-  background-color: var(--main-bg-color-vanilla);
+  background-color: var(--main-bg-color-blue);
+  color: white;
   border-bottom: 1px solid #ddd;
   border-radius: 10px 10px 0 0;
   height: 50px;
@@ -87,21 +91,26 @@
   text-align: center;
   font-family: "Montserrat";
   font-weight: 700;
-  font-size: 14px;
+  font-size: 16px;
 }
 .slots_cares {
+  background-color: white;
   border-bottom: 1px solid #ddd;
+  padding: 12px 0px;
 }
 .slots_cares select {
   display: block;
   width: 276px;
   height: 50px;
-  margin: 12px auto;
+  margin: 0px auto;
   border: 1px solid #ddd;
   border-radius: 10px;
   background-color: #eee;
   padding-left: 12px;
   padding-right: 12px;
+}
+.slots_date {
+  background-color: white;
 }
 .slots_date-day {
   line-height: 50px;
@@ -137,4 +146,76 @@
 }
 .slots_time:hover {
   cursor: pointer;
+}
+h3.appointment_salutation {
+  text-align: left;
+  padding-bottom: 12px;
+}
+.appointment_message {
+  font-weight: bold;
+}
+.reservation {
+  margin: 20px 0;
+  background-color: white;
+  border-radius: 10px;
+  padding: 12px 24px;
+}
+.reservation h3 {
+  text-align: left;
+  color: var(--main-color-blue);
+  padding: 0 0 12px 0;
+}
+.reservation_date {
+  height: 50px;
+  line-height: 50px;
+  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+  font-weight: bold;
+}
+.appointment_date::first-letter {
+  text-transform: uppercase;
+}
+.reservation_infos {
+  padding-top: 12px;
+  color: var(--main-color-blue);
+}
+.reservation_infos > div {
+  line-height: 26px;
+}
+.reservation_infos_price {
+  display: flex;
+  flex-direction: column;
+}
+.reservation_infos_price span:last-child {
+  color: black;
+}
+.appointment_child {
+  display: none;
+  background-color: white;
+  border-radius: 10px;
+  margin: 12px 0;
+  padding: 24px;
+}
+.appointment_child h3 {
+  text-align: left;
+  color: var(--main-color-blue);
+  padding: 0 0 12px 0;
+}
+select#childs,
+.form_new_child {
+  height: 50px;
+  line-height: 48px;
+  width: 100%;
+  padding: 0 12px;
+  border-radius: 10px;
+}
+.form_new_child {
+  margin-top: 12px;
+  border: 1px solid #ddd;
+}
+button.btn_appointment {
+  width: 100px;
+}
+.appointment_form {
+  text-align: right;
 }
