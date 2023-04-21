@@ -11,6 +11,13 @@
 		<div class="content login_content">
 			<h3 class="login_title">Identifiez-vous</h3>
 			<div class="login_message">Votre réservation n'est pas encore validée</div>
+			<div class="tabs">
+				<div class="tabs_item">J'ai déjà un compte</div>
+				<div class="tabs_item">
+					<a href="{{ path('app_register')}}">Je crée mon compte</a>
+				</div>
+
+			</div>
 
 			<form method="post" class="login_form">
 				{% if error %}
@@ -25,7 +32,6 @@
 					</div>
 				{% endif %}
 
-				<h3 class="login_form_title">J'ai déjà un compte</h3>
 				<div>Accédez à votre espace pour pouvoir gérer vos rendez-vous</div>
 				<label for="inputEmail">Email
 					<span class="danger">*</span>

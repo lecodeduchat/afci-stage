@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Espace patient
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="content">
+			<div class="profil_menu">
+				Bonjour,
+				{{ user.firstname }}{{ user.lastname}}
+				<a href="{{ path('app_logout') }}">Me déconnecter</a>
+				<a href="">
+					<i class="fa-solid fa-user-gear"></i>
+					Compte</a>
+			</div>
+			<h1>Espace patient</h1>
+			<div class="list-old-appointments">
+				<h3>Votre prochain rendez-vous</h3>
+				<ul>
+					{% for appointment in nextAppointments %}
+						<li>
+							<span class="color_care">
+								<i class="fa-solid fa-circle"></i>
+							</span>
+							<span>
+								{% for care in cares %}
+									{% if care.id == appointment.care.id %}
+										{{ care.name }}
+									{% endif %}
+								{% endfor %}
+							</span>
+							<span>{{ appointment.date|date('d/m/Y') }}</span>
+						</li>
+					{% endfor %}
+				</ul>
+				<h3>Historique de vos rendez-vous</h3>
+				<ul>
+					{% for appointment in oldsAppointments %}
+						<li>
+							<span class="color_care">
+								<i class="fa-solid fa-circle"></i>
+							</span>
+							<span>
+								{% for care in cares %}
+									{% if care.id == appointment.care.id %}
+										{{ care.name }}
+									{% endif %}
+								{% endfor %}
+							</span>
+							<span>{{ appointment.date|date('d/m/Y') }}</span>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	</div>
+{% endblock %}

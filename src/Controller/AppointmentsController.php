@@ -198,15 +198,19 @@ class AppointmentsController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
         $user = $this->getUser();
-
+        // Je créee un nouveau rendez-vous
         $appointment = new Appointments();
+        // Je récupère l'utilisateur connecté et je l'associe au rendez-vous
+        $appointment->setUser($user);
         $form = $this->createForm(AppointmentsType::class, $appointment);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // TODO : Vérifier que le rendez-vous n'est pas déjà pris (si code javascript modifié par un hacker) ou pris entre temps par un autre utilisateur
             $appointmentsRepository->save($appointment, true);
-
-            return $this->redirectToRoute('appointments_index', [], Response::HTTP_SEE_OTHER);
+            // TODO : Ajouter un message flash indiquant que le rendez-vous a bien été créé
+            // TODO : Envoyer un mail de confirmation au client
+            return $this->redirectToRoute('profile_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('appointments/new.html.twig', [
