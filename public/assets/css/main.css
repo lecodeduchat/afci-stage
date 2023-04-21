@@ -25,7 +25,7 @@
   --main-bg-color-purple-light: rgba(98, 94, 188, 0.6);
   --main-bg-color-gray: rgba(78, 80, 85, 1);
   --main-bg-color-blue: rgba(70, 186, 210, 1);
-  --main-bg-color-blue-light: rgba(70, 186, 210, 0.4);
+  --main-bg-color-blue-light: #b6e3ed;
   --main-bg-color-vanilla: rgba(255, 236, 173, 1);
 }
 
@@ -111,10 +111,10 @@ p {
 .open {
   display: block;
 }
-.hidden {
+/* .hidden {
   visibility: hidden;
   height: 0px;
-}
+} */
 
 /* LAYOUT --------------------------------------------------------------------------- */
 .container {

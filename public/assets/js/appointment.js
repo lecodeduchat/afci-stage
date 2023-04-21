@@ -142,13 +142,56 @@ if (reservation) {
 
   // Affichage des informations de la séance
   dataCares.forEach((dataCare) => {
-    console.log(dataCare);
     if (dataCare[0] == careId) {
       careName.textContent = dataCare[1];
       careDuration.textContent = dataCare[2].slice(3, 5) + " minutes";
       carePrice.textContent = dataCare[3] + ",00";
     }
   });
+  // Injection des données dans le formulaire de rendez-vous --------------------
+  const form = document.querySelector("form");
+  if (form) {
+    const selectHour = document.querySelector("#appointments_time_hour");
+    const selectMinute = document.querySelector("#appointments_time_minute");
+    const selectDay = document.querySelector("#appointments_date_day");
+    const selectMonth = document.querySelector("#appointments_date_month");
+    const selectYear = document.querySelector("#appointments_date_year");
+
+    const optionsHour = selectHour.querySelectorAll("option");
+    const optionsMinute = selectMinute.querySelectorAll("option");
+    const optionsDay = selectDay.querySelectorAll("option");
+    const optionsMonth = selectMonth.querySelectorAll("option");
+    const optionsYear = selectYear.querySelectorAll("option");
+
+    optionsHour.forEach((option) => {
+      if (option.value == hours) {
+        option.setAttribute("selected", "selected");
+      }
+    });
+    optionsMinute.forEach((option) => {
+      if (option.value == minutes) {
+        option.setAttribute("selected", "selected");
+      }
+    });
+    optionsDay.forEach((option) => {
+      if (option.value == day) {
+        option.setAttribute("selected", "selected");
+      }
+    });
+
+    optionsMonth.forEach((option) => {
+      // Si le mois est inférieur à 10, je supprime le 0
+      month = month.slice(0, 1) == "0" ? month.slice(1, 2) : month;
+      if (option.value == month) {
+        option.setAttribute("selected", "selected");
+      }
+    });
+    optionsYear.forEach((option) => {
+      if (option.value == year) {
+        option.setAttribute("selected", "selected");
+      }
+    });
+  }
 }
 
 function capitalizeFirstLetter(string) {

@@ -37,6 +37,10 @@
   border-left: 1px solid #ddd;
   border-right: 1px solid #ddd;
 }
+.firstCare:hover,
+.secondCare:hover {
+  cursor: pointer;
+}
 .firstCare_list,
 .secondCare_list {
   display: none;
@@ -215,7 +219,13 @@ select#childs,
 }
 button.btn_appointment {
   width: 100px;
+  margin-bottom: 30px;
 }
 .appointment_form {
   text-align: right;
+}
+.link.link_appointment {
+  color: black;
+  font-weight: bold;
+  text-decoration: underline;
 }

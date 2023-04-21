@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Cares;
+use App\Entity\Users;
 use App\Entity\Appointments;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -53,16 +54,36 @@ class AppointmentsRepository extends ServiceEntityRepository
             ->orderBy('a.id', 'ASC')
             ->getQuery()
             ->getResult();
-        // dd($this->createQueryBuilder('a')->getQuery()->getSQL());
     }
 
-    //    public function findOneBySomeField($value): ?Appointments
-    //    {
-    //        return $this->createQueryBuilder('a')
-    //            ->andWhere('a.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function findNextAppointmentByUser($user, $date): array
+    {
+        return $this->createQueryBuilder('a')
+            ->innerJoin(Users::class, 'u', 'WITH', 'u = a.user')
+            ->andWhere('a.user = :val AND a.date > :date')
+            ->setParameter('val', $user)
+            ->setParameter('date', $date)
+            ->orderBy('a.date', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * Retourne l'historique des rendez-vous d'un utilisateur donné par ordre décroissant
+     * depuis la date du jour
+     *
+     * @param [type] $user
+     * @return array
+     */
+    public function findOldAppointmentByUser($user, $date): array
+    {
+        return $this->createQueryBuilder('a')
+            ->innerJoin(Users::class, 'u', 'WITH', 'u = a.user')
+            ->andWhere('a.user = :val AND a.date < :date')
+            ->setParameter('val', $user)
+            ->setParameter('date', $date)
+            ->orderBy('a.date', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 }
