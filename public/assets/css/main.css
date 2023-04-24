@@ -111,10 +111,10 @@ p {
 .open {
   display: block;
 }
-/* .hidden {
+.hidden {
   visibility: hidden;
   height: 0px;
-} */
+}
 
 /* LAYOUT --------------------------------------------------------------------------- */
 .container {
