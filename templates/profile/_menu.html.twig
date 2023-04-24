@@ -1,0 +1,21 @@
+<div class="profile_menu">
+	<div class="profile_menu_salutation">
+		Bonjour,
+		{{ user.firstname }}&nbsp;{{ user.lastname}}
+	</div>
+	<nav>
+		<div class="profile_menu_title">
+			<i class="fa-solid fa-user-gear"></i>
+			Mon compte
+		</div>
+		<ul class="profile_menu_content">
+			<li class="profile_menu_item">
+				<a href="{{ path('profile_show') }}">Voir mon profil</a>
+			</li>
+			<li class="profile_menu_item">
+				<a href="{{ path('app_logout') }}">Me déconnecter</a>
+			</li>
+		</ul>
+	</nav>
+</div>
+<div class="gradient-color-bar"></div>

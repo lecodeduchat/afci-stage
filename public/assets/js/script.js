@@ -11,6 +11,16 @@ btnMainMenu.addEventListener("click", function () {
   burger.classList.toggle("fa-bars");
 });
 
+// Ouverture et fermeture du menu secondaire des utilisateurs connectés ----
+const btnMenuUser = document.querySelector(".profile_menu_title");
+const menuUser = document.querySelector(".profile_menu_content");
+if (menuUser) {
+  btnMenuUser.addEventListener("click", function () {
+    console.log("coucou menu user");
+    menuUser.classList.toggle("profile_menu_content--open");
+  });
+}
+
 // Animation du menu sur tablette et desktop -------------------------------
 const header = document.querySelector("header");
 const headerContent = document.querySelector(".header_content");

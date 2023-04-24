@@ -23,6 +23,9 @@ class Cares
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $duration = null;
 
+    #[ORM\Column(length: 7)]
+    private ?string $color = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +63,18 @@ class Cares
     public function setDuration(\DateTimeInterface $duration): self
     {
         $this->duration = $duration;
+
+        return $this;
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(string $color): self
+    {
+        $this->color = $color;
 
         return $this;
     }

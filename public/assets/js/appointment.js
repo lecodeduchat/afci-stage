@@ -97,6 +97,7 @@ if (reservation) {
     "Novembre",
     "Décembre",
   ];
+  // Je récupère les données du local storage
   let time = localStorage.getItem("time");
   let date = localStorage.getItem("date");
   let nameDay = localStorage.getItem("nameDay");
@@ -149,13 +150,14 @@ if (reservation) {
     }
   });
   // Injection des données dans le formulaire de rendez-vous --------------------
-  const form = document.querySelector("form");
+  const form = document.querySelector(".appointment_form");
   if (form) {
     const selectHour = document.querySelector("#appointments_time_hour");
     const selectMinute = document.querySelector("#appointments_time_minute");
     const selectDay = document.querySelector("#appointments_date_day");
     const selectMonth = document.querySelector("#appointments_date_month");
     const selectYear = document.querySelector("#appointments_date_year");
+    const btnSubmit = document.querySelector(".btn_appointment");
 
     const optionsHour = selectHour.querySelectorAll("option");
     const optionsMinute = selectMinute.querySelectorAll("option");
@@ -190,6 +192,12 @@ if (reservation) {
       if (option.value == year) {
         option.setAttribute("selected", "selected");
       }
+    });
+    btnSubmit.addEventListener("click", function () {
+      // Je vide les données du local storage après la validation du formulaire
+      localStorage.setItem("time", "");
+      localStorage.setItem("date", "");
+      localStorage.setItem("nameDay", "");
     });
   }
 }

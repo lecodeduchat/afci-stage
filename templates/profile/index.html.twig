@@ -1,36 +1,42 @@
 {% extends 'base.html.twig' %}
 
+{% block javascripts %}
+	<script src="/assets/js/profile.js" defer></script>
+{% endblock %}
+
 {% block title %}Espace patient
 {% endblock %}
 
 {% block body %}
+	{% include('/profile/_menu.html.twig') %}
 	<div class="container">
 		<div class="content">
-			<div class="profil_menu">
-				Bonjour,
-				{{ user.firstname }}{{ user.lastname}}
-				<a href="{{ path('app_logout') }}">Me déconnecter</a>
-				<a href="">
-					<i class="fa-solid fa-user-gear"></i>
-					Compte</a>
-			</div>
 			<h1>Espace patient</h1>
-			<div class="list-old-appointments">
+			<div class="profile_list_appointments">
 				<h3>Votre prochain rendez-vous</h3>
 				<ul>
 					{% for appointment in nextAppointments %}
 						<li>
-							<span class="color_care">
-								<i class="fa-solid fa-circle"></i>
-							</span>
-							<span>
+							<div class="profile_list_appointment_care">
 								{% for care in cares %}
 									{% if care.id == appointment.care.id %}
-										{{ care.name }}
+										<span class="color_care" style="color:{{ care.color }}">
+											<i class="fa-solid fa-circle"></i>
+										</span>
+										<span>
+											{{ care.name }}
+										</span>
 									{% endif %}
 								{% endfor %}
-							</span>
-							<span>{{ appointment.date|date('d/m/Y') }}</span>
+
+							</div>
+							<div class="profile_list_appointment_date">
+								<span>{{ appointment.date|dayName }}</span>
+								<span>{{ appointment.date|date('d') }}</span>
+								<span>{{ appointment.date|monthName }}</span>
+								<span>{{ appointment.date|date('Y') }}</span>
+							</div>
+							<a href="{{ path('appointments_delete',{id: appointment.id} )}}" class="btn btn_cancel_appointment">Annuler le RDV</a>
 						</li>
 					{% endfor %}
 				</ul>
@@ -52,6 +58,7 @@
 						</li>
 					{% endfor %}
 				</ul>
+				{# <a href="">Voir plus</a> #}
 			</div>
 		</div>
 	</div>
