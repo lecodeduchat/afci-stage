@@ -115,6 +115,7 @@ class AppointmentsController extends AbstractController
                     $limitAfternoon = strtotime($afternoonEnd) - 30 * 60;
                     // Je crée la variable $slot, je lui attribut la valeur du début de matinée et je la convertis en timestamp (temps en millisecondes)
                     $slot = strtotime($morningStart);
+                    //TODO: Attention à l'heure qu'il est pour ne pas afficher les créneaux horaires passés !!!!
                     // Je recherche dans la liste des rendez-vous, ceux qui correspondent à la date du jour 
                     foreach ($appointments as $appointment) {
                         if ($appointment->getDate()->format('Y-m-d') == $date) {
@@ -198,7 +199,7 @@ class AppointmentsController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
         $user = $this->getUser();
-        // Je créee un nouveau rendez-vous
+        // Je crée un nouveau rendez-vous
         $appointment = new Appointments();
         // Je récupère l'utilisateur connecté et je l'associe au rendez-vous
         $appointment->setUser($user);
@@ -229,7 +230,7 @@ class AppointmentsController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_appointments_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Appointments $appointment, AppointmentsRepository $appointmentsRepository): Response
     {
         $form = $this->createForm(AppointmentsType::class, $appointment);
@@ -241,19 +242,19 @@ class AppointmentsController extends AbstractController
             return $this->redirectToRoute('app_appointments_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('appointments/edit.html.twig', [
+        return $this->render('appointments/edit.html.twig', [
             'appointment' => $appointment,
             'form' => $form,
         ]);
     }
 
-    #[Route('/{id}', name: 'app_appointments_delete', methods: ['POST'])]
+    #[Route('/delete/{id}', name: 'delete', methods: ['POST'])]
     public function delete(Request $request, Appointments $appointment, AppointmentsRepository $appointmentsRepository): Response
     {
         if ($this->isCsrfTokenValid('delete' . $appointment->getId(), $request->request->get('_token'))) {
             $appointmentsRepository->remove($appointment, true);
         }
 
-        return $this->redirectToRoute('app_appointments_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('profile/profile_index', [], Response::HTTP_SEE_OTHER);
     }
 }

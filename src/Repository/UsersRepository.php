@@ -42,6 +42,14 @@ class UsersRepository extends ServiceEntityRepository implements PasswordUpgrade
         }
     }
 
+    public function update(Users $entity, bool $flush = false): void
+    {
+        $this->getEntityManager()->persist($entity);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
      */
@@ -56,28 +64,28 @@ class UsersRepository extends ServiceEntityRepository implements PasswordUpgrade
         $this->save($user, true);
     }
 
-//    /**
-//     * @return Users[] Returns an array of Users objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('u.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return Users[] Returns an array of Users objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('u')
+    //            ->andWhere('u.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('u.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    public function findOneBySomeField($value): ?Users
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?Users
+    //    {
+    //        return $this->createQueryBuilder('u')
+    //            ->andWhere('u.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }

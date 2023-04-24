@@ -71,11 +71,12 @@ class AppointmentsRepository extends ServiceEntityRepository
     /**
      * Retourne l'historique des rendez-vous d'un utilisateur donné par ordre décroissant
      * depuis la date du jour
+     * Limité à 5 résultats
      *
      * @param [type] $user
      * @return array
      */
-    public function findOldAppointmentByUser($user, $date): array
+    public function findOldAppointmentByUser($user, $date): ?array
     {
         return $this->createQueryBuilder('a')
             ->innerJoin(Users::class, 'u', 'WITH', 'u = a.user')
@@ -84,6 +85,6 @@ class AppointmentsRepository extends ServiceEntityRepository
             ->setParameter('date', $date)
             ->orderBy('a.date', 'DESC')
             ->getQuery()
-            ->getResult();
+            ->getMaxResults(5);
     }
 }
