@@ -22,11 +22,17 @@ h3.login_title {
   background-color: white;
   border-radius: 0 0 10px 10px;
   padding: 12px 24px 24px 24px;
+  display: flex;
+  flex-direction: column;
 }
 .login_form div {
   line-height: 22px;
   margin-bottom: 20px;
 }
+.login_form-link {
+  margin-bottom: 12px;
+}
+
 button.btn-login {
   width: 290px;
   height: 100px;
