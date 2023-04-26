@@ -2,7 +2,6 @@
   background-color: var(--main-bg-color-vanilla);
 }
 .content_appointment {
-  margin: 0 12px;
   padding-bottom: 80px;
 }
 .content_appointment h3 {
@@ -80,7 +79,7 @@
   line-height: 60px;
 }
 .slots_content {
-  width: 330px;
+  width: 100%;
   margin: 0 auto;
   border: 1px solid #ddd;
   border-radius: 10px 10px 0 0;
