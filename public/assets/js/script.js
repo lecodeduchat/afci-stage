@@ -86,3 +86,15 @@ function initMap() {
     });
   });
 }
+
+// bouton fermeture des message
+const closeMessage = document.querySelectorAll(".alertClose");
+  
+
+ closeMessage.forEach(element => { 
+  element.addEventListener("click", function(){
+    element.parentNode.style.display ='none';
+  })
+});
+
+

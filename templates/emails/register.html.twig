@@ -1,0 +1,5 @@
+<h1>Activer votre compte</h1>
+<p>Bonjour {{user.firstname}} {{user.lastname}}</p>
+<p>votre inscription sur le site de Charlotte Vandermersch est à valider en cliquant sur le lien ci-dessous:</p>
+<p><a href="{{absolute_url(path('verify_user',{token: token}))}}">Lien</a></p>
+<p>Ce lien expirera dans trois heures</p>
