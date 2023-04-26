@@ -11,7 +11,7 @@
 }
 .profile_menu_content--open {
   position: absolute;
-  bottom: -104px; /* 50px * nb de li + px de gradient-color-bar */
+  bottom: -154px; /* 50px * nb de li + px de gradient-color-bar */
   right: 0;
   display: block;
   background-color: var(--main-bg-color-purple);
@@ -44,8 +44,15 @@
   text-align: left;
   padding-left: 18px;
 }
-.btn_cancel_appointment {
-  padding: 8px 12px;
+.profile_list_appointments ul {
+  list-style: none;
+  padding: 0;
+}
+.btn.btn_cancel_appointment {
+  margin: 12px auto;
+  width: fit-content;
+  height: 30px;
+  line-height: 30px;
 }
 .profile_list_appointments li {
   text-align: center;
@@ -76,7 +83,4 @@ table.edition_profile tr td:first-child {
 .edition_profile_action {
   text-align: right;
   padding: 0 18px;
-}
-.edition_profile_action .btn {
-  padding: 12px;
 }
