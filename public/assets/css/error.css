@@ -1,0 +1,48 @@
+.page_error{
+   height: calc(100vh - 130px);
+   background-color: #4c7177;
+   display: grid;
+   grid-template-columns: repeat(2,1fr);
+}
+
+
+
+.page_error_img{
+    height: 300px;
+    
+    
+}
+
+.page_error_bulle_img{
+    height: 75px;
+   
+    
+}
+
+.bulle_oops{
+    grid-column: 1/1;
+    font-family: "Sauna-bold";
+    font-size: 26px;
+    }
+
+.p_error{
+   
+    
+    font-size: 68px;
+    font-family: "Sauna-bold";
+    color:var(--main-bg-color-vanilla);
+    }
+
+    @media screen and (min-width: 532px){
+        .page_error_img{
+            left: 150px;
+        }
+        .page_error_bulle_img{
+
+        }
+
+
+    }
+
+
+

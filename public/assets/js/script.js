@@ -96,6 +96,7 @@ function initMap() {
     });
   });
 }
+
 // Initialisation de datepicker ---------------------------------------------
 const datepicker = document.querySelector(".js-datepicker");
 if (datepicker) {
@@ -108,3 +109,16 @@ if (datepicker) {
     });
   });
 }
+
+// bouton fermeture des message
+const closeMessage = document.querySelectorAll(".alertClose");
+  
+
+ closeMessage.forEach(element => { 
+  element.addEventListener("click", function(){
+    element.parentNode.style.display ='none';
+  })
+});
+
+
+
