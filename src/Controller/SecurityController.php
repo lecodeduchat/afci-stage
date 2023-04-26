@@ -22,9 +22,10 @@ class SecurityController extends AbstractController
     #[Route(path: '/connexion', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils, CaresRepository $caresRepository): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
+        $user = "";
+        if ($this->getUser()) {
+            return $this->redirectToRoute('target_path');
+        }
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -36,7 +37,8 @@ class SecurityController extends AbstractController
             [
                 'last_username' => $lastUsername,
                 'error' => $error,
-                'cares' => $caresRepository->findAll()
+                'cares' => $caresRepository->findAll(),
+                'user' => $user,
             ],
 
         );

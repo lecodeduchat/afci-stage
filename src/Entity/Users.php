@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UsersRepository::class)]
-#[UniqueEntity(fields: ['email'], message: 'Ily a déjà un compte avec cette adresse email.')]
+#[UniqueEntity(fields: ['email'], message: 'Il y a déjà un compte avec cette adresse email.')]
 class Users implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use CreatedAtTrait;
@@ -22,10 +22,11 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank(message: 'Veuillez renseigner votre adresse email.')]
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
-    #[ORM\Column]
+    #[ORM\Column(options: ['default' => 'ROLE_USER'])]
     private array $roles = [];
 
     /**
@@ -34,24 +35,34 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    #[Assert\NotBlank(message: 'Veuillez renseigner votre nom.')]
     #[ORM\Column(length: 100)]
     private ?string $firstname = null;
 
+    #[Assert\NotBlank(message: 'Veuillez renseigner votre prénom.')]
     #[ORM\Column(length: 100)]
     private ?string $lastname = null;
 
+    #[Assert\NotBlank(message: 'Veuillez renseigner votre date de naissance.')]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $birthday = null;
 
+    #[Assert\NotBlank(message: 'Veuillez renseigner votre adresse.')]
     #[ORM\Column(length: 255)]
     private ?string $address = null;
 
+    #[Assert\NotBlank(message: 'Veuillez renseigner votre code postal.')]
+    #[Assert\Regex(pattern: '/^[0-9]{5}$/', message: 'Le code postal doit comporter 5 chiffres.')]
+    #[Assert\Length(min: 5, max: 5, exactMessage: 'Le code postal doit comporter 5 chiffres.')]
     #[ORM\Column(length: 5)]
     private ?string $zipcode = null;
 
+    #[Assert\NotBlank(message: 'Veuillez renseigner votre ville.')]
     #[ORM\Column(length: 150)]
     private ?string $city = null;
 
+    #[Assert\Regex(pattern: '/^[0-9]{10}$/', message: 'Le numéro de téléphone doit comporter 10 chiffres.')]
+    #[Assert\NotBlank(message: 'Veuillez renseigner votre numéro de téléphone.')]
     #[ORM\Column(length: 10)]
     private ?string $phone = null;
 
@@ -237,6 +248,12 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+
+    public function __toString()
+    {
+        return $this->firstname . ' ' . $this->lastname;
+    }
+
     public function getIsverified(): ?bool
     {
         return $this->is_verified;
@@ -260,6 +277,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
        $this->resetToken = $resetToken;
        return $this;
     }
+
 
 
 }

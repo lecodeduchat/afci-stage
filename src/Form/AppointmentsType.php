@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Cares;
 use App\Entity\Users;
+use App\Entity\Childs;
 use App\Entity\Appointments;
 use App\Repository\CaresRepository;
 use Symfony\Component\Form\AbstractType;
@@ -27,7 +28,8 @@ class AppointmentsType extends AbstractType
                     return $cr->createQueryBuilder('c')
                         ->orderBy('c.name', 'ASC');
                 },
-            ]);
+            ])
+            ->add('child_id', null, ['attr' => ['class' => 'hidden']]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

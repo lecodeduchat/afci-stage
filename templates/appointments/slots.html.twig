@@ -37,7 +37,7 @@
 							</div>
 							<div class="slots_times">
 								{% for slot in day['slots'] %}
-									<a href="{{ path('appointments_new')}}" class="slots_time" data-nameday="{{ nameDay }}" data-date="{{ date }}" data-time="{{ slot|date("H:i") }}">
+									<a href="" class="slots_time" data-nameday="{{ nameDay }}" data-date="{{ date }}" data-time="{{ slot|date("H:i") }}">
 										{{ slot|date("H:i") }}</a>
 								{% endfor %}
 							</div>

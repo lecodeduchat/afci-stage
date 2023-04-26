@@ -2,21 +2,25 @@
 
 namespace App\Controller;
 
-use App\Entity\Appointments;
+use DateTime;
+use App\Entity\Users;
+use App\Entity\Childs;
 use App\Entity\Holidays;
+use App\Form\ChildsType;
+use App\Entity\Appointments;
 use App\Form\AppointmentsType;
-use App\Repository\AppointmentsRepository;
 use App\Repository\CaresRepository;
+use App\Repository\ChildsRepository;
 use App\Repository\HolidaysRepository;
 use App\Repository\SchedulesRepository;
 use App\Repository\VacationsRepository;
-use DateTime;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\AppointmentsRepository;
+use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpClient\HttpClient;
-use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/rendez-vous', name: 'appointments_')]
 class AppointmentsController extends AbstractController
@@ -48,21 +52,30 @@ class AppointmentsController extends AbstractController
     #[Route('/', name: 'index', methods: ['GET'])]
     public function index(AppointmentsRepository $appointmentsRepository, CaresRepository $caresRepository): Response
     {
+        $user = "";
+        if ($this->getUser()) {
+            $user = $this->getUser();
+        }
         return $this->render('appointments/index.html.twig', [
             'appointments' => $appointmentsRepository->findAll(),
             'firstCares' => $caresRepository->findByExampleField('Première%'),
             'secondCares' => $caresRepository->findByExampleField('Suivi%'),
             'cares' => $caresRepository->findAll(),
+            'user' => $user,
         ]);
     }
     #[Route('/slots', name: 'slots', methods: ['GET'])]
     public function slots(AppointmentsRepository $appointmentsRepository, CaresRepository $caresRepository, SchedulesRepository $schedulesRepository, HolidaysRepository $holidaysRepository, VacationsRepository $vacationsRepository): Response
     {
+        $user = "";
+        if ($this->getUser()) {
+            $user = $this->getUser();
+        }
         // Je récupère la date du jour
         $date = new \DateTime();
+        $timeNow = $date;
         // Je la formate pour la passer en paramètre à la requête
         $date = $date->format('Y-m-d');
-
         $appointments = $appointmentsRepository->findAllSince($date);
         $schedules = $schedulesRepository->findAll();
         // Je crée un tableau pour stocker les créneaux horaires de chaque jour
@@ -113,9 +126,20 @@ class AppointmentsController extends AbstractController
                     //! Problème : si la limite est fixée à 12h30, le dernier créneau horaire sera à 12h00 mais pour un premier rendez-vous cela repousse la fin de matinée à 12h45 !!!
                     $limitMorning = strtotime($morningEnd) - 30 * 60;
                     $limitAfternoon = strtotime($afternoonEnd) - 30 * 60;
-                    // Je crée la variable $slot, je lui attribut la valeur du début de matinée et je la convertis en timestamp (temps en millisecondes)
-                    $slot = strtotime($morningStart);
-                    //TODO: Attention à l'heure qu'il est pour ne pas afficher les créneaux horaires passés !!!!
+                    // Je crée la variable $slot, je lui attribut la valeur du début de matinée sauf si le jour est aujourd'hui et que l'heure actuelle est supérieure à l'heure de début de matinée
+                    if ($i == 0 && $timeNow > $schedule->getMorningStart()) {
+                        $hour = $timeNow->format("H");
+                        $minutes = $timeNow->format("i");
+                        if ($minutes < 30) {
+                            $slot = mktime($hour, 30, 0, date('m'), date('d'), date('Y'));;
+                        } else {
+                            $hour = $hour + 1;
+                            $slot = mktime($hour, 0, 0, date('m'), date('d'), date('Y'));;
+                        }
+                    } else {
+                        $slot = strtotime($morningStart);
+                    }
+                    // dd($slot);
                     // Je recherche dans la liste des rendez-vous, ceux qui correspondent à la date du jour 
                     foreach ($appointments as $appointment) {
                         if ($appointment->getDate()->format('Y-m-d') == $date) {
@@ -188,6 +212,42 @@ class AppointmentsController extends AbstractController
             'days' => $this->days,
             'months' => $this->months,
             'time' => $time,
+            'user' => $user,
+        ]);
+    }
+
+    #[Route('/enfants', name: 'childs', methods: ['GET', 'POST'])]
+    public function childs(Request $request, ChildsRepository $childsRepository, CaresRepository $caresRepository): Response
+    {
+        // Je vérifie que l'utilisateur est connecté , sinon je le redirige vers la page de connexion
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+        $user = $this->getUser();
+        $childs = $childsRepository->findByUser(['user' => $user]);
+
+        // Je crée un nouveau formulaire pour ajouter un enfant
+        $child = new Childs();
+        $child->setParent1($user);
+
+        //! La méthode getLastname est soulignée mais elle fonctionne
+        $nom = $user->getLastname();
+        $child->setLastname($nom);
+        $childForm = $this->createForm(ChildsType::class, $child);
+        $childForm->handleRequest($request);
+
+        if ($childForm->isSubmitted() && $childForm->isValid()) {
+            $child->setParent2(NULL);
+            $childsRepository->save($child, true);
+            // TODO : Ajouter un message flash indiquant que l'enfant a bien été ajouté
+            return $this->redirectToRoute('appointments_childs', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('appointments/childs.html.twig', [
+            'childs' => $childs,
+            'user' => $user,
+            'cares' => $caresRepository->findAll(),
+            'childForm' => $childForm->createView(),
         ]);
     }
 

@@ -1,5 +1,16 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+{% endblock %}
+
+
+{% block javascripts %}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="/assets/js/register.js" defer></script>
+{% endblock %}
+
+
 {% block title %}Inscription
 {% endblock %}
 
@@ -22,7 +33,9 @@
 					{{ form_row(registrationForm.firstname) }}
 					{{ form_row(registrationForm.lastname) }}
 					{{ form_row(registrationForm.birthday) }}
+					<div class="error birthday danger"></div>
 					{{ form_row(registrationForm.email) }}
+					<div class="error email danger"></div>
 					{{ form_row(registrationForm.plainPassword, {
             label: 'Mot de passe'
         }) }}
@@ -32,7 +45,7 @@
 					{{ form_row(registrationForm.city) }}
 					{{ form_row(registrationForm.RGPDConsent) }}
 
-					<button type="submit" class="btn">M'inscrire</button>
+					<button type="submit" class="btn btn-inscription">M'inscrire</button>
 					{{ form_end(registrationForm) }}
 				</div>
 			</div>

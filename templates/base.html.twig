@@ -14,19 +14,19 @@
 		<link
 		rel="shortcut icon" href="/assets/images/chiro.ico" type="image/x-icon">
 		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+		<link rel="stylesheet" href="/assets/css/main.css">
+		<link href="/assets/fontawesome/css/fontawesome.css" rel="stylesheet">
+		<link href="/assets/fontawesome/css/brands.css" rel="stylesheet">
+		<link href="/assets/fontawesome/css/solid.css" rel="stylesheet">
 		{% block stylesheets %}
 			{# {{ encore_entry_link_tags('app') }} #}
-			<link rel="stylesheet" href="/assets/css/main.css">
-			<link href="/assets/fontawesome/css/fontawesome.css" rel="stylesheet">
-			<link href="/assets/fontawesome/css/brands.css" rel="stylesheet">
-			<link href="/assets/fontawesome/css/solid.css" rel="stylesheet">
-
 		{% endblock %}
 		<script src="/assets/js/script.js" defer></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap&v=weekly" defer></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
 		{% block javascripts %}
 			{# {{ encore_entry_script_tags('app') }} #}
-
-			<script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap&v=weekly" defer></script>
 		{% endblock %}
 	</head>
 	<body>
