@@ -15,16 +15,19 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RegistrationController extends AbstractController
 {
     #[Route('/inscription', name: 'app_register')]
-
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, UsersAuthenticator $authenticator,
-     EntityManagerInterface $entityManager, SendMailService $mail,JWTService $jwt): Response
-    {
+    public function register(
+        Request $request,
+        UserPasswordHasherInterface $userPasswordHasher,
+        UserAuthenticatorInterface $userAuthenticator,
+        UsersAuthenticator $authenticator,
+        EntityManagerInterface $entityManager,
+        SendMailService $mail,
+        JWTService $jwt
+    ): Response {
         $user = new Users();
         // $created_at ajouté manuellement car il manquait la fonction construct dans Users !!!
         // $created_at = new \DateTimeImmutable();
@@ -38,6 +41,8 @@ class RegistrationController extends AbstractController
 
         // Ajout du role ROLE_USER par défaut
         $user->setRoles(['ROLE_USER']);
+        // Ajout de la valeur par défaut pour le champs is_verified
+        $user->setIsVerified(false);
         // Vérification du numéro de téléphone
         $phone = $user->getPhone();
         // Suppression des points
@@ -73,16 +78,13 @@ class RegistrationController extends AbstractController
 
             // generation du jwt de l'utilisateur
             $header = [
-                'typ' =>'JWT',
+                'typ' => 'JWT',
                 'alg' => 'HS256'
             ];
-
             $payload = [
                 'user_id' => $user->getId()
             ];
-
-            $token = $jwt->generate($header,$payload,$this->getParameter('app.jwtsecret'));
-            
+            $token = $jwt->generate($header, $payload, $this->getParameter('app.jwtsecret'));
 
             // Pour l'envoie du mail 
             $mail->send(
@@ -90,12 +92,8 @@ class RegistrationController extends AbstractController
                 $user->getEmail(),
                 'Activation de votre compte sur le site Charlotte Vandermersch',
                 'register',
-                compact('user','token')
-
-
-
+                compact('user', 'token')
             );
-
 
             return $userAuthenticator->authenticateUser(
                 $user,
@@ -110,67 +108,61 @@ class RegistrationController extends AbstractController
         ]);
     }
 
-    #[Route('/verif/{token}',name: 'verify_user')]
-    public function verifyUser($token,JWTService $jwt, UsersRepository $usersRepository, EntityManagerInterface $em):Response
+    #[Route('/verif/{token}', name: 'verify_user')]
+    public function verifyUser($token, JWTService $jwt, UsersRepository $usersRepository, EntityManagerInterface $em): Response
     {
-        if($jwt->isValid($token) && !$jwt->isExpired($token) && $jwt->check($token, $this->getParameter('app.jwtsecret'))){
-
+        if ($jwt->isValid($token) && !$jwt->isExpired($token) && $jwt->check($token, $this->getParameter('app.jwtsecret'))) {
             $payload = $jwt->getPayload($token);
-
             $user = $usersRepository->find($payload['user_id']);
 
-
-            if($user && !$user->getIsVerified()){
+            if ($user && !$user->getIsVerified()) {
                 $user->setIsVerified(true);
                 $em->flush($user);
                 $this->addFlash('success', 'Utilisateur activé');
                 return $this->redirectToRoute('profile_index');
+            }
+            $this->addFlash('danger', 'Le token est invalide ou a expiré');
+            return $this->redirectToRoute('app_login');
         }
-        $this->addFlash('danger', 'Le token est invalide ou a expiré');
-        return $this->redirectToRoute('app_login');
-
-    }}
+    }
 
     #[Route('/renvoiverif', name: 'resend_verif')]
     public function resendVerif(JWTService $jwt, SendMailService $mail, UsersRepository $usersRepository): Response
     {
         $user = $this->getUser();
 
-        if(!$user){
+        if (!$user) {
             $this->addFlash('danger', 'Vous devez être connecté pour accéder à cette page');
-            return $this->redirectToRoute('app_login');    
-        }
-
-        if($user->getIsVerified()){
-            $this->addFlash('warning', 'Cet utilisateur est déjà activé');
-            return $this->redirectToRoute('profile_index');}
-
-            $header = [
-                'typ' => 'JWT',
-                'alg' => 'HS256'
-            ];
-    
-            // On crée le Payload
-            $payload = [
-                'user_id' => $user->getId()
-            ];
-    
-            // On génère le token
-            $token = $jwt->generate($header, $payload, $this->getParameter('app.jwtsecret'));
-    
-            // On envoie un mail
-            $mail->send(
-                'no-reply@monsite.net',
-                $user->getEmail(),
-                'Activation de votre compte sur le site Charlotte Vandermersch',
-                'register',
-                compact('user', 'token')
-            );
-            $this->addFlash('success', 'Email de vérification envoyé');
             return $this->redirectToRoute('app_login');
-        
         }
 
+        if ($user->getIsVerified()) {
+            $this->addFlash('warning', 'Cet utilisateur est déjà activé');
+            return $this->redirectToRoute('profile_index');
+        }
+
+        $header = [
+            'typ' => 'JWT',
+            'alg' => 'HS256'
+        ];
+
+        // On crée le Payload
+        $payload = [
+            'user_id' => $user->getId()
+        ];
+
+        // On génère le token
+        $token = $jwt->generate($header, $payload, $this->getParameter('app.jwtsecret'));
+
+        // On envoie un mail
+        $mail->send(
+            'no-reply@monsite.net',
+            $user->getEmail(),
+            'Activation de votre compte sur le site Charlotte Vandermersch',
+            'register',
+            compact('user', 'token')
+        );
+        $this->addFlash('success', 'Email de vérification envoyé');
+        return $this->redirectToRoute('app_login');
     }
-
-
+}

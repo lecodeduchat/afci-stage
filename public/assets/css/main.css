@@ -118,6 +118,7 @@ p {
 .hidden {
   visibility: hidden;
   height: 0px;
+  font-size: 0;
 }
 
 /* LAYOUT --------------------------------------------------------------------------- */
@@ -129,7 +130,6 @@ p {
   padding: 18px;
 }
 @media screen and (min-width: 768px) {
-  padding: ;
 }
 @media screen and (min-width: 1200px) {
   .content {
@@ -139,6 +139,7 @@ p {
 }
 /* ANIMATION BUTTONS CALL-ACTION ----------------------------------------------------- */
 .btn {
+  width: 200px;
   font-family: "Montserrat";
   font-weight: bold;
   font-size: 14px;
@@ -230,11 +231,7 @@ p {
 
 /* fermeture du message */
 
-
-.alertClose{
+.alertClose {
   border: none;
   background-color: transparent;
 }
-
-
-

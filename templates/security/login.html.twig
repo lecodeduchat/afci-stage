@@ -68,28 +68,18 @@
 					</div>
 				</div>
 			</div>
-
 		</div>
+		<table class="cares hidden">
+			<tbody class="hidden">
+				{% for care in cares %}
+					<tr class="hidden">
+						<td class="hidden">{{ care.id }}</td>
+						<td class="hidden">{{ care.name }}</td>
+						<td class="hidden">{{ care.duration|format_datetime('none','short', locale='fr') }}</td>
+						<td class="hidden">{{ care.price }}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
 	</div>
-	<table class="cares hidden">
-		<thead>
-			<tr>
-				<th>id</th>
-				<th>name</th>
-				<th>duration</th>
-				<th>price</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for care in cares %}
-				<tr>
-					<td>{{ care.id }}</td>
-					<td>{{ care.name }}</td>
-					<td>{{ care.duration|format_datetime('none','short', locale='fr') }}</td>
-					<td>{{ care.price }}</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
-
 {% endblock %}
