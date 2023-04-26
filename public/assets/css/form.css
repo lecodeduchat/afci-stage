@@ -5,25 +5,27 @@
 .content_register h3 {
   color: black;
   text-align: left;
-  padding-top: 20px;
 }
 .form_users-bg {
   border-radius: 0 0 10px 10px;
 }
 .form_users {
   background-color: var(--main-bg-color-blue-light);
-  width: 1200px;
+  width: 100%;
   margin: 0 auto;
-  padding: 32px;
+  padding: 18px;
   border-radius: 0 0 10px 10px;
 }
 .form_users label {
   display: block;
-  width: 300px;
+  width: 290px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 25px;
+}
+.btn-inscription {
+  margin-top: 18px;
 }
 .form-control,
 input[type="password"] {

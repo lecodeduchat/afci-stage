@@ -2,9 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\AppointmentsRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\AppointmentsRepository;
 
 #[ORM\Entity(repositoryClass: AppointmentsRepository::class)]
 class Appointments
@@ -27,6 +27,9 @@ class Appointments
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $child_id = null;
 
     public function getId(): ?int
     {
@@ -77,6 +80,18 @@ class Appointments
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getChildId(): ?int
+    {
+        return $this->child_id;
+    }
+
+    public function setChildId(?int $child_id): self
+    {
+        $this->child_id = $child_id;
 
         return $this;
     }

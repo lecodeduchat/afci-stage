@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class RegistrationFormType extends AbstractType
 {
@@ -45,21 +46,31 @@ class RegistrationFormType extends AbstractType
             ->add('phone', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => '+33 6 66 77 88 99'
+                    'placeholder' => '06.66.77.88.99'
                 ],
-                'label' => 'Téléphone'
+                'label' => 'Téléphone',
+                'constraints' => [
+                    new Regex([
+                        'pattern' => '/^0[1-9]([-. ]?[0-9]{2}){4}$/',
+                        'message' => 'Le numéro de téléphone doit comporter 10 chiffres.'
+                    ])
+                ],
             ])
             ->add('birthday', DateType::class, [
-                'attr' => [
-                    'class' => 'form-control'
-                ],
+
                 'label' => 'Date de naissance',
-                'widget' => 'choice',
-                'years' => range(date('Y') - 110, date('Y')),
-                'format' => 'ddMMyyyy',
-                'placeholder' => [
-                    'day' => 'Jour', 'month' => 'Mois', 'year' => 'Année'
+                'widget' => 'single_text',
+                // Pour utiliser datepicker il faut désactiver html5
+                'html5' => false,
+                // Ajout de l'attribut 'datepicker' pour le JS
+                'attr' => [
+                    'class' => 'form-control',
+                    // 'class' => 'js-datepicker',
+                    'placeholder' => 'jj/mm/aaaa',
                 ],
+                'years' => range(date('Y') - 110, date('Y')),
+                'format' => 'dd/MM/yyyy',
+                'invalid_message' => 'La date de naissance doit correspondre au format "jj/mm/aaaa" (ex: 05/02/2000)',
             ])
             ->add('address', TextType::class, [
                 'attr' => [
@@ -100,11 +111,11 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Mot de passe',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Veuillez saisir un mot de passe',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'Votre mot de passe doit faire au minimun {{ limit }} caractères',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),

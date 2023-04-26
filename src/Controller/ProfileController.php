@@ -2,8 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Users;
-use App\Form\UsersFormType;
+use App\Form\RegistrationFormType;
 use App\Repository\CaresRepository;
 use App\Repository\UsersRepository;
 use App\Repository\AppointmentsRepository;
@@ -64,8 +63,8 @@ class ProfileController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
         $user = $this->getUser();
-
-        $form = $this->createForm(UsersFormType::class, $user);
+        // Je récupère le formulaire de modification de profil en réutilisant le formulaire d'inscription
+        $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -76,6 +75,7 @@ class ProfileController extends AbstractController
         }
 
         return $this->render('profile/edit.html.twig', [
+            'user' => $user,
             'userForm' => $form->createView(),
         ]);
     }

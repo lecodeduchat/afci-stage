@@ -12,6 +12,7 @@ careChoices.forEach((careChoice) => {
 });
 // Sauvegarde du choix du créneau horaire
 const slotsTimes = document.querySelectorAll(".slots_time");
+
 slotsTimes.forEach((slotsTime) => {
   slotsTime.addEventListener("click", function () {
     let time = slotsTime.getAttribute("data-time");
@@ -20,8 +21,17 @@ slotsTimes.forEach((slotsTime) => {
     localStorage.setItem("time", time);
     localStorage.setItem("date", date);
     localStorage.setItem("nameDay", nameDay);
+    let careId = localStorage.getItem("careId");
+    if (careId == 2 || careId == 5) {
+      console.log("RDV enfant");
+      slotsTime.setAttribute("href", "/rendez-vous/enfants");
+    } else {
+      console.log("RDV adulte");
+      slotsTime.setAttribute("href", "/rendez-vous/new");
+    }
   });
 });
+
 // Je passe à selected le type de séance choisi
 const selectCares = document.querySelector("#cares");
 let careId = localStorage.getItem("careId");
@@ -74,7 +84,15 @@ days.forEach((day) => {
     dayChevron.classList.toggle("fa-chevron-right");
   });
 });
-
+// Sauvegarde du choix de l'enfant --------------------------------------------
+const childsSelect = document.querySelector("#childs");
+if (childsSelect) {
+  let childId = childsSelect.value;
+  localStorage.setItem("childId", childId);
+  childsSelect.addEventListener("change", function () {
+    localStorage.setItem("childId", childsSelect.value);
+  });
+}
 // Remplissage des champs du formulaire de rendez-vous et de l'affichage de la réservation--------------------
 const reservation = document.querySelector(".reservation");
 if (reservation) {
@@ -101,7 +119,6 @@ if (reservation) {
   let time = localStorage.getItem("time");
   let date = localStorage.getItem("date");
   let nameDay = localStorage.getItem("nameDay");
-  let nameCare;
   let day = date.slice(8, 10);
   let month = date.slice(5, 7);
   let monthName = months[month - 1];
@@ -193,11 +210,17 @@ if (reservation) {
         option.setAttribute("selected", "selected");
       }
     });
+    let childId = localStorage.getItem("childId");
+    const inputChildId = document.querySelector("#appointments_child_id");
+    inputChildId.setAttribute("value", childId);
+    console.log(inputChildId.value);
     btnSubmit.addEventListener("click", function () {
       // Je vide les données du local storage après la validation du formulaire
       localStorage.setItem("time", "");
       localStorage.setItem("date", "");
       localStorage.setItem("nameDay", "");
+      localStorage.setItem("careId", "");
+      localStorage.setItem("childId", "");
     });
   }
 }

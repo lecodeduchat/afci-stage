@@ -2,27 +2,27 @@
 {% block javascripts %}
 	<script src="/assets/js/appointment.js" defer></script>
 {% endblock %}
-
 {% block title %}Rendez-vous
 {% endblock %}
 
 {% block body %}
-
 	<div class="container container_appointment">
-		<div
-			class="content content_appointment">
-			{# <h3 class="appointment_salutation">Bonjour,
-																						{{ user.firstname }}
-																						{{ user.lastname }}
-																					</h3> #}
+		<div class="content content_appointment">
 			<div class="appointment_message">Votre réservation n'est pas encore validée</div>
-			{# <div class="appointment_child">
-							<h3>La séance est pour</h3>
-							<select name="childs" id="childs">
-								<option value="">Prénom enfant 1</option>
-							</select>
-							<div class="form_new_child">Ajouter un enfant</div>
-						</div> #}
+			<div class="appointment_child">
+				<h3>La séance est pour</h3>
+				{% if(childs) %}
+					<select name="childs" id="childs">
+						{% for child in childs %}
+							<option value="{{ child.id }}">{{ child.firstname }}</option>
+						{% endfor %}
+						<option value="autre">Ajouter un enfant</option>
+					</select>
+					<a href="{{ path('appointments_new')}}" class="btn link">Valider</a>
+				{% else %}
+					{% include('childs/_form.html.twig') %}
+				{% endif %}
+			</div>
 			<div class="reservation">
 				<h3>Votre réservation</h3>
 				<div class="reservation_date">
@@ -43,10 +43,8 @@
 					</div>
 				</div>
 			</div>
-			{{ include('appointments/_form.html.twig') }}
-
+			{# {{ include('appointments/_form.html.twig') }} #}
 			<a href="{{ path('appointments_index') }}" class="link link_appointment">Retour au choix de la séance</a>
-
 		</div>
 	</div>
 	<table class="cares hidden">

@@ -30,6 +30,10 @@ class Childs
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Users $parent2 = null;
 
+    public function __construct()
+    {
+    }
+
     public function getId(): ?int
     {
         return $this->id;

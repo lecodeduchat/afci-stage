@@ -8,7 +8,6 @@
 {% endblock %}
 
 {% block body %}
-	{% include('/profile/_menu.html.twig') %}
 	<div class="container">
 		<div class="content">
 			<h1>Espace patient</h1>
@@ -28,13 +27,14 @@
 										</span>
 									{% endif %}
 								{% endfor %}
-
 							</div>
 							<div class="profile_list_appointment_date">
 								<span>{{ appointment.date|dayName }}</span>
 								<span>{{ appointment.date|date('d') }}</span>
 								<span>{{ appointment.date|monthName }}</span>
 								<span>{{ appointment.date|date('Y') }}</span>
+								à
+								<span>{{ appointment.time|date('H') }}</span>h<span>{{ appointment.time|date('i') }}</span>
 							</div>
 							<a href="{{ path('appointments_delete',{id: appointment.id} )}}" class="btn btn_cancel_appointment">Annuler le RDV</a>
 						</li>

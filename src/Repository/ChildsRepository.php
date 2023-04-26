@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Users;
 use App\Entity\Childs;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Childs>
@@ -39,19 +40,17 @@ class ChildsRepository extends ServiceEntityRepository
         }
     }
 
-    //    /**
-    //     * @return Childs[] Returns an array of Childs objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('c.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
+    /**
+     * @return Childs[] Returns an array of Childs objects
+     */
+    public function findByUser($user): array
+    {
+        return $this->createQueryBuilder('c')
+            ->innerJoin(Users::class, 'u', 'WITH', 'u = c.parent1 OR u = c.parent2')
+            ->andWhere('c.parent1 = :val OR c.parent2 = :val')
+            ->setParameter('val', $user)
+            ->orderBy('c.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 }

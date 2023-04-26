@@ -120,16 +120,9 @@
   line-height: 24px;
   padding-bottom: 32px;
 }
-.about_content-text .readMore {
-  width: 150px;
-  height: 50px;
-  border-radius: 10px;
-  font-weight: bold;
-  color: white;
-  background-color: var(--main-bg-color-lavender);
-  text-align: center;
-  line-height: 50px;
-  margin: 18px auto;
+.btn.readMore {
+  width: 166px;
+  margin: 0 auto;
 }
 /* BLOC SEPARATOR PHOTOS ------------------------------------------------------------ */
 .separator-photos {
