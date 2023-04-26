@@ -65,11 +65,11 @@ footer h4 {
   background: #4e5055;
   padding: 18px;
   color: white;
+  width: 100%;
 }
 .footer_content_info {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
   width: 100%;
 }
 .footer_container_info ul {
@@ -129,7 +129,8 @@ a {
   line-height: 26px;
 }
 /*   première média query    */
-@media screen and (min-width: 532px) {
+/* Pourquoi min-width: 532px ?!!! */
+@media screen and (min-width: 760px) {
   .footer_img_facade {
     height: 190px;
   }
@@ -148,19 +149,23 @@ a {
   .footer_content-btnRdv {
     width: 230px;
   }
-  .footer_container_info {
-    width: 100%;
-  }
   .footer_container_info ul:nth-of-type(1) {
     padding-right: 20px;
   }
-  .footer_container_info ul {
+  .footer_content_info div {
+    display: flex;
+    flex-direction: row;
+  }
+  .footer_container_info div ul {
     width: 50%;
   }
   .footer_content_info h3 {
     width: 100%;
     text-align: center;
     margin-bottom: 22px;
+  }
+  .footer_content_info h4 {
+    width: 100%;
   }
   .footer_container_links {
     display: flex;
