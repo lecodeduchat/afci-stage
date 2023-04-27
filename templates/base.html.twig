@@ -33,9 +33,9 @@
 		{% if app.user and app.user.isVerified == false %}
 			<div class="warning" role="alert">
 				<div class="alert-message">
-					<p><strong>Votre compte n'est pas activé</strong>,<a href="{{path('resend_verif')}}"> renvoyer le lien d'activation </a></p>
+					<p><strong>Votre compte n'est pas activé</strong>,<a href="{{ path('resend_verif') }}" class="link"> renvoyer le lien d'activation </a></p>
 				</div>
-				<button  class="alertClose" aria-label="close">X</button>
+				<button  class="alertClose" aria-label="close"><i class="fa-solid fa-xmark"></i></button>
 			</div>
 		{% endif %}
 		{% include '/_partials/_flash.html.twig' %}	
