@@ -28,8 +28,10 @@ class ProfileController extends AbstractController
         $date = new \DateTime();
         // Je récupère l'historique des rendez-vous de l'utilisateur connecté
         $oldsAppointments = $appointmentsRepository->findOldAppointmentByUser($user, $date);
+        // dd($oldsAppointments);
         // Je récupère les rendez-vous à venir de l'utilisateur connecté
         $nextAppointments = $appointmentsRepository->findNextAppointmentByUser($user, $date);
+
         // Je récupère tous les soins
         $cares = $caresRepository->findAll();
 
