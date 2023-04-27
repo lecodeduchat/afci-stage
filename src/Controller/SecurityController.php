@@ -98,7 +98,9 @@ class SecurityController extends AbstractController
 
 
         return $this->render('security/reset_password_request.html.twig', 
-        ['requestPassForm' => $form->createview()]
+        ['requestPassForm' => $form->createview(), 
+         'user' => ''
+                    ]
     );
     }
 
@@ -135,7 +137,8 @@ class SecurityController extends AbstractController
             }
 
             return $this->render('security/reset_password.html.twig', [
-                'passForm' => $form->createView()
+                'passForm' => $form->createView(),
+                'user' => ''
             ]);
         }
         $this->addFlash('danger', 'Jeton invalide');
