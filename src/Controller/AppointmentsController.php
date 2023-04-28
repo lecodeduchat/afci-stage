@@ -15,6 +15,7 @@ use App\Repository\HolidaysRepository;
 use App\Repository\SchedulesRepository;
 use App\Repository\VacationsRepository;
 use App\Repository\AppointmentsRepository;
+use App\Service\SendMailService;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
@@ -252,7 +253,7 @@ class AppointmentsController extends AbstractController
     }
 
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
-    public function new(Request $request, AppointmentsRepository $appointmentsRepository, CaresRepository $caresRepository): Response
+    public function new(Request $request, AppointmentsRepository $appointmentsRepository, CaresRepository $caresRepository,SendMailService $mail): Response
     {
         // Je vérifie que l'utilisateur est connecté , sinon je le redirige vers la page de connexion
         if (!$this->getUser()) {
@@ -270,7 +271,21 @@ class AppointmentsController extends AbstractController
             // TODO : Vérifier que le rendez-vous n'est pas déjà pris (si code javascript modifié par un hacker) ou pris entre temps par un autre utilisateur
             $appointmentsRepository->save($appointment, true);
             // TODO : Ajouter un message flash indiquant que le rendez-vous a bien été créé
+            $this->addFlash('success','Votre rendez-vous à étais pris en compte');
             // TODO : Envoyer un mail de confirmation au client
+            $mail->send(
+                'no-reply@monsite.net',
+                $user->getEmail(),
+                'Email de confirmation de votre rendez vous',
+                'rendezvous',
+                compact('user','appointment'));
+            $mail->send(
+                'no-reply@monsite.net',
+                'no-reply@monsite.net' ,
+                'Email de confirmation de votre rendez vous',
+                'rendezvousclient',
+                compact('user','appointment'));
+            
             return $this->redirectToRoute('profile_index', [], Response::HTTP_SEE_OTHER);
         }
 

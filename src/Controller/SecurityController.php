@@ -93,6 +93,7 @@ class SecurityController extends AbstractController
         }
 
 
+
         return $this->render(
             'security/reset_password_request.html.twig',
             [
@@ -100,6 +101,7 @@ class SecurityController extends AbstractController
                 'user' => ''
             ]
         );
+
     }
 
     #[Route('oublie/{token}', name: 'reset_pass')]
@@ -135,7 +137,9 @@ class SecurityController extends AbstractController
 
             return $this->render('security/reset_password.html.twig', [
                 'passForm' => $form->createView(),
+
                 'user' => $user
+
             ]);
         }
         $this->addFlash('danger', 'Jeton invalide');
