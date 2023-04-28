@@ -46,11 +46,43 @@
 						<td>Changer le mot de passe</td>
 					</tr>
 				</tbody>
-
 			</table>
 			<div class="edition_profile_action">
 				<a href="{{ path('profile_edit') }}" class="btn btn-primary">Modifier votre profil</a>
 			</div>
+			{# Je teste le tableau childs pour savoir si l'utilisateur à déjà des enfants #}
+			{% if childs %}
+				<h2>Enfant(s)</h2>
+				<table>
+					<thead>
+						<tr>
+							<th>Prénom</th>
+							<th>Date de naissance</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for child in childs %}
+							<tr>
+								<td>{{ child.firstname }}</td>
+								<td>{{ child.birthday|date("d/m/Y") }}</td>
+								<td>
+									<a href="{{ path('app_childs_edit' , {id: child.id}) }}">Modifier</a>
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+				<div class="edition_profile_action">
+					<a href="{{ path('app_childs_new') }}" class="btn btn-primary">Ajouter un enfant</a>
+				</div>
+			{% else %}
+				<h2>Enfant</h2>
+				<p>Vous n'avez pas encore d'enfant, ajoutez-en un pour pouvoir réserver une séance.</p>
+				<div class="edition_profile_action">
+					<a href="{{ path('app_childs_new') }}" class="btn btn-primary">Ajouter un enfant</a>
+				</div>
+			{% endif %}
 		</div>
 	</div>
 {% endblock %}
