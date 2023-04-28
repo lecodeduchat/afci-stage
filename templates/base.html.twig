@@ -29,18 +29,28 @@
 		{% endblock %}
 	</head>
 	<body>
-		{{ include('/_partials/_header.html.twig') }}
+		{% block header %}
+			{{ include('/_partials/_header.html.twig') }}
+		{% endblock %}
 		{% if app.user and app.user.isVerified == false %}
 			<div class="warning" role="alert">
 				<div class="alert-message">
-					<p><strong>Votre compte n'est pas activé</strong>,<a href="{{ path('resend_verif') }}" class="link"> renvoyer le lien d'activation </a></p>
+					<p>
+						<strong>Votre compte n'est pas activé</strong>,<a href="{{ path('resend_verif') }}" class="link">
+							renvoyer le lien d'activation
+						</a>
+					</p>
 				</div>
-				<button  class="alertClose" aria-label="close"><i class="fa-solid fa-xmark"></i></button>
+				<button class="alertClose" aria-label="close">
+					<i class="fa-solid fa-xmark"></i>
+				</button>
 			</div>
 		{% endif %}
-		{% include '/_partials/_flash.html.twig' %}	
-		{% block body %}
+		{% include '/_partials/_flash.html.twig' %}
+		{% block body %}{% endblock %}
+		{% block footer %}
+			{{ include('/_partials/_footer.html.twig') }}
 		{% endblock %}
-		{{ include('/_partials/_footer.html.twig') }}
+
 	</body>
 </html>

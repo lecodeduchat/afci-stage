@@ -1,6 +1,23 @@
 "use strict";
-// Sauvegarde des données dans le local storage -----------------------------
-// Sauvegarde du choix du type de séance
+// Connexion sans avoir choisi de rendez-vous ------------------------------
+const reservation = document.querySelector(".reservation");
+
+if (reservation) {
+  const appointmentDate = document.querySelector(".appointment_date");
+  const loginMessage = document.querySelector(".login_message");
+  // Je teste si la date du rendez-vous est définie en local storage
+  let time = localStorage.getItem("time");
+  if (time == "") {
+    loginMessage.style.display = "none";
+    reservation.style.display = "none";
+  } else {
+    loginMessage.style.display = "block";
+    reservation.style.display = "block";
+  }
+}
+
+// Rendez-vous étape 1 : choix du type de séance ----------------------------
+// Sauvegarde du choix du type de séance dans le local storage
 const careChoices = document.querySelectorAll(".care_choice");
 const careItems = document.querySelectorAll(".care_item");
 
@@ -94,7 +111,7 @@ if (childsSelect) {
   });
 }
 // Remplissage des champs du formulaire de rendez-vous et de l'affichage de la réservation--------------------
-const reservation = document.querySelector(".reservation");
+
 if (reservation) {
   const dateDiv = document.querySelector(".appointment_date");
   const timeDiv = document.querySelector(".appointment_time");
