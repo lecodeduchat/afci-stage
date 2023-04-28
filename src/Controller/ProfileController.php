@@ -6,6 +6,7 @@ use App\Form\RegistrationFormType;
 use App\Repository\CaresRepository;
 use App\Repository\UsersRepository;
 use App\Repository\AppointmentsRepository;
+use App\Repository\ChildsRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -44,7 +45,7 @@ class ProfileController extends AbstractController
     }
 
     #[Route('/votre-profil', name: 'show')]
-    public function show(): Response
+    public function show(ChildsRepository $childsRepository): Response
     {
         // Je vérifie que l'utilisateur est connecté , sinon je le redirige vers la page de connexion
         if (!$this->getUser()) {
@@ -52,8 +53,12 @@ class ProfileController extends AbstractController
         }
         $user = $this->getUser();
 
+        // Je vérifie si l'utilisateur a des enfants
+        $childs = $childsRepository->findByUser($user);
+
         return $this->render('profile/show.html.twig', [
             'user' => $user,
+            'childs' => $childs,
         ]);
     }
 
