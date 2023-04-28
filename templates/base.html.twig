@@ -18,8 +18,12 @@
 		<link href="/assets/fontawesome/css/fontawesome.css" rel="stylesheet">
 		<link href="/assets/fontawesome/css/brands.css" rel="stylesheet">
 		<link href="/assets/fontawesome/css/solid.css" rel="stylesheet">
+		{% if app.user %}
+			<link rel="stylesheet" href="/assets/css/pages/profile.css">
+		{% endif %}
 		{% block stylesheets %}
 			{# {{ encore_entry_link_tags('app') }} #}
+
 		{% endblock %}
 		<script src="/assets/js/script.js" defer></script>
 		<script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap&v=weekly" defer></script>
@@ -51,6 +55,5 @@
 		{% block footer %}
 			{{ include('/_partials/_footer.html.twig') }}
 		{% endblock %}
-
 	</body>
 </html>

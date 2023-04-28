@@ -1,4 +1,7 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="/assets/css/pages/appointment.css">
+{% endblock %}
 {% block javascripts %}
 	<script src="/assets/js/appointment.js" defer></script>
 {% endblock %}
@@ -6,7 +9,6 @@
 {% endblock %}
 
 {% block body %}
-	{% include('/_partials/_menu-users.html.twig') %}
 	<div class="container container_appointment">
 		<div class="content content_appointment">
 			<h3>Prendre rendez-vous en ligne</h3>

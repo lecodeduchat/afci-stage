@@ -1,7 +1,7 @@
 /* HOME BLOC ------------------------------------------------------------- */
 .home_container {
   position: relative;
-  background: url("../images/cabinet-01.jpg") center/cover no-repeat;
+  background: url("/assets/images/cabinet-01.jpg") center/cover no-repeat;
   height: 300px;
 }
 .home_container::before {
@@ -88,7 +88,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background: url("../images/cabinet-01.jpg") center/cover no-repeat;
+  background: url("/assets/images/cabinet-01.jpg") center/cover no-repeat;
   width: 200px;
   height: 200px;
   border-radius: 50%;
@@ -97,7 +97,7 @@
   position: absolute;
   top: 40px;
   left: 120px;
-  background: url("../images/cabinet-02.jpg") center/cover no-repeat;
+  background: url("/assets/images/cabinet-02.jpg") center/cover no-repeat;
   width: 180px;
   height: 180px;
   border-radius: 50%;
@@ -107,7 +107,7 @@
   position: absolute;
   top: 120px;
   left: 60px;
-  background: url("../images/charlotte-profil.png") center/cover no-repeat;
+  background: url("/assets/images/charlotte-profil.png") center/cover no-repeat;
   width: 180px;
   height: 180px;
   border-radius: 50%;

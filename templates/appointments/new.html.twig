@@ -1,4 +1,8 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="/assets/css/pages/appointment.css">
+{% endblock %}
+
 {% block javascripts %}
 	<script src="/assets/js/appointment.js" defer></script>
 {% endblock %}
@@ -12,17 +16,17 @@
 		<div
 			class="content content_appointment">
 			{# <h3 class="appointment_salutation">Bonjour,
-																						{{ user.firstname }}
-																						{{ user.lastname }}
-																					</h3> #}
+																									{{ user.firstname }}
+																									{{ user.lastname }}
+																								</h3> #}
 			<div class="appointment_message">Votre réservation n'est pas encore validée</div>
 			{# <div class="appointment_child">
-							<h3>La séance est pour</h3>
-							<select name="childs" id="childs">
-								<option value="">Prénom enfant 1</option>
-							</select>
-							<div class="form_new_child">Ajouter un enfant</div>
-						</div> #}
+										<h3>La séance est pour</h3>
+										<select name="childs" id="childs">
+											<option value="">Prénom enfant 1</option>
+										</select>
+										<div class="form_new_child">Ajouter un enfant</div>
+									</div> #}
 			<div class="reservation">
 				<h3>Votre réservation</h3>
 				<div class="reservation_date">

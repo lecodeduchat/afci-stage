@@ -56,7 +56,7 @@ class UsersAuthenticator extends AbstractLoginFormAuthenticator
         // Si user, je redirige vers la page de prise de rendez-vous
         //! TODO chercher comment renvoyé l'utilisateur vers la dernière page visitée
         if ($user->getRoles()[0] === 'ROLE_USER') {
-            return new RedirectResponse($this->urlGenerator->generate('appointment_new'));
+            return new RedirectResponse($this->urlGenerator->generate('appointments_new'));
         }
 
         // throw new \Exception('TODO: provide a valid redirect inside ' . __FILE__);

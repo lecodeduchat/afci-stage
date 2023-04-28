@@ -16,6 +16,7 @@
   display: block;
   background-color: var(--main-bg-color-purple);
   list-style: none;
+  z-index: 10;
 }
 .profile_menu_content li {
   padding: 0 18px;
