@@ -27,12 +27,16 @@ class ProfileController extends AbstractController
         $user = $this->getUser();
         // Je récupère la date du jour
         $date = new \DateTime();
+        //! TODO: Mystère à résoudre ma requête avec >= ne fonctionne pas !!! pour nextAppointments
+        // Je retire 1 jour à la date du jour car bug avec la date du jour
+        $date->modify('-1 day');
         // Je récupère l'historique des rendez-vous de l'utilisateur connecté
         $oldsAppointments = $appointmentsRepository->findOldAppointmentByUser($user, $date);
-        // dd($oldsAppointments);
+
         // Je récupère les rendez-vous à venir de l'utilisateur connecté
         $nextAppointments = $appointmentsRepository->findNextAppointmentByUser($user, $date);
-
+        // dd($date);
+        // dd($nextAppointments);
         // Je récupère tous les soins
         $cares = $caresRepository->findAll();
 

@@ -29,6 +29,10 @@ if (selectAppointmentsCare) {
 if (hours == "09") {
   hours = 9;
 }
+// Je corrige la date du jour si elle est inférieure à 10 car 09 n'est pas une value valide dans un select!!!
+if (parseInt(day) < 10) {
+  day = day.slice(1, 2);
+}
 optionsHour.forEach((option) => {
   if (option.value == hours) {
     option.setAttribute("selected", "selected");
@@ -42,6 +46,7 @@ optionsMinute.forEach((option) => {
 optionsDay.forEach((option) => {
   if (option.value == day) {
     option.setAttribute("selected", "selected");
+    console.log(day);
   }
 });
 optionsMonth.forEach((option) => {
