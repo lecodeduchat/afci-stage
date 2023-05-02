@@ -1,0 +1,250 @@
+[33mcommit c7a6b6c9df39fecf23f6559c0007c1cd34495934[m[33m ([m[1;36mHEAD -> [m[1;32mlaurence[m[33m, [m[1;31morigin/laurence[m[33m)[m
+Author: lecodeduchat <lecodeduchat@gmail.com>
+Date:   Fri Apr 28 12:35:26 2023 +0200
+
+    Correction des bugs js et ajout de la liste des enfants dans le profil
+
+[33mcommit 889cdb7df69341cd1c7c9edd4d1039b034cae1d0[m
+Author: lecodeduchat <lecodeduchat@gmail.com>
+Date:   Fri Apr 28 09:57:45 2023 +0200
+
+    Réorganisation fichiers twig et css
+
+[33mcommit 402c9fd1785cb111dffb84a75bf313d2f85562fc[m[33m ([m[1;32mmain[m[33m)[m
+Merge: a4e9d14 58d690b
+Author: lecodeduchat <102955829+lecodeduchat@users.noreply.github.com>
+Date:   Fri Apr 28 08:57:50 2023 +0200
+
+    Merge pull request #36 from lecodeduchat/guillaume
+    
+    ajout du mail d'envoi pour le rendez-vous
+
+[33mcommit 58d690bfc9bffef13f899cf18d83ed5b08ce6f36[m
+Merge: 74a1776 a4e9d14
+Author: lecodeduchat <102955829+lecodeduchat@users.noreply.github.com>
+Date:   Fri Apr 28 08:57:42 2023 +0200
+
+    Merge branch 'main' into guillaume
+
+[33mcommit a4e9d1496b1ac9dc18f2d631ee9adda07da8da9c[m
+Merge: a3c64b6 b13055a
+Author: lecodeduchat <102955829+lecodeduchat@users.noreply.github.com>
+Date:   Fri Apr 28 08:55:47 2023 +0200
+
+    Merge pull request #35 from lecodeduchat/laurence
+    
+    Commit avant réorganisation des templates twig
+
+[33mcommit b13055ad7262257fc8f623701f42c7e2a5bc513d[m
+Author: lecodeduchat <lecodeduchat@gmail.com>
+Date:   Fri Apr 28 08:55:14 2023 +0200
+
+    Commit avant réorganisation des templates twig
+
+[33mcommit 74a177645a24e3f8ef2219f74cd790ec9a18200d[m
+Author: Gu111aum3 <gderouin@ymail.com>
+Date:   Thu Apr 27 15:35:24 2023 +0200
+
+    ajout du mail d'envoi pour le rendez-vous
+
+[33mcommit a3c64b6e4698b349bc81ee9285b105b06d402ce9[m
+Merge: c941e96 35b1665
+Author: lecodeduchat <102955829+lecodeduchat@users.noreply.github.com>
+Date:   Thu Apr 27 11:48:53 2023 +0200
+
+    Merge pull request #34 from lecodeduchat/laurence
+    
+    Corrections messages flash
+
+[33mcommit 35b1665aff3f1666cbc354354aa98f93c11942f1[m
+Author: lecodeduchat <lecodeduchat@gmail.com>
+Date:   Thu Apr 27 11:47:42 2023 +0200
+
+    Corrections messages flash
+
+[33mcommit c941e96bb6a04b5b13209de15e34abda6fb206f5[m
+Merge: 6ae1735 86df870
+Author: lecodeduchat <102955829+lecodeduchat@users.noreply.github.com>
+Date:   Thu Apr 27 09:10:42 2023 +0200
+
+    Merge pull request #33 from lecodeduchat/laurence
+    
+    Modifications css
+
+[33mcommit 86df8704476d924baa20cfd328032809d6a92200[m
+Author: lecodeduchat <lecodeduchat@gmail.com>
+Date:   Thu Apr 27 09:09:09 2023 +0200
+
+    Modifications css
+
+[33mcommit 6ae1735084de90964c34bd7305ef535c3478c9c5[m
+Merge: b6caea1 81fdd0c
+Author: lecodeduchat <102955829+lecodeduchat@users.noreply.github.com>
+Date:   Wed Apr 26 20:22:58 2023 +0200
+
+    Merge pull request #32 from lecodeduchat/laurence
+    
+    Modifications css
+
+[33mcommit 81fdd0c670892b16927c5c56702c72f5d4e19c4e[m
+Author: lecodeduchat <lecodeduchat@gmail.com>
+Date:   Wed Apr 26 20:19:51 2023 +0200
+
+    Modifications css
+
+[33mcommit b6caea1bc99f56ae41412ea0ee1925524cfa1213[m
+Merge: 899ce36 02f1a8e
+Author: lecodeduchat <102955829+lecodeduchat@users.noreply.github.com>
+Date:   Wed Apr 26 18:02:51 2023 +0200
+
+    Merge pull request #31 from lecodeduchat/laurence
+    
+    Correction css et fichier registerController
+
+[33mcommit 02f1a8eda9a7fad62cd97b09e60fb5876bede943[m
+Author: lecodeduchat <lecodeduchat@gmail.com>
+Date:   Wed Apr 26 18:01:56 2023 +0200
+
+    Correction css et fichier registerController
+
+[33mcommit 899ce3699e6cdd8fd27f214218a46336d418d55e[m
+Merge: e511f97 3fbf31e
+Author: lecodeduchat <102955829+lecodeduchat@users.noreply.github.com>
+Date:   Wed Apr 26 17:03:16 2023 +0200
+
+    Merge pull request #30 from lecodeduchat/laurence
+    
+    Ajout prise de rendez-vous d'un enfant
+
+[33mcommit 3fbf31e7cf910f9b727fc2a522287f611114b7e5[m
+Merge: 4d3d256 e511f97
+Author: lecodeduchat <102955829+lecodeduchat@users.noreply.github.com>
+Date:   Wed Apr 26 17:03:08 2023 +0200
+
+    Merge branch 'main' into laurence
+
+[33mcommit 4d3d256c1a5b3b0ac29bac351f5b6e4ad469ca60[m
+Author: lecodeduchat <lecodeduchat@gmail.com>
+Date:   Wed Apr 26 16:59:57 2023 +0200
+
+    Ajout prise de rendez-vous d'un enfant
+
+[33mcommit e511f97d680db9cb2d101fedd5af0d1edfa6cb0a[m
+Merge: fcabf6d 97c24d4
+Author: lecodeduchat <102955829+lecodeduchat@users.noreply.github.com>
+Date:   Wed Apr 26 16:54:54 2023 +0200
+
+    Merge pull request #29 from lecodeduchat/guillaume
+    
+    ajout de reset
+
+[33mcommit 97c24d4b67bd74aa57b5e04ef48aaf8598d8646e[m
+Author: Gu111aum3 <gderouin@ymail.com>
+Date:   Wed Apr 26 16:53:45 2023 +0200
+
+    ajout de reset
+
+[33mcommit fcabf6d67bcf922b8d3b01396738c0db26db0762[m
+Merge: 3e1469c d396773
+Author: lecodeduchat <102955829+lecodeduchat@users.noreply.github.com>
+Date:   Mon Apr 24 17:21:03 2023 +0200
+
+    Merge pull request #28 from lecodeduchat/laurence
+    
+    Création d'une extension Twig pour les dates et ajout édition et modi…
+
+[33mcommit d396773acbb1dde946d38cc00ae466c62fd22451[m
+Author: lecodeduchat <lecodeduchat@gmail.com>
+Date:   Mon Apr 24 17:20:20 2023 +0200
+
+    Création d'une extension twig pour les dates et ajout édition et modification d'un profil
+
+[33mcommit 3e1469c5bd67e7e5a25eb41ed08861333f3f2ffc[m
+Merge: b6b7956 6c7c923
+Author: lecodeduchat <102955829+lecodeduchat@users.noreply.github.com>
+Date:   Mon Apr 24 08:47:04 2023 +0200
+
+    Merge pull request #27 from lecodeduchat/laurence
+    
+    Ajout du lien Mot de passe oublié et fichier checklist technique du t…
+
+[33mcommit 6c7c9233dccf1d4b280aa2891443e1c9740cf970[m
+Author: lecodeduchat <lecodeduchat@gmail.com>
+Date:   Mon Apr 24 08:46:22 2023 +0200
+
+    Ajout du lien Mot de passe oublié et fichier checklist technique du titre dwwm
+
+[33mcommit b6b7956948519aa6439abaf238718ab6035df7a4[m
+Merge: f848818 2c851fe
+Author: lecodeduchat <102955829+lecodeduchat@users.noreply.github.com>
+Date:   Fri Apr 21 12:40:40 2023 +0200
+
+    Merge pull request #26 from lecodeduchat/laurence
+    
+    Laurence
+
+[33mcommit 2c851fe5da1975bbaed81692d527c2c2ff756a2c[m
+Author: lecodeduchat <lecodeduchat@gmail.com>
+Date:   Fri Apr 21 12:40:10 2023 +0200
+
+    Ajout sauvegarde sql du 21 avril
+
+[33mcommit 47e045d0f15ea7c1ff76bd67726650ccb5163556[m
+Author: lecodeduchat <lecodeduchat@gmail.com>
+Date:   Fri Apr 21 12:38:07 2023 +0200
+
+    Création de rendez-vous fait, et début page espace patient avec historique rdv et rdv à venir
+
+[33mcommit f848818ffbb02bb16e333e7b0419de3403e235ee[m
+Merge: 5205798 6a821e7
+Author: lecodeduchat <102955829+lecodeduchat@users.noreply.github.com>
+Date:   Thu Apr 20 17:18:22 2023 +0200
+
+    Merge pull request #25 from lecodeduchat/laurence
+    
+    Parcours prise de rendez-vous étape de connexion
+
+[33mcommit 6a821e78beb6c0859435715f0b9d451282779bf8[m
+Author: lecodeduchat <lecodeduchat@gmail.com>
+Date:   Thu Apr 20 17:17:43 2023 +0200
+
+    Parcours prise de rendez-vous étape de connexion
+
+[33mcommit 5205798db259876831748cb5ea85a8bab931dadf[m
+Merge: 9a224f3 d85479c
+Author: lecodeduchat <102955829+lecodeduchat@users.noreply.github.com>
+Date:   Wed Apr 19 17:14:16 2023 +0200
+
+    Merge pull request #24 from lecodeduchat/laurence
+    
+    Affichage des créneaux horaires terminés
+
+[33mcommit d85479c3c4e9b2b23518c9a27560b3a904c2f25c[m
+Author: lecodeduchat <lecodeduchat@gmail.com>
+Date:   Wed Apr 19 17:13:35 2023 +0200
+
+    Affichage des créneaux horaires terminés
+
+[33mcommit 9a224f3b2447daed4e3c17606855967a093320ff[m
+Author: lecodeduchat <lecodeduchat@gmail.com>
+Date:   Tue Apr 18 14:17:24 2023 +0200
+
+    Syntaxe inner join faite
+
+[33mcommit baf06c24c15e7a6b75465b0cf4a5ef1be97fa500[m
+Merge: 2d3187c 4e70e33
+Author: lecodeduchat <lecodeduchat@gmail.com>
+Date:   Sun Apr 16 20:32:55 2023 +0200
+
+    Merge branch 'main' of https://github.com/lecodeduchat/afci-stage
+
+[33mcommit 4e70e33bf978934f3704df9f7f4bf65dca1400f8[m
+Merge: 82a5795 5b7418b
+Author: lecodeduchat <102955829+lecodeduchat@users.noreply.github.com>
+Date:   Tue Apr 18 07:07:44 2023 +0200
+
+    Merge pull request #23 from lecodeduchat/laurence
+    
+    Ajout sauvegarde sql
+
+[33mcommit 5b7418bfb9272d2

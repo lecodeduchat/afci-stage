@@ -1,0 +1,22 @@
+#calendar {
+  width: calc(100% - 36px);
+  margin: 0 18px;
+  height: 600px;
+}
+h2.fc-toolbar-title {
+  text-transform: uppercase;
+}
+/* tbody tr {
+  height: 50px;
+} */
+@media screen and (min-width: 900px) {
+  #calendar {
+    margin-top: 20px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  #calendar {
+    width: 1200px;
+    margin: 20px auto 0 auto;
+  }
+}

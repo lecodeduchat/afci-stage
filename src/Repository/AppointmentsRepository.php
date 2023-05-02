@@ -60,7 +60,7 @@ class AppointmentsRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('a')
             ->innerJoin(Users::class, 'u', 'WITH', 'u = a.user')
-            ->andWhere('a.user = :val AND a.date > :date')
+            ->andWhere('a.user = :val AND a.date >= :date')
             ->setParameter('val', $user)
             ->setParameter('date', $date)
             ->orderBy('a.date', 'DESC')

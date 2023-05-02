@@ -1,94 +1,15 @@
-*,
-::before,
-::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-@font-face {
-  font-family: "Sauna-bold";
-  src: url("../fonts/sauna-bold.otf");
-}
-@font-face {
-  font-family: "Montserrat";
-  src: url("../fonts/Montserrat/Montserrat-Regular.ttf");
-  font-weight: normal;
-}
-@font-face {
-  font-family: "Montserrat";
-  src: url("../fonts/Montserrat/Montserrat-Bold.ttf");
-  font-weight: bold;
-}
-@font-face {
-  font-family: "Montserrat";
-  src: url("../fonts/Montserrat/Montserrat-SemiBold.ttf");
-  font-weight: 500;
-}
-@font-face {
-  font-family: "Libre Baskerville";
-  src: url("../fonts/Libre_Baskerville/LibreBaskerville-Italic.ttf");
-  font-style: italic;
-}
-/* HEADER de l'administration */
+/* Header administration */
 .header_logo {
-  height: 84px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  padding: 2px auto;
-}
-.header_logo-img {
-  vertical-align: baseline;
-}
-.header_logo-img img {
-  width: 50px;
-  height: 80px;
-}
-.header_logo-text {
-  width: calc(100% - 80px);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 80px;
-  /* z-index: 4; */
-}
-.header_logo-text .name {
-  font-family: "Sauna-bold";
-  font-size: clamp(1rem, 24px, 2rem);
-  color: #000;
-  line-height: 40px;
-}
-.header_logo-text .profession {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: clamp(0.8rem, 14px, 1.6rem);
-  line-height: 30px;
-  color: #000;
-}
-.gradient-color-bar {
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(
-    90deg,
-    #ff2400,
-    #e81d1d,
-    #e8b71d,
-    #e3e81d,
-    #1de840,
-    #1ddde8,
-    #2b1de8,
-    #dd00f3,
-    #dd00f3
-  );
-  z-index: 6;
+  margin-top: 0;
 }
 /* Menu de l'administration */
 .menu_container {
   width: 100%;
-  position: absolute;
-  bottom: 0;
+  position: fixed;
+  bottom: 0px;
   left: 0;
   background-color: #284a6d;
+  z-index: 1000;
 }
 .menu_content {
   width: 100%;

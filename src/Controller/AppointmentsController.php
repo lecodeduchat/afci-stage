@@ -253,7 +253,7 @@ class AppointmentsController extends AbstractController
     }
 
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
-    public function new(Request $request, AppointmentsRepository $appointmentsRepository, CaresRepository $caresRepository,SendMailService $mail): Response
+    public function new(Request $request, AppointmentsRepository $appointmentsRepository, CaresRepository $caresRepository, SendMailService $mail): Response
     {
         // Je vérifie que l'utilisateur est connecté , sinon je le redirige vers la page de connexion
         if (!$this->getUser()) {
@@ -267,25 +267,29 @@ class AppointmentsController extends AbstractController
         $form = $this->createForm(AppointmentsType::class, $appointment);
         $form->handleRequest($request);
 
+        // dd($form);
+
         if ($form->isSubmitted() && $form->isValid()) {
             // TODO : Vérifier que le rendez-vous n'est pas déjà pris (si code javascript modifié par un hacker) ou pris entre temps par un autre utilisateur
             $appointmentsRepository->save($appointment, true);
             // TODO : Ajouter un message flash indiquant que le rendez-vous a bien été créé
-            $this->addFlash('success','Votre rendez-vous à étais pris en compte');
+            $this->addFlash('success', 'Votre rendez-vous à étais pris en compte');
             // TODO : Envoyer un mail de confirmation au client
             $mail->send(
                 'no-reply@monsite.net',
                 $user->getEmail(),
                 'Email de confirmation de votre rendez vous',
                 'rendezvous',
-                compact('user','appointment'));
+                compact('user', 'appointment')
+            );
             $mail->send(
                 'no-reply@monsite.net',
-                'no-reply@monsite.net' ,
+                'no-reply@monsite.net',
                 'Email de confirmation de votre rendez vous',
                 'rendezvousclient',
-                compact('user','appointment'));
-            
+                compact('user', 'appointment')
+            );
+
             return $this->redirectToRoute('profile_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -305,7 +309,7 @@ class AppointmentsController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
+    #[Route('/edit/{id}', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Appointments $appointment, AppointmentsRepository $appointmentsRepository): Response
     {
         $form = $this->createForm(AppointmentsType::class, $appointment);
