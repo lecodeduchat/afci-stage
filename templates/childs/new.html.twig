@@ -1,11 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Childs{% endblock %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="/assets/css/_partials/form.css">
+{% endblock %}
+
+{% block title %}New Childs
+{% endblock %}
 
 {% block body %}
-    <h1>Create new Childs</h1>
+	<h1>Ajouter un enfant</h1>
 
-    {{ include('childs/_form.html.twig') }}
+	{{ include('childs/_form.html.twig') }}
 
-    <a href="{{ path('app_childs_index') }}">back to list</a>
+	<a href="{{ path('profile_index') }}">Retour à la liste des enfants</a>
 {% endblock %}

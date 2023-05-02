@@ -16,7 +16,6 @@ const btnMenuUser = document.querySelector(".profile_menu_title");
 const menuUser = document.querySelector(".profile_menu_content");
 if (menuUser) {
   btnMenuUser.addEventListener("click", function () {
-    console.log("coucou menu user");
     menuUser.classList.toggle("profile_menu_content--open");
   });
 }
@@ -112,13 +111,28 @@ if (datepicker) {
 
 // bouton fermeture des message
 const closeMessage = document.querySelectorAll(".alertClose");
-  
 
- closeMessage.forEach(element => { 
-  element.addEventListener("click", function(){
-    element.parentNode.style.display ='none';
-  })
+closeMessage.forEach((element) => {
+  element.addEventListener("click", function () {
+    element.parentNode.style.display = "none";
+  });
 });
 
+// Connexion sans avoir choisi de rendez-vous ------------------------------
+const reservation = document.querySelector(".reservation");
 
-
+if (reservation) {
+  const loginMessage = document.querySelector(".login_message");
+  // Je teste loginMessage pour éviter une erreur si la page n'est pas celle de la connexion
+  if (loginMessage) {
+    // Je teste si la date du rendez-vous est définie en local storage
+    let time = localStorage.getItem("time");
+    if (time == "") {
+      loginMessage.style.display = "none";
+      reservation.style.display = "none";
+    } else {
+      loginMessage.style.display = "block";
+      reservation.style.display = "block";
+    }
+  }
+}
