@@ -22,9 +22,21 @@
 										<span class="color_care" style="color:{{ care.color }}">
 											<i class="fa-solid fa-circle"></i>
 										</span>
-										<span>
-											{{ care.name }}
-										</span>
+										{% if care.id == 2 or care.id == 5 %}
+											{% for child in childs %}
+												<span>{{ care.name }}</span>
+												<span class="appointment-child next">pour
+													<strong>
+														{% if child.id == appointment.childId %}
+															{{ child.firstname }}
+														{% endif %}
+													</strong>
+												</span>
+											{% endfor %}
+										{% else %}
+											<span>{{ care.name }}</span>
+										{% endif %}
+
 									{% endif %}
 								{% endfor %}
 							</div>
@@ -43,18 +55,37 @@
 				<h3>Historique de vos rendez-vous</h3>
 				<ul>
 					{% for appointment in oldsAppointments %}
-						<li>
-							<span class="color_care">
-								<i class="fa-solid fa-circle"></i>
-							</span>
-							<span>
-								{% for care in cares %}
-									{% if care.id == appointment.care.id %}
-										{{ care.name }}
+						<li class="olds-appointments_item">
+							{% for care in cares %}
+								{% if care.id == appointment.care.id %}
+									<span class="color_care" style="color:{{ care.color }}">
+										<i class="fa-solid fa-circle"></i>
+									</span>
+									{% if care.id == 2 or care.id == 5 %}
+										{% for child in childs %}
+											<span>{{ care.name }}</span>
+											<span class="appointment-child">pour
+												<strong>
+													{% if child.id == appointment.childId %}
+														{{ child.firstname }}
+													{% endif %}
+												</strong>
+											</span>
+										{% endfor %}
+									{% else %}
+										<span>{{ care.name }}</span>
 									{% endif %}
-								{% endfor %}
-							</span>
-							<span>{{ appointment.date|date('d/m/Y') }}</span>
+								{% endif %}
+							{% endfor %}
+							<strong>
+								<span>-
+									{{ appointment.date|dayName }}</span>
+								<span>{{ appointment.date|date('d') }}</span>
+								<span>{{ appointment.date|monthName }}</span>
+								<span>{{ appointment.date|date('Y') }}</span>
+								à
+								<span>{{ appointment.time|date('H') }}</span>h<span>{{ appointment.time|date('i') }}</span>
+							</strong>
 						</li>
 					{% endfor %}
 				</ul>

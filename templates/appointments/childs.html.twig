@@ -6,8 +6,8 @@
 {% endblock %}
 
 {% block javascripts %}
-	<script src="/assets/js/appointmentStepChild.js" defer></script>
 	<script src="/assets/js/appointmentReservation.js" defer></script>
+	<script src="/assets/js/appointmentStepChild.js" defer></script>
 {% endblock %}
 {% block title %}Rendez-vous
 {% endblock %}
@@ -23,7 +23,7 @@
 						{% for child in childs %}
 							<option value="{{ child.id }}">{{ child.firstname }}</option>
 						{% endfor %}
-						<option value="autre">Ajouter un enfant</option>
+						<option value="0">Ajouter un enfant</option>
 					</select>
 					<a href="{{ path('appointments_new')}}" class="btn link">Valider</a>
 				{% else %}

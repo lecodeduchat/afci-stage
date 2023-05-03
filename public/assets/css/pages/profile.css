@@ -85,3 +85,26 @@ table.edition_profile tr td:first-child {
   text-align: right;
   padding: 0 18px;
 }
+.appointment-child.next {
+  display: block;
+}
+li.olds-appointments_item {
+  text-align: left;
+  padding-left: 18px;
+}
+li.olds-appointments_item .color_care {
+  font-size: 12px;
+  margin-right: 6px;
+}
+@media screen and (min-width: 640px) {
+  .profile_list_appointments {
+    width: 640px;
+    margin: 0 auto;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .profile_menu {
+    width: 1200px;
+    margin: 0 auto;
+  }
+}

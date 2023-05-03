@@ -26,7 +26,7 @@ class SecurityController extends AbstractController
         if ($this->getUser()) {
             return $this->redirectToRoute('target_path');
         }
-
+        // dd($_SESSION);
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
@@ -39,6 +39,7 @@ class SecurityController extends AbstractController
                 'error' => $error,
                 'cares' => $caresRepository->findAll(),
                 'user' => $user,
+
             ],
 
         );
@@ -101,7 +102,6 @@ class SecurityController extends AbstractController
                 'user' => ''
             ]
         );
-
     }
 
     #[Route('oublie/{token}', name: 'reset_pass')]

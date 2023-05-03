@@ -6,17 +6,29 @@
 h2.fc-toolbar-title {
   text-transform: uppercase;
 }
-/* tbody tr {
-  height: 50px;
-} */
+
 @media screen and (min-width: 900px) {
   #calendar {
-    margin-top: 20px;
+    margin: 18px;
   }
 }
 @media screen and (min-width: 1200px) {
   #calendar {
-    width: 1200px;
-    margin: 20px auto 0 auto;
+    width: 80%;
+    height: calc(100% - 36px);
+  }
+  .fc-list-day-cushion {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+  }
+  .fc-list-day-text {
+    padding-right: 6px;
+  }
+  .fc-list-day-text::first-letter {
+    text-transform: uppercase;
+  }
+  tbody tr {
+    height: 30px;
   }
 }

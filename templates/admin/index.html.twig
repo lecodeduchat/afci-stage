@@ -17,11 +17,17 @@
 
 {% block header %}
 	{% include('admin/_partials/_header.html.twig') %}
-	{% include('admin/_partials/_menu.html.twig') %}
+
 {% endblock %}
 
 {% block body %}
-	<div id="calendar"></div>
+	<div class="container">
+		{% include('admin/_partials/_menu.html.twig') %}
+		<div id="calendar"></div>
+	</div>
+	<div
+		class="modal">{# {% include('admin/_partials/form.html.twig') %} #}
+	</div>
 {% endblock %}
 
 {% block footer %}{% endblock %}

@@ -9,23 +9,26 @@ use App\Entity\Holidays;
 use App\Form\ChildsType;
 use App\Entity\Appointments;
 use App\Form\AppointmentsType;
+use App\Service\SendMailService;
 use App\Repository\CaresRepository;
 use App\Repository\ChildsRepository;
 use App\Repository\HolidaysRepository;
 use App\Repository\SchedulesRepository;
 use App\Repository\VacationsRepository;
 use App\Repository\AppointmentsRepository;
-use App\Service\SendMailService;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/rendez-vous', name: 'appointments_')]
 class AppointmentsController extends AbstractController
 {
+
+
     private $days = [
         'lundi',
         'mardi',
@@ -216,10 +219,22 @@ class AppointmentsController extends AbstractController
             'user' => $user,
         ]);
     }
+    #[Route('/etape', name: 'step', methods: ['GET', 'POST'])]
+    public function testCare()
+    {
+        // Je vérifie que l'utilisateur est connecté , sinon je le redirige vers la page de connexion
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+        $user = $this->getUser();
+    }
 
     #[Route('/enfants', name: 'childs', methods: ['GET', 'POST'])]
     public function childs(Request $request, ChildsRepository $childsRepository, CaresRepository $caresRepository): Response
     {
+        $session = $request->getSession();
+        $session->set('redirect', '/rendez-vous/enfants');
+
         // Je vérifie que l'utilisateur est connecté , sinon je le redirige vers la page de connexion
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
