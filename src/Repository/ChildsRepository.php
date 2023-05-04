@@ -53,4 +53,16 @@ class ChildsRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findLastChildByUser($user): array
+    {
+        return $this->createQueryBuilder('c')
+            ->innerJoin(Users::class, 'u', 'WITH', 'u = c.parent1 OR u = c.parent2')
+            ->andWhere('c.parent1 = :val OR c.parent2 = :val')
+            ->setParameter('val', $user)
+            ->orderBy('c.id', 'Desc')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult();
+    }
 }

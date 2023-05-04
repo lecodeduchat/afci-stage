@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Appointments;
 use App\Repository\AppointmentsRepository;
 use DateTime;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,6 +20,11 @@ class MainController extends AbstractController
         // $this->denyAccessUnlessGranted('ROLE_ADMIN');
         // $user = $this->getUser();
         // return $this->render('admin/index.html.twig', compact('user'));
+
+        // // Je crée un nouveau rendez-vous
+        // $appointment = new Appointments();
+        // // Je crée un formulaire pour ajouter un rendez-vous
+        // $appointmentForm = $this->createForm(AppointmentsType::class, $appointment);
 
         // Je récupère tous les rendez-vous
         $appointments = $appointmentsRepository->findAll();
@@ -60,6 +66,9 @@ class MainController extends AbstractController
         // Je retourne les données formatées en JSON
         $data = json_encode($rdvs);
 
-        return $this->render('admin/index.html.twig', compact('data'));
+        return $this->render('admin/index.html.twig', [
+            'data' => $data,
+            // 'appointmentForm' => $appointmentForm->createView(),
+        ]);
     }
 }

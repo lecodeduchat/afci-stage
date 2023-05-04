@@ -46,7 +46,6 @@ optionsMinute.forEach((option) => {
 optionsDay.forEach((option) => {
   if (option.value == day) {
     option.setAttribute("selected", "selected");
-    console.log(day);
   }
 });
 optionsMonth.forEach((option) => {
@@ -62,6 +61,9 @@ optionsYear.forEach((option) => {
   }
 });
 let childId = localStorage.getItem("childId");
+if (childId == "newChild") {
+  childId = lastChildId;
+}
 const inputChildId = document.querySelector("#appointments_child_id");
 inputChildId.setAttribute("value", childId);
 

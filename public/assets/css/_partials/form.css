@@ -63,3 +63,12 @@ input[type="password"] {
   background-color: var(--main-bg-color-blue-light);
   border-radius: 10px 10px 0 0;
 }
+@media screen and (min-width: 768px) {
+  select option {
+    font-size: 16px;
+  }
+  form label {
+    display: inline-block;
+    width: 200px;
+  }
+}

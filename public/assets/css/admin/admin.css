@@ -42,3 +42,48 @@
   background-color: red;
   height: 600px;
 }
+@media screen and (min-width: 900px) {
+}
+@media screen and (min-width: 1200px) {
+  body {
+    height: 100vh;
+  }
+  .container {
+    display: flex;
+    flex-direction: row;
+    height: calc(100% - 132px);
+  }
+  .menu_container {
+    position: relative;
+    width: 20%;
+  }
+  .menu_container .gradient-color-bar {
+    display: none;
+  }
+  .menu_items {
+    flex-direction: column;
+    height: 100%;
+    line-height: 50px;
+  }
+  .menu_item {
+    width: 100%;
+    text-align: left;
+    padding-left: 18px;
+    border-bottom: 1px solid #ddd;
+  }
+  .menu_item span {
+    display: inline-block;
+  }
+  .submenu {
+    display: block;
+    list-style: none;
+    padding-left: 18px;
+    padding-bottom: 18px;
+  }
+  .submenu_item {
+    line-height: 25px;
+  }
+  .submenu_item:hover {
+    cursor: pointer;
+  }
+}
