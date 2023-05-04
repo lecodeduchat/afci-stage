@@ -1,13 +1,33 @@
-{% extends "base.html.twig" %}
+{% extends "/admin/base.html.twig" %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="/assets/css/admin/calendar.css">
+{% endblock %}
+
+{% block javascripts %}
+	<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.6/index.global.min.js'></script>
+	<script>
+		let events = {{ data|raw }};
+	</script>
+	<script src="/assets/js/calendar.js" defer></script>
+{% endblock %}
+
 {% block title %}Administration
 {% endblock %}
 
 {% block header %}
 	{% include('admin/_partials/_header.html.twig') %}
+
 {% endblock %}
 
 {% block body %}
-	<h1>Page administration</h1>
+	<div class="container">
+		{% include('admin/_partials/_menu.html.twig') %}
+		<div id="calendar"></div>
+	</div>
+	<div
+		class="modal">{# {% include('admin/_partials/form.html.twig') %} #}
+	</div>
 {% endblock %}
 
 {% block footer %}{% endblock %}

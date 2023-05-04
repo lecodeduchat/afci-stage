@@ -32,19 +32,4 @@ class SendMailService
         $this->mailer->send($email);
 
     }
-
-
-
-
-
-
-
-
 }
-
-
-
-
-
-
-?>

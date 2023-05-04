@@ -29,6 +29,10 @@ if (selectAppointmentsCare) {
 if (hours == "09") {
   hours = 9;
 }
+// Je corrige la date du jour si elle est inférieure à 10 car 09 n'est pas une value valide dans un select!!!
+if (parseInt(day) < 10) {
+  day = day.slice(1, 2);
+}
 optionsHour.forEach((option) => {
   if (option.value == hours) {
     option.setAttribute("selected", "selected");
@@ -57,6 +61,9 @@ optionsYear.forEach((option) => {
   }
 });
 let childId = localStorage.getItem("childId");
+if (childId == "newChild") {
+  childId = lastChildId;
+}
 const inputChildId = document.querySelector("#appointments_child_id");
 inputChildId.setAttribute("value", childId);
 

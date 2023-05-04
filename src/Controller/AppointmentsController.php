@@ -9,23 +9,26 @@ use App\Entity\Holidays;
 use App\Form\ChildsType;
 use App\Entity\Appointments;
 use App\Form\AppointmentsType;
+use App\Service\SendMailService;
 use App\Repository\CaresRepository;
 use App\Repository\ChildsRepository;
 use App\Repository\HolidaysRepository;
 use App\Repository\SchedulesRepository;
 use App\Repository\VacationsRepository;
 use App\Repository\AppointmentsRepository;
-use App\Service\SendMailService;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/rendez-vous', name: 'appointments_')]
 class AppointmentsController extends AbstractController
 {
+
+
     private $days = [
         'lundi',
         'mardi',
@@ -216,10 +219,22 @@ class AppointmentsController extends AbstractController
             'user' => $user,
         ]);
     }
+    #[Route('/etape', name: 'step', methods: ['GET', 'POST'])]
+    public function testCare()
+    {
+        // Je vérifie que l'utilisateur est connecté , sinon je le redirige vers la page de connexion
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+        $user = $this->getUser();
+    }
 
     #[Route('/enfants', name: 'childs', methods: ['GET', 'POST'])]
     public function childs(Request $request, ChildsRepository $childsRepository, CaresRepository $caresRepository): Response
     {
+        $session = $request->getSession();
+        $session->set('redirect', '/rendez-vous/enfants');
+
         // Je vérifie que l'utilisateur est connecté , sinon je le redirige vers la page de connexion
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
@@ -241,7 +256,7 @@ class AppointmentsController extends AbstractController
             $child->setParent2(NULL);
             $childsRepository->save($child, true);
             // TODO : Ajouter un message flash indiquant que l'enfant a bien été ajouté
-            return $this->redirectToRoute('appointments_childs', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('appointments_new', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('appointments/childs.html.twig', [
@@ -253,8 +268,13 @@ class AppointmentsController extends AbstractController
     }
 
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
-    public function new(Request $request, AppointmentsRepository $appointmentsRepository, CaresRepository $caresRepository,SendMailService $mail): Response
-    {
+    public function new(
+        Request $request,
+        AppointmentsRepository $appointmentsRepository,
+        CaresRepository $caresRepository,
+        SendMailService $mail,
+        ChildsRepository $childsRepository
+    ): Response {
         // Je vérifie que l'utilisateur est connecté , sinon je le redirige vers la page de connexion
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
@@ -264,28 +284,52 @@ class AppointmentsController extends AbstractController
         $appointment = new Appointments();
         // Je récupère l'utilisateur connecté et je l'associe au rendez-vous
         $appointment->setUser($user);
+        // Je récupère le dernier enfant ajouté par l'utilisateur et je vérifirai si il correspond à l'enfant sélectionné dans le formulaire
+        $lastChild = $childsRepository->findLastChildByUser($user);
+        $lastChildId = $lastChild[0]->getId();
+        $firstnameLastChild = $lastChild[0]->getFirstname();
+        // Je récupère la liste des enfants
+        $childs = $childsRepository->findByUser($user);
+        $enfants = [];
+        // foreach ($childs as $child) {
+        //     $enfants[] = [
+        //         'id' => $child->getId(),
+        //         'firstname' => $child->getFirstname(),
+        //     ];
+        // }
+        foreach ($childs as $child) {
+            $enfants[$child->getId()] = [
+                'firstname' => $child->getFirstname(),
+            ];
+        }
+        $childs = json_encode($enfants);
+
         $form = $this->createForm(AppointmentsType::class, $appointment);
         $form->handleRequest($request);
+
+        // dd($form);
 
         if ($form->isSubmitted() && $form->isValid()) {
             // TODO : Vérifier que le rendez-vous n'est pas déjà pris (si code javascript modifié par un hacker) ou pris entre temps par un autre utilisateur
             $appointmentsRepository->save($appointment, true);
             // TODO : Ajouter un message flash indiquant que le rendez-vous a bien été créé
-            $this->addFlash('success','Votre rendez-vous à étais pris en compte');
+            $this->addFlash('success', 'Votre rendez-vous à étais pris en compte');
             // TODO : Envoyer un mail de confirmation au client
             $mail->send(
                 'no-reply@monsite.net',
                 $user->getEmail(),
                 'Email de confirmation de votre rendez vous',
                 'rendezvous',
-                compact('user','appointment'));
+                compact('user', 'appointment')
+            );
             $mail->send(
                 'no-reply@monsite.net',
-                'no-reply@monsite.net' ,
+                'no-reply@monsite.net',
                 'Email de confirmation de votre rendez vous',
                 'rendezvousclient',
-                compact('user','appointment'));
-            
+                compact('user', 'appointment')
+            );
+
             return $this->redirectToRoute('profile_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -294,6 +338,9 @@ class AppointmentsController extends AbstractController
             'form' => $form,
             'cares' => $caresRepository->findAll(),
             'user' => $user,
+            'lastChildId' => $lastChildId,
+            'firstnameLastChild' => $firstnameLastChild,
+            'childs' => $childs,
         ]);
     }
 
@@ -305,7 +352,7 @@ class AppointmentsController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
+    #[Route('/edit/{id}', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Appointments $appointment, AppointmentsRepository $appointmentsRepository): Response
     {
         $form = $this->createForm(AppointmentsType::class, $appointment);

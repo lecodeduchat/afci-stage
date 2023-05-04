@@ -1,0 +1,34 @@
+#calendar {
+  width: calc(100% - 36px);
+  margin: 0 18px;
+  height: 600px;
+}
+h2.fc-toolbar-title {
+  text-transform: uppercase;
+}
+
+@media screen and (min-width: 900px) {
+  #calendar {
+    margin: 18px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  #calendar {
+    width: 80%;
+    height: calc(100% - 36px);
+  }
+  .fc-list-day-cushion {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+  }
+  .fc-list-day-text {
+    padding-right: 6px;
+  }
+  .fc-list-day-text::first-letter {
+    text-transform: uppercase;
+  }
+  tbody tr {
+    height: 30px;
+  }
+}
