@@ -6,6 +6,13 @@
 {% endblock %}
 
 {% block javascripts %}
+	<script>
+		let lastChildId = {{ lastChildId }};
+let firstnameLastChild = `{{ firstnameLastChild }}`;
+console.log('prénom: ', firstnameLastChild);
+let childs = {{ childs|raw }};
+console.log(childs);
+	</script>
 	<script src="/assets/js/appointmentReservation.js" defer></script>
 	<script src="/assets/js/appointmentStepNew.js" defer></script>
 {% endblock %}
@@ -16,7 +23,7 @@
 	<div class="container container_appointment">
 		<div class="content content_appointment">
 			<div class="appointment_message">Votre réservation n'est pas encore validée</div>
-			<div class="reservation">
+			<div class="reservation last-step">
 				<h3>Votre réservation</h3>
 				<div class="reservation_date">
 					<span class="appointment_date"></span>

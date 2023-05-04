@@ -256,7 +256,7 @@ class AppointmentsController extends AbstractController
             $child->setParent2(NULL);
             $childsRepository->save($child, true);
             // TODO : Ajouter un message flash indiquant que l'enfant a bien été ajouté
-            return $this->redirectToRoute('appointments_childs', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('appointments_new', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('appointments/childs.html.twig', [
@@ -268,8 +268,13 @@ class AppointmentsController extends AbstractController
     }
 
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
-    public function new(Request $request, AppointmentsRepository $appointmentsRepository, CaresRepository $caresRepository, SendMailService $mail): Response
-    {
+    public function new(
+        Request $request,
+        AppointmentsRepository $appointmentsRepository,
+        CaresRepository $caresRepository,
+        SendMailService $mail,
+        ChildsRepository $childsRepository
+    ): Response {
         // Je vérifie que l'utilisateur est connecté , sinon je le redirige vers la page de connexion
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
@@ -279,6 +284,26 @@ class AppointmentsController extends AbstractController
         $appointment = new Appointments();
         // Je récupère l'utilisateur connecté et je l'associe au rendez-vous
         $appointment->setUser($user);
+        // Je récupère le dernier enfant ajouté par l'utilisateur et je vérifirai si il correspond à l'enfant sélectionné dans le formulaire
+        $lastChild = $childsRepository->findLastChildByUser($user);
+        $lastChildId = $lastChild[0]->getId();
+        $firstnameLastChild = $lastChild[0]->getFirstname();
+        // Je récupère la liste des enfants
+        $childs = $childsRepository->findByUser($user);
+        $enfants = [];
+        // foreach ($childs as $child) {
+        //     $enfants[] = [
+        //         'id' => $child->getId(),
+        //         'firstname' => $child->getFirstname(),
+        //     ];
+        // }
+        foreach ($childs as $child) {
+            $enfants[$child->getId()] = [
+                'firstname' => $child->getFirstname(),
+            ];
+        }
+        $childs = json_encode($enfants);
+
         $form = $this->createForm(AppointmentsType::class, $appointment);
         $form->handleRequest($request);
 
@@ -313,6 +338,9 @@ class AppointmentsController extends AbstractController
             'form' => $form,
             'cares' => $caresRepository->findAll(),
             'user' => $user,
+            'lastChildId' => $lastChildId,
+            'firstnameLastChild' => $firstnameLastChild,
+            'childs' => $childs,
         ]);
     }
 
