@@ -122,9 +122,11 @@ class RegistrationController extends AbstractController
         }
     }
 
-    #[Route('/renvoiverif', name: 'resend_verif')]
-    public function resendVerif(JWTService $jwt, SendMailService $mail, UsersRepository $usersRepository): Response
-    {
+    #[Route('/renvoiverif/{route}', name: 'resend_verif')]
+    public function resendVerif(JWTService $jwt, SendMailService $mail, UsersRepository $usersRepository,$route): Response
+    {   
+
+
         $user = $this->getUser();
 
         if (!$user) {
@@ -157,8 +159,13 @@ class RegistrationController extends AbstractController
             'Activation de votre compte sur le site Charlotte Vandermersch',
             'register',
             compact('user', 'token')
+
+            
         );
+
+
+        
         $this->addFlash('success', 'Email de vérification envoyé');
-        return $this->redirectToRoute('profile_index');
+        return $this->redirectToRoute($route);
     }
 }

@@ -40,7 +40,7 @@
 			<div class="warning" role="alert">
 				<div class="alert-message">
 					<p>
-						<strong>Votre compte n'est pas activé</strong>,<a href="{{ path('resend_verif') }}" class="link">
+						<strong>Votre compte n'est pas activé</strong>,<a href="{{ path('resend_verif', {route: app.request.get('_route')}) }}" class="link">
 							renvoyer le lien d'activation
 						</a>
 					</p>

@@ -1,0 +1,10 @@
+.footer_logo_img{
+    height: 200px;
+    width: 100px;
+background: url("/assets/images/logo-chiro.png") center/50% no-repeat;
+}
+
+ul{
+    list-style: none;
+}
+
