@@ -17,7 +17,6 @@ class AppointmentsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('time', null, ['attr' => ['class' => 'hidden']])
             ->add('date', null, ['attr' => ['class' => 'hidden']])
             ->add('care', EntityType::class, [
                 'attr' => ['class' => 'hidden'],
