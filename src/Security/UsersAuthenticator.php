@@ -49,11 +49,13 @@ class UsersAuthenticator extends AbstractLoginFormAuthenticator
         }
         $session = $request->getSession();
 
-        if ($session !== null) {
+        if ($session->get('redirect') !== null) {
             $path = $session->get('redirect');
         } else {
-            $path = $this->urlGenerator->generate('appointments_new');
+            // $path = $this->urlGenerator->generate('appointments_new');
+            $path = $this->urlGenerator->generate('profile_index');
         }
+        // dd($path);
         // Je teste si le user est un admin ou un user
         // Si admin, je redirige vers la page d'administration
         $user = $token->getUser();

@@ -1,11 +1,11 @@
 "use strict";
 
 // Injection des données dans le formulaire de rendez-vous --------------------
-const selectHour = document.querySelector("#appointments_time_hour");
-const selectMinute = document.querySelector("#appointments_time_minute");
-const selectDay = document.querySelector("#appointments_date_day");
-const selectMonth = document.querySelector("#appointments_date_month");
-const selectYear = document.querySelector("#appointments_date_year");
+const selectHour = document.querySelector("#appointments_date_time_hour");
+const selectMinute = document.querySelector("#appointments_date_time_minute");
+const selectDay = document.querySelector("#appointments_date_date_day");
+const selectMonth = document.querySelector("#appointments_date_date_month");
+const selectYear = document.querySelector("#appointments_date_date_year");
 const btnSubmit = document.querySelector(".btn_appointment");
 const optionsHour = selectHour.querySelectorAll("option");
 const optionsMinute = selectMinute.querySelectorAll("option");

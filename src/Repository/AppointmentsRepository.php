@@ -35,7 +35,6 @@ class AppointmentsRepository extends ServiceEntityRepository
     public function remove(Appointments $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
-
         if ($flush) {
             $this->getEntityManager()->flush();
         }
@@ -51,7 +50,8 @@ class AppointmentsRepository extends ServiceEntityRepository
             ->innerJoin(Cares::class, 'c', 'WITH', 'c = a.care')
             ->andWhere('a.date >= :val')
             ->setParameter('val', $date)
-            ->orderBy('a.id', 'ASC')
+            ->orderBy('a.time', 'ASC')
+            ->orderBy('a.date', 'ASC')
             ->getQuery()
             ->getResult();
     }
