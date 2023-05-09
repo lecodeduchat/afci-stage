@@ -41,8 +41,6 @@ class CalendarController extends AbstractController
                 // On hydrate l'objet rendez-vous avec les données envoyées par le front
                 $date = new DateTime($data->start);
                 $appointments->setDate($date);
-                $time = new DateTime($data->start);
-                $appointments->setTime($time);
                 //On envoye les données dans la base de données
                 $em->persist($appointments);
                 $em->flush();
