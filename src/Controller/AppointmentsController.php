@@ -351,7 +351,9 @@ class AppointmentsController extends AbstractController
         if ($this->isCsrfTokenValid('delete' . $appointment->getId(), $request->request->get('_token'))) {
             $appointmentsRepository->remove($appointment, true);
         }
+
         $appointmentsRepository->remove($appointment, true);
         return $this->redirectToRoute('profile_index', [], Response::HTTP_SEE_OTHER);
+
     }
 }
