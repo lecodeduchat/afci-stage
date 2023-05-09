@@ -1,7 +1,13 @@
 {% block body %}
-<p>Bonjour {{user.firstname}} {{user.lastname}}</p>
-<p>Rendez vous du {{ appointment.date ? appointment.date|date('Y-m-d') : '' }} à {{ appointment.time ? appointment.time|date('H:i:s') : '' }}<p>
-<p>à bien étais pris en compte</p>
+	<p>Bonjour
+		{{user.firstname}}
+		{{user.lastname}}</p>
+	<p>Rendez vous du
+		{{ appointment.date ? appointment.date|date('Y-m-d') : '' }}
+		à{{ appointment.date ? appointment.date|date('H:i:s') : '' }}
+	</p>
+	<p></p>
+	<p>à bien étais pris en compte</p>
 {% endblock %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">

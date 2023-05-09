@@ -45,7 +45,7 @@
 								<span>{{ appointment.date|monthName }}</span>
 								<span>{{ appointment.date|date('Y') }}</span>
 								à
-								<span>{{ appointment.time|date('H') }}</span>h<span>{{ appointment.time|date('i') }}</span>
+								<span>{{ appointment.date|date('H') }}</span>h<span>{{ appointment.date|date('i') }}</span>
 							</div>
 							<a href="{{ path('appointments_delete',{id: appointment.id} )}}" class="btn btn_cancel_appointment">Annuler le RDV</a>
 						</li>
@@ -83,7 +83,7 @@
 								<span>{{ appointment.date|monthName }}</span>
 								<span>{{ appointment.date|date('Y') }}</span>
 								à
-								<span>{{ appointment.time|date('H') }}</span>h<span>{{ appointment.time|date('i') }}</span>
+								<span>{{ appointment.date|date('H') }}</span>h<span>{{ appointment.date|date('i') }}</span>
 							</strong>
 						</li>
 					{% endfor %}

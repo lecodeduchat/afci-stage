@@ -18,12 +18,14 @@
 
 {% block header %}
 	{% include('admin/_partials/_header.html.twig') %}
-
 {% endblock %}
 
 {% block body %}
 	<div class="container">
 		{% include('admin/_partials/_menu.html.twig') %}
+		<div class="icon-menu-calendar">
+			<i class="fa-calendar-days fa-solid menu-calendar-mobile"></i>
+		</div>
 		<div id="calendar"></div>
 	</div>
 	<div

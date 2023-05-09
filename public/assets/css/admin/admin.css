@@ -1,6 +1,26 @@
+body {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+}
 /* Header administration */
 .header_logo {
   margin-top: 0;
+  height: 40px;
+  justify-content: center;
+}
+.header_logo-img {
+  height: 40px;
+  width: 40px;
+}
+.header_logo-text {
+  width: 70%;
+  height: 40px;
+  padding: 20px 0;
+}
+.header_logo-text span.profession,
+.header_logo-text img {
+  display: none;
 }
 /* Menu de l'administration */
 .menu_container {
@@ -51,7 +71,7 @@
   .container {
     display: flex;
     flex-direction: row;
-    height: calc(100% - 132px);
+    height: calc(100% - 42px);
   }
   .menu_container {
     position: relative;

@@ -39,7 +39,7 @@ class MainController extends AbstractController
             // Pour couper une chaine de caractères, on utilise substr()
             $duration = substr($duration, 0, 2);
             // Je récupère l'heure du rendez-vous
-            $time = $appointment->getTime()->format('H:i:s');
+            $time = $appointment->getDate()->format('H:i:s');
             // Je crée un objet DateTime avec la date et l'heure du rendez-vous
             $date = new DateTime($day . '' . $time);
             $start = $date->format('Y-m-d H:i:s');
