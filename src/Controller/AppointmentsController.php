@@ -110,7 +110,7 @@ class AppointmentsController extends AbstractController
             $limitMorning = strtotime($endMorning) - 30 * 60;
             $limitAfternoon = strtotime($endAfternoon) - 30 * 60;
             // Je crée la variable $slot, je lui attribut la valeur du début de matinée sauf si le jour est aujourd'hui et que l'heure actuelle est supérieure à l'heure de début de matinée
-            if ($i == 0 && $timeNow > $dayOn->getStartMorning()) {
+            if ($i == 0 && $timeNow->format("H:I") > $dayOn->getStartMorning()->format("H:i")) {
                 $hour = $timeNow->format("H");
                 $minutes = $timeNow->format("i");
                 if ($minutes < 30) {
