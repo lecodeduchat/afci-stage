@@ -57,7 +57,7 @@ let calendar = new FullCalendar.Calendar(calendarElt, {
   eventMinHeight: 30,
   // Je règle la durée des créneaux à 15 minutes et je définis les heures d'ouverture et de fermeture
   slotDuration: "00:15:00",
-  slotMinTime: "09:00:00",
+  slotMinTime: "08:30:00",
   slotMaxTime: "20:00:00",
   headerToolbar: {
     start: "prev,next today",

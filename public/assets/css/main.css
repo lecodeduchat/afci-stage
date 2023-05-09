@@ -226,7 +226,7 @@ p {
 }
 .success {
   color: green;
-  background-color: #fcfcfd;
+  background-color: #05966938;
   display: grid;
   grid-template-columns: 1fr 60px;
 }
@@ -244,3 +244,4 @@ p {
   border: none;
   background-color: transparent;
 }
+

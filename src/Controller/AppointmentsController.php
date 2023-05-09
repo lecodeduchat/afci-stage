@@ -377,6 +377,6 @@ class AppointmentsController extends AbstractController
             $appointmentsRepository->remove($appointment, true);
         }
 
-        return $this->redirectToRoute('profile/profile_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
     }
 }
