@@ -1,15 +1,51 @@
 #calendar {
-  width: calc(100% - 36px);
-  margin: 0 18px;
-  height: 600px;
+  width: calc(100% - 16px);
+  margin: 0 8px;
+  height: 500px;
+}
+.icon-menu-calendar {
+  color: var(--main-color-purple);
+  text-align: end;
+}
+.icon-menu-calendar i {
+  font-size: 1.5rem;
+  padding: 8px;
+}
+.fc-header-toolbar {
+  margin-top: 8px;
 }
 h2.fc-toolbar-title {
   text-transform: uppercase;
 }
-
+.fc-toolbar-chunk:nth-of-type(2) {
+  width: 40%;
+}
+.fc-toolbar-chunk:nth-of-type(3) {
+  display: none;
+}
+.fc-toolbar-chunk:nth-of-type(3).open-menu-calendar-mobile {
+  display: flex;
+  position: absolute;
+  left: 8px;
+  top: 50px;
+}
+.fc-event-time {
+  font-weight: bold;
+}
 @media screen and (min-width: 900px) {
   #calendar {
+    width: calc(100% - 36px);
     margin: 18px;
+    height: 100%;
+  }
+  .fc-toolbar-chunk:nth-of-type(3) {
+    display: block;
+  }
+  .icon-menu-calendar {
+    display: none;
+  }
+  tbody tr {
+    height: 25px;
   }
 }
 @media screen and (min-width: 1200px) {
@@ -27,8 +63,5 @@ h2.fc-toolbar-title {
   }
   .fc-list-day-text::first-letter {
     text-transform: uppercase;
-  }
-  tbody tr {
-    height: 30px;
   }
 }

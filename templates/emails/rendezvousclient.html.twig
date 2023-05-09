@@ -1,4 +1,11 @@
-
-<p>Bonjour </p>
-<p>le Rendez vous du {{ appointment.date ? appointment.date|date('Y-m-d') : '' }} à {{ appointment.time ? appointment.time|date('H:i:s') : '' }} par {{user.firstname}} {{user.lastname}}<p>
+<p>Bonjour
+</p>
+<p>le Rendez vous du
+	{{ appointment.date ? appointment.date|date('Y-m-d') : '' }}
+	à
+	{{ appointment.date ? appointment.date|date('H:i:s') : '' }}
+	par
+	{{user.firstname}}{{user.lastname}}
+</p>
+<p></p>
 <p>à bien étais pris en compte</p>
