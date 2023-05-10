@@ -73,10 +73,16 @@ if (width < 768) {
     // Je rends les événements modifiables en les déplaçants
     editable: true,
     // Je rends les événements redimensionnables
-    eventResizableFromStart: true,
+    // eventResizableFromStart: true,
     eventClick: function (infos) {
       console.log(infos.event.start);
       console.log(infos.event.end);
+    },
+    eventDrop: function (infos) {
+      if (!confirm("Etes vous sûr(e) de vouloir déplacer ce rendez-vous ?")) {
+        // La méthode revert permet d'annuler les modifications
+        infos.revert();
+      }
     },
   });
 } else if (width < 1024) {
@@ -153,6 +159,12 @@ if (width < 768) {
       console.log(infos.event.start);
       console.log(infos.event.end);
     },
+    eventDrop: function (infos) {
+      if (!confirm("Etes vous sûr(e) de vouloir déplacer ce rendez-vous ?")) {
+        // La méthode revert permet d'annuler les modifications
+        infos.revert();
+      }
+    },
   });
 } else if (width < 1300) {
   view = "timeGridWeek";
@@ -228,6 +240,12 @@ if (width < 768) {
       console.log(infos.event.start);
       console.log(infos.event.end);
     },
+    eventDrop: function (infos) {
+      if (!confirm("Etes vous sûr(e) de vouloir déplacer ce rendez-vous ?")) {
+        // La méthode revert permet d'annuler les modifications
+        infos.revert();
+      }
+    },
   });
 } else {
   view = "timeGridWeek";
@@ -302,6 +320,12 @@ if (width < 768) {
     eventClick: function (infos) {
       console.log(infos.event.start);
       console.log(infos.event.end);
+    },
+    eventDrop: function (infos) {
+      if (!confirm("Etes vous sûr(e) de vouloir déplacer ce rendez-vous ?")) {
+        // La méthode revert permet d'annuler les modifications
+        infos.revert();
+      }
     },
   });
 }

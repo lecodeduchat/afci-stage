@@ -1,0 +1,11 @@
+.form_appointment-form {
+  border: 2px solid red;
+}
+.form_appointment {
+  visibility: visible;
+  height: 50px;
+  font-size: 14px;
+}
+.container_appointment {
+  padding: 0 18px;
+}

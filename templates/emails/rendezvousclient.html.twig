@@ -1,11 +1,12 @@
-<p>Bonjour
-</p>
-<p>le Rendez vous du
-	{{ appointment.date ? appointment.date|date('Y-m-d') : '' }}
+<p>Bonjour Charlotte,</p>
+<p>Le rendez-vous de
+	<strong>{{user.firstname}}&nbsp;{{user.lastname}}</strong><br>
+	le
+	<strong>{{ appointment.date|dayName }}
+		{{ appointment.date|date('d')}}
+		{{ appointment.date|monthName }}
+		{{ appointment.date|date('Y')}}</strong><br>
 	à
-	{{ appointment.date ? appointment.date|date('H:i:s') : '' }}
-	par
-	{{user.firstname}}{{user.lastname}}
+	<strong>{{ appointment.date ? appointment.date|date('H:i') : '' }}</strong>
+	a bien été pris en compte.
 </p>
-<p></p>
-<p>à bien étais pris en compte</p>

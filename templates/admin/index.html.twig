@@ -26,10 +26,12 @@
 		<div class="icon-menu-calendar">
 			<i class="fa-calendar-days fa-solid menu-calendar-mobile"></i>
 		</div>
+		<div class="link-add-appointment">
+			<a href="{{ path('admin_appointments_new') }}">
+				<i class="fa-solid fa-plus"></i>
+			</a>
+		</div>
 		<div id="calendar"></div>
-	</div>
-	<div
-		class="modal">{# {% include('admin/_partials/form.html.twig') %} #}
 	</div>
 {% endblock %}
 

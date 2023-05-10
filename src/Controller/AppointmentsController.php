@@ -211,7 +211,7 @@ class AppointmentsController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
         $user = $this->getUser();
-        $childs = $childsRepository->findByUser(['user' => $user]);
+        $childs = $childsRepository->findByUser($user);
 
         // Je crée un nouveau formulaire pour ajouter un enfant
         $child = new Childs();
@@ -258,20 +258,20 @@ class AppointmentsController extends AbstractController
         // Je crée un nouveau rendez-vous
         $appointment = new Appointments();
         // Je récupère l'utilisateur connecté et je l'associe au rendez-vous
-        $appointment->setUser($user);
+        $appointment->setUserId($user->getId());
         // Je récupère le dernier enfant ajouté par l'utilisateur et je vérifirai si il correspond à l'enfant sélectionné dans le formulaire
         $lastChild = $childsRepository->findLastChildByUser($user);
-        $lastChildId = $lastChild[0]->getId();
-        $firstnameLastChild = $lastChild[0]->getFirstname();
+        if ($lastChild == NULL) {
+            $lastChildId = "";
+            $firstnameLastChild = "";
+        } else {
+            $lastChildId = $lastChild[0]->getId();
+            $firstnameLastChild = $lastChild[0]->getFirstname();
+        }
         // Je récupère la liste des enfants
         $childs = $childsRepository->findByUser($user);
         $enfants = [];
-        // foreach ($childs as $child) {
-        //     $enfants[] = [
-        //         'id' => $child->getId(),
-        //         'firstname' => $child->getFirstname(),
-        //     ];
-        // }
+
         foreach ($childs as $child) {
             $enfants[$child->getId()] = [
                 'firstname' => $child->getFirstname(),
@@ -288,7 +288,7 @@ class AppointmentsController extends AbstractController
             // TODO : Vérifier que le rendez-vous n'est pas déjà pris (si code javascript modifié par un hacker) ou pris entre temps par un autre utilisateur
             $appointmentsRepository->save($appointment, true);
             // TODO : Ajouter un message flash indiquant que le rendez-vous a bien été créé
-            $this->addFlash('success', 'Votre rendez-vous à étais pris en compte');
+            $this->addFlash('success', 'Votre rendez-vous a été pris en compte. Vous allez recevoir un email de confirmation.');
             // TODO : Envoyer un mail de confirmation au client
             $mail->send(
                 'no-reply@monsite.net',
@@ -354,6 +354,5 @@ class AppointmentsController extends AbstractController
 
         $appointmentsRepository->remove($appointment, true);
         return $this->redirectToRoute('profile_index', [], Response::HTTP_SEE_OTHER);
-
     }
 }

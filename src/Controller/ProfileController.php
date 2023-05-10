@@ -33,14 +33,13 @@ class ProfileController extends AbstractController
 
         // Je vérifie si l'utilisateur a des enfants
         $childs = $childsRepository->findByUser($user);
-
+        // dd($user->getId());
         // Je récupère l'historique des rendez-vous de l'utilisateur connecté
-        $oldsAppointments = $appointmentsRepository->findOldAppointmentByUser($user, $date);
+        $oldsAppointments = $appointmentsRepository->findOldAppointmentByUser($user->getId(), $date);
 
         // Je récupère les rendez-vous à venir de l'utilisateur connecté
-        $nextAppointments = $appointmentsRepository->findNextAppointmentByUser($user, $date);
-        // dd($date);
-        // dd($nextAppointments);
+        $nextAppointments = $appointmentsRepository->findNextAppointmentByUser($user->getId(), $date);
+
         // Je récupère tous les soins
         $cares = $caresRepository->findAll();
 
