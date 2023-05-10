@@ -1,38 +1,42 @@
-{% extends 'base.html.twig' %}
+{% extends '/admin/base.html.twig' %}
 
-{% block title %}Cares{% endblock %}
+{% block title %}Seances{% endblock %}
 
 {% block body %}
-    <h1>Cares</h1>
+    <div class="container">
+    {% include('admin/_partials/_menu.html.twig') %}
+    <div class="cares_container">
+    <h1>Séance</h1>
 
-    <table class="table">
+    <table class="table_cares_show" height="100px" >
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ care.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
+        
+            <tr align="left">
+                <th>Nom:</th>
                 <td>{{ care.name }}</td>
             </tr>
-            <tr>
-                <th>Price</th>
+            <tr align="left">
+                <th>Prix:</th>
                 <td>{{ care.price }}</td>
             </tr>
-            <tr>
-                <th>Duration</th>
+            <tr align="left">
+                <th>Durée:</th>
                 <td>{{ care.duration ? care.duration|date('H:i:s') : '' }}</td>
             </tr>
-            <tr>
-                <th>Color</th>
-                <td>{{ care.color }}</td>
+            <tr align="left">
+                <th>Couleur:</th>
+               <td><span class="color_care" style="color:{{ care.color }}">
+											<i class="fa-solid fa-circle"></i>
+										</span></td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('cares_index') }}">back to list</a>
-
-    <a href="{{ path('cares_edit', {'id': care.id}) }}">edit</a>
-
-    {{ include('cares/_delete_form.html.twig') }}
+   
+    <div class="btn_delete_cares_show">
+    {{ include('admin/cares/_delete_form.html.twig') }} </div>
+    <div class="a_back_cares">
+    <a href="{{ path('cares_index') }}">retourne en arrière</a></div>
+    </div>
+    </div>
 {% endblock %}

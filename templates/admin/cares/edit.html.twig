@@ -1,13 +1,22 @@
-{% extends 'base.html.twig' %}
+{% extends '/admin/base.html.twig' %}
 
-{% block title %}Edit Cares{% endblock %}
+{% block title %}Edition des séances{% endblock %}
 
 {% block body %}
-    <h1>Edit Cares</h1>
+<div class="container">
 
-    {{ include('cares/_form.html.twig', {'button_label': 'Update'}) }}
+    {% include('admin/_partials/_menu.html.twig') %}
+<div class="cares_container">
+    <h1>Edition des séances</h1>
 
-    <a href="{{ path('cares_index') }}">back to list</a>
+    {{ include('admin/cares/_form.html.twig', {'button_label': 'Changement'}) }}
+    <div class="btn_delete_cares_show">{{ include('/admin/cares/_delete_form.html.twig') }}</div>
 
-    {{ include('cares/_delete_form.html.twig') }}
+    <div class="a_back_cares">
+    <a href="{{ path('cares_index') }}">Retour en arrière</a>
+    </div>
+
+    
+    </div>
+    </div>
 {% endblock %}

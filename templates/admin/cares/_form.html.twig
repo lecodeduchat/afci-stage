@@ -1,4 +1,14 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<div class="cares_form">
+{{ form_start(Caresform) }}
+<div class="careform_name">
+ {{ form_row(Caresform.name) }}
+ </div>
+ {{ form_row(Caresform.price) }}
+    <div class="careform_duration">
+ {{ form_row(Caresform.duration) }}
+ </div>
+ {{ form_row(Caresform.color) }}
+    <div class="btn_form">
+    <button class="btn">{{ button_label|default('Sauvegarder') }}</button></div>
+{{ form_end(Caresform) }}
+</div>
