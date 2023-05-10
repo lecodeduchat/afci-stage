@@ -1,23 +1,23 @@
 {% extends '/admin/base.html.twig' %}
 
-{% block title %}Cares index{% endblock %}
+{% block title %}index des séances{% endblock %}
 
 {% block body %}
 
     <div class="container ">
   {% include('admin/_partials/_menu.html.twig') %}
     <div class="cares_container">
-    <h1>Cares index</h1>
+    <h1>L'index des séances</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
+    <table class="table" height="400px" style="text-align:center" >
+        <thead >
+            <tr colspan="3">
                 <th>Id</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Duration</th>
-                <th>Color</th>
-                <th>actions</th>
+                <th>Nom</th>
+                <th>Prix</th>
+                <th>Durée</th>
+                <th>Couleur</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -27,10 +27,12 @@
                 <td>{{ care.name }}</td>
                 <td>{{ care.price }}</td>
                 <td>{{ care.duration ? care.duration|date('H:i:s') : '' }}</td>
-                <td>{{ care.color }}</td>
+                <td ><span class="color_care" style="color:{{ care.color }}">
+											<i class="fa-solid fa-circle rond"></i>
+										</span></td>
                 <td>
-                    <a href="{{ path('cares_show', {'id': care.id}) }}">show</a>
-                    <a href="{{ path('cares_edit', {'id': care.id}) }}">edit</a>
+                    <a href="{{ path('cares_show', {'id': care.id}) }}" ><i class="fa-regular fa-eye"></i></a>
+                    <a href="{{ path('cares_edit', {'id': care.id}) }}"><i class="fa-regular fa-pen-to-square"></i></a>
                 </td>
             </tr>
         {% else %}
@@ -40,7 +42,10 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('cares_new') }}">Create new</a>
+        <div class="btn_indexcares">
+				<a href="{{ path('cares_new')}}" class="btn">Ajout séance</a>
+			</div>
+  
+    </div>
     </div>
 {% endblock %}

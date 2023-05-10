@@ -36,7 +36,7 @@ class CaresController extends AbstractController
 
         return $this->render('admin/cares/new.html.twig', [
             'care' => $care,
-            'form' => $form,
+            'Caresform' => $form,
         ]);
     }
 
@@ -62,11 +62,11 @@ class CaresController extends AbstractController
 
         return $this->render('admin/cares/edit.html.twig', [
             'care' => $care,
-            'form' => $form,
+            'Caresform' => $form,
         ]);
     }
 
-    #[Route('delete/{id}', name: 'delete', methods: ['POST'])]
+    #[Route('/delete/{id}', name: 'delete', methods: ['POST'])]
     public function delete(Request $request, Cares $care, CaresRepository $caresRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$care->getId(), $request->request->get('_token'))) {
