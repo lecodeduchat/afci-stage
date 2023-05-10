@@ -17,32 +17,39 @@ class Customers
     #[ORM\Column(length: 100)]
     private ?string $firstname = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 100, nullable: true)]
     private ?string $lastname = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: false)]
     private ?\DateTimeInterface $birthday = null;
 
-    #[ORM\Column(length: 180)]
+    #[ORM\Column(length: 180, nullable: true)]
     private ?string $email = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $address = null;
 
-    #[ORM\Column(length: 5)]
+    #[ORM\Column(length: 5, nullable: true)]
     private ?string $zipcode = null;
 
-    #[ORM\Column(length: 150)]
+    #[ORM\Column(length: 150, nullable: true)]
     private ?string $city = null;
 
-    #[ORM\Column(length: 10)]
+    #[ORM\Column(length: 17, nullable: false)]
     private ?string $phone = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: Types::BOOLEAN, nullable: false)]
     private ?bool $is_blocked = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
+
+    public function __construct()
+    {
+        // Pour le champ created_at, on ajoute la date du jour
+        $this->created_at = new \DateTimeImmutable();
+        $this->is_blocked = false;
+    }
 
     public function getId(): ?int
     {

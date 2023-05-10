@@ -32,6 +32,16 @@ h2.fc-toolbar-title {
 .fc-event-time {
   font-weight: bold;
 }
+.link-add-appointment {
+  position: absolute;
+  right: 0;
+  bottom: 100px;
+}
+.link-add-appointment a {
+  color: var(--main-color-purple);
+  font-size: 1.5rem;
+  padding: 8px;
+}
 @media screen and (min-width: 900px) {
   #calendar {
     width: calc(100% - 36px);

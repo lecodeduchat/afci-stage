@@ -1,0 +1,72 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %}Nouveau rendez-vous
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="/assets/css/_partials/form.css">
+	<link rel="stylesheet" href="/assets/css/pages/appointment.css">
+	<link rel="stylesheet" href="/assets/css/admin/appointments.css">
+{% endblock %}
+
+{% block javascripts %}
+
+	<script>
+		let slots = {{ slots|json_encode|raw }};
+let customers = {{ customers|json_encode|raw }};
+let users = {{ users|json_encode|raw }};
+	</script>
+	<script src="/assets/js/adminAppointment.js" defer></script>
+
+{% endblock %}
+
+{% block body %}
+
+	<div class="container container_appointment">
+		{% include('admin/_partials/_menu.html.twig') %}
+		<h1>Nouveau rendez-vous</h1>
+		<div class="choice_care">
+			<select name="cares" id="cares" class="form-control">
+				<option value="">Choisir une séance</option>
+				{% for care in cares %}
+					<option value="{{ care.id }}">{{ care.name }}</option>
+				{% endfor %}
+			</select>
+		</div>
+		<div class="slots_dates">
+			<select name="dates" id="dates" class="form-control">
+				<option value="">Choisir une date</option>
+				{% for day in slots %}
+					{% set date = day['date'] %}
+					{% set nameDay = day['day'] %}
+					{% set numMonth = date|date("m")%}
+					{% set nameMonth = months[numMonth-1] %}
+					<option value="{{ date }}">{{ nameDay }}
+						{{ date|date("j") }}
+						{{ nameMonth }}
+						{{ date|date("Y")}}</option>
+				{% endfor %}
+			</select>
+			<select name="times" id="times" class="form-control">
+				<option value="">Choisir une heure</option>
+			</select>
+		</div>
+		<div class="choice_user">
+			<select name="clients" id="clients" class="form-control">
+				<option value="">Rechercher un patient</option>
+				{% for client in clients|keys %}
+					{% set toto = clients[client] %}
+
+					<option value="{{ client }}">{{ client }}
+						-
+						{{ toto["id"] }}</option>
+
+				{% endfor %}
+			</select>
+		</div>
+		<div class="form_appointment-form">
+			{{ include('admin/appointments/_form.html.twig') }}
+		</div>
+		<a href="{{ path('admin_index') }}">Retour</a>
+	</div>
+{% endblock %}

@@ -18,9 +18,8 @@ class Appointments
     #[ORM\JoinColumn(nullable: false)]
     private ?Cares $care = null;
 
-    #[ORM\ManyToOne(cascade: ['persist'])]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Users $user = null;
+    #[ORM\Column(nullable: false)]
+    private ?int $user_id = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
@@ -45,14 +44,14 @@ class Appointments
         return $this;
     }
 
-    public function getUser(): ?Users
+    public function getUserId(): ?int
     {
-        return $this->user;
+        return $this->user_id;
     }
 
-    public function setUser(Users $user): self
+    public function setUserId(int $user_id): self
     {
-        $this->user = $user;
+        $this->user_id = $user_id;
 
         return $this;
     }

@@ -56,12 +56,11 @@ class AppointmentsRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findNextAppointmentByUser($user, $date): array
+    public function findNextAppointmentByUser($userId, $date): array
     {
         return $this->createQueryBuilder('a')
-            ->innerJoin(Users::class, 'u', 'WITH', 'u = a.user')
-            ->andWhere('a.user = :val AND a.date >= :date')
-            ->setParameter('val', $user)
+            ->andWhere('a.user_id = :val AND a.date >= :date')
+            ->setParameter('val', $userId)
             ->setParameter('date', $date)
             ->orderBy('a.date', 'ASC')
             ->getQuery()
@@ -76,12 +75,11 @@ class AppointmentsRepository extends ServiceEntityRepository
      * @param [type] $user
      * @return array
      */
-    public function findOldAppointmentByUser($user, $date): array
+    public function findOldAppointmentByUser($userId, $date): array
     {
         return $this->createQueryBuilder('a')
-            ->innerJoin(Users::class, 'u', 'WITH', 'u = a.user')
-            ->andWhere('a.user = :val AND a.date < :date')
-            ->setParameter('val', $user)
+            ->andWhere('a.user_id = :val AND a.date < :date')
+            ->setParameter('val', $userId)
             ->setParameter('date', $date)
             ->orderBy('a.date', 'DESC')
             ->getQuery()

@@ -136,3 +136,5 @@ if (reservation) {
     }
   }
 }
+// Déclaration des variables pour la page new rendez-vous -------------------
+let firstnameChild, childs, firstnameLastChild;
