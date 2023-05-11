@@ -2,11 +2,15 @@
 
 namespace App\Controller\Admin;
 
+use DateTime;
 use App\Entity\Appointments;
 use App\Form\AppointmentsType;
-use App\Repository\AppointmentsRepository;
+use App\Service\SendMailService;
+use App\Repository\CaresRepository;
 use App\Repository\UsersRepository;
-use DateTime;
+use App\Repository\DaysOnRepository;
+use App\Repository\AppointmentsRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,7 +19,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class MainController extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function index(AppointmentsRepository $appointmentsRepository, UsersRepository $usersRepository): Response
+    public function index(Request $request, AppointmentsRepository $appointmentsRepository, UsersRepository $usersRepository, DaysOnRepository $daysOnRepository, SendMailService $mail, CaresRepository $caresRepository): Response
     {
         // Je vérifie que l'utilisateur est bien connecté
         // et qu'il a le rôle: ROLE_ADMIN
@@ -25,8 +29,42 @@ class MainController extends AbstractController
 
         // Je crée un nouveau rendez-vous
         $appointment = new Appointments();
-        // // Je crée un formulaire pour ajouter un rendez-vous
-        // $appointmentForm = $this->createForm(AppointmentsType::class, $appointment);
+        // Je crée un formulaire pour ajouter un rendez-vous
+        $form = $this->createForm(AppointmentsType::class, $appointment);
+
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // TODO : Vérifier que le rendez-vous n'est pas déjà pris (si code javascript modifié par un hacker) ou pris entre temps par un autre utilisateur
+            $appointmentsRepository->save($appointment, true);
+            // Affichage d'un message flash à l'utilisateur
+            $this->addFlash('success', 'Le rendez-vous a été pris en compte. Vous allez recevoir un email de confirmation.');
+            // Envoye d'un mail de confirmation à l'utilisateur
+            $mail->send(
+                'no-reply@monsite.net',
+                $user->getEmail(),
+                'Email de confirmation de votre rendez vous',
+                'rendezvous',
+                compact('user', 'appointment')
+            );
+            $mail->send(
+                'no-reply@monsite.net',
+                'no-reply@monsite.net',
+                'Email de confirmation d\'un rendez vous',
+                'rendezvousclient',
+                compact('user', 'appointment')
+            );
+
+            return $this->redirectToRoute(
+                'admin_index',
+                [],
+                Response::HTTP_SEE_OTHER
+            );
+        }
+
+        // Je récupère la date du jour
+        $today = new DateTime();
 
         // Je récupère tous les rendez-vous
         $appointments = $appointmentsRepository->findAll();
@@ -68,15 +106,65 @@ class MainController extends AbstractController
                 'textColor' => '#000',
             ];
         }
+        // Je colore les heures non travaillées
+        // Je récupère les jours ouvrés
+        $daysOn = $daysOnRepository->findAllSince($today);
+        foreach ($daysOn as $dayOn) {
+            // Je récupère la date du jour
+            $day = $dayOn->getDate()->format('Y-m-d');
+
+            // Je récupère l'heure de début de la journée
+            $startMorning = $dayOn->getStartMorning();
+            $endMorning = $dayOn->getEndMorning();
+            $startAfternoon = $dayOn->getStartAfternoon();
+            $endAfternoon = $dayOn->getEndAfternoon();
+
+            if ($startMorning != null) {
+                $startMorning = $startMorning->format('H:i:s');
+                // Je colore les heures non travaillées du matin
+                $rdvs[] = [
+                    'id' => 0,
+                    'start' => $day . ' 08:30:00',
+                    'end' => $day . ' ' . $startMorning,
+                    'title' => 'Heures non travaillées',
+                    'color' => '#fff',
+                    'textColor' => '#000',
+                ];
+            }
+            if ($endMorning != null && $startAfternoon != null) {
+                $endMorning = $endMorning->format('H:i:s');
+                $startAfternoon = $startAfternoon->format('H:i:s');
+                // Je colore les heures non travaillées du midi
+                $rdvs[] = [
+                    'id' => 0,
+                    'start' => $day . ' ' . $endMorning,
+                    'end' => $day . ' ' . $startAfternoon,
+                    'title' => 'Pause repas',
+                    'color' => '#fff',
+                    'textColor' => '#000',
+                ];
+            }
+            if ($endAfternoon != null) {
+                $endAfternoon = $endAfternoon->format('H:i:s');
+                // Je colore les heures non travaillées de l'après-midi
+                $rdvs[] = [
+                    'id' => 0,
+                    'start' => $day . ' ' . $endAfternoon,
+                    'end' => $day . ' 20:00:00',
+                    'title' => 'Heures non travaillées',
+                    'color' => '#fff',
+                    'textColor' => '#000',
+                ];
+            }
+        }
+
         // Je retourne les données formatées en JSON
         $data = json_encode($rdvs);
 
-        // Je crée un formulaire pour la modale
-        $appointmentForm = $this->createForm(AppointmentsType::class, $appointment);
-
         return $this->render('admin/index.html.twig', [
             'data' => $data,
-            'appointmentForm' => $appointmentForm->createView(),
+            'form' => $form->createView(),
+            'cares' => $caresRepository->findAll(),
         ]);
     }
 }
