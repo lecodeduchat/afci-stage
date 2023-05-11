@@ -2,7 +2,7 @@
 
 {% block stylesheets %}
 	<link rel="stylesheet" href="/assets/css/admin/calendar.css">
-	
+	<link rel="stylesheet" href="/assets/css/admin/appointments.css">
 {% endblock %}
 
 {% block javascripts %}
@@ -11,6 +11,7 @@
 		let events = {{ data|raw }};
 	</script>
 	<script src="/assets/js/calendar.js" defer></script>
+	<script src="/assets/js/adminAppointment.js" defer></script>
 {% endblock %}
 
 {% block title %}Administration
@@ -26,12 +27,18 @@
 		<div class="icon-menu-calendar">
 			<i class="fa-calendar-days fa-solid menu-calendar-mobile"></i>
 		</div>
-		<div class="link-add-appointment">
-			<a href="{{ path('admin_appointments_new') }}">
-				<i class="fa-solid fa-plus"></i>
-			</a>
-		</div>
+		{# <div class="link-add-appointment">
+													<a href="{{ path('admin_appointments_new') }}">
+														<i class="fa-solid fa-plus"></i>
+													</a>
+												</div> #}
 		<div id="calendar"></div>
+		<div class="modal modal_container">
+			<div class="modal_content">
+				<div class="newAppointment"></div>
+				{% include('admin/appointments/_form.html.twig') %}
+			</div>
+		</div>
 	</div>
 {% endblock %}
 
