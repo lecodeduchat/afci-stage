@@ -8,7 +8,7 @@
     <div class="cares_container">
     <h1>Séance</h1>
 
-    <table class="table_cares_show" height="100px" >
+    <table class="table_cares_show"  >
         <tbody>
         
             <tr align="left">
@@ -21,7 +21,7 @@
             </tr>
             <tr align="left">
                 <th>Durée:</th>
-                <td>{{ care.duration ? care.duration|date('H:i:s') : '' }}</td>
+                <td>{{ care.duration|date('i:s')}}</td>
             </tr>
             <tr align="left">
                 <th>Couleur:</th>
@@ -36,7 +36,7 @@
     <div class="btn_delete_cares_show">
     {{ include('admin/cares/_delete_form.html.twig') }} </div>
     <div class="a_back_cares">
-    <a href="{{ path('cares_index') }}">retourne en arrière</a></div>
+    <a href="{{ path('cares_index') }}">Retour</a></div>
     </div>
     </div>
 {% endblock %}

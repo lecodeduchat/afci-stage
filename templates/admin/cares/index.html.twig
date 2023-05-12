@@ -9,7 +9,7 @@
     <div class="cares_container">
     <h1>L'index des séances</h1>
 
-    <table class="table" height="400px" style="text-align:center" >
+    <table class="table">
         <thead >
             <tr colspan="3">
                 <th>Id</th>
@@ -26,18 +26,18 @@
                 <td>{{ care.id }}</td>
                 <td>{{ care.name }}</td>
                 <td>{{ care.price }}</td>
-                <td>{{ care.duration ? care.duration|date('H:i:s') : '' }}</td>
+                <td>{{  care.duration|date('i:s')}}</td>
                 <td ><span class="color_care" style="color:{{ care.color }}">
 											<i class="fa-solid fa-circle rond"></i>
 										</span></td>
                 <td>
                     <a href="{{ path('cares_show', {'id': care.id}) }}" ><i class="fa-regular fa-eye"></i></a>
                     <a href="{{ path('cares_edit', {'id': care.id}) }}"><i class="fa-regular fa-pen-to-square"></i></a>
-                </td>
+                    <a href="{{path('cares_delete', {'id':care.id})}}"><i class="fa-regular fa-pen-to-square"></i></a>
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">no records found</td>
+                <td colspan="6">Pas d'enregistrement trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
