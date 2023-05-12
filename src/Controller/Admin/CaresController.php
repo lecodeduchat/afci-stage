@@ -57,7 +57,7 @@ class CaresController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $caresRepository->save($care, true);
 
-            return $this->redirectToRoute('app_cares_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('cares_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('admin/cares/edit.html.twig', [
@@ -66,13 +66,16 @@ class CaresController extends AbstractController
         ]);
     }
 
-    #[Route('/delete/{id}', name: 'delete', methods: ['POST'])]
+    #[Route('/delete/{id}', name: 'delete', methods: ['POST', 'GET', 'DELETE'])]
     public function delete(Request $request, Cares $care, CaresRepository $caresRepository): Response
-    {
+    {   
+            echo('test');
         if ($this->isCsrfTokenValid('delete'.$care->getId(), $request->request->get('_token'))) {
+            
             $caresRepository->remove($care, true);
+            
         }
 
-        return $this->redirectToRoute('app_cares_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('cares_index', [], Response::HTTP_SEE_OTHER);
     }
 }

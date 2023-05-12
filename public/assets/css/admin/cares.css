@@ -3,11 +3,16 @@
     margin: 20px;
 }
 
+.table{
+    height: 400px;
+    text-align:center;
+}
+
 .btn{
     display: flex;
     align-items: center;
     justify-content: center;
-   padding: 10px; 
+   
 }
 /* css pour la partie show */
 /* .btn_delete_cares,{ 
@@ -21,14 +26,19 @@
 
 }
 
+.careform_duration div{
+    display: flex;
+    flex-direction: row;
+}
+
 
 
 .btn_indexcares{
     display: flex;
     align-items: center;
     justify-content: center;
-   padding: 10px;
-}
+
+} 
 
 /* formulaire */
 .btn_form{
@@ -51,6 +61,62 @@
 }
 /* show edit */
 
+@media screen and (min-width: 1200px){
+.cares_container{
+    width: 80%;
+}
+
+.table{
+    margin: 0 auto;
+}
+
+.table_cares_show{
+    margin: 0 auto;
+}
+.btn_delete_cares_show,.a_back_cares
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.cares_form{
+    display:flex;
+    justify-content: center;
+    
+}
+
+.btn_form{
+    display: flex;
+    justify-content: center;
+}
+
+
+
+.table,tr,td{
+    border:1px solid var(--main-color-purple);
+    border-collapse: collapse;
+}
+
+.btn_indexcares{
+    padding: 20px;
+}
+
+h1{
+    padding: 30px;
+}
+
+thead th{
+    padding: 8px;
+}
+
+
+
+
+
+
+}
 
 
 
