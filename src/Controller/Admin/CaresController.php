@@ -31,7 +31,7 @@ class CaresController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $caresRepository->save($care, true);
 
-            return $this->redirectToRoute('app_cares_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('cares_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('admin/cares/new.html.twig', [

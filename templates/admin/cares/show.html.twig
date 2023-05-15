@@ -1,5 +1,7 @@
 {% extends '/admin/base.html.twig' %}
-
+{% block stylesheets %}
+    <link rel="stylesheet" href="/assets/css/admin/cares.css">
+{% endblock %}
 {% block title %}Seances{% endblock %}
 
 {% block body %}
@@ -11,19 +13,19 @@
     <table class="table_cares_show"  >
         <tbody>
         
-            <tr align="left">
+            <tr>
                 <th>Nom:</th>
                 <td>{{ care.name }}</td>
             </tr>
-            <tr align="left">
+            <tr>
                 <th>Prix:</th>
                 <td>{{ care.price }}</td>
             </tr>
-            <tr align="left">
+            <tr>
                 <th>Durée:</th>
                 <td>{{ care.duration|date('i:s')}}</td>
             </tr>
-            <tr align="left">
+            <tr>
                 <th>Couleur:</th>
                <td><span class="color_care" style="color:{{ care.color }}">
 											<i class="fa-solid fa-circle"></i>
@@ -33,8 +35,7 @@
     </table>
 
    
-    <div class="btn_delete_cares_show">
-    {{ include('admin/cares/_delete_form.html.twig') }} </div>
+    
     <div class="a_back_cares">
     <a href="{{ path('cares_index') }}">Retour</a></div>
     </div>
