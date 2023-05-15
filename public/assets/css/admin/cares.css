@@ -2,27 +2,45 @@
 .cares_form,.btn_delete_cares_show,.a_back_cares{
     margin: 20px;
 }
-
+/* index */
 .table{
     height: 400px;
     text-align:center;
+    margin: 0 auto;
 }
 
+.btn_index_cares{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+
+} 
 .btn{
     display: flex;
     align-items: center;
     justify-content: center;
    
 }
-/* css pour la partie show */
-/* .btn_delete_cares,{ 
-    padding: 10px;
-    display: flex;
-   justify-content: center;
-} */
 
+.btn_action{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.btn-trash{
+    border: none;
+}
+/* show */
 .table_cares_show{
     border-spacing: 15px;
+    
+}
+
+.table_cares_show td{
+    align-self: left;
+    border: none;
 
 }
 
@@ -31,14 +49,12 @@
     flex-direction: row;
 }
 
+.careform_price{
+    padding-bottom: 10px;
+}
 
 
-.btn_indexcares{
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
-} 
 
 /* formulaire */
 .btn_form{
@@ -51,17 +67,27 @@
     height: 25px;
 }
 
-.careform_name{
-    padding-bottom: 10px;
-}
 
 .price_cares{
     width: 200px;
     height: 25px;
 }
-/* show edit */
 
-@media screen and (min-width: 1200px){
+.duration_cares{
+    height: 25px;
+}
+
+.careform_duration
+{
+    margin-top: 10px;
+}
+
+.careform_color{
+    margin-top: 10px;
+}
+
+
+@media screen and (min-width: 1000px){
 .cares_container{
     width: 80%;
 }
@@ -84,12 +110,14 @@
 .cares_form{
     display:flex;
     justify-content: center;
-    
+    height: 200px;
+   
 }
 
 .btn_form{
     display: flex;
     justify-content: center;
+    margin-top: 20px;
 }
 
 
@@ -99,9 +127,6 @@
     border-collapse: collapse;
 }
 
-.btn_indexcares{
-    padding: 20px;
-}
 
 h1{
     padding: 30px;
@@ -110,10 +135,6 @@ h1{
 thead th{
     padding: 8px;
 }
-
-
-
-
 
 
 }

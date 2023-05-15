@@ -1,7 +1,10 @@
 {% extends '/admin/base.html.twig' %}
 
-{% block title %}index des séances
+{% block stylesheets %}
+    <link rel="stylesheet" href="/assets/css/admin/cares.css">
 {% endblock %}
+{% block title %}Index des séances{% endblock %}
+
 
 {% block body %}
 
@@ -10,50 +13,44 @@
 		<div class="cares_container">
 			<h1>L'index des séances</h1>
 
-			<table class="table">
-				<thead>
-					<tr colspan="3">
-						<th>Id</th>
-						<th>Nom</th>
-						<th>Prix</th>
-						<th>Durée</th>
-						<th>Couleur</th>
-						<th>Actions</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for care in cares %}
-						<tr>
-							<td>{{ care.id }}</td>
-							<td>{{ care.name }}</td>
-							<td>{{ care.price }}</td>
-							<td>{{  care.duration|date('i:s')}}</td>
-							<td>
-								<span class="color_care" style="color:{{ care.color }}">
-									<i class="fa-solid fa-circle rond"></i>
-								</span>
-							</td>
-							<td>
-								<a href="{{ path('cares_show', {'id': care.id}) }}">
-									<i class="fa-regular fa-eye"></i>
-								</a>
-								<a href="{{ path('cares_edit', {'id': care.id}) }}">
-									<i class="fa-regular fa-pen-to-square"></i>
-								</a>
-								<a href="{{path('cares_delete', {'id':care.id})}}">
-									<i class="fa-regular fa-pen-to-square"></i>
-								</a>
+		
 
-							</td>
-						</tr>
-					{% else %}
-						<tr>
-							<td colspan="6">Pas d'enregistrement trouvé</td>
-						</tr>
-					{% endfor %}
-				</tbody>
-			</table>
-			<div class="btn_indexcares">
+    <table class="table">
+        <thead >
+            <tr colspan="3">
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prix</th>
+                <th>Durée</th>
+                <th>Couleur</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for care in cares %}
+            <tr>
+                <td>{{ care.id }}</td>
+                <td>{{ care.name }}</td>
+                <td>{{ care.price }}</td>
+                <td>{{  care.duration|date('i:s')}}</td>
+                <td ><span class="color_care" style="color:{{ care.color }}">
+											<i class="fa-solid fa-circle rond"></i>
+										</span></td>
+                <td>
+                <div class="btn_action">
+                    <a href="{{ path('cares_show', {'id': care.id}) }}" ><i class="fa-regular fa-eye"></i></a>
+                    <a href="{{ path('cares_edit', {'id': care.id}) }}"><i class="fa-regular fa-pen-to-square"></i></a>
+                    {{ include('admin/cares/_delete_form.html.twig') }} </div></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Pas d'enregistrement trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+        <div class="btn_index_cares">
+
 				<a href="{{ path('cares_new')}}" class="btn">Ajout séance</a>
 			</div>
 
