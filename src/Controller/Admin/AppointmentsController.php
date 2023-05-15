@@ -8,6 +8,7 @@ use App\Entity\Childs;
 use App\Entity\Appointments;
 use App\Form\AppointmentsType;
 use App\Service\SendMailService;
+use App\Form\AdminAppointmentsType;
 use App\Repository\CaresRepository;
 use App\Repository\UsersRepository;
 use App\Repository\ChildsRepository;
@@ -30,31 +31,15 @@ class AppointmentsController extends AbstractController
         UsersRepository $userRepository,
         CaresRepository $caresRepository,
         SendMailService $mail,
-        ChildsRepository $childsRepository,
-        CustomersRepository $customersRepository
+        ChildsRepository $childsRepository
     ): Response {
         // Initialisation d'un patient
         $user = new Users();
         // Initialisation d'un enfant
         $child = new Childs();
-        // Patients déjà inscrits
+        // Je récupère tous les clients
         $users = $userRepository->findAllUsers();
-        // Patients non inscrits
-        $customers = $customersRepository->findAllCustomers();
-        // Création de la liste des clients
-        $clients = [];
-        foreach ($users as $user) {
-            $name = $user->getLastname() . ' ' . $user->getFirstname();
-            $clients[$name]["type"] = "user";
-            $clients[$name]["id"] = $user->getId();
-        }
-        foreach ($customers as $customer) {
-            $name = $customer->getFirstname();
-            $clients[$name]["type"] = "customer";
-            $clients[$name]["id"] = $customer->getId();
-        }
-        ksort($clients);
-        // dd($clients['AGNES LECOUTRE']["customerId"]);
+
         // Création d'un tableau de créneaux horaires
         $slots = new Slots($appointmentsRepository, $daysOnRepository);
         $slots = $slots->getSlots();
@@ -62,7 +47,7 @@ class AppointmentsController extends AbstractController
         // Initialisation d'un nouveau rendez-vous
         $appointment = new Appointments();
         // Formulaire de prise de rendez-vous
-        $form = $this->createForm(AppointmentsType::class, $appointment);
+        $form = $this->createForm(AdminAppointmentsType::class, $appointment);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -92,13 +77,10 @@ class AppointmentsController extends AbstractController
         return $this->render('admin/appointments/new.html.twig', [
             'appointment' => $appointment,
             'form' => $form,
-            'users' => $users,
             'cares' => $caresRepository->findAll(),
             'slots' => $slots,
             'months' => Slots::MONTHS,
-            'customers' => $customers,
             'users' => $users,
-            'clients' => $clients,
         ]);
     }
 }

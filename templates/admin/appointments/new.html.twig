@@ -10,29 +10,18 @@
 {% endblock %}
 
 {% block javascripts %}
-
 	<script>
 		let slots = {{ slots|json_encode|raw }};
-let customers = {{ customers|json_encode|raw }};
 let users = {{ users|json_encode|raw }};
 	</script>
 	<script src="/assets/js/adminAppointment.js" defer></script>
-
 {% endblock %}
 
 {% block body %}
 
 	<div class="container container_appointment">
 		{% include('admin/_partials/_menu.html.twig') %}
-		<h1>Nouveau rendez-vous</h1>
-		<div class="choice_care">
-			<select name="cares" id="cares" class="form-control">
-				<option value="">Choisir une séance</option>
-				{% for care in cares %}
-					<option value="{{ care.id }}">{{ care.name }}</option>
-				{% endfor %}
-			</select>
-		</div>
+		<h1 class="admin">Nouveau rendez-vous</h1>
 		<div class="slots_dates">
 			<select name="dates" id="dates" class="form-control">
 				<option value="">Choisir une date</option>
@@ -51,18 +40,28 @@ let users = {{ users|json_encode|raw }};
 				<option value="">Choisir une heure</option>
 			</select>
 		</div>
-		<div class="choice_user">
-			<select name="clients" id="clients" class="form-control">
-				<option value="">Rechercher un patient</option>
-				{% for client in clients|keys %}
-					{% set toto = clients[client] %}
-
-					<option value="{{ client }}">{{ client }}
-						-
-						{{ toto["id"] }}</option>
-
+		<div class="choice_care">
+			<select name="cares" id="cares" class="form-control">
+				<option value="">Choisir une séance</option>
+				{% for care in cares %}
+					<option value="{{ care.id }}">{{ care.name }}</option>
 				{% endfor %}
 			</select>
+		</div>
+		<div class="choice_user">
+			<label for="search_user" class="form-label">Rechercher un patient</label>
+			<input type="search" name="search_user" id="search_user" placeholder="Nom du patient" class="form-control admin">
+			<ul class="list_users form-control">
+				<li data-id='id'>Nom prénom</li>
+				<li data-id='id'>Nom prénom</li>
+			</ul>
+			<div class="new_user">
+				<input id="new_user" type="radio">
+				<label for="new_user">Nouveau patient</label>
+			</div>
+		</div>
+		<div
+			class="new_patient">{# {{ include('admin/users/_form.html.twig') }} #}
 		</div>
 		<div class="form_appointment-form">
 			{{ include('admin/appointments/_form.html.twig') }}

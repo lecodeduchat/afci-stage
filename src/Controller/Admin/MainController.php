@@ -4,7 +4,7 @@ namespace App\Controller\Admin;
 
 use DateTime;
 use App\Entity\Appointments;
-use App\Form\AppointmentsType;
+use App\Form\AdminAppointmentsType;
 use App\Service\SendMailService;
 use App\Repository\CaresRepository;
 use App\Repository\UsersRepository;
@@ -30,7 +30,7 @@ class MainController extends AbstractController
         // Je crée un nouveau rendez-vous
         $appointment = new Appointments();
         // Je crée un formulaire pour ajouter un rendez-vous
-        $form = $this->createForm(AppointmentsType::class, $appointment);
+        $form = $this->createForm(AdminAppointmentsType::class, $appointment);
 
 
         $form->handleRequest($request);
