@@ -15,10 +15,10 @@ class CaresType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name', TextType::class,['attr' => ['class' => 'name_cares'],'label' =>'Nom:'])
-            ->add('price',TextType::class,['attr' => ['class' => 'price_cares'],'label' =>'Prix:'])
-            ->add('duration',null,['attr' => ['class' => 'duration_cares'],'label' =>'durée:'])
-            ->add('color', ColorType::class,['attr' => ['class' => 'color_cares'],'label' =>'Couleur:'])
+            ->add('name', TextType::class,['attr' => ['class' => 'name_cares'],'label' =>'Nom : '])
+            ->add('price',TextType::class,['attr' => ['class' => 'price_cares'],'label' =>'Prix : '])
+            ->add('duration',null,['attr' => ['class' => 'duration_cares'],'label' =>'durée : '])
+            ->add('color', ColorType::class,['attr' => ['class' => 'color_cares'],'label' =>'Couleur : '])
         ;
     }
 
