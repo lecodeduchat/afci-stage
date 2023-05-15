@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UsersRepository::class)]
-#[UniqueEntity(fields: ['email'], message: 'Il y a déjà un compte avec cette adresse email.')]
+// #[UniqueEntity(fields: ['email'], message: 'Il y a déjà un compte avec cette adresse email.')]
 class Users implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use CreatedAtTrait;
@@ -21,12 +21,11 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Assert\NotBlank(message: 'Veuillez renseigner votre adresse email.')]
-    #[ORM\Column(length: 180, unique: true)]
+    #[ORM\Column(length: 180)]
     private ?string $email = null;
 
     #[ORM\Column(options: ['default' => 'ROLE_PATIENT'])]
-    private array $roles = [];
+    private ?string $roles = null;
 
     /**
      * @var string The hashed password
@@ -34,11 +33,9 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $password = null;
 
-    #[Assert\NotBlank(message: 'Veuillez renseigner votre prénom.')]
     #[ORM\Column(length: 100)]
     private ?string $firstname = null;
 
-    #[Assert\NotBlank(message: 'Veuillez renseigner votre nom.')]
     #[ORM\Column(length: 100)]
     private ?string $lastname = null;
 

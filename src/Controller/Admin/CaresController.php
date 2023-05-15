@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/seances' ,  name: 'cares_')]
+#[Route('/admin/seances',  name: 'cares_')]
 class CaresController extends AbstractController
 {
     #[Route('/', name: 'index', methods: ['GET'])]
@@ -68,12 +68,11 @@ class CaresController extends AbstractController
 
     #[Route('/delete/{id}', name: 'delete', methods: ['POST', 'GET', 'DELETE'])]
     public function delete(Request $request, Cares $care, CaresRepository $caresRepository): Response
-    {   
-            echo('test');
-        if ($this->isCsrfTokenValid('delete'.$care->getId(), $request->request->get('_token'))) {
-            
+    {
+        echo ('test');
+        if ($this->isCsrfTokenValid('delete' . $care->getId(), $request->request->get('_token'))) {
+
             $caresRepository->remove($care, true);
-            
         }
 
         return $this->redirectToRoute('cares_index', [], Response::HTTP_SEE_OTHER);

@@ -345,10 +345,3 @@ calendar.on("eventChange", function (event) {
   xhr.send(JSON.stringify(data));
 });
 calendar.render();
-
-// Animation du menu en mode mobile
-const menuCalendarMobile = document.querySelector(".menu-calendar-mobile");
-const itemsMenu = document.querySelector(".fc-toolbar-chunk:nth-of-type(3)");
-menuCalendarMobile.addEventListener("click", function () {
-  itemsMenu.classList.toggle("open-menu-calendar-mobile");
-});
