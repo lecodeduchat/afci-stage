@@ -1,11 +1,17 @@
 {% extends '/admin/base.html.twig' %}
 
-{% block title %}New Users{% endblock %}
+{% block title %}Nouveau Patient{% endblock %}
 
 {% block body %}
-    <h1>Create new Users</h1>
+  <div class="container">
+  {% include('admin/_partials/_menu.html.twig') %}
+    <div class="cares_container">
+    <h1>Creation d'un nouveau patient</h1>
 
     {{ include('admin/users/_form.html.twig') }}
-
-    <a href="{{ path('users_index') }}">back to list</a>
+    <div class="a_back_cares">
+    <a href="{{ path('users_index') }}">Retour</a>
+    </div>
+    </div>
+    </div>
 {% endblock %}

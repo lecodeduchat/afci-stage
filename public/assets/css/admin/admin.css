@@ -67,6 +67,19 @@ h1.admin {
   background-color: red;
   height: 600px;
 }
+
+/* index cares user admin */
+.btn-trash{
+  border: none;
+}
+
+.btn_action{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+
 @media screen and (min-width: 900px) {
 }
 @media screen and (min-width: 1200px) {
@@ -111,4 +124,64 @@ h1.admin {
   .submenu_item:hover {
     cursor: pointer;
   }
+
+  .cares_container{
+    width: 80%;
+  }
+  /* index user admin */
+  .table_admin,.table_admin_show{
+    margin: 0 auto;
+  }
+
+
+
+
+  .table_admin tr td{
+    border:1px solid var(--main-color-purple);
+    border-collapse: collapse;
+  }
+
+  .btn_index_admin{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+
+  } 
+  .btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+  }
+
+
+
+.tbody_show{
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  gap: 10px;
+}
+
+.tbody_show th{
+  padding-right: 10px;
+}
+
+.a_back_cares
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#users{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+
+
 }
