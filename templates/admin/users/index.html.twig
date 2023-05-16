@@ -1,32 +1,28 @@
 {% extends '/admin/base.html.twig' %}
 
-{% block title %}Users index{% endblock %}
+{% block javascripts %}
+    <script src="/assets/js/adminuser.js" defer></script>
+{% endblock %}
+
+{% block title %}Index des patients{% endblock %}
 
 {% block body %}
-    <h1>Users index</h1>
-
+  <div class="container">
+  {% include('admin/_partials/_menu.html.twig') %}
+    <div class="cares_container">
+    <h1>Index des Patients</h1>
+    <div class="btn_index_admin">
+    <a href="{{ path('users_new') }}" class="btn">Nouveau patient</a></div>
     <table class="table_admin">
-        <thead>
+        <thead class="thead_admin">
             <tr>
                 <th>Id</th>
-                <th>Email</th>
-                <th>Roles</th>
-                <th>Password</th>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Birthday</th>
-                <th>Address_number</th>
-                <th>Address</th>
-                <th>Address_details</th>
-                <th>Zipcode</th>
-                <th>City</th>
-                <th>Country</th>
-                <th>Home_phone</th>
-                <th>Cell_phone</th>
-                <th>Is_blocked</th>
-                <th>Is_verified</th>
-                <th>ResetToken</th>
-                <th>Created_at</th>
+                <th>E-mail</th>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Téléphone</th>
+                <th>Téléphone Mobile</th>
+                <th>Bloqué</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -35,34 +31,28 @@
             <tr>
                 <td>{{ user.id }}</td>
                 <td>{{ user.email }}</td>
-                <td>{{ user.password }}</td>
                 <td>{{ user.firstname }}</td>
                 <td>{{ user.lastname }}</td>
-                <td>{{ user.birthday ? user.birthday|date('Y-m-d') : '' }}</td>
-                <td>{{ user.addressNumber }}</td>
-                <td>{{ user.address }}</td>
-                <td>{{ user.addressDetails }}</td>
-                <td>{{ user.zipcode }}</td>
-                <td>{{ user.city }}</td>
-                <td>{{ user.country }}</td>
-                <td>{{ user.homePhone }}</td>
-                <td>{{ user.cellPhone }}</td>
-                <td>{{ user.isBlocked ? 'Yes' : 'No' }}</td>
-                <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
-                <td>{{ user.resetToken }}</td>
-                <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td class="homePhone">{{ user.homePhone }}</td>
+                <td class="cellPhone">{{user.cellPhone}}</td>
+                <td>{{ user.isBlocked ? 'Oui' : 'Non' }}</td>
                 <td>
-                    <a href="{{ path('users_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('users_edit', {'id': user.id}) }}">edit</a>
+                    <div class="btn_action">
+                    <a href="{{ path('users_show', {'id': user.id}) }}"><i class="fa-regular fa-eye"></i></a>
+                    <a href="{{ path('users_edit', {'id': user.id}) }}"><i class="fa-regular fa-pen-to-square"></i></a>
+                    {{ include('admin/users/_delete_form.html.twig') }}
+                    </div>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="20">no records found</td>
+                <td colspan="20">Pas d'enregistrement trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+    </div>
+    </div>
 
-    <a href="{{ path('users_new') }}">Create new</a>
+    
 {% endblock %}

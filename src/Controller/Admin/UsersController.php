@@ -36,7 +36,7 @@ class UsersController extends AbstractController
 
         return $this->render('admin/users/new.html.twig', [
             'user' => $user,
-            'form' => $form,
+            'userForm' => $form,
         ]);
     }
 
@@ -62,7 +62,7 @@ class UsersController extends AbstractController
 
         return $this->render('admin/users/edit.html.twig', [
             'user' => $user,
-            'form' => $form,
+            'userForm' => $form,
         ]);
     }
 
