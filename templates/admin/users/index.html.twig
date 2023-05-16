@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Users index{% endblock %}
+
+{% block body %}
+    <h1>Users index</h1>
+
+    <table class="table_admin">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Password</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Birthday</th>
+                <th>Address_number</th>
+                <th>Address</th>
+                <th>Address_details</th>
+                <th>Zipcode</th>
+                <th>City</th>
+                <th>Country</th>
+                <th>Home_phone</th>
+                <th>Cell_phone</th>
+                <th>Is_blocked</th>
+                <th>Is_verified</th>
+                <th>ResetToken</th>
+                <th>Created_at</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.password }}</td>
+                <td>{{ user.firstname }}</td>
+                <td>{{ user.lastname }}</td>
+                <td>{{ user.birthday ? user.birthday|date('Y-m-d') : '' }}</td>
+                <td>{{ user.addressNumber }}</td>
+                <td>{{ user.address }}</td>
+                <td>{{ user.addressDetails }}</td>
+                <td>{{ user.zipcode }}</td>
+                <td>{{ user.city }}</td>
+                <td>{{ user.country }}</td>
+                <td>{{ user.homePhone }}</td>
+                <td>{{ user.cellPhone }}</td>
+                <td>{{ user.isBlocked ? 'Yes' : 'No' }}</td>
+                <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
+                <td>{{ user.resetToken }}</td>
+                <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('users_show', {'id': user.id}) }}">show</a>
+                    <a href="{{ path('users_edit', {'id': user.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="20">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('users_new') }}">Create new</a>
+{% endblock %}
