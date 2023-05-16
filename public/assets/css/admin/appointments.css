@@ -9,16 +9,20 @@
 .container_appointment {
   padding: 0 18px;
 }
-input[type="search"].admin {
+input[type="text"].admin {
   border-radius: 10px 10px 0 0;
   margin-bottom: 0;
 }
-ul.form-control {
+ul.search_results {
   border-top: 0;
   border-radius: 0 0 10px 10px;
   background-color: white;
   list-style: none;
+  min-height: 0px;
+  max-height: 200px;
+  overflow-y: scroll;
 }
+
 @media screen and (min-width: 1200px) {
   .modal_content {
     width: 300px;

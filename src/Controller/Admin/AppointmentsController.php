@@ -39,6 +39,19 @@ class AppointmentsController extends AbstractController
         $child = new Childs();
         // Je récupère tous les clients
         $users = $userRepository->findAllUsers();
+        $clients = [];
+        $cpt = 0;
+        foreach ($users as $user) {
+            $clients[$cpt] = [
+                "id" => $user->getId(),
+                "firstname" => $user->getFirstname(),
+                "lastname" => $user->getLastname(),
+                "cellphone" => $user->getCellPhone(),
+                "email" => $user->getEmail(),
+            ];
+            $cpt++;
+        }
+
 
         // Création d'un tableau de créneaux horaires
         $slots = new Slots($appointmentsRepository, $daysOnRepository);
@@ -80,7 +93,7 @@ class AppointmentsController extends AbstractController
             'cares' => $caresRepository->findAll(),
             'slots' => $slots,
             'months' => Slots::MONTHS,
-            'users' => $users,
+            'clients' => $clients,
         ]);
     }
 }
