@@ -1,12 +1,28 @@
 "use strict";
+// bouton fermeture des messages d'alerte
+const closeMessage = document.querySelectorAll(".alertClose");
+closeMessage.forEach((element) => {
+  element.addEventListener("click", function () {
+    console.log("click fermerture message");
+    element.parentNode.style.display = "none";
+  });
+});
+
+// Initaialisations des variables ---------------------------------------------
 const appointmentDate = document.querySelector("#dates");
 const appointmentTime = document.querySelector("#times");
+const formUpdateUser = document.querySelector("#users_form");
+const emailUser = document.querySelector("#users_form_email");
+const firstnameUser = document.querySelector("#users_form_firstname");
+const lastnameUser = document.querySelector("#users_form_lastname");
+const cellphoneUser = document.querySelector("#users_form_cell_phone");
 let appointmentDateValue, appointmentTimeValue;
-// PRISE DE RENDEZ-VOUS
+
+// PRISE DE RENDEZ-VOUS ------------------------------------------------------
 // J'injecte la date et l'heure dans le formulaire non affiché
 let date = localStorage.getItem("date");
 let time = localStorage.getItem("time");
-console.log(time.slice(0, 5));
+// console.log(time.slice(0, 5));
 updateDateTime();
 // J'injecte la date et l'heure dans le pseudo formulaire affiché
 let appointmentDateOptions = document.querySelectorAll("#dates option");
@@ -50,7 +66,7 @@ appointmentTime.addEventListener("change", () => {
   updateDateTime();
 });
 /**
- * Fonction qui met à jour les données du formulaire
+ * Fonction qui met à jour les données du formulaire des champs date et time
  */
 function updateDateTime() {
   if (date && time) {
@@ -64,7 +80,7 @@ cares.addEventListener("change", () => {
   document.querySelector("#admin_appointments_care").value = cares.value;
 });
 
-// Recherche d'un patient
+// Recherche d'un patient -----------------------------------------------------
 const searchPatient = document.querySelector("#search_user");
 const searchResults = document.querySelector(".search_results");
 let search;
@@ -75,39 +91,104 @@ searchPatient.addEventListener("keyup", () => {
   searchResults.innerHTML = "";
   list_users = [];
   search = searchPatient.value;
-  console.log("search: ", search);
+
   clients.forEach((client) => {
-    if (client.lastname.toLowerCase().includes(search.toLowerCase())) {
-      console.log("test2", client.lastname.toLowerCase(), search.toLowerCase());
+    if (
+      client.lastname.toLowerCase().includes(search.toLowerCase()) ||
+      client.firstname.toLowerCase().includes(search.toLowerCase())
+    ) {
       list_users.push(client);
     }
   });
   createListUsers();
   selectUser();
+  // fillFormUser();
 });
+/**
+ * Fonction qui crée la liste des patients
+ * @returns void
+ */
 function createListUsers() {
   list_users.forEach((user) => {
     searchResults.innerHTML += `<li>${user.lastname} ${user.firstname}</li>`;
   });
 }
+/**
+ * Fonction qui sélectionne un patient dans la liste des patients
+ * @returns void
+ */
 function selectUser() {
   // J'écoute la liste des patients issue de la recherche
   const listUsers = document.querySelectorAll(".search_results li");
   // Je vérifie qu'il y a des patients dans la liste
   if (listUsers.length > 0) {
+    searchResults.classList.add("search_results--open");
     listUsers.forEach((user) => {
       user.addEventListener("click", () => {
-        console.log("user: ", user.innerHTML);
         searchPatient.value = user.innerHTML;
         searchResults.innerHTML = "";
+        searchResults.classList.remove("search_results--open");
         // J'injecte l'id du patient dans le formulaire
         clients.forEach((client) => {
           if (client.lastname + " " + client.firstname == searchPatient.value) {
             document.querySelector("#admin_appointments_user_id").value =
               client.id;
+            // Je stocke l'id du patient dans le local storage
+            console.log("client.id: ", client.id);
+            localStorage.setItem("user_id", client.id);
+            fillFormUser();
           }
         });
       });
     });
   }
+  addChildId();
+  // fillFormUser();
+}
+/**
+ * Fonction qui ajoute l'id de l'enfant dans le formulaire
+ * @returns void
+ */
+function addChildId() {
+  const child = document.querySelector("#admin_appointments_child_id");
+  let careId = document.querySelector("#admin_appointments_care").value;
+  if (careId != 2 || careId != 4) {
+    console.log("child: ", child.value);
+    child.value = null;
+  }
+}
+
+// J'écoute la checkbox new_user pour savoir si le patient est nouveau
+const newUser = document.querySelector("#new_user");
+const cursorNewUser = document.querySelector(".cursor_new_user");
+const cursorCross = cursorNewUser.querySelector(".fa-xmark");
+newUser.addEventListener("change", () => {
+  cursorNewUser.classList.toggle("checked");
+  cursorCross.classList.toggle("checked");
+});
+
+/**
+ * Fonction qui remplit les champs du formulaire pour un patient existant sélectionné précédemment
+ * @returns void
+ */
+function fillFormUser() {
+  const userId = localStorage.getItem("user_id");
+  console.log("userId: ", userId);
+  clients.forEach((client) => {
+    if (client.id == userId) {
+      firstnameUser.value = client.firstname;
+      lastnameUser.value = client.lastname;
+      emailUser.value = client.email;
+      cellphoneUser.value = formatPhone(client.cellphone);
+    }
+  });
+}
+
+function formatPhone(phone) {
+  phone = "0" + phone;
+  let phoneFormated = phone.replace(
+    /(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/,
+    "$1 $2 $3 $4 $5"
+  );
+  return phoneFormated;
 }

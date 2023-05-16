@@ -1,0 +1,51 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Jours ouvres
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		{% include('admin/_partials/_menu.html.twig') %}
+		<div class="content">
+			<h1>Listes des jours ouvrés</h1>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Date</th>
+						<th>Start_morning</th>
+						<th>End_morning</th>
+						<th>Start_afternoon</th>
+						<th>End_afternoon</th>
+						<th>Created_at</th>
+						<th>actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for days_on in days_ons %}
+						<tr>
+							<td>{{ days_on.id }}</td>
+							<td>{{ days_on.date ? days_on.date|date('Y-m-d') : '' }}</td>
+							<td>{{ days_on.startMorning ? days_on.startMorning|date('H:i:s') : '' }}</td>
+							<td>{{ days_on.endMorning ? days_on.endMorning|date('H:i:s') : '' }}</td>
+							<td>{{ days_on.startAfternoon ? days_on.startAfternoon|date('H:i:s') : '' }}</td>
+							<td>{{ days_on.endAfternoon ? days_on.endAfternoon|date('H:i:s') : '' }}</td>
+							<td>{{ days_on.createdAt ? days_on.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+							<td>
+								{# <a href="{{ path('daysOn_show', {'id': days_on.id}) }}">show</a> #}
+								<a href="{{ path('daysOn_edit', {'id': days_on.id}) }}">edit</a>
+								{{ include('admin/days_on/_delete_form.html.twig') }}
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="8">no records found</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<a href="{{ path('daysOn_new') }}">Ajouter un jour ouvré</a>
+		</div>
+	</div>
+
+{% endblock %}

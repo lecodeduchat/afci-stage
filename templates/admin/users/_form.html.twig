@@ -1,7 +1,5 @@
-<div class="user_form">
 
 {{ form_start(userForm) }}
-    {{ form_widget(userForm) }}
-    <button class="btn">{{ button_label|default('Enregistrer') }}</button>
-    </div>
+{{ form_widget(userForm) }}
+<button class="btn btn-submit">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(userForm) }}

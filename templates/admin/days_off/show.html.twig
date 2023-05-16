@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DaysOff{% endblock %}
+
+{% block body %}
+    <h1>DaysOff</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ days_off.id }}</td>
+            </tr>
+            <tr>
+                <th>Start</th>
+                <td>{{ days_off.start ? days_off.start|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>End</th>
+                <td>{{ days_off.end ? days_off.end|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ days_off.title }}</td>
+            </tr>
+            <tr>
+                <th>Color</th>
+                <td>{{ days_off.color }}</td>
+            </tr>
+            <tr>
+                <th>All_day</th>
+                <td>{{ days_off.allDay ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{{ days_off.createdAt ? days_off.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_days_off_index') }}">back to list</a>
+
+    <a href="{{ path('app_days_off_edit', {'id': days_off.id}) }}">edit</a>
+
+    {{ include('days_off/_delete_form.html.twig') }}
+{% endblock %}

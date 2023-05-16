@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Trait\CreatedAtTrait;
 use App\Repository\DaysOnRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -9,6 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: DaysOnRepository::class)]
 class DaysOn
 {
+    use CreatedAtTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -29,8 +32,11 @@ class DaysOn
     #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $end_afternoon = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $created_at = null;
+    public function __construct()
+    {
+        // Pour le champ created_at, on ajoute la date du jour
+        $this->created_at = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {

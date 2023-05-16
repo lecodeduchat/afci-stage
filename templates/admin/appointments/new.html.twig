@@ -23,6 +23,7 @@ let clients = {{ clients|json_encode|raw }};
 		{% include('admin/_partials/_menu.html.twig') %}
 		<h1 class="admin">Nouveau rendez-vous</h1>
 		<div class="slots_dates">
+			<i class="fa-solid fa-calendar-days"></i>
 			<select name="dates" id="dates" class="form-control">
 				<option value="">Choisir une date</option>
 				{% for day in slots %}
@@ -36,11 +37,13 @@ let clients = {{ clients|json_encode|raw }};
 						{{ date|date("Y")}}</option>
 				{% endfor %}
 			</select>
+			<i class="fa-solid fa-clock"></i>
 			<select name="times" id="times" class="form-control">
 				<option value="">Choisir une heure</option>
 			</select>
 		</div>
 		<div class="choice_care">
+			<i class="fa-solid fa-notes-medical"></i>
 			<select name="cares" id="cares" class="form-control">
 				<option value="">Choisir une séance</option>
 				{% for care in cares %}
@@ -48,17 +51,38 @@ let clients = {{ clients|json_encode|raw }};
 				{% endfor %}
 			</select>
 		</div>
-		<div class="choice_user">
-			<label for="search_user" class="form-label">Rechercher un patient</label>
-			<input type="text" name="search_user" id="search_user" placeholder="Nom du patient" class="form-control admin">
-			<ul class="search_results form-control"></ul>
-			<div class="new_user">
-				<input id="new_user" type="radio">
-				<label for="new_user">Nouveau patient</label>
+		<div class="datas_user">
+			<div class="datas_user-header">
+				<div>Patient</div>
+				<div class="new_user">
+					<div class="cursor_new_user">
+						<i class="fa-solid fa-xmark"></i>
+					</div>
+					<input id="new_user" type="checkbox">
+					<label for="new_user">Nouveau patient</label>
+				</div>
+				<div class="choice_user">
+					<input type="text" name="search_user" id="search_user" placeholder="Rechercher un patient" class="form-control admin">
+					<ul class="search_results form-control"></ul>
+				</div>
 			</div>
-		</div>
-		<div
-			class="new_patient">{# {{ include('admin/users/_form.html.twig') }} #}
+			<div class="datas_user_ref-header">
+				<div>Référent</div>
+				<div class="new_user_ref">
+					<div class="cursor_new_user_ref">
+						<i class="fa-solid fa-xmark"></i>
+					</div>
+					<input id="new_user_ref" type="checkbox">
+					<label for="new_user_ref">Nouveau référent</label>
+				</div>
+				<div class="choice_user_ref">
+					<input type="text" name="search_user" id="search_user_ref" placeholder="Rechercher un référent" class="form-control admin">
+					<ul class="search_results form-control"></ul>
+				</div>
+			</div>
+			<div class="form_user admin_appointment_form">
+				{{ include('admin/users/_form.html.twig') }}
+			</div>
 		</div>
 		<div class="form_appointment-form">
 			{{ include('admin/appointments/_form.html.twig') }}

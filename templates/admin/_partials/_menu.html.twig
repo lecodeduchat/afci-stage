@@ -28,9 +28,15 @@
 				<span>PARAMETRES</span>
 				<ul class="submenu parameter_items">
 					<li class="submenu_item">Profil Charlotte</li>
-					<li class="submenu_item"><a href="{{ path('cares_index')}}">Séances</a> </li>
-					<li class="submenu_item">Ajouter un jour ouvré</li>
-					<li class="submenu_item">Ajouter une indisponibilité</li>
+					<li class="submenu_item">
+						<a href="{{ path('cares_index')}}">Séances</a>
+					</li>
+					<li class="submenu_item">
+						<a href="{{ path('daysOn_index') }}">Jours ouvrés</a>
+					</li>
+					<li class="submenu_item">
+						<a href="{{ path('daysOff_index') }}">Indisponibilités</a>
+					</li>
 				</ul>
 			</li>
 			<li class="menu_item">

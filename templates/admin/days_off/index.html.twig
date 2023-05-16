@@ -1,0 +1,54 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Indisponibilités
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		{% include('admin/_partials/_menu.html.twig') %}
+		<div class="content">
+
+			<h1>Liste des indisponibilités</h1>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Début</th>
+						<th>Fin</th>
+						<th>Intitulé</th>
+						<th>Couleur</th>
+						<th>Toute la journée</th>
+						<th>Ajouté le</th>
+						<th>actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for days_off in days_offs %}
+						<tr>
+							<td>{{ days_off.start ? days_off.start|date('Y-m-d H:i:s') : '' }}</td>
+							<td>{{ days_off.end ? days_off.end|date('Y-m-d H:i:s') : '' }}</td>
+							<td>{{ days_off.title }}</td>
+							<td>{{ days_off.color }}</td>
+							<td>{{ days_off.allDay ? 'Oui' : 'Non' }}</td>
+							<td>{{ days_off.createdAt ? days_off.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+							<td>
+								<a href="{{ path('daysOff_edit', {'id': days_off.id}) }}">
+									<i class="fa-regular fa-pen-to-square"></i>
+									{{ include('admin/days_off/_delete_form.html.twig') }}
+								</a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="8">Pas d'enregistrement trouvé.</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+			<a href="{{ path('daysOff_new') }}">Ajouter une indisponibilité</a>
+		</div>
+
+	</div>
+
+{% endblock %}

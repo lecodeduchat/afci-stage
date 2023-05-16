@@ -6,7 +6,8 @@ use App\Entity\Users;
 use App\Classes\Slots;
 use App\Entity\Childs;
 use App\Entity\Appointments;
-use App\Form\AppointmentsType;
+use App\Form\UsersFormType;
+use App\Form\ChildsType;
 use App\Service\SendMailService;
 use App\Form\AdminAppointmentsType;
 use App\Repository\CaresRepository;
@@ -35,8 +36,26 @@ class AppointmentsController extends AbstractController
     ): Response {
         // Initialisation d'un patient
         $user = new Users();
+        $userForm = $this->createForm(UsersFormType::class, $user);
+        $userForm->handleRequest($request);
+        if ($userForm->isSubmitted() && $userForm->isValid()) {
+            $userRepository->save($user, true);
+            // Affichage d'un message flash à l'utilisateur
+            $this->addFlash('success', 'Le patient a été ajouté avec succès.');
+            return $this->redirectToRoute('admin_index', [], Response::HTTP_SEE_OTHER);
+        }
+
         // Initialisation d'un enfant
         $child = new Childs();
+        $childForm = $this->createForm(ChildsType::class, $child);
+        $childForm->handleRequest($request);
+        if ($childForm->isSubmitted() && $childForm->isValid()) {
+            $childsRepository->save($child, true);
+            // Affichage d'un message flash à l'utilisateur
+            $this->addFlash('success', 'L\'enfant a été ajouté avec succès.');
+            return $this->redirectToRoute('admin_index', [], Response::HTTP_SEE_OTHER);
+        }
+
         // Je récupère tous les clients
         $users = $userRepository->findAllUsers();
         $clients = [];
@@ -60,10 +79,11 @@ class AppointmentsController extends AbstractController
         // Initialisation d'un nouveau rendez-vous
         $appointment = new Appointments();
         // Formulaire de prise de rendez-vous
-        $form = $this->createForm(AdminAppointmentsType::class, $appointment);
-        $form->handleRequest($request);
+        $appointmentForm = $this->createForm(AdminAppointmentsType::class, $appointment);
+        $appointmentForm->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($appointmentForm->isSubmitted() && $appointmentForm->isValid()) {
+
             // TODO : Vérifier que le rendez-vous n'est pas déjà pris (si code javascript modifié par un hacker) ou pris entre temps par un autre utilisateur
             $appointmentsRepository->save($appointment, true);
             // Affichage d'un message flash à l'utilisateur
@@ -89,7 +109,9 @@ class AppointmentsController extends AbstractController
 
         return $this->render('admin/appointments/new.html.twig', [
             'appointment' => $appointment,
-            'form' => $form,
+            'appointmentForm' => $appointmentForm,
+            'userForm' => $userForm,
+            'childForm' => $childForm,
             'cares' => $caresRepository->findAll(),
             'slots' => $slots,
             'months' => Slots::MONTHS,
