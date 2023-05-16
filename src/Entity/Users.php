@@ -6,7 +6,6 @@ use App\Entity\Trait\CreatedAtTrait;
 use App\Repository\UsersRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -24,10 +23,8 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180)]
     private ?string $email = null;
 
-
     #[ORM\Column(options: ['default' => "ROLE_PATIENT"])]
     private ?array $roles = null;
-
 
     /**
      * @var string The hashed password

@@ -9,20 +9,118 @@
 .container_appointment {
   padding: 0 18px;
 }
+.datas_user {
+  background-color: white;
+  padding: 18px;
+  border-radius: 10px;
+}
+.datas_user-header,
+.datas_user_ref-header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  border-bottom: 1px solid #ddd;
+}
+.datas_user_ref-header {
+  display: none;
+}
+.new_user,
+.new_user_ref {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.cursor_new_user,
+.cursor_new_user_ref {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #aaa;
+  width: 35px;
+  height: 24px;
+  border-radius: 15px;
+}
+.cursor_new_user.checked,
+.cursor_new_user_ref.checked {
+  background-color: lightblue;
+}
+.cursor_new_user i,
+.cursor_new_user_ref i {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  line-height: 18px;
+  text-align: center;
+  font-size: 10px;
+  background-color: #ddd;
+  border-radius: 50%;
+}
+.cursor_new_user i.checked,
+.cursor_new_user_ref i.checked {
+  left: auto;
+  right: 2px;
+}
+.new_user input[type="checkbox"],
+.new_user_ref input[type="checkbox"] {
+  width: 35px;
+  height: 22px;
+  z-index: 1;
+  opacity: 0;
+}
+.new_user label,
+.new_user_ref label {
+  margin-left: 8px;
+}
 input[type="text"].admin {
-  border-radius: 10px 10px 0 0;
+  border-radius: 10px;
   margin-bottom: 0;
+  margin-top: 18px;
 }
 ul.search_results {
-  border-top: 0;
-  border-radius: 0 0 10px 10px;
+  border: 0;
+  border-radius: 10px;
   background-color: white;
   list-style: none;
-  min-height: 0px;
+  height: 0px;
   max-height: 200px;
   overflow-y: scroll;
 }
-
+ul.search_results.search_results--open {
+  height: auto;
+  border: 1px solid #ddd;
+  border-top: 0;
+}
+.form_user label {
+  display: inline-block;
+  width: 30%;
+}
+#users_form_birthday {
+  display: inline-block;
+}
+.admin_appointment_form .btn.btn-submit {
+  display: none;
+  margin-top: 18px;
+}
+.form_appointment-form form {
+  display: flex;
+  flex-direction: column;
+}
+/* .form_appointment-form form input,
+.form_appointment-form form select {
+  opacity: 0;
+  height: 0px;
+} */
+.form_appointment-form form .btn_appointment {
+  margin: 0 auto;
+  margin-bottom: 60px;
+}
 @media screen and (min-width: 1200px) {
   .modal_content {
     width: 300px;

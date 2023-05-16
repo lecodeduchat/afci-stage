@@ -1,11 +1,17 @@
 <div class="appointment_form">
 
-	{{ form_start(form) }}
-	{{ form_widget(form.date) }}
-	{{ form_widget(form.care) }}
-	{{ form_widget(form.user_id) }}
-	{{ form_widget(form.child_id) }}
+	{{ form_start(appointmentForm
+	) }}
+	{{ form_widget(appointmentForm
+	.date) }}
+	{{ form_widget(appointmentForm
+	.care) }}
+	{{ form_widget(appointmentForm
+	.user_id) }}
+	{{ form_widget(appointmentForm
+	.child_id) }}
 	<button class="btn btn_appointment">Valider</button>
-	{{ form_end(form) }}
+	{{ form_end(appointmentForm
+	) }}
 
 </div>

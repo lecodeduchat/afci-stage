@@ -1,0 +1,7 @@
+<form method="post" action="{{ path('daysOff_delete', {'id': days_off.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette indisponibilité ?');">
+	<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ days_off.id) }}">
+	<button class="btn-delete">
+		<i class="fa-solid fa-trash-can"></i>
+	</button>
+
+</form>
