@@ -24,8 +24,8 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180)]
     private ?string $email = null;
 
-    #[ORM\Column(options: ['default' => 'ROLE_PATIENT'])]
-    private ?string $roles = null;
+    #[ORM\Column]
+    private array $roles = [];
 
     /**
      * @var string The hashed password
@@ -79,6 +79,9 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 100, nullable: true)]
     private $resetToken;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $user_ref = null;
+
     public function __construct()
     {
         // Pour le champ created_at, on ajoute la date du jour
@@ -118,7 +121,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        // $roles[] = 'ROLE_USER';
+        $roles[] = 'ROLE_PATIENT';
 
         return array_unique($roles);
     }
@@ -322,5 +325,17 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function __toString(): string
     {
         return $this->firstname . ' ' . $this->lastname;
+    }
+
+    public function getUserRef(): ?int
+    {
+        return $this->user_ref;
+    }
+
+    public function setUserRef(?int $user_ref): self
+    {
+        $this->user_ref = $user_ref;
+
+        return $this;
     }
 }

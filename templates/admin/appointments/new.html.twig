@@ -12,7 +12,7 @@
 {% block javascripts %}
 	<script>
 		let slots = {{ slots|json_encode|raw }};
-let users = {{ users|json_encode|raw }};
+let clients = {{ clients|json_encode|raw }};
 	</script>
 	<script src="/assets/js/adminAppointment.js" defer></script>
 {% endblock %}
@@ -50,11 +50,8 @@ let users = {{ users|json_encode|raw }};
 		</div>
 		<div class="choice_user">
 			<label for="search_user" class="form-label">Rechercher un patient</label>
-			<input type="search" name="search_user" id="search_user" placeholder="Nom du patient" class="form-control admin">
-			<ul class="list_users form-control">
-				<li data-id='id'>Nom prénom</li>
-				<li data-id='id'>Nom prénom</li>
-			</ul>
+			<input type="text" name="search_user" id="search_user" placeholder="Nom du patient" class="form-control admin">
+			<ul class="search_results form-control"></ul>
 			<div class="new_user">
 				<input id="new_user" type="radio">
 				<label for="new_user">Nouveau patient</label>
