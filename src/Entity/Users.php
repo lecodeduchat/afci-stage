@@ -24,8 +24,10 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180)]
     private ?string $email = null;
 
-    #[ORM\Column]
-    private array $roles = [];
+
+    #[ORM\Column(options: ['default' => "ROLE_PATIENT"])]
+    private ?array $roles = null;
+
 
     /**
      * @var string The hashed password
@@ -121,7 +123,9 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
+
         $roles[] = 'ROLE_PATIENT';
+
 
         return array_unique($roles);
     }
