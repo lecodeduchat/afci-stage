@@ -49,12 +49,25 @@
 		<div class="footer_container_links">
 			<div class="footer_content_links">
 				<ul>
-					<li><a href="/">Accueil</a></li>
-					<li><a href="">La chiropraxie</a></li>
-					<li><a href="">Votre chiropracteur</a></li>
-					<li><a href="">Les soins</a></li>
-					<li><a href="">Prix et tarifs (remboursements)</a></li>
-					<li><a href="">FAQ</a></li>
+					<li>
+						<a href="/">Accueil</a>
+					</li>
+					<li>
+						<a href="{{ path('page_chiropractic') }}">La chiropraxie</a>
+					</li>
+					<li>
+						<a href="{{ path('page_chiropractor') }}">Votre chiropracteur</a>
+					</li>
+					<li>
+						<a href="{{ path('page_cares') }}">Les soins</a>
+					</li>
+					<li>
+						<a href="{{ path('page_prices') }}">Prix et tarifs</a>
+					</li>
+					<li>
+						<a href="{{ path('page_faq') }}">FAQ</a>
+					</li>
+					{#  #}
 				</ul>
 			</div>
 			<div class="footer_content_i">
@@ -71,13 +84,13 @@
 		<div class="footer_end">
 			<div class="footer_content_end">
 				<span>
-					<a href="">RGPD</a>
+					<a href="{{ path('page_rgpd') }}">RGPD</a>
 				</span>
 				<span>
-					<a href="">Mentions légales</a>
+					<a href="{{ path('page_legal_notices') }}">Mentions légales</a>
 				</span>
 				<span>
-					Site crée par boule et bill</span>
+					Site crée par Laurence Delporte et Guillaume Derouin</span>
 				<span>
 					Copyright © 2023</span>
 			</div>
