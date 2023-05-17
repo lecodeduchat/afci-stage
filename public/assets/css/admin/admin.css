@@ -131,6 +131,7 @@ h1.admin {
   /* index user admin */
   .table_admin,.table_admin_show{
     margin: 0 auto;
+    border-collapse: collapse;
   }
 
 
@@ -138,7 +139,7 @@ h1.admin {
 
   .table_admin tr td{
     border:1px solid var(--main-color-purple);
-    border-collapse: collapse;
+    
   }
 
   .btn_index_admin{
@@ -154,7 +155,9 @@ h1.admin {
     justify-content: center;
    
   }
-
+.thead_show{
+  padding: 8px;
+}
 
 
 .tbody_show{
