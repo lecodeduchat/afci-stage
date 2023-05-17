@@ -27,7 +27,7 @@
             </tr>
         </thead>
         <tbody>
-        {% for user in users %}
+        {% for user in pagination %}
             <tr>
                 <td>{{ user.id }}</td>
                 <td>{{ user.email }}</td>
@@ -49,8 +49,10 @@
                 <td colspan="20">Pas d'enregistrement trouvé</td>
             </tr>
         {% endfor %}
+        
         </tbody>
     </table>
+    {{knp_pagination_render(pagination)}}
     </div>
     </div>
 
