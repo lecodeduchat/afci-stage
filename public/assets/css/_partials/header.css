@@ -73,6 +73,7 @@ header {
 .main_menu-link {
   font-size: 15px;
   font-weight: bold;
+  color: var(--main-color-purple);
 }
 .header_content-btnRdv {
   box-sizing: border-box;
