@@ -69,16 +69,15 @@ h1.admin {
 }
 
 /* index cares user admin */
-.btn-trash{
+.btn-trash {
   border: none;
 }
 
-.btn_action{
+.btn_action {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
 }
-
 
 @media screen and (min-width: 900px) {
 }
@@ -125,66 +124,80 @@ h1.admin {
     cursor: pointer;
   }
 
-  .cares_container{
+  .cares_container {
     width: 80%;
   }
   /* index user admin */
-  .table_admin,.table_admin_show{
+  .table_admin,
+  .table_admin_show {
     margin: 0 auto;
     border-collapse: collapse;
   }
-
-
-
-
-  .table_admin tr td{
-    border:1px solid var(--main-color-purple);
-    
+  .table_admin tr td {
+    border: 1px solid var(--main-color-purple);
+    padding: 8px;
   }
-
-  .btn_index_admin{
+  .btn_index_admin {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
-
-  } 
-  .btn{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-   
   }
-.thead_show{
-  padding: 8px;
-}
-
-
-.tbody_show{
-  display: flex;
-  flex-direction: column;
-  width: 300px;
-  gap: 10px;
-}
-
-.tbody_show th{
-  padding-right: 10px;
-}
-
-.a_back_cares
-{
+  .btn {
     display: flex;
     align-items: center;
     justify-content: center;
-}
+  }
+  .thead_admin th {
+    padding: 8px;
+    border: 1px solid var(--main-color-purple);
+    background-color: var(--main-color-purple);
+    color: white;
+  }
+  .tbody_admin tr:nth-of-type(even) {
+    background-color: #ddd;
+  }
+  .tbody_admin .btn_action a,
+  .tbody_admin .btn_action form {
+    padding: 0 5px;
+  }
+  .tbody_show {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    gap: 10px;
+  }
+  .tbody_show th {
+    padding-right: 10px;
+  }
+  .a_back_cares {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #users {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .pagination_admin {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .pagination_admin span {
+    display: inline-block;
+    width: 40px;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 0 2px;
+  }
 
-#users{
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-
-
-
+  .pagination_admin span.current {
+    background-color: var(--main-color-purple);
+    color: white;
+  }
 }

@@ -11,25 +11,21 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/users', name:'users_') ]
+#[Route('/admin/users', name: 'users_')]
 class UsersController extends AbstractController
 {
     #[Route('/', name: 'index', methods: ['GET'])]
-    public function index(UsersRepository $usersRepository,Request $request,PaginatorInterface $paginator): Response
+    public function index(UsersRepository $usersRepository, Request $request, PaginatorInterface $paginator): Response
     {
         $pagination = $paginator->paginate(
             $usersRepository->paginationQuery(),
             // je recupère la page et par defaut je lui met la 1
-            $request->query->get('page',1),
-            25
-    
-
+            $request->query->get('page', 1),
+            17
         );
 
-
-
         return $this->render('admin/users/index.html.twig', [
-            'pagination'=> $pagination
+            'pagination' => $pagination
         ]);
     }
 
@@ -81,7 +77,7 @@ class UsersController extends AbstractController
     #[Route('/delete/{id}', name: 'delete', methods: ['POST'])]
     public function delete(Request $request, Users $user, UsersRepository $usersRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
             $usersRepository->remove($user, true);
         }
 
