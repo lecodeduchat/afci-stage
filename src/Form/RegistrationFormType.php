@@ -43,12 +43,25 @@ class RegistrationFormType extends AbstractType
                 ],
                 'label' => 'Prénom'
             ])
-            ->add('phone', TextType::class, [
+            ->add('home_phone', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => '06.66.77.88.99'
                 ],
-                'label' => 'Téléphone',
+                'label' => 'Téléphone fixe',
+                'constraints' => [
+                    new Regex([
+                        'pattern' => '/^0[1-9]([-. ]?[0-9]{2}){4}$/',
+                        'message' => 'Le numéro de téléphone doit comporter 10 chiffres.'
+                    ])
+                ],
+            ])
+            ->add('cell_phone', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => '06.66.77.88.99'
+                ],
+                'label' => 'Téléphone mobile',
                 'constraints' => [
                     new Regex([
                         'pattern' => '/^0[1-9]([-. ]?[0-9]{2}){4}$/',
@@ -92,6 +105,14 @@ class RegistrationFormType extends AbstractType
                     'placeholder' => 'Paris'
                 ],
                 'label' => 'Ville'
+            ])
+            ->add('country', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'France',
+                    'value' => 'France'
+                ],
+                'label' => 'Pays'
             ])
             // Modifier 'agreeTerms' par 'RGPDConsent'
             ->add('RGPDConsent', CheckboxType::class, [

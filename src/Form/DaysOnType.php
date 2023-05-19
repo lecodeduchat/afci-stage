@@ -20,10 +20,42 @@ class DaysOnType extends AbstractType
                     'placeholder' => 'Date',
                 ],
             ])
-            ->add('start_morning')
-            ->add('end_morning')
-            ->add('start_afternoon')
-            ->add('end_afternoon');
+            ->add('start_morning', null, [
+                'widget' => 'single_text',
+                'label' => 'Début de matinée',
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Start Morning',
+                    'value' => '09:30',
+                ],
+            ])
+            ->add('end_morning', null, [
+                'widget' => 'single_text',
+                'label' => 'Fin de matinée',
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'End Morning',
+                    'value' => '13:00',
+                ],
+            ])
+            ->add('start_afternoon', null, [
+                'widget' => 'single_text',
+                'label' => 'Début d\'après-midi',
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Start Afternoon',
+                    'value' => '14:00',
+                ],
+            ])
+            ->add('end_afternoon', null, [
+                'widget' => 'single_text',
+                'label' => 'Fin d\'après-midi',
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'End Afternoon',
+                    'value' => '18:00',
+                ],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

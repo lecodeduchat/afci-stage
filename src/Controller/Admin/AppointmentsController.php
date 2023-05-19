@@ -14,7 +14,6 @@ use App\Repository\CaresRepository;
 use App\Repository\UsersRepository;
 use App\Repository\ChildsRepository;
 use App\Repository\DaysOnRepository;
-use App\Repository\CustomersRepository;
 use App\Repository\AppointmentsRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

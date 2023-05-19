@@ -43,11 +43,20 @@ class RegistrationController extends AbstractController
         $user->setRoles(['ROLE_USER']);
         // Ajout de la valeur par défaut pour le champs is_verified
         $user->setIsVerified(false);
-        // Vérification du numéro de téléphone
-        $phone = $user->getPhone();
+        // Vérification du numéro de téléphone fixe
+        $home_phone = $user->getHomePhone();
         // Suppression des points
-        $phone = str_replace('.', '', $phone);
-        $user->setPhone($phone);
+        $home_phone = str_replace('.', '', $home_phone);
+        // J'enlève le premier 0 s'il y en a un
+        $home_phone = ltrim($home_phone, '0');
+        $user->setHomePhone($home_phone);
+        // Vérification du numéro de téléphone portable
+        $cell_phone = $user->getCellPhone();
+        // Suppression des points
+        $cell_phone = str_replace('.', '', $cell_phone);
+        // J'enlève le premier 0 s'il y en a un
+        $cell_phone = ltrim($cell_phone, '0');
+        $user->setCellPhone($cell_phone);
 
         // Vérification de la date de naissance
         $birthday = $user->getBirthday();
@@ -123,8 +132,8 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/renvoiverif/{route}', name: 'resend_verif')]
-    public function resendVerif(JWTService $jwt, SendMailService $mail, UsersRepository $usersRepository,$route): Response
-    {   
+    public function resendVerif(JWTService $jwt, SendMailService $mail, UsersRepository $usersRepository, $route): Response
+    {
 
 
         $user = $this->getUser();
@@ -160,11 +169,11 @@ class RegistrationController extends AbstractController
             'register',
             compact('user', 'token')
 
-            
+
         );
 
 
-        
+
         $this->addFlash('success', 'Email de vérification envoyé');
         return $this->redirectToRoute($route);
     }

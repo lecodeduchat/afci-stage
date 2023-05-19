@@ -29,7 +29,22 @@ class DaysOnController extends AbstractController
         $daysOnForm->handleRequest($request);
 
         if ($daysOnForm->isSubmitted() && $daysOnForm->isValid()) {
+            $startMorning = $daysOnForm->get('start_morning')->getData();
+            $endMorning = $daysOnForm->get('end_morning')->getData();
+            if ($startMorning > $endMorning) {
+                $this->addFlash('danger', 'L\'heure de début de matinée doit être inférieure à l\'heure de fin de matinée');
+                return $this->redirectToRoute('daysOn_new');
+            }
+            $startAfternoon = $daysOnForm->get('start_afternoon')->getData();
+            $endAfternoon = $daysOnForm->get('end_afternoon')->getData();
+            if ($startAfternoon > $endAfternoon) {
+                $this->addFlash('danger', 'L\'heure de début d\'après-midi doit être inférieure à l\'heure de fin d\'après-midi');
+                return $this->redirectToRoute('daysOn_new');
+            }
             $daysOnRepository->save($daysOn, true);
+            // if ($startMorning == "00:00") {
+            //     $daysOn->setStartMorning();
+            // }
 
             return $this->redirectToRoute('daysOn_index', [], Response::HTTP_SEE_OTHER);
         }

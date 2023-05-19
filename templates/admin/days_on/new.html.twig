@@ -1,5 +1,13 @@
 {% extends 'admin/base.html.twig' %}
 
+{% block stylesheets %}
+	<link rel="stylesheet" href="/assets/css/admin/daysOn.css">
+{% endblock %}
+{% block javascripts %}
+	<script src="/assets/js/adminDaysOn.js" defer></script>
+{% endblock %}
+
+
 {% block title %}Ajout jour ouvré
 {% endblock %}
 
@@ -9,8 +17,10 @@
 		{% include('admin/_partials/_menu.html.twig') %}
 		<div class="content">
 			<h1>Ajouter un jour ouvré</h1>
-			{{ include('admin/days_on/_form.html.twig') }}
-			<a href="{{ path('daysOn_index') }}">Retour à la liste</a>
+			<div class="form_daysOn">
+				{{ include('admin/days_on/_form.html.twig') }}
+				<a href="{{ path('daysOn_index') }}" class="link">Retour à la liste</a>
+			</div>
 		</div>
 	</div>
 

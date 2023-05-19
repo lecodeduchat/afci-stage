@@ -1,9 +1,5 @@
 {% extends '/admin/base.html.twig' %}
 
-{% block javascripts %}
-	<script src="/assets/js/adminuser.js" defer></script>
-{% endblock %}
-
 {% block title %}Index des patients
 {% endblock %}
 
@@ -35,8 +31,8 @@
 							<td>{{ user.firstname }}</td>
 							<td>{{ user.lastname }}</td>
 							<td>{{ user.email }}</td>
-							<td class="cellPhone">{{user.cellPhone}}</td>
-							<td class="homePhone">{{ user.homePhone }}</td>
+							<td class="cellPhone">{{ user.cellPhone|phone }}</td>
+							<td class="homePhone">{{ user.homePhone|phone }}</td>
 							<td>{{ user.isBlocked ? 'Oui' : 'Non' }}</td>
 							<td>
 								<div class="btn_action">

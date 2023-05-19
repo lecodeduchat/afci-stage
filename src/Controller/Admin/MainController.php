@@ -127,7 +127,7 @@ class MainController extends AbstractController
                     'start' => $day . ' 08:30:00',
                     'end' => $day . ' ' . $startMorning,
                     'title' => 'Heures non travaillées',
-                    'color' => '#fff',
+                    'color' => '#ddd',
                     'textColor' => '#000',
                 ];
             }
@@ -140,7 +140,7 @@ class MainController extends AbstractController
                     'start' => $day . ' ' . $endMorning,
                     'end' => $day . ' ' . $startAfternoon,
                     'title' => 'Pause repas',
-                    'color' => '#fff',
+                    'color' => '#ddd',
                     'textColor' => '#000',
                 ];
             }
@@ -152,7 +152,27 @@ class MainController extends AbstractController
                     'start' => $day . ' ' . $endAfternoon,
                     'end' => $day . ' 20:00:00',
                     'title' => 'Heures non travaillées',
-                    'color' => '#fff',
+                    'color' => '#ddd',
+                    'textColor' => '#000',
+                ];
+            }
+            if ($startMorning == null || $startMorning == "00:00:00") {
+                $rdvs[] = [
+                    'id' => 0,
+                    'start' => $day . ' 08:30:00',
+                    'end' => $day . ' 13:00:00',
+                    'title' => 'Matinée OFF',
+                    'color' => '#ddd',
+                    'textColor' => '#000',
+                ];
+            }
+            if ($startAfternoon == null || $startAfternoon == "00:00:00") {
+                $rdvs[] = [
+                    'id' => 0,
+                    'start' => $day . ' 14:00:00',
+                    'end' => $day . ' 20:00:00',
+                    'title' => 'Après-midi OFF',
+                    'color' => '#ddd',
                     'textColor' => '#000',
                 ];
             }
