@@ -5,7 +5,7 @@
 
 {% block body %}
 	<div class="container">
-		<div class="content content">
+		<div class="content content_profile">
 			<h2>Votre profil</h2>
 			<table class="edition_profile">
 				<tbody>
@@ -34,8 +34,12 @@
 						<td>{{ user.city }}</td>
 					</tr>
 					<tr>
-						<td>Téléphone</td>
-						<td>{{ user.phone }}</td>
+						<td>Téléphone fixe</td>
+						<td>{{ user.homePhone|phone }}</td>
+					</tr>
+					<tr>
+						<td>Téléphone portable</td>
+						<td>{{ user.cellPhone|phone }}</td>
 					</tr>
 					<tr>
 						<td>Date de naissance</td>

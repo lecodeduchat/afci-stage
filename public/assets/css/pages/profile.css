@@ -73,17 +73,25 @@
   line-height: 30px;
 }
 table.edition_profile {
-  padding: 18px;
-}
-table.edition_profile tr {
-  line-height: 30px;
+  width: 100%;
+  padding: 18px 0;
 }
 table.edition_profile tr td:first-child {
   font-weight: bold;
 }
+table.edition_profile tr {
+  width: 100%;
+  line-height: 30px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  padding-left: 18px;
+  margin-bottom: 10px;
+}
+
 .edition_profile_action {
   text-align: right;
-  padding: 0 18px;
+  margin-bottom: 36px;
 }
 .appointment-child.next {
   display: block;
@@ -100,6 +108,23 @@ li.olds-appointments_item .color_care {
   .profile_list_appointments {
     width: 640px;
     margin: 0 auto;
+  }
+  table.edition_profile {
+    width: 100%;
+  }
+  table.edition_profile tr {
+    flex-direction: row;
+  }
+  table.edition_profile tr td:first-child {
+    width: 200px;
+  }
+  .edition_profile_action .btn {
+    margin: 0 auto;
+  }
+  .content_profile {
+    width: 640px;
+    margin: 0 auto;
+    padding: 18px 0;
   }
 }
 @media screen and (min-width: 1200px) {

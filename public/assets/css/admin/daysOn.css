@@ -1,0 +1,31 @@
+.daysOn_btn_radio legend,
+.form_daysOn label {
+  display: inline-block;
+  width: 200px;
+  margin: 10px 0;
+}
+.btn-daysOn {
+  margin: 18px 0;
+}
+.form_daysOn .link {
+  color: black;
+  text-decoration: underline;
+}
+.form_daysOn .link:hover {
+  color: var(--main-color-purple);
+}
+.form_daysOn {
+  width: 350px;
+  margin: 0 auto;
+}
+.daysOn_btn_radio label {
+  display: inline-block;
+  width: auto;
+}
+.daysOn_btn_radio {
+  display: flex;
+  flex-direction: row;
+}
+.daysOn_btn_radio input {
+  margin: 0 10px;
+}

@@ -1,4 +1,26 @@
 {{ form_start(daysOnForm) }}
-{{ form_widget(daysOnForm) }}
-<button class="btn btn-submit">{{ button_label|default('Enregistrer') }}</button>
+{{ form_row(daysOnForm.date) }}
+<div class="open_morning">
+	<div class="daysOn_btn_radio">
+		<legend>Ouvert le matin</legend>
+		<label for="open_morning_yes">Oui</label>
+		<input type="radio" name="open_morning" id="open_morning_yes" checked>
+		<label for="open_morning_no">Non</label>
+		<input type="radio" name="open_morning" id="open_morning_no">
+	</div>
+	{{ form_row(daysOnForm.start_morning) }}
+	{{ form_row(daysOnForm.end_morning) }}
+</div>
+<div class="open_afternoon">
+	<div class="daysOn_btn_radio">
+		<legend>Ouvert l'après-midi</legend>
+		<label for="open_afternoon_yes">Oui</label>
+		<input type="radio" name="open_afternoon" id="open_afternoon_yes" checked>
+		<label for="open_afternoon_no">Non</label>
+		<input type="radio" name="open_afternoon" id="open_afternoon_no">
+	</div>
+	{{ form_row(daysOnForm.start_afternoon) }}
+	{{ form_row(daysOnForm.end_afternoon) }}
+</div>
+<button class="btn btn-submit btn-daysOn">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(daysOnForm) }}
