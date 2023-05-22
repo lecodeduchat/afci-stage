@@ -41,8 +41,6 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Nom',
                 'constraints' => [
                     new Regex([
-                        // pattern de Nolwenn pour un username
-                        // 'pattern' => '/^[a-zA-Z'\s-]{2,25}$/i',
                         'pattern' => '/^[a-z]+[ \-\']?[[a-z]+[ \-\']?]*[a-z]+$/i',
                         'message' => 'Le nom doit être valide.'
                     ])
