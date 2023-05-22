@@ -1,0 +1,12 @@
+<p>Bonjour Charlotte,</p>
+<p>Le rendez-vous de
+	<strong>{{user.firstname}}&nbsp;{{user.lastname}}</strong><br>
+	le
+	<strong>{{ appointment.date|dayName }}
+		{{ appointment.date|date('d')}}
+		{{ appointment.date|monthName }}
+		{{ appointment.date|date('Y')}}</strong><br>
+	à
+	<strong>{{ appointment.date ? appointment.date|date('H:i') : '' }}</strong>
+	a été annulé.
+</p>
