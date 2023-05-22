@@ -2,13 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\DaysOffRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Trait\CreatedAtTrait;
+use App\Repository\DaysOffRepository;
 
 #[ORM\Entity(repositoryClass: DaysOffRepository::class)]
 class DaysOff
 {
+    use CreatedAtTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -29,8 +32,12 @@ class DaysOff
     #[ORM\Column]
     private ?bool $all_day = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $created_at = null;
+
+    public function __construct()
+    {
+        // Pour le champ created_at, on ajoute la date du jour
+        $this->created_at = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {

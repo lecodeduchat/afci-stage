@@ -32,7 +32,6 @@ class MainController extends AbstractController
         // Je crée un formulaire pour ajouter un rendez-vous
         $form = $this->createForm(AdminAppointmentsType::class, $appointment);
 
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

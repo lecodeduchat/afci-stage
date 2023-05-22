@@ -70,7 +70,6 @@ class AppointmentsController extends AbstractController
             $cpt++;
         }
 
-
         // Création d'un tableau de créneaux horaires
         $slots = new Slots($appointmentsRepository, $daysOnRepository);
         $slots = $slots->getSlots();

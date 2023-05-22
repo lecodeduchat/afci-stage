@@ -39,28 +39,26 @@ class DaysOffRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return DaysOff[] Returns an array of DaysOff objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('d')
-//            ->andWhere('d.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('d.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * @return DaysOff[] Returns an array of DaysOff objects
+     */
+    public function findAllSince($date): array
+    {
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.start >= :val')
+            ->setParameter('val', $date)
+            ->orderBy('d.start', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 
-//    public function findOneBySomeField($value): ?DaysOff
-//    {
-//        return $this->createQueryBuilder('d')
-//            ->andWhere('d.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?DaysOff
+    //    {
+    //        return $this->createQueryBuilder('d')
+    //            ->andWhere('d.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }

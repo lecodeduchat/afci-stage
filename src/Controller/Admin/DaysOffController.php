@@ -60,7 +60,7 @@ class DaysOffController extends AbstractController
             return $this->redirectToRoute('daysOff_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('days_off/edit.html.twig', [
+        return $this->render('admin/days_off/edit.html.twig', [
             'days_off' => $daysOff,
             'form' => $form,
         ]);
