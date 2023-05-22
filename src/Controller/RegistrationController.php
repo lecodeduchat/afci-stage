@@ -50,6 +50,7 @@ class RegistrationController extends AbstractController
         // J'enlève le premier 0 s'il y en a un
         $home_phone = ltrim($home_phone, '0');
         $user->setHomePhone($home_phone);
+
         // Vérification du numéro de téléphone portable
         $cell_phone = $user->getCellPhone();
         // Suppression des points

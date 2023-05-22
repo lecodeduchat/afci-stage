@@ -2,10 +2,12 @@
 // Vérification de la date de naissance --------------------------------------
 const birthday = document.querySelector("#registration_form_birthday");
 const errorBirthday = document.querySelector(".error.birthday");
+const regexDate = /^(\d{2})\/(\d{2})\/(\d{4})$/;
+const regexPhone = /^0[1-9]([-. ]?[0-9]{2}){4}$/;
 
 birthday.addEventListener("blur", function () {
   const date = birthday.value;
-  const regexDate = /^(\d{2})\/(\d{2})\/(\d{4})$/;
+
   let errors = [];
   errorBirthday.innerHTML = "";
 
