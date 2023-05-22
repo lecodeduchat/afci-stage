@@ -47,7 +47,7 @@
 								à
 								<span>{{ appointment.date|date('H') }}</span>h<span>{{ appointment.date|date('i') }}</span>
 							</div>
-							<a href="{{ path('appointments_delete',{id: appointment.id} )}}" class="btn btn_cancel_appointment">Annuler le RDV</a>
+							{{ include('/appointments/_delete_form.html.twig') }}
 						</li>
 					{% endfor %}
 				</ul>
