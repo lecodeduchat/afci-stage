@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New DaysOff{% endblock %}
+{% block title %}New DaysOff
+{% endblock %}
 
 {% block body %}
-    <h1>Create new DaysOff</h1>
+	<h1>Create new DaysOff</h1>
 
-    {{ include('days_off/_form.html.twig') }}
+	{{ include('admin/days_off/_form.html.twig') }}
 
-    <a href="{{ path('app_days_off_index') }}">back to list</a>
+	<a href="{{ path('daysOff_index') }}">Retour</a>
 {% endblock %}

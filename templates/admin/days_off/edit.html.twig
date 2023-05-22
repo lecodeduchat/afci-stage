@@ -1,13 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit DaysOff{% endblock %}
+{% block title %}Indisponibilité
+{% endblock %}
 
 {% block body %}
-    <h1>Edit DaysOff</h1>
+	<h1>Modifier l'indisponibilité</h1>
 
-    {{ include('days_off/_form.html.twig', {'button_label': 'Update'}) }}
+	{{ include('admin/days_off/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('app_days_off_index') }}">back to list</a>
+	<a href="{{ path('daysOff_index') }}">Retour</a>
 
-    {{ include('days_off/_delete_form.html.twig') }}
+	{{ include('admin/days_off/_delete_form.html.twig') }}
 {% endblock %}
