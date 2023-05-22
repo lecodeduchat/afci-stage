@@ -1,8 +1,11 @@
 <div class="profile_menu">
+{% if app.user %}
 	<div class="profile_menu_salutation">
 		Bonjour,
 		{{ user.firstname }}&nbsp;{{ user.lastname}}
 	</div>
+
+	
 	<nav>
 		<div class="profile_menu_title">
 			<i class="fa-solid fa-user-gear"></i>
@@ -21,4 +24,4 @@
 		</ul>
 	</nav>
 </div>
-<div class="gradient-color-bar"></div>
+<div class="gradient-color-bar"></div>{% endif %}

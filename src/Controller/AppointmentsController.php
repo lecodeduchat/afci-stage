@@ -236,10 +236,33 @@ class AppointmentsController extends AbstractController
     }
 
     #[Route('/delete/{id}', name: 'delete', methods: ['POST', 'GET', 'DELETE'])]
-    public function delete(Request $request, Appointments $appointment, AppointmentsRepository $appointmentsRepository): Response
+    public function delete(Request $request, Appointments $appointment, AppointmentsRepository $appointmentsRepository, SendMailService $mail): Response
     {
         if ($this->isCsrfTokenValid('delete' . $appointment->getId(), $request->request->get('_token'))) {
             $appointmentsRepository->remove($appointment, true);
+
+            $user = $this->getUser();
+
+            $this->addFlash('success', 'Votre rendez-vous a été annulé');
+
+            $mail->send(
+                'no-reply@monsite.net',
+                $user->getEmail(),
+                'Annulation de votre rendez vous',
+                'annulation',
+                compact('user', 'appointment')
+            );
+            $mail->send(
+                'no-reply@monsite.net',
+                'no-reply@monsite.net',
+                'Annulation rendez vous',
+                'annulationclient',
+                compact('user', 'appointment')
+            );
+
+
+
+
         }
 
         return $this->redirectToRoute('profile_index', [], Response::HTTP_SEE_OTHER);
