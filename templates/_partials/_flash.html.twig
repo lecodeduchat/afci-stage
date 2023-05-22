@@ -1,12 +1,14 @@
 {% for label,messages in app.flashes %}
 	{% for message in messages %}
 		<div class="{{label}}" role="alert">
-			<div class="alert-message">
-				<p>{{message|raw}}</p>
+			<div class="flash-message">
+				<div class="alert-message">
+					<p>{{message|raw}}</p>
+				</div>
+				<button class="alertClose" aria-label="close">
+					<i class="fa-solid fa-xmark"></i>
+				</button>
 			</div>
-			<button class="alertClose" aria-label="close">
-				<i class="fa-solid fa-xmark"></i>
-			</button>
 		</div>
 	{% endfor %}
 

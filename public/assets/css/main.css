@@ -138,6 +138,10 @@ p {
     width: 1200px;
     margin: 0 auto;
   }
+  .flash-message {
+    width: 1200px;
+    margin: 0 auto;
+  }
 }
 /* ANIMATION BUTTONS CALL-ACTION ----------------------------------------------------- */
 .btn {
@@ -218,17 +222,17 @@ p {
   display: grid;
   grid-template-columns: 1fr 60px;
 }
+.flash-message {
+  display: grid;
+  grid-template-columns: 1fr 60px;
+}
 .warning {
   color: orange;
   background-color: #fff3cd;
-  display: grid;
-  grid-template-columns: 1fr 60px;
 }
 .success {
   color: green;
   background-color: #05966938;
-  display: grid;
-  grid-template-columns: 1fr 60px;
 }
 .warning .link,
 .warning .fa-xmark {
