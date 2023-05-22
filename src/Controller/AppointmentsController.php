@@ -290,20 +290,20 @@ class AppointmentsController extends AbstractController
             // TODO : Ajouter un message flash indiquant que le rendez-vous a bien été créé
             $this->addFlash('success', 'Votre rendez-vous a été pris en compte. Vous allez recevoir un email de confirmation.');
             // TODO : Envoyer un mail de confirmation au client
-            $mail->send(
-                'no-reply@monsite.net',
-                $user->getEmail(),
-                'Email de confirmation de votre rendez vous',
-                'rendezvous',
-                compact('user', 'appointment')
-            );
-            $mail->send(
-                'no-reply@monsite.net',
-                'no-reply@monsite.net',
-                'Email de confirmation de votre rendez vous',
-                'rendezvousclient',
-                compact('user', 'appointment')
-            );
+            // $mail->send(
+            //     'no-reply@monsite.net',
+            //     $user->getEmail(),
+            //     'Email de confirmation de votre rendez vous',
+            //     'rendezvous',
+            //     compact('user', 'appointment')
+            // );
+            // $mail->send(
+            //     'no-reply@monsite.net',
+            //     'no-reply@monsite.net',
+            //     'Email de confirmation de votre rendez vous',
+            //     'rendezvousclient',
+            //     compact('user', 'appointment')
+            // );
 
             return $this->redirectToRoute('profile_index', [], Response::HTTP_SEE_OTHER);
         }
