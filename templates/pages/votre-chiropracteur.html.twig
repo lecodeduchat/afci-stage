@@ -1,12 +1,42 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+	<link rel="stylesheet" href="/assets/css/pages/pages.css">
+{% endblock %}
+
 {% block title %}Votre Chiropracteur
 {% endblock %}
 
 {% block body %}
 	<div class="container">
-		<div class="content">
-			<h1>Votre Chiropracteur</h1>
+		<div class="title_votre-chiropracteur">
+			<h1 class="title_page">Votre chiropracteur</h1>
+		</div>
+		<div class="content content_pages">
+			<div class="votre-chiropracteur">
+				<img src="/assets/images/charlotte-profil.png" alt="Charlotte Vandermersh" class="image_votre-chiropracteur">
+				<p>Diplômée en chiropratique depuis 2012, j’ai créé le cabinet d’Haubourdin en 2013 en parallèle de mon travail de collaboratrice à Boulogne-sur-Mer chez Delphine TOURRET.</p>
+			</div>
+			<div class="content_page_votre-chiropracteur">
+				<h3>Mon regard sur le métier</h3>
+				<div class="content_text_votre-chiropracteur">
+					<p>J'ai une vision globale du corps et j'aime faire le lien entre celui-ci et les émotions, car ils sont étroitement liés.</p>
+					<p>Pouvoir apporter un soutien sur le plan physique par la chiropraxie et sur le plan émotionnel par l’utilisation des plantes est un moyen pour moi d’être une professionnelle qui regarde tous les aspects de votre personne.
+					</p>
+					<p>
+						<strong>C’est la raison pour laquelle vous venez me voir au cabinet.</strong>
+					</p>
+				</div>
+				<h3>Comment j'en suis arrivée là ?</h3>
+				<div class="content_text_votre-chiropracteur">
+					<p>J'ai commencé très tôt à me passionner pour le corps humain et l'aide à la personne. J'ai très vite cherché ce qui me plaisait.</p>
+					<p>Tout d’abord, dans le domaine de la médecine chinoise en shiatsu. Ce fut un premier pied à l’étrier, mais pas ce qui m'animait le plus.</p>
+					<p>J'ai trouvé ma voie et l'envie de pratiquer la chiropraxie quelques années plus tard.</p>
+					<p>Une fois installée en tant que chiropracteur, ma curiosité et l’envie d'apprendre, me poussa naturellement à continuer à me former.</p>
+					<p>Cette fois, dans un autre domaine qui me passionne tout autant, les fleurs et plantes. J'ai suivi des formations sur les fleurs de Bach et bush australien avec Jean-Michel SCHERPEREEL à la « La Centaurée ». Suivi d’une formation en phytothérapie à l’ETNAT.</p>
+					<p>J’ai également suivi des formations sur tout ce qui concerne la petite enfance et l'accompagnement parental à l'arrivé d'un bébé. Les difficultés que cela peut amener : les freins restrictifs buccaux, l'allaitement, les troubles de l’oralité alimentaires. Tout cela demande une approche pluridisciplinaire et surtout un soutien pour une famille avec plus ou moins de difficulté.</p>
+				</div>
+			</div>
 		</div>
 	</div>
 {% endblock %}
