@@ -36,7 +36,7 @@
 							- Chèque et espèces
 						</div>
 						<div class="care_btn">
-							<a href="{{ path('appointments_slots') }}" class="btn btn-reservation care_choice" data-set="{{ care.id }}">Réserver</a>
+							<a href="{{ path('appointments_slots',{'slug' : 'premiere-consultation'}) }}" class="btn btn-reservation care_choice" data-set="{{ care.id }}">Réserver</a>
 						</div>
 					</li>
 				{% endfor %}
@@ -65,10 +65,9 @@
 							- Chèque et espèces
 						</div>
 						<div class="care_btn">
-							<a href="{{ path('appointments_slots') }}" class="btn btn-reservation care_choice" data-set="{{ care.id }}">Réserver</a>
+							<a href="{{ path('appointments_slots',{'slug' : 'suivi-consultation'}) }}" class="btn btn-reservation care_choice" data-set="{{ care.id }}">Réserver</a>
 						</div>
 					</li>
-
 				{% endfor %}
 			</ul>
 		</div>
