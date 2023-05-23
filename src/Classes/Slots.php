@@ -13,18 +13,23 @@ class Slots
     private $appointmentsRepository;
     private $daysOnRepository;
     private $daysOffRepository;
+    private $careDuration;
 
-    public function __construct(AppointmentsRepository $appointmentsRepository, DaysOnRepository $daysOnRepository, DaysOffRepository $daysOffRepository)
+    public function __construct(AppointmentsRepository $appointmentsRepository, DaysOnRepository $daysOnRepository, DaysOffRepository $daysOffRepository, $careDuration)
     {
         $this->appointmentsRepository = $appointmentsRepository;
         $this->daysOnRepository = $daysOnRepository;
         $this->daysOffRepository = $daysOffRepository;
+        $this->careDuration = $careDuration;
     }
 
     public function getSlots(): array
     {
         // Je récupère la date du jour
         $date = new \DateTime();
+        // J'ajoute 1 jour à la date du jour pour les tests
+        // $date->add(new \DateInterval('P1D'));
+
         $timeNow = $date;
         // Je la formate pour la passer en paramètre à la requête
         $dateNow = $date->format('Y-m-d');
@@ -54,17 +59,39 @@ class Slots
             // Je crée un tableau pour stocker les créneaux horaires de chaque jour
             $slots[$i]["slots"] = [];
 
-            // Je crée un tableau avec les rendez-vous du jour et les indisponibilités du jour
+            // Je vérifie si la matinée est ouverte
+            if ($dayOn->getStartMorning()->format("H:i") != "00:00") {
+                $startDay = $dayOn->getStartMorning()->format("H:i");
+                $endMorning = $dayOn->getEndMorning()->format("H:i");
+                // Je fixe la limite de créneaux horaires pour la matinée en me basant sur des créneaux de 30 minutes
+                $limitMorning = strtotime($endMorning) - 30 * 60;
+                $is_open_morning = true;
+            } else {
+                $is_open_morning = false;
+                $startDay = $dayOn->getStartAfternoon()->format("H:i");
+            }
+            // Je vérifie si l'après-midi est ouvert
+            if ($dayOn->getStartAfternoon()->format("H:i") != "00:00") {
+                $endDay = $dayOn->getEndAfternoon()->format("H:i");
+                $startAfternoon = $dayOn->getStartAfternoon()->format("H:i");
+                $endAfternoon = $dayOn->getEndAfternoon()->format("H:i");
+                // Je fixe la limite de créneaux horaires pour l'après-midi en me basant sur des créneaux de 30 minutes
+                $limitAfternoon = strtotime($endAfternoon) - 30 * 60;
+                $is_open_afternoon = true;
+            } else {
+                $is_open_afternoon = false;
+                $endDay = $dayOn->getEndMorning()->format("H:i");
+            }
+
+            // Je crée un tableau avec les rendez-vous du jour, les indisponibilités du jour et le cas échéant la pause déjeuner
             $hoursOff = [];
 
-            foreach ($daysOff as $dayOff) {
-                if ($dayOff->getStart()->format('Y-m-d') == $slots[$i]["date"]) {
-                    $start = strtotime($dayOff->getStart()->format("H:i"));
-                    $hoursOff[$start] = [
-                        "start" => $dayOff->getStart()->format('H:i'),
-                        "end" => $dayOff->getEnd()->format('H:i'),
-                    ];
-                }
+            // Si la matinée et l'après-midi sont ouvertes, j'ajoute la pause déjeuner dans le tableau des indisponibilités
+            if ($is_open_morning == true && $is_open_afternoon == true) {
+                $hoursOff[strtotime($endMorning)] = [
+                    "start" => $endMorning,
+                    "end" => $startAfternoon,
+                ];
             }
 
             foreach ($appointments as $appointment) {
@@ -79,125 +106,97 @@ class Slots
                     ];
                 }
             }
+            foreach ($daysOff as $dayOff) {
+                if ($dayOff->getStart()->format('Y-m-d') == $slots[$i]["date"]) {
+                    $start = strtotime($dayOff->getStart()->format("H:i"));
+                    $hoursOff[$start] = [
+                        "start" => $dayOff->getStart()->format('H:i'),
+                        "end" => $dayOff->getEnd()->format('H:i'),
+                    ];
+                }
+            }
+
             // Je trie le tableau par ordre croissant
             ksort($hoursOff);
-
-            // Je vérifie si la matinée est ouverte
-            if ($dayOn->getStartMorning() != null || $dayOn->getStartMorning()->format("H:i") != "00:00") {
-                $startMorning = $dayOn->getStartMorning()->format("H:i");
-                $endMorning = $dayOn->getEndMorning()->format("H:i");
-                // Je fixe la limite de créneaux horaires pour la matinéeen me basant sur des créneaux de 30 minutes
-                $limitMorning = strtotime($endMorning) - 30 * 60;
-                $is_open_morning = true;
-            }
-            // Je vérifie si l'après-midi est ouvert
-            if ($dayOn->getStartAfternoon() != null || $dayOn->getStartAfternoon()->format("H:i") != "00:00") {
-                $startAfternoon = $dayOn->getStartAfternoon()->format("H:i");
-                $endAfternoon = $dayOn->getEndAfternoon()->format("H:i");
-                // Je fixe la limite de créneaux horaires pour l'après-midi en me basant sur des créneaux de 30 minutes
-                $limitAfternoon = strtotime($endAfternoon) - 30 * 60;
-                $is_open_afternoon = true;
+            // dd($hoursOff);
+            // Je mets à jour la fin de journée en fonction de la dernière indisponibilité
+            $end = end($hoursOff);
+            // echo "end: ", $end["end"], " - endDay: ", $endDay, "<br>";
+            if ($endDay < $end["end"]) {
+                $endDay = $end["end"];
             }
 
-            // Je crée la variable $slot, je lui attribut la valeur du début de matinée sauf si le jour est aujourd'hui et que l'heure actuelle est supérieure à l'heure de début de matinée
-            if ($dateNow == $slots[$i]["date"]) {
-                if ($is_open_morning == true) {
-                    // dd($timeNow, $startMorning, $limitMorning);
-                    if ($timeNow->format("H:i") < $startMorning) {
-                        $slot = strtotime($startMorning);
-                    } elseif ($timeNow->format("H:i") < date("H:i", $limitMorning)) {
-                        $hour = $timeNow->format("H");
-                        $minutes = $timeNow->format("i");
-                        if ($minutes < 30) {
-                            $slot = mktime($hour, 30, 0, date('m'), date('d'), date('Y'));;
-                        } else {
-                            $hour = $hour + 1;
-                            $slot = mktime($hour, 0, 0, date('m'), date('d'), date('Y'));;
-                        }
-                    }
-                }
-                if ($is_open_afternoon == true && $slot > $limitMorning) {
-                    if ($timeNow->format("H:i") < $startAfternoon) {
-                        $slot = strtotime($startAfternoon);
-                    } elseif ($timeNow < $limitAfternoon) {
-                        $hour = $timeNow->format("H");
-                        $minutes = $timeNow->format("i");
-                        if ($minutes < 30) {
-                            $slot = mktime($hour, 30, 0, date('m'), date('d'), date('Y'));;
-                        } else {
-                            $hour = $hour + 1;
-                            $slot = mktime($hour, 0, 0, date('m'), date('d'), date('Y'));;
-                        }
-                    }
+            // Je crée la variable $slot, je lui attribut la valeur du début de journée sauf si le jour est aujourd'hui et que l'heure actuelle est supérieure à l'heure de début de journée
+            if ($slots[$i]["date"] == $dateNow && $timeNow->format("H:i") > $startDay) {
+                $hour = $timeNow->format("H");
+                $minutes = $timeNow->format("i");
+                if ($minutes < 30) {
+                    $slot = mktime($hour, 30, 0, date('m'), date('d'), date('Y'));;
+                } else {
+                    $hour = $hour + 1;
+                    $slot = mktime($hour, 0, 0, date('m'), date('d'), date('Y'));;
                 }
             } else {
-                if ($is_open_morning == true) {
-                    $slot = strtotime($startMorning);
-                } else {
-                    $slot = strtotime($startAfternoon);
-                }
+                $slot = strtotime($startDay);
             }
+            // echo "Date: ", $slots[$i]["date"], " - slot de départ: ", date("H:i", $slot), "<br>";
+            // echo "-------------------------------------------------------------------------------- <br>";
+            $careDuration = $this->careDuration;
+            // Je parcours le tableau des indisponibilités pour récupérer les créneaux horaires disponibles
             $cpt = 0;
+            $j = 0;
             foreach ($hoursOff as $hourOff) {
+                // echo $j, " slot de départ bis: ", date("H:i", $slot), " -start :", $hourOff["start"], " - end: ", date("H:i", strtotime($hourOff["end"])),  "<br>";
                 while ($slot < strtotime($hourOff["start"])) {
-                    if ($slot < $limitMorning) {
+                    $diff = strtotime($hourOff["start"]) - $slot;
+                    // echo "diff : " . $diff . "<br>";
+                    // echo "slot: ", date("H:i", $slot), " - start: ", date("H:i", strtotime($hourOff["start"])), " - end: ", date("H:i", strtotime($hourOff["end"])), "- diff: ", $diff / 60, '<br>';
+                    if ($diff >= $careDuration) {
                         $horaire = date("H:i", $slot);
                         array_push($slots[$i]["slots"], $horaire);
                         // le timestamp étant en millisecondes, pour ajouter 30 minutes, je multiplie par 60
                         $slot = $slot + 30 * 60;
-                    } elseif ($slot >= $limitMorning && $slot < strtotime($startAfternoon) && $is_open_afternoon == true) {
-                        if ($slot == $limitMorning) {
-                            $horaire = date("H:i", $slot);
-                            array_push($slots[$i]["slots"], $horaire);
-                        }
-                        // le timestamp étant en millisecondes, pour ajouter 30 minutes, je multiplie par 60
-                        $slot = strtotime($startAfternoon);
-                    } elseif ($slot >= strtotime($startAfternoon) && $slot < $limitAfternoon && $is_open_afternoon == true) {
-                        $horaire = date("H:i", $slot);
-                        array_push($slots[$i]["slots"], $horaire);
-                        // le timestamp étant en millisecondes, pour ajouter 30 minutes, je multiplie par 60
-                        $slot = $slot + 30 * 60;
+                    } else {
+                        $slot = strtotime($hourOff["end"]);
                     }
                     $cpt++;
                     if ($cpt > 100) {
                         break;
                     }
                 }
-            }
+                if ($slot <= strtotime($hourOff["end"])) {
+                    $slot = strtotime($hourOff["end"]);
+                }
 
-            // Si aucun rendez-vous et aucune indisponibilité ne correspond à la date du jour boucle selon le moment de la journée
-            if ($is_open_morning == true && count($hoursOff) == 0 && $timeNow->format("H:i") < $slot) {
-                $cpt = 0;
-                while (
-                    $slot <= $limitMorning
-                ) {
+                $j++;
+            }
+            // Si aucun rendez-vous et aucune indisponibilité ne correspond à la date du jour
+            // OU si l'heure actuelle est inférieure à l'heure de fin de journée
+            $cpt = $diff = 0;
+            // dd($slot, $endDay);
+            // echo "-------------------------------------------------------------------------------- <br>";
+            // echo "slot de départ ter: ", date("H:i", $slot), "<br>";
+            while (
+                $slot < strtotime($endDay)
+            ) {
+                $diff = strtotime($endDay) - $slot;
+                if ($diff >= $careDuration) {
+                    // echo "slot : ", date("H:i", $slot), " - diff: ", $diff, '<br>';
                     $horaire = date("H:i", $slot);
                     array_push($slots[$i]["slots"], $horaire);
                     // le timestamp étant en millisecondes, pour ajouter 30 minutes, je multiplie par 60
                     $slot = $slot + 30 * 60;
-                    $cpt++;
-                    if ($cpt > 100) {
-                        break;
-                    }
+                } else {
+                    $slot = strtotime($hourOff["end"]);
+                }
+                $cpt++;
+                if ($cpt > 20) {
+                    break;
                 }
             }
-            if ($is_open_afternoon == true && count($hoursOff) == 0) {
-                $slot = strtotime($startAfternoon);
-                $cpt = 0;
-                while (
-                    $slot <= $limitAfternoon
-                ) {
-
-                    $horaire = date("H:i", $slot);
-                    array_push($slots[$i]["slots"], $horaire);
-                    // le timestamp étant en millisecondes, pour ajouter 30 minutes, je multiplie par 60
-                    $slot = $slot + 30 * 60;
-                    $cpt++;
-                    if ($cpt > 100) {
-                        break;
-                    }
-                }
-            }
+            // echo "-------------------------------------------------------------------------------- <br>";
+            // echo "Fin de journée: ", $endDay, " - slot: ", date("H:i", $slot), "<br>";
+            // echo "-------------------------------------------------------------------------------- <br>";
             $i++;
         }
         return $slots;

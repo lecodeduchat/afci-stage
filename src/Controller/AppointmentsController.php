@@ -63,16 +63,25 @@ class AppointmentsController extends AbstractController
             'user' => $user,
         ]);
     }
-    #[Route('/slots', name: 'slots', methods: ['GET'])]
-    public function slots(AppointmentsRepository $appointmentsRepository, CaresRepository $caresRepository, DaysOnRepository $daysOnRepository, DaysOffRepository $daysOffRepository): Response
+    #[Route('/slots/{slug}', name: 'slots', methods: ['GET'])]
+    public function slots(AppointmentsRepository $appointmentsRepository, CaresRepository $caresRepository, DaysOnRepository $daysOnRepository, DaysOffRepository $daysOffRepository, Request $request): Response
     {
         $user = "";
         if ($this->getUser()) {
             $user = $this->getUser();
         }
-
+        // Durée du soin choisi en minutes
+        $slug = $request->attributes->get('slug');
+        if ($slug == "premiere-consultation") {
+            $careDuraton = 45;
+        } elseif ($slug == "suivi-consultation") {
+            $careDuraton = 30;
+        } else {
+            // erreur de slug : je redirige vers la page appointments_index
+            return $this->redirectToRoute('appointments_index');
+        }
         // Création d'un tableau de créneaux horaires
-        $slots = new Slots($appointmentsRepository, $daysOnRepository, $daysOffRepository);
+        $slots = new Slots($appointmentsRepository, $daysOnRepository, $daysOffRepository, $careDuraton);
         $slots = $slots->getSlots();
 
         // Création d'un timestamp à 9h00 de la date du jour
@@ -259,10 +268,6 @@ class AppointmentsController extends AbstractController
                 'annulationclient',
                 compact('user', 'appointment')
             );
-
-
-
-
         }
 
         return $this->redirectToRoute('profile_index', [], Response::HTTP_SEE_OTHER);
