@@ -1,0 +1,94 @@
+.content_pages {
+  padding-top: 0;
+  margin-bottom: 18px;
+}
+.title_chiropraxie {
+  background: url("/assets/images/manipulation-02.jpg") center/cover;
+}
+.title_votre-chiropracteur {
+  background: url("/assets/images/manipulation-01.jpeg") center/cover;
+}
+.title_soins {
+  background: url("/assets/images/manipulation-01.jpeg") center/cover;
+}
+.votre-chiropracteur {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.image_votre-chiropracteur {
+  display: block;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+.votre-chiropracteur p {
+  width: 100%;
+  margin: 0 auto;
+  font-style: italic;
+}
+.title_page {
+  padding: 44px 0px;
+  color: white;
+  background-color: var(--main-bg-color-lavender-light);
+}
+.content_pages h3 {
+  margin-top: 18px;
+}
+.content_pages p {
+  padding-bottom: 0px;
+  text-indent: 18px;
+}
+.content_care {
+}
+p.intro_cares {
+  font-style: italic;
+  font-weight: bold;
+}
+.image_care {
+  margin-top: 18px;
+  display: block;
+  width: 100%;
+}
+@media screen and (min-width: 768px) {
+  p.intro_cares {
+    padding: 36px;
+    padding-bottom: 18px;
+  }
+  .image_care {
+    width: 50%;
+    margin: 18px auto;
+  }
+  .content_care_infos {
+    width: 50%;
+    margin: 0 auto;
+  }
+  .content_text_votre-chiropracteur {
+    margin-bottom: 36px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .content_page_votre-chiropracteur {
+    width: 800px;
+    margin: 0 auto;
+  }
+  .title_page {
+    padding: 100px 0px;
+  }
+  .votre-chiropracteur {
+    margin: 36px 0;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .image_votre-chiropracteur {
+    margin: 0;
+  }
+  .votre-chiropracteur p {
+    padding-left: 36px;
+    width: 40%;
+    margin: 0;
+  }
+}

@@ -21,12 +21,10 @@
 				<div class="tabs_item">
 					<a href="{{ path('app_register')}}">Je crée mon compte</a>
 				</div>
-
 			</div>
-
 			<form method="post" class="login_form">
 				{% if error %}
-					<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+					<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security.fr') }}</div>
 				{% endif %}
 
 				{% if app.user %}

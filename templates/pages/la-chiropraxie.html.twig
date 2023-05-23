@@ -1,12 +1,26 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+	<link rel="stylesheet" href="/assets/css/pages/pages.css">
+{% endblock %}
+
 {% block title %}La Chiropraxie
 {% endblock %}
 
 {% block body %}
 	<div class="container">
-		<div class="content">
-			<h1>La Chiropraxie</h1>
+		<div class="title_chiropraxie">
+			<h1 class="title_page">La Chiropraxie</h1>
+		</div>
+		<div class="content content_pages">
+			<h3>Définition</h3>
+			<p>"La chiropraxie est un art, une science, une philosophie, qui consiste en la prévention, le diagnostic, le traitement des pathologies mécaniques réelles ou supposées de l'appareil neuro-musculo-squelettique, en particulier du rachis et de leurs conséquences."</p>
+			<p>Votre corps détient toutes les clefs de sa propre guérison. Le chiropracteur lui indique le chemin que doit prendre votre corps pour y arriver. C’est l’intelligence innée.</p>
+			<p>L’acte appelé « ajustement » se pratique avec les mains de votre chiropracteur principalement. Il vise à rectifier l’équilibre de votre système nerveux et lui donner un fonctionnement optimal. Système nerveux qui se trouve dans votre colonne vertébrale et boite crânienne.</p>
+			<h3>L'histoire de la chiropraxie</h3>
+			<p>Les Etats-Unis sont le berceau de la chiropraxie, où la discipline a été fondée à la fin du XIXème siècle, par Daniel David Palmer. Les premiers soins chiropratiques ont été dispensés par Palmer lui-même dès 1895. Il fonda deux ans plus tard la première école, à Davenport. A ce jour, plus de 75 000 chiropracteurs exercent dans les 50 états. La chiropraxie est reconnue dans chacun de ces états.
+			</p>
+			<p>En 2013, la prestigieuse American Medical Association recommande aux patients de consulter un chiropracteur en première intention pour le soin des lombalgies.</p>
 		</div>
 	</div>
 {% endblock %}

@@ -1,12 +1,53 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+	<link rel="stylesheet" href="/assets/css/pages/pages.css">
+{% endblock %}
+
+
 {% block title %}Les soins
 {% endblock %}
 
 {% block body %}
 	<div class="container">
-		<div class="content">
-			<h1>Les soins</h1>
+		<div class="title_soins">
+			<h1 class="title_page">Les soins</h1>
+		</div>
+		<div class="content content_pages">
+			<p class="intro_cares">"Les techniques utilisées diffèrent d’un âge à l’autre et d’une condition à l’autre. C’est pourquoi un examen complet est toujours requis pour identifier les soins appropriés et les techniques adaptées à votre cas."</p>
+			<h3>Chez le nourrisson et l'enfant</h3>
+			<div class="content_care">
+				<img src="/assets/images/leonard-cranien2-bis.jpg" alt="manipulation cranien" class="image_care">
+				<div class="content_care_infos">
+					<p>La naissance, ce moment merveilleux, est à la fois tellement riche physiquement et émotionnellement qu’il est bon et doux de pouvoir le rééquilibrer.</p>
+					<p>J’accompagne le corps sur les 2 années à avenir où tout cela est en construction. Des premiers  mouvements de motricité, à la mise à 4 pattes, apprendre à marcher, parler, courir, et manger.</p>
+					<p>Tout ces changements rapides sont intenses pour le corps, événements qui se reproduiront lors de l'adolescence. Un accompagnement adapté permettra un développement optimal.</p>
+				</div>
+			</div>
+			<h3>Chez la femme enceinte</h3>
+			<div class="content_care">
+				<img src="/assets/images/femme-enceinte.webp" alt="femme enceinte" class="image_care">
+				<div class="content_care_infos">
+					<p>Elle conçoit un bébé, à partir de deux cellules et donne naissance à un petit être humain et tout cela en 9 mois à peine. 9 mois où le corps va travailler dur en créant la vie, tout en devant continuer son activité quotidienne.</p>
+					<p>La prise en charge a pour objectif de vous accompagner afin d’éviter les désagréments supplémentaires liés à tous ces changements rapides. Changements de courbe physique dus au ventre qui arrive, les humeurs changeantes dues aux hormones. Les désagréments d’ordre viscéral et articulaire en tout genre.</p>
+				</div>
+			</div>
+			<h3>Chez les adultes</h3>
+			<div class="content_care">
+				<img src="/assets/images/adulte.webp" alt="adultes" class="image_care">
+				<div class="content_care_infos">
+					<p>L'adulte vit des stress physiques, émotionnels, chimiques. La gestion de tout ce stress devient parfois trop lourde et entraîne des troubles neuro-musculo-squelettique.</p>
+					<p>La prise en charge va permettre d’améliorer votre quotidien, un système nerveux optimal dans un corps optimal.  Pour vivre votre quotidien de la meilleure façon qu'il soit.</p>
+				</div>
+			</div>
+			<h3>Chez les séniors</h3>
+			<div class="content_care">
+				<img src="/assets/images/senior.webp" alt="séniors" class="image_care">
+				<div class="content_care_infos">
+					<p>Parce que l’espérance de vie ne cesse de croître, parce que la douleur n’est plus une fatalité même avec l’âge, les chiropracteurs sont amenés régulièrement à prendre en charges certains problèmes de santé spécifiques aux seniors.</p>
+					<p>Par des ajustements doux, définis et adaptés, le chiropracteur soulage les douleurs et symptômes arthrosiques d’une grande majorité de patients seniors, même pour celles et ceux opérés au niveau de certaines articulations.</p>
+				</div>
+			</div>
 		</div>
 	</div>
 {% endblock %}
