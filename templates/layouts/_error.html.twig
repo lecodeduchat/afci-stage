@@ -11,22 +11,32 @@
         {% block stylesheets %}
             {# {{ encore_entry_link_tags('app') }} #}
             <link rel="stylesheet" href="/assets/css/main.css">
+            <link rel="stylesheet" href="/assets/css/_layouts/error.css">
+            <link rel="stylesheet" href="/assets/css/pages/profile.css">
             <link href="/assets/fontawesome/css/fontawesome.css" rel="stylesheet">
             <link href="/assets/fontawesome/css/brands.css" rel="stylesheet">
             <link href="/assets/fontawesome/css/solid.css" rel="stylesheet">
             
+            
+        {% endblock %}
+        {% block javascripts %}
+            <script src="/assets/js/script.js" defer></script>
         {% endblock %}
 
     </head>
     <body>
-        {{ include('/_header.html.twig') }}
+        {{ include('/_partials/_header.html.twig') }}
         {% block body %}
         <div class="page_error">
-            <div class="">
-            <img src="/assets/images/popeye.png" alt="" class="page_error_img">
-            <img src="/assets/images/bulle.png" alt="" class="page_error_bulle_img">
-            <div class="bulle_oops">Oops !</div>
+            <div class="global_img">
+            <div class="popeye_img">
+            <img src="/assets/images/popeye.png" alt="image popeye" class="page_error_img">
             </div>
+            <div class="bulle_global">
+            <div class="bulle_img">
+            <img src="/assets/images/bulle.png" alt="image d'une bulle" class="page_error_bulle_img"></div>
+            </div>
+            <div class="bulle_oops">Oops !</div></div>
             <p class="p_error">Page {{exception.statusCode}}</p>
 
         
