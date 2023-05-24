@@ -154,7 +154,7 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Vous devez accepter les conditions d\'utilisation.',
                     ]),
                 ],
-                'label' => 'En m\'inscrivant à ce site j\'accepte... '
+                'label' => 'En m\'inscrivant à ce site j\'accepte le règlement général sur la protection des données.'
             ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
@@ -164,7 +164,7 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Mot de passe',
                 'constraints' => [
                     new Regex(
-                        '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{14,}$/',
+                        '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{12,}$/',
                         "Le mot de passe doit contenir au moins 14 caractères dont une majuscule, une minuscule, un chiffre et un caractère spécial (#?!@$%^&*-)"
                     )
                 ],

@@ -136,9 +136,7 @@ class RegistrationController extends AbstractController
     public function resendVerif(JWTService $jwt, SendMailService $mail, UsersRepository $usersRepository, $route): Response
     {
 
-
         $user = $this->getUser();
-
         if (!$user) {
             $this->addFlash('danger', 'Vous devez être connecté pour accéder à cette page');
             return $this->redirectToRoute('app_login');
@@ -169,11 +167,7 @@ class RegistrationController extends AbstractController
             'Activation de votre compte sur le site Charlotte Vandermersch',
             'register',
             compact('user', 'token')
-
-
         );
-
-
 
         $this->addFlash('success', 'Email de vérification envoyé');
         return $this->redirectToRoute($route);

@@ -1,15 +1,18 @@
 {% extends 'base.html.twig' %}
+
 {% block stylesheets %}
 	<link rel="stylesheet" href="/assets/css/pages/appointment.css">
 	<link rel="stylesheet" href="/assets/css/_partials/form.css">
-
 {% endblock %}
 
 {% block javascripts %}
+	<script>
+		let cares = {{ cares|raw }};
+	</script>
 	<script src="/assets/js/appointmentReservation.js" defer></script>
 	<script src="/assets/js/appointmentStepChild.js" defer></script>
-
 {% endblock %}
+
 {% block title %}Rendez-vous
 {% endblock %}
 
@@ -58,25 +61,5 @@
 			<a href="{{ path('appointments_index') }}" class="link link_appointment">Retour au choix de la séance</a>
 		</div>
 	</div>
-	<table class="cares hidden">
-		<thead>
-			<tr>
-				<th>id</th>
-				<th>name</th>
-				<th>duration</th>
-				<th>price</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for care in cares %}
-				<tr>
-					<td>{{ care.id }}</td>
-					<td>{{ care.name }}</td>
-					<td>{{ care.duration|format_datetime('none','short', locale='fr') }}</td>
-					<td>{{ care.price }}</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
 
 {% endblock %}

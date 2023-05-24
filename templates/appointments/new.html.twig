@@ -6,15 +6,17 @@
 {% block javascripts %}
 	<script>
 		{% if childs %}
-lastChildId = {{ lastChildId }};
+lastChildId = `{{ lastChildId }}`;
 firstnameLastChild = `{{ firstnameLastChild }}`;
 console.log('prénom: ', firstnameLastChild);
 childs = {{ childs|raw }};
-console.log(childs);{% endif %}
+console.log(childs);{% endif %}let dataCares = {{ cares|raw }};
+console.log(dataCares);
 	</script>
 	<script src="/assets/js/appointmentReservation.js" defer></script>
 	<script src="/assets/js/appointmentStepNew.js" defer></script>
 {% endblock %}
+
 {% block title %}Rendez-vous
 {% endblock %}
 
@@ -46,25 +48,5 @@ console.log(childs);{% endif %}
 			<a href="{{ path('appointments_index') }}" class="link link_appointment">Retour au choix de la séance</a>
 		</div>
 	</div>
-	<table class="cares hidden">
-		<thead>
-			<tr>
-				<th>id</th>
-				<th>name</th>
-				<th>duration</th>
-				<th>price</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for care in cares %}
-				<tr>
-					<td>{{ care.id }}</td>
-					<td>{{ care.name }}</td>
-					<td>{{ care.duration|format_datetime('none','short', locale='fr') }}</td>
-					<td>{{ care.price }}</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
 
 {% endblock %}

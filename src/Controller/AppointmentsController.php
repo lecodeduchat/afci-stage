@@ -169,13 +169,25 @@ class AppointmentsController extends AbstractController
         // Je récupère la liste des enfants
         $childs = $childsRepository->findByUser($user);
         $enfants = [];
-
         foreach ($childs as $child) {
             $enfants[$child->getId()] = [
                 'firstname' => $child->getFirstname(),
             ];
         }
         $childs = json_encode($enfants);
+
+        // Je récupère la liste des soins
+        $cares = $caresRepository->findAll();
+        $soins = [];
+        foreach ($cares as $care) {
+            $soins[$care->getId()] = [
+                'id' => $care->getId(),
+                'name' => $care->getName(),
+                'duration' => $care->getDuration()->format('H:i'),
+                'price' => $care->getPrice(),
+            ];
+        }
+        $cares = json_encode($soins);
 
         $form = $this->createForm(AppointmentsType::class, $appointment);
         $form->handleRequest($request);
@@ -210,7 +222,7 @@ class AppointmentsController extends AbstractController
         return $this->render('appointments/new.html.twig', [
             'appointment' => $appointment,
             'form' => $form,
-            'cares' => $caresRepository->findAll(),
+            'cares' => $cares,
             'user' => $user,
             'lastChildId' => $lastChildId,
             'firstnameLastChild' => $firstnameLastChild,
