@@ -45,49 +45,25 @@ nameDay = capitalizeFirstLetter(nameDay);
 dateDiv.textContent = `${nameDay} ${day} ${monthName} ${year}`;
 timeDiv.textContent = `${hours}h${minutes}`;
 
-// Je récupère les données de la table "care" -------------------------------
-const cares = document.querySelector("table.cares");
-const tbody = cares.querySelector("tbody");
-const rows = tbody.querySelectorAll("tr");
-let dataCares = [];
-let cpt = 0;
-rows.forEach((row) => {
-  const items = row.querySelectorAll("td");
-  dataCares[cpt] = [];
-  items.forEach((item) => {
-    dataCares[cpt].push(item.textContent);
-  });
-  cpt++;
-});
-
 // Affichage des informations de la séance ----------------------------------
 const lastStep = document.querySelector(".last-step");
-// Pour savoir si je suis sur la dernière étape de la pris de rendez-vous
-// if (lastStep) {
-//   console.log("test", firstnameLastChild);
-//   if (typeof firstnameLastChild == undefined) {
-//     firstnameChild = "";
-//   } else {
-//     console.log("test2");
-//     firstnameChild = firstnameLastChild;
-//   }
-// }
-dataCares.forEach((dataCare) => {
-  if (dataCare[0] == careId) {
+
+for (let key in dataCares) {
+  if (dataCares[key].id == careId) {
     if (careId == 2 || careId == 5) {
       let childId = localStorage.getItem("childId");
       if (typeof childId !== "undefined" && childId == "newChild") {
-        console.log(firstnameChild);
-        careName.textContent = dataCare[1] + " pour " + firstnameChild;
+        careName.textContent = dataCares[key].name + " pour " + firstnameChild;
       } else {
-        console.log(childs);
         careName.textContent =
-          dataCare[1] + " pour " + childs[childId].firstname;
+          dataCares[key].name + " pour " + childs[childId].firstname;
       }
     } else {
-      careName.textContent = dataCare[1];
+      careName.textContent = dataCares[key].name;
     }
-    careDuration.textContent = dataCare[2].slice(3, 5) + " minutes";
-    carePrice.textContent = dataCare[3] + ",00";
+    let duration = dataCares[key].duration;
+    duration = duration.slice(3, 5);
+    careDuration.textContent = `${duration} minutes`;
+    carePrice.textContent = dataCares[key].price + ",00";
   }
-});
+}

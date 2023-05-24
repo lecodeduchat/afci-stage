@@ -13,13 +13,13 @@ class ResetPasswordRequestFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email' , EmailType::class,
-            [   
-                'label' => 'Entrer votre e-mail',
+
+            ->add('email', EmailType::class, [
                 'attr' => [
-                    'placeholder'=> 'Votreemail@email.fr',
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder' => 'email@example.com'
                 ],
+                'label' => 'E-mail',
                 'constraints' => [
                     new Regex([
                         'pattern' => '/^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-zA-Z]{2,4}$/',
@@ -27,12 +27,8 @@ class ResetPasswordRequestFormType extends AbstractType
                     ])
                 ],
 
+            ]);
 
-            ]
-            
-            
-            )
-        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

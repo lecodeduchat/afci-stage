@@ -53,7 +53,7 @@
 				</ul>
 				<h3>Historique de vos rendez-vous</h3>
 				<ul>
-					{% for appointment in oldsAppointments %}
+					{% for appointment in pagination %}
 						<li class="olds-appointments_item">
 							{% for care in cares %}
 								{% if care.id == appointment.care.id %}
@@ -77,8 +77,7 @@
 								{% endif %}
 							{% endfor %}
 							<strong>
-								<span>-
-									{{ appointment.date|dayName }}</span>
+								<span>{{ appointment.date|dayName }}</span>
 								<span>{{ appointment.date|date('d') }}</span>
 								<span>{{ appointment.date|monthName }}</span>
 								<span>{{ appointment.date|date('Y') }}</span>
@@ -88,7 +87,9 @@
 						</li>
 					{% endfor %}
 				</ul>
-				{# <a href="">Voir plus</a> #}
+				<div class="pagination_profile">
+					{{knp_pagination_render(pagination)}}
+				</div>
 			</div>
 		</div>
 	</div>

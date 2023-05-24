@@ -2,22 +2,27 @@
 
 namespace App\Controller;
 
+use App\Entity\Users;
 use App\Form\RegistrationFormType;
+use App\Form\ResetPasswordFormType;
 use App\Repository\CaresRepository;
 use App\Repository\UsersRepository;
-use App\Repository\AppointmentsRepository;
 use App\Repository\ChildsRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\AppointmentsRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 // On définit manuellement le nom de la route depuis laquelle on accèdera à toutes les méthodes de ce contrôleur
 #[Route('/profil', name: 'profile_')]
 class ProfileController extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function index(AppointmentsRepository $appointmentsRepository, CaresRepository $caresRepository, ChildsRepository $childsRepository): Response
+    public function index(AppointmentsRepository $appointmentsRepository, CaresRepository $caresRepository, ChildsRepository $childsRepository, PaginatorInterface $paginator, Request $request): Response
     {
         // Je vérifie que l'utilisateur est connecté , sinon je le redirige vers la page de connexion
         if (!$this->getUser()) {
@@ -36,6 +41,12 @@ class ProfileController extends AbstractController
         // dd($user->getId());
         // Je récupère l'historique des rendez-vous de l'utilisateur connecté
         $oldsAppointments = $appointmentsRepository->findOldAppointmentByUser($user->getId(), $date);
+        $pagination = $paginator->paginate(
+            $appointmentsRepository->paginationQueryAppointmentsUser($user->getId(), $date),
+            // je recupère la page et par defaut je lui met la 1
+            $request->query->get('page', 1),
+            10
+        );
 
         // Je récupère les rendez-vous à venir de l'utilisateur connecté
         $nextAppointments = $appointmentsRepository->findNextAppointmentByUser($user->getId(), $date);
@@ -45,7 +56,7 @@ class ProfileController extends AbstractController
 
         return $this->render('profile/index.html.twig', [
             'user' => $user,
-            'oldsAppointments' => $oldsAppointments,
+            'pagination' => $pagination,
             'nextAppointments' => $nextAppointments,
             'cares' => $cares,
             'childs' => $childs,
@@ -93,5 +104,45 @@ class ProfileController extends AbstractController
             'user' => $user,
             'userForm' => $form->createView(),
         ]);
+    }
+
+    #[Route('/votre-profil/changer-mot-de-passe', name: 'changePassword')]
+    public function changePassword(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        UserPasswordHasherInterface $passwordHasher
+    ): Response {
+        // Je vérifie que l'utilisateur est connecté , sinon je le redirige vers la page de connexion
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+        $user = $this->getUser();
+
+        if ($user) {
+
+            $form = $this->createForm(ResetPasswordFormType::class);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $user->setPassword(
+                    $passwordHasher->hashPassword(
+                        $user,
+                        $form->get('password')->getData()
+                    )
+                );
+                $entityManager->persist($user);
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Mot de passe changé avec succès');
+                return $this->redirectToRoute('profile_index');
+            }
+
+            return $this->render('security/reset_password.html.twig', [
+                'passForm' => $form->createView(),
+                'user' => $user
+            ]);
+        }
+        $this->addFlash('danger', 'Jeton invalide');
+        return $this->redirectToRoute('profile_index');
     }
 }
