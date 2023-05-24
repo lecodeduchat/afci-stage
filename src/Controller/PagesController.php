@@ -47,7 +47,7 @@ class PagesController extends AbstractController
             $user = $this->getUser();
             return $this->render('pages/prix-et-tarifs.html.twig',compact('user'));
         }
-        return $this->render('pages/prix-et-tarifs.html.twig',compact('user'));
+        return $this->render('pages/prix-et-tarifs.html.twig');
         
     }
 
