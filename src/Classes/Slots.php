@@ -71,7 +71,9 @@ class Slots
                 $startDay = $dayOn->getStartAfternoon()->format("H:i");
             }
             // Je vérifie si l'après-midi est ouvert
+    
             if ($dayOn->getStartAfternoon()->format("H:i") != "00:00") {
+                // dd($dayOn->getStartAfternoon()->format("H:i"));
                 $endDay = $dayOn->getEndAfternoon()->format("H:i");
                 $startAfternoon = $dayOn->getStartAfternoon()->format("H:i");
                 $endAfternoon = $dayOn->getEndAfternoon()->format("H:i");
