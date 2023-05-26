@@ -15,6 +15,7 @@ use App\Repository\UsersRepository;
 use App\Repository\ChildsRepository;
 use App\Repository\DaysOnRepository;
 use App\Repository\AppointmentsRepository;
+use App\Repository\DaysOffRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,6 +29,7 @@ class AppointmentsController extends AbstractController
         Request $request,
         AppointmentsRepository $appointmentsRepository,
         DaysOnRepository $daysOnRepository,
+        DaysOffRepository $daysOffRepository,
         UsersRepository $userRepository,
         CaresRepository $caresRepository,
         SendMailService $mail,
@@ -71,7 +73,7 @@ class AppointmentsController extends AbstractController
         }
 
         // Création d'un tableau de créneaux horaires
-        $slots = new Slots($appointmentsRepository, $daysOnRepository);
+        $slots = new Slots($appointmentsRepository, $daysOnRepository,$daysOffRepository,$caresRepository);
         $slots = $slots->getSlots();
         // dd($slots);
         // Initialisation d'un nouveau rendez-vous
