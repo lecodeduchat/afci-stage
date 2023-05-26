@@ -28,7 +28,6 @@ class ProfileController extends AbstractController
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
         }
-
         $user = $this->getUser();
         // Je récupère la date du jour
         $date = new \DateTime();
