@@ -1,7 +1,7 @@
 /* HOME BLOC ------------------------------------------------------------- */
 .home_container {
   position: relative;
-  background: url("/assets/images/cabinet-01.jpg") center/cover no-repeat;
+  background: url("/assets/images/cabinet-large.jpg") center/cover no-repeat;
   height: 300px;
 }
 .home_container::before {
@@ -79,7 +79,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background: url("/assets/images/cabinet-01.jpg") center/cover no-repeat;
+  background: url("/assets/images/cabinet-03.jpg") center/cover no-repeat;
   width: 200px;
   height: 200px;
   border-radius: 50%;
@@ -127,24 +127,24 @@
   height: 100%;
 }
 .separator-photo:nth-of-type(1) {
-  background: url("/assets/images/sportif.webp") center/cover no-repeat;
+  background: url("/assets/images/leonard-visceral.jpg") center/cover no-repeat;
   display: none;
 }
 .separator-photo:nth-of-type(2) {
-  background: url("/assets/images/femme-enceinte.webp") center/cover no-repeat;
+  background: url("/assets/images/femme-enceinte.jpg") center/cover no-repeat;
 }
 .separator-photo:nth-of-type(3) {
-  background: url("/assets/images/adolescents.webp") center/cover no-repeat;
+  background: url("/assets/images/enfant.jpg") center/cover no-repeat;
   display: none;
 }
 .separator-photo:nth-of-type(4) {
-  background: url("/assets/images/pediatrie.webp") center/cover no-repeat;
+  background: url("/assets/images/succion-test.jpg") center/cover no-repeat;
 }
 .separator-photo:nth-of-type(5) {
-  background: url("/assets/images/senior.webp") center/cover no-repeat;
+  background: url("/assets/images/senior.jpg") center/cover no-repeat;
 }
 .separator-photo:nth-of-type(6) {
-  background: url("/assets/images/manipulation-02.jpg") center/cover no-repeat;
+  background: url("/assets/images/adulte.jpg") center/cover no-repeat;
   display: none;
 }
 /* BLOC FORWHOM --------------------------------------------------------------------- */
