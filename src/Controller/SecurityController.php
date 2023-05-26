@@ -24,7 +24,7 @@ class SecurityController extends AbstractController
     {
         $user = "";
         if ($this->getUser()) {
-            return $this->redirectToRoute('target_path');
+            return $this->redirectToRoute('app_home');
         }
         // dd($_SESSION);
         // get the login error if there is one
@@ -39,10 +39,8 @@ class SecurityController extends AbstractController
                 'error' => $error,
                 'cares' => $caresRepository->findAll(),
                 'user' => $user,
-
             ],
         );
-
     }
 
     #[Route(path: '/logout', name: 'app_logout')]

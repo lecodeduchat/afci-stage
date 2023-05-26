@@ -31,7 +31,9 @@ class AppointmentsController extends AbstractController
         UsersRepository $userRepository,
         CaresRepository $caresRepository,
         SendMailService $mail,
-        ChildsRepository $childsRepository
+        ChildsRepository $childsRepository,
+        DaysOffRepository $daysOffRepository,
+
     ): Response {
         // Initialisation d'un patient
         $user = new Users();
@@ -42,6 +44,16 @@ class AppointmentsController extends AbstractController
             // Affichage d'un message flash à l'utilisateur
             $this->addFlash('success', 'Le patient a été ajouté avec succès.');
             return $this->redirectToRoute('admin_index', [], Response::HTTP_SEE_OTHER);
+        }
+        // Durée du soin choisi en minutes
+        $slug = $request->attributes->get('slug');
+        if ($slug == "premiere-consultation") {
+            $careDuraton = 45;
+        } elseif ($slug == "suivi-consultation") {
+            $careDuraton = 30;
+        } else {
+            // erreur de slug : je redirige vers la page appointments_index
+            return $this->redirectToRoute('appointments_index');
         }
 
         // Initialisation d'un enfant
@@ -71,7 +83,7 @@ class AppointmentsController extends AbstractController
         }
 
         // Création d'un tableau de créneaux horaires
-        $slots = new Slots($appointmentsRepository, $daysOnRepository);
+        $slots = new Slots($appointmentsRepository, $daysOnRepository, $daysOffRepository, $careDuraton);
         $slots = $slots->getSlots();
         // dd($slots);
         // Initialisation d'un nouveau rendez-vous
