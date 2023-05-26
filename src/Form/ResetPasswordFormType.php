@@ -2,6 +2,8 @@
 
 namespace App\Form;
 
+use Karser\Recaptcha3Bundle\Form\Recaptcha3Type;
+use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Regex;
@@ -25,7 +27,13 @@ class ResetPasswordFormType extends AbstractType
                         "Le mot de passe doit contenir au moins 14 caractères dont une majuscule, une minuscule, un chiffre et un caractère spécial (#?!@$%^&*-)"
                     )
                 ],
+            ])
+            ->add('captcha', Recaptcha3Type::class, [
+                'constraints' => new Recaptcha3(),
+                'action_name' => 'reset_password',
+                'locale' => 'fr',
             ]);
+            
     }
 
     public function configureOptions(OptionsResolver $resolver): void

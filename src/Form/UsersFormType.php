@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Users;
+use Karser\Recaptcha3Bundle\Form\Recaptcha3Type;
+use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -10,9 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
+
 
 
 class UsersFormType extends AbstractType
@@ -146,7 +146,14 @@ class UsersFormType extends AbstractType
                         'message' => 'Le pays doit être valide.'
                     ])
                 ],
+            ])
+            ->add('captcha', Recaptcha3Type::class, [
+                'constraints' => new Recaptcha3(),
+                'action_name' => 'homepage',
+                'script_nonce_csp' => $nonceCSP,
+                'locale' => 'de',
             ]);
+            
     }
 
     public function configureOptions(OptionsResolver $resolver): void

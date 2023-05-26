@@ -34,7 +34,7 @@ class AppointmentsController extends AbstractController
         CaresRepository $caresRepository,
         SendMailService $mail,
         ChildsRepository $childsRepository,
-        DaysOffRepository $daysOffRepository,
+    
 
     ): Response {
         // Initialisation d'un patient
