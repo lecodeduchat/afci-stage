@@ -73,7 +73,7 @@ header {
 .main_menu-link {
   font-size: 15px;
   font-weight: bold;
-  color: var(--main-color-purple);
+  color: white;
 }
 .header_content-btnRdv {
   box-sizing: border-box;
@@ -262,6 +262,11 @@ header {
   }
 }
 @media screen and (min-width: 1200px) {
+  .main_menu-link {
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--main-color-purple);
+  }
   .header_container {
     width: 1200px;
     margin: 0 auto;

@@ -39,10 +39,8 @@ class SecurityController extends AbstractController
                 'error' => $error,
                 'cares' => $caresRepository->findAll(),
                 'user' => $user,
-
             ],
         );
-
     }
 
     #[Route(path: '/logout', name: 'app_logout')]
