@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Users;
+use Karser\Recaptcha3Bundle\Form\Recaptcha3Type;
+use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\IsTrue;
@@ -168,6 +170,11 @@ class RegistrationFormType extends AbstractType
                         "Le mot de passe doit contenir au moins 14 caractères dont une majuscule, une minuscule, un chiffre et un caractère spécial (#?!@$%^&*-)"
                     )
                 ],
+            ])
+            ->add('captcha', Recaptcha3Type::class, [
+                'constraints' => new Recaptcha3(),
+                'action_name' => 'register',
+                'locale' => 'fr',
             ]);
     }
 
