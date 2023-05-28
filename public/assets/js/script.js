@@ -96,19 +96,6 @@ function initMap() {
   });
 }
 
-// Initialisation de datepicker ---------------------------------------------
-// const datepicker = document.querySelector(".js-datepicker");
-// if (datepicker) {
-//   $(document).ready(function () {
-//     console.log("coucou datepicker");
-//     // you may need to change this code if you are not using Bootstrap Datepicker
-//     $(".js-datepicker").datepicker({
-//       format: "dd/MM/yyyy",
-//       placeholder: "jj/mm/aaaa",
-//     });
-//   });
-// }
-
 // bouton fermeture des message
 const closeMessage = document.querySelectorAll(".alertClose");
 
@@ -136,5 +123,3 @@ if (reservation) {
     }
   }
 }
-// Déclaration des variables pour la page new rendez-vous -------------------
-let firstnameChild, childs, firstnameLastChild;

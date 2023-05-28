@@ -99,8 +99,11 @@ table.edition_profile tr {
 li.olds-appointments_item {
   text-align: left;
   padding-left: 18px;
+  line-height: 28px;
 }
-
+li.olds-appointments_item > strong {
+  display: block;
+}
 li.olds-appointments_item .color_care {
   font-size: 12px;
   margin-right: 6px;
@@ -114,7 +117,7 @@ li.olds-appointments_item .color_care {
     width: 640px;
     margin: 0 auto;
   }
-  li.olds-appointments_item > span:nth-child(2) {
+  li.olds-appointments_item > strong {
     display: inline-block;
     width: 250px;
   }

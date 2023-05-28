@@ -22,7 +22,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class ProfileController extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function index(AppointmentsRepository $appointmentsRepository, CaresRepository $caresRepository, ChildsRepository $childsRepository, PaginatorInterface $paginator, Request $request): Response
+    public function index(AppointmentsRepository $appointmentsRepository, CaresRepository $caresRepository, UsersRepository $usersRepository, PaginatorInterface $paginator, Request $request): Response
     {
         // Je vérifie que l'utilisateur est connecté , sinon je le redirige vers la page de connexion
         if (!$this->getUser()) {
@@ -36,10 +36,11 @@ class ProfileController extends AbstractController
         $date->modify('-1 day');
 
         // Je vérifie si l'utilisateur a des enfants
-        $childs = $childsRepository->findByUser($user);
-        // dd($user->getId());
+        $childs = $usersRepository->findChildsByUser($user->getId(), '["ROLE_CHILD"]');
+
         // Je récupère l'historique des rendez-vous de l'utilisateur connecté
-        $oldsAppointments = $appointmentsRepository->findOldAppointmentByUser($user->getId(), $date);
+        $oldAppointments = $appointmentsRepository->findOldAppointmentByUser($user->getId(), $date);
+        // dd($oldAppointments);
         $pagination = $paginator->paginate(
             $appointmentsRepository->paginationQueryAppointmentsUser($user->getId(), $date),
             // je recupère la page et par defaut je lui met la 1
@@ -63,7 +64,7 @@ class ProfileController extends AbstractController
     }
 
     #[Route('/votre-profil', name: 'show')]
-    public function show(ChildsRepository $childsRepository): Response
+    public function show(UsersRepository $usersRepository): Response
     {
         // Je vérifie que l'utilisateur est connecté , sinon je le redirige vers la page de connexion
         if (!$this->getUser()) {
@@ -72,8 +73,8 @@ class ProfileController extends AbstractController
         $user = $this->getUser();
 
         // Je vérifie si l'utilisateur a des enfants
-        $childs = $childsRepository->findByUser($user);
-
+        $childs = $usersRepository->findChildsByUser($user->getId(), '["ROLE_CHILD"]');
+        dd($childs);
         return $this->render('profile/show.html.twig', [
             'user' => $user,
             'childs' => $childs,

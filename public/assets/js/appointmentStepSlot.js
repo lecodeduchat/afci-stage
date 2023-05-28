@@ -34,7 +34,7 @@ slotsTimes.forEach((slotsTime) => {
       slotsTime.setAttribute("href", "/rendez-vous/enfants");
     } else {
       console.log("RDV adulte");
-      slotsTime.setAttribute("href", "/rendez-vous/new");
+      slotsTime.setAttribute("href", "/rendez-vous/nouveau");
     }
   });
 });

@@ -34,9 +34,8 @@ class AppointmentsController extends AbstractController
         CaresRepository $caresRepository,
         SendMailService $mail,
         ChildsRepository $childsRepository,
-    
-
     ): Response {
+
         // Initialisation d'un patient
         $user = new Users();
         $userForm = $this->createForm(UsersFormType::class, $user);
@@ -47,6 +46,7 @@ class AppointmentsController extends AbstractController
             $this->addFlash('success', 'Le patient a été ajouté avec succès.');
             return $this->redirectToRoute('admin_index', [], Response::HTTP_SEE_OTHER);
         }
+
         // Durée du soin choisi en minutes
         $slug = $request->attributes->get('slug');
         if ($slug == "premiere-consultation") {

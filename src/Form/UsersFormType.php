@@ -11,8 +11,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-
-
 class UsersFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void

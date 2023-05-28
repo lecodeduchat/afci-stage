@@ -3,6 +3,7 @@
 const childsSelect = document.querySelector("#childs");
 const formChild = document.querySelector(".formChild");
 const btnValidateChild = document.querySelector(".choiceChild");
+
 if (childsSelect) {
   let childId = childsSelect.value;
   localStorage.setItem("childId", childId);

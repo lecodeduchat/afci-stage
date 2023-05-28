@@ -23,7 +23,7 @@ class UsersRepository extends ServiceEntityRepository implements PasswordUpgrade
     {
         parent::__construct($registry, Users::class);
     }
-  
+
 
     public function save(Users $entity, bool $flush = false): void
     {
@@ -80,17 +80,27 @@ class UsersRepository extends ServiceEntityRepository implements PasswordUpgrade
     public function paginationQuery()
     {
         return $this->createQueryBuilder('u')
-        ->orderBy('u.id','ASC')
-        ->getQuery();
+            ->orderBy('u.id', 'ASC')
+            ->getQuery();
     }
 
-    //    public function findOneBySomeField($value): ?Users
-    //    {
-    //        return $this->createQueryBuilder('u')
-    //            ->andWhere('u.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function findChildsByUser($userId, $role): array
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.user_ref = :user AND u.roles LIKE :role')
+            ->setParameter('user', $userId)
+            ->setParameter('role', $role)
+            ->orderBy('u.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    // public function findLastChildByUser($userId): ?Users
+    // {
+    //     return $this->createQueryBuilder('u')
+    //         ->andWhere('u.user_ref = :user')
+    //         ->setParameter('val', $userId)
+    //         ->getQuery()
+    //         ->getOneOrNullResult();
+    // }
 }
