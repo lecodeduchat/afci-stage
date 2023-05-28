@@ -88,10 +88,10 @@ class AppointmentsRepository extends ServiceEntityRepository
     public function paginationQueryAppointmentsUser($userId, $date)
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.user_id = :val AND a.date >= :date')
+            ->andWhere('a.user_id = :val AND a.date < :date')
             ->setParameter('val', $userId)
             ->setParameter('date', $date)
-            ->orderBy('a.date', 'ASC')
+            ->orderBy('a.date', 'DESC')
             ->getQuery();
     }
 }

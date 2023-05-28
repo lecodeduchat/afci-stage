@@ -20,7 +20,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 180)]
+    #[ORM\Column(length: 180, nullable: true)]
     private ?string $email = null;
 
     #[ORM\Column(options: ['default' => "ROLE_PATIENT"])]
@@ -52,21 +52,21 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[Assert\Regex(pattern: '/^[0-9]{5}$/', message: 'Le code postal doit comporter 5 chiffres.')]
     #[Assert\Length(min: 5, max: 5, exactMessage: 'Le code postal doit comporter 5 chiffres.')]
-    #[ORM\Column(length: 5)]
+    #[ORM\Column(length: 5, nullable: true)]
     private ?string $zipcode = null;
 
-    #[ORM\Column(length: 150)]
+    #[ORM\Column(length: 150, nullable: true)]
     private ?string $city = null;
 
-    #[ORM\Column(length: 150)]
+    #[ORM\Column(length: 150, nullable: true)]
     private ?string $country = null;
 
     #[Assert\Regex(pattern: '/^[0-9]{9}$/', message: 'Le numéro de téléphone doit comporter 9 chiffres.')]
-    #[ORM\Column(length: 10)]
+    #[ORM\Column(length: 10, nullable: true)]
     private ?string $home_phone = null;
 
     #[Assert\Regex(pattern: '/^[0-9]{9}$/', message: 'Le numéro de téléphone doit comporter 9 chiffres.')]
-    #[ORM\Column(length: 10)]
+    #[ORM\Column(length: 10, nullable: true)]
     private ?string $cell_phone = null;
 
     #[ORM\Column]

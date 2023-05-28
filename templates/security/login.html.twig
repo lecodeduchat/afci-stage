@@ -5,7 +5,11 @@
 	<link rel="stylesheet" href="/assets/css/pages/appointment.css">
 {% endblock %}
 {% block javascripts %}
+	<script>
+		dataCares = {{ soins|raw }}
+	</script>
 	<script src="/assets/js/appointmentReservation.js" defer></script>
+
 {% endblock %}
 
 {% block title %}Connexion
@@ -72,17 +76,5 @@
 				</div>
 			</div>
 		</div>
-		<table class="cares hidden">
-			<tbody class="hidden">
-				{% for care in cares %}
-					<tr class="hidden">
-						<td class="hidden">{{ care.id }}</td>
-						<td class="hidden">{{ care.name }}</td>
-						<td class="hidden">{{ care.duration|format_datetime('none','short', locale='fr') }}</td>
-						<td class="hidden">{{ care.price }}</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
 	</div>
 {% endblock %}

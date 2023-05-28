@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Classes\Soins;
 use App\Form\ResetPasswordFormType;
 use App\Form\ResetPasswordRequestFormType;
 use App\Repository\CaresRepository;
@@ -32,12 +33,16 @@ class SecurityController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
+        // Je récupère la liste des soins pour la carte de réservation
+        $soins = new Soins($caresRepository);
+        $soins = $soins->getSoins();
+
         return $this->render(
             'security/login.html.twig',
             [
                 'last_username' => $lastUsername,
                 'error' => $error,
-                'cares' => $caresRepository->findAll(),
+                'soins' => $soins,
                 'user' => $user,
             ],
         );

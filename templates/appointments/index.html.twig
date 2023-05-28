@@ -4,7 +4,10 @@
 {% endblock %}
 {% block javascripts %}
 	<script src="/assets/js/appointmentStepCare.js" defer></script>
-
+	<script>
+		dataCares = {{ soins|raw }};
+console.log(dataCares);
+	</script>
 {% endblock %}
 {% block title %}Rendez-vous
 {% endblock %}

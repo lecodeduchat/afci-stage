@@ -156,11 +156,19 @@
   padding: 0 18px;
   padding-bottom: 32px;
 }
+p.forWhom_content-text {
+  text-align: center;
+  padding-top: 0;
+}
 ul.forWhom_content-text {
   padding: 0 18px;
+  list-style: none;
 }
 ul.forWhom_content-text li {
   line-height: 24px;
+}
+ul.forWhom_content-text li .fa-pagelines {
+  padding-right: 10px;
 }
 @media screen and (min-width: 450px) {
   .home_content-text {
@@ -171,6 +179,9 @@ ul.forWhom_content-text li {
   }
 }
 @media screen and (min-width: 768px) {
+  .home_container {
+    height: 400px;
+  }
   .home_content {
     width: 60%;
     margin-left: 40%;

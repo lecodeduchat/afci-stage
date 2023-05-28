@@ -48,15 +48,21 @@ timeDiv.textContent = `${hours}h${minutes}`;
 // Affichage des informations de la séance ----------------------------------
 const lastStep = document.querySelector(".last-step");
 
+// Je récupère l'url de la page
+let pathname = window.location.pathname;
+
 for (let key in dataCares) {
   if (dataCares[key].id == careId) {
-    if (careId == 2 || careId == 5) {
+    if (careId == 2 || (careId == 5 && pathname == "/rendez-vous/nouveau")) {
+      // Je récupère le prénom de l'enfant lorsque je suis sur la page /rendez-vous/nouveau
       let childId = localStorage.getItem("childId");
-      if (typeof childId !== "undefined" && childId == "newChild") {
-        careName.textContent = dataCares[key].name + " pour " + firstnameChild;
+      if (childId == "newChild") {
+        childId = dataChilds.pop();
+        careName.textContent =
+          dataCares[key].name + " pour " + dataChilds[childId].firstname;
       } else {
         careName.textContent =
-          dataCares[key].name + " pour " + childs[childId].firstname;
+          dataCares[key].name + " pour " + dataChilds[childId].firstname;
       }
     } else {
       careName.textContent = dataCares[key].name;
