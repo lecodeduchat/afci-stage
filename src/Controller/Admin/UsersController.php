@@ -21,7 +21,7 @@ class UsersController extends AbstractController
             $usersRepository->paginationQuery(),
             // je recupère la page et par defaut je lui met la 1
             $request->query->get('page', 1),
-            17
+            15
         );
 
         return $this->render('admin/users/index.html.twig', [

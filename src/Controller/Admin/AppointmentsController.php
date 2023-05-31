@@ -5,17 +5,18 @@ namespace App\Controller\Admin;
 use App\Entity\Users;
 use App\Classes\Slots;
 use App\Entity\Childs;
-use App\Entity\Appointments;
-use App\Form\UsersFormType;
 use App\Form\ChildsType;
+use App\Form\UsersFormType;
+use App\Entity\Appointments;
 use App\Service\SendMailService;
+use App\Form\AdminUsersShortType;
 use App\Form\AdminAppointmentsType;
 use App\Repository\CaresRepository;
 use App\Repository\UsersRepository;
 use App\Repository\ChildsRepository;
 use App\Repository\DaysOnRepository;
-use App\Repository\AppointmentsRepository;
 use App\Repository\DaysOffRepository;
+use App\Repository\AppointmentsRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -38,24 +39,13 @@ class AppointmentsController extends AbstractController
 
         // Initialisation d'un patient
         $user = new Users();
-        $userForm = $this->createForm(UsersFormType::class, $user);
+        $userForm = $this->createForm(AdminUsersShortType::class, $user);
         $userForm->handleRequest($request);
         if ($userForm->isSubmitted() && $userForm->isValid()) {
             $userRepository->save($user, true);
             // Affichage d'un message flash à l'utilisateur
             $this->addFlash('success', 'Le patient a été ajouté avec succès.');
             return $this->redirectToRoute('admin_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        // Durée du soin choisi en minutes
-        $slug = $request->attributes->get('slug');
-        if ($slug == "premiere-consultation") {
-            $careDuraton = 45;
-        } elseif ($slug == "suivi-consultation") {
-            $careDuraton = 30;
-        } else {
-            // erreur de slug : je redirige vers la page appointments_index
-            return $this->redirectToRoute('appointments_index');
         }
 
         // Initialisation d'un enfant
@@ -78,18 +68,17 @@ class AppointmentsController extends AbstractController
                 "id" => $user->getId(),
                 "firstname" => $user->getFirstname(),
                 "lastname" => $user->getLastname(),
+                "homephone" => $user->getHomePhone(),
                 "cellphone" => $user->getCellPhone(),
                 "email" => $user->getEmail(),
             ];
             $cpt++;
         }
 
-        // Création d'un tableau de créneaux horaires
-
-        $slots = new Slots($appointmentsRepository, $daysOnRepository, $daysOffRepository, $careDuraton);
-
+        // Je récupère les créneaux disponibles
+        $slots = new Slots($appointmentsRepository, $daysOnRepository, $daysOffRepository, $caresDuration = 30);
         $slots = $slots->getSlots();
-        // dd($slots);
+
         // Initialisation d'un nouveau rendez-vous
         $appointment = new Appointments();
         // Formulaire de prise de rendez-vous
@@ -103,6 +92,7 @@ class AppointmentsController extends AbstractController
             // Affichage d'un message flash à l'utilisateur
             $this->addFlash('success', 'Le rendez-vous a été pris en compte. Vous allez recevoir un email de confirmation.');
             // Envoye d'un mail de confirmation à l'utilisateur
+            $user = $userRepository->findOneBy(['id' => $appointment->getUserId()]);
             $mail->send(
                 'no-reply@monsite.net',
                 $user->getEmail(),

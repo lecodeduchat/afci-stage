@@ -51,6 +51,15 @@ class DaysOnRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+    /**
+     * @return DaysOn[] Retourne un tableau d'objet DaysOn
+     */
+    public function paginationQuery()
+    {
+        return $this->createQueryBuilder('u')
+            ->orderBy('u.id', 'DESC')
+            ->getQuery();
+    }
 
     //    public function findOneBySomeField($value): ?DaysOn
     //    {

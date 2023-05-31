@@ -5,19 +5,26 @@ namespace App\Controller\Admin;
 use App\Entity\DaysOn;
 use App\Form\DaysOnType;
 use App\Repository\DaysOnRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/Admin/jours-ouvres', name: 'daysOn')]
 class DaysOnController extends AbstractController
 {
     #[Route('/', name: '_index', methods: ['GET'])]
-    public function index(DaysOnRepository $daysOnRepository): Response
+    public function index(DaysOnRepository $daysOnRepository, Request $request, PaginatorInterface $paginator): Response
     {
+        $pagination = $paginator->paginate(
+            $daysOnRepository->paginationQuery(),
+            // je recupère la page et par defaut je lui met la 1
+            $request->query->get('page', 1),
+            15
+        );
         return $this->render('admin/days_on/index.html.twig', [
-            'days_ons' => $daysOnRepository->findAll(),
+            'pagination' => $pagination
         ]);
     }
 
@@ -29,6 +36,15 @@ class DaysOnController extends AbstractController
         $daysOnForm->handleRequest($request);
 
         if ($daysOnForm->isSubmitted() && $daysOnForm->isValid()) {
+            $date = $daysOnForm->get('date')->getData();
+
+            // Je vérifie que la date n'est pas déjà un jour ouvré
+            $daysOnExist = $daysOnRepository->findOneBy(['date' => $date]);
+            if ($daysOnExist) {
+                $this->addFlash('danger', 'Il y a déjà un jour ouvré à cette date.');
+                return $this->redirectToRoute('daysOn_new');
+            }
+            // Je vérifie que les heures de début et de fin de matinée sont cohérentes
             $startMorning = $daysOnForm->get('start_morning')->getData();
             $endMorning = $daysOnForm->get('end_morning')->getData();
             if ($startMorning > $endMorning) {
@@ -41,10 +57,8 @@ class DaysOnController extends AbstractController
                 $this->addFlash('danger', 'L\'heure de début d\'après-midi doit être inférieure à l\'heure de fin d\'après-midi');
                 return $this->redirectToRoute('daysOn_new');
             }
+
             $daysOnRepository->save($daysOn, true);
-            // if ($startMorning == "00:00") {
-            //     $daysOn->setStartMorning();
-            // }
 
             return $this->redirectToRoute('daysOn_index', [], Response::HTTP_SEE_OTHER);
         }

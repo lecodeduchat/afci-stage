@@ -1,5 +1,9 @@
 "use strict";
-
+// LOADER --------------------------------------------------------------------
+// const loader = document.querySelector(".loader");
+// window.addEventListener("load", () => {
+//   loader.classList.add("fondu-out");
+// });
 // Ouverture et fermeture du menu principale ---------------------------------
 const btnMainMenu = document.querySelector(".main_menu-btn");
 const mainMenu = document.querySelector(".main_menu-list");

@@ -71,9 +71,8 @@ class Slots
                 $startDay = $dayOn->getStartAfternoon()->format("H:i");
             }
             // Je vérifie si l'après-midi est ouvert
-    
+
             if ($dayOn->getStartAfternoon()->format("H:i") != "00:00") {
-                // dd($dayOn->getStartAfternoon()->format("H:i"));
                 $endDay = $dayOn->getEndAfternoon()->format("H:i");
                 $startAfternoon = $dayOn->getStartAfternoon()->format("H:i");
                 $endAfternoon = $dayOn->getEndAfternoon()->format("H:i");
@@ -120,12 +119,14 @@ class Slots
 
             // Je trie le tableau par ordre croissant
             ksort($hoursOff);
-            // dd($hoursOff);
-            // Je mets à jour la fin de journée en fonction de la dernière indisponibilité
-            $end = end($hoursOff);
-            // echo "end: ", $end["end"], " - endDay: ", $endDay, "<br>";
-            if ($endDay < $end["end"]) {
-                $endDay = $end["end"];
+
+            // Je mets à jour la fin de journée en fonction de la dernière indisponibilité si le tableau n'est pas vide
+            if (!empty($hoursOff)) {
+                $end = end($hoursOff);
+                // dd($endDay, $end["end"]);
+                if ($endDay < $end["end"]) {
+                    $endDay = $end["end"];
+                }
             }
 
             // Je crée la variable $slot, je lui attribut la valeur du début de journée sauf si le jour est aujourd'hui et que l'heure actuelle est supérieure à l'heure de début de journée

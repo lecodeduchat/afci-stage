@@ -1,21 +1,14 @@
 "use strict";
-// bouton fermeture des messages d'alerte
-const closeMessage = document.querySelectorAll(".alertClose");
-closeMessage.forEach((element) => {
-  element.addEventListener("click", function () {
-    console.log("click fermerture message");
-    element.parentNode.style.display = "none";
-  });
-});
 
-// Initaialisations des variables ---------------------------------------------
+// Initialisation des variables ---------------------------------------------
 const appointmentDate = document.querySelector("#dates");
 const appointmentTime = document.querySelector("#times");
-const formUpdateUser = document.querySelector("#users_form");
-const emailUser = document.querySelector("#users_form_email");
-const firstnameUser = document.querySelector("#users_form_firstname");
-const lastnameUser = document.querySelector("#users_form_lastname");
-const cellphoneUser = document.querySelector("#users_form_cell_phone");
+const formUpdateUser = document.querySelector("form[name='admin_users_short']");
+const emailUser = document.querySelector("#admin_users_short_email");
+const firstnameUser = document.querySelector("#admin_users_short_firstname");
+const lastnameUser = document.querySelector("#admin_users_short_lastname");
+const homephoneUser = document.querySelector("#admin_users_short_home_phone");
+const cellphoneUser = document.querySelector("#admin_users_short_cell_phone");
 let appointmentDateValue, appointmentTimeValue;
 
 // PRISE DE RENDEZ-VOUS ------------------------------------------------------
@@ -143,7 +136,7 @@ function selectUser() {
     });
   }
   addChildId();
-  // fillFormUser();
+  fillFormUser();
 }
 /**
  * Fonction qui ajoute l'id de l'enfant dans le formulaire
@@ -173,19 +166,24 @@ newUser.addEventListener("change", () => {
  */
 function fillFormUser() {
   const userId = localStorage.getItem("user_id");
-  console.log("userId: ", userId);
   clients.forEach((client) => {
     if (client.id == userId) {
       firstnameUser.value = client.firstname;
       lastnameUser.value = client.lastname;
       emailUser.value = client.email;
+      console.log("client.homephone: ", client.homephone);
+      homephoneUser.value = formatPhone(client.homephone);
       cellphoneUser.value = formatPhone(client.cellphone);
     }
   });
 }
 
 function formatPhone(phone) {
-  phone = "0" + phone;
+  if (phone.length == 9) {
+    phone = "0" + phone;
+  } else {
+    phone = "Non renseigné";
+  }
   let phoneFormated = phone.replace(
     /(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/,
     "$1 $2 $3 $4 $5"

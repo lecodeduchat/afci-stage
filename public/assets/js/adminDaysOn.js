@@ -1,5 +1,5 @@
 "use strict";
-console.log("adminDaysOn.js");
+
 const openMorning = document.querySelector(".open_morning");
 const startMorning = openMorning.querySelector("div:nth-child(2)");
 const endMorning = openMorning.querySelector("div:nth-child(3)");
@@ -17,6 +17,8 @@ openMorningNo.addEventListener("change", () => {
  */
 function toggleOpenMorning() {
   if (openMorningYes.checked) {
+    days_on_start_morning.value = "09:30";
+    days_on_end_morning.value = "13:00";
     startMorning.style.display = "block";
     endMorning.style.display = "block";
   } else if (openMorningNo.checked) {
@@ -43,6 +45,8 @@ openAfternoonNo.addEventListener("change", () => {
  */
 function toggleOpenAfternoon() {
   if (openAfternoonYes.checked) {
+    days_on_start_afternoon.value = "14:00";
+    days_on_end_afternoon.value = "18:00";
     startAfternoon.style.display = "block";
     endAfternoon.style.display = "block";
   } else if (openAfternoonNo.checked) {
