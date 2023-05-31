@@ -46,7 +46,7 @@ h2.fc-toolbar-title {
   #calendar {
     width: calc(100% - 36px);
     margin: 18px;
-    height: 100%;
+    height: 70%;
   }
   .fc-toolbar-chunk:nth-of-type(3) {
     display: block;

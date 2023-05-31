@@ -1,0 +1,8 @@
+{{ form_start(userForm) }}
+{{ form_row(userForm.firstname)}}
+{{ form_row(userForm.lastname) }}
+{{ form_row(userForm.email) }}
+{{ form_row(userForm.home_phone) }}
+{{ form_row(userForm.cell_phone) }}
+<button class="btn btn-submit">{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(userForm) }}

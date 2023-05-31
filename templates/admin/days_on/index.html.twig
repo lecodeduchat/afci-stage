@@ -7,44 +7,53 @@
 	<div class="container">
 		{% include('admin/_partials/_menu.html.twig') %}
 		<div class="content">
-			<h1>Listes des jours ouvrés</h1>
+			<h1>Liste des jours ouvrés</h1>
+			<div class="btn_index_admin">
+				<a href="{{ path('daysOn_new') }}" class="btn">Ajouter un jour ouvré</a>
+			</div>
 			<table class="table table_admin">
-				<thead>
+				<thead class="thead_admin">
 					<tr>
-						<th>Id</th>
 						<th>Date</th>
-						<th>Start_morning</th>
-						<th>End_morning</th>
-						<th>Start_afternoon</th>
-						<th>End_afternoon</th>
-						<th>Created_at</th>
-						<th>actions</th>
+						<th>Début de matinée</th>
+						<th>Fin de matinée</th>
+						<th>Début d'après-midi</th>
+						<th>Fin d'après-midi</th>
+						<th>Créé le</th>
+						<th>Actions</th>
 					</tr>
 				</thead>
-				<tbody>
-					{% for days_on in days_ons %}
+				<tbody class="tbody_admin">
+					{% for days_on in pagination %}
 						<tr>
-							<td>{{ days_on.id }}</td>
 							<td>{{ days_on.date ? days_on.date|date('Y-m-d') : '' }}</td>
-							<td>{{ days_on.startMorning ? days_on.startMorning|date('H:i:s') : '' }}</td>
-							<td>{{ days_on.endMorning ? days_on.endMorning|date('H:i:s') : '' }}</td>
-							<td>{{ days_on.startAfternoon ? days_on.startAfternoon|date('H:i:s') : '' }}</td>
-							<td>{{ days_on.endAfternoon ? days_on.endAfternoon|date('H:i:s') : '' }}</td>
+							<td>{{ (days_on.startMorning|date('H:i') != '00:00') ? days_on.startMorning|date('H:i:s') : '' }}</td>
+							<td>{{ (days_on.endMorning|date('H:i') != '00:00') ? days_on.endMorning|date('H:i:s') : '' }}</td>
+							<td>{{ (days_on.startAfternoon|date('H:i') != '00:00') ? days_on.startAfternoon|date('H:i:s') : '' }}</td>
+							<td>{{ (days_on.endAfternoon|date('H:i') != '00:00') ? days_on.endAfternoon|date('H:i:s') : '' }}</td>
 							<td>{{ days_on.createdAt ? days_on.createdAt|date('Y-m-d H:i:s') : '' }}</td>
 							<td>
-								{# <a href="{{ path('daysOn_show', {'id': days_on.id}) }}">show</a> #}
-								<a href="{{ path('daysOn_edit', {'id': days_on.id}) }}">edit</a>
-								{{ include('admin/days_on/_delete_form.html.twig') }}
+								<div
+									class="btn_action">
+									{# <a href="{{ path('daysOn_show', {'id': days_on.id}) }}">show</a> #}
+									<a href="{{ path('daysOn_edit', {'id': days_on.id}) }}">
+										<i class="fa-regular fa-pen-to-square"></i>
+									</a>
+									{{ include('admin/days_on/_delete_form.html.twig') }}
+								</div>
 							</td>
 						</tr>
 					{% else %}
 						<tr>
-							<td colspan="8">no records found</td>
+							<td colspan="8">Pas d'enregistrement trouvé</td>
 						</tr>
 					{% endfor %}
 				</tbody>
 			</table>
-			<a href="{{ path('daysOn_new') }}">Ajouter un jour ouvré</a>
+			<div class="pagination">
+				{{knp_pagination_render(pagination)}}
+			</div>
+
 		</div>
 	</div>
 

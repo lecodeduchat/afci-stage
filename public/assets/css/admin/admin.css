@@ -80,6 +80,9 @@ h1.admin {
 }
 
 @media screen and (min-width: 900px) {
+  body {
+    height: 100vh;
+  }
 }
 @media screen and (min-width: 1200px) {
   body {
@@ -89,6 +92,9 @@ h1.admin {
     display: flex;
     flex-direction: row;
     height: calc(100% - 42px);
+  }
+  .content {
+    width: 80%;
   }
   .menu_container {
     position: relative;
@@ -122,10 +128,6 @@ h1.admin {
   }
   .submenu_item:hover {
     cursor: pointer;
-  }
-
-  .cares_container {
-    width: 80%;
   }
   /* index user admin */
   .table_admin,
@@ -195,7 +197,6 @@ h1.admin {
     border-radius: 5px;
     margin: 0 2px;
   }
-
   .pagination_admin span.current {
     background-color: var(--main-color-purple);
     color: white;

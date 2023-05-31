@@ -1,24 +1,25 @@
 {% extends '/admin/base.html.twig' %}
 {% block stylesheets %}
-    <link rel="stylesheet" href="/assets/css/admin/cares.css">
+	<link rel="stylesheet" href="/assets/css/admin/cares.css">
 {% endblock %}
-{% block title %}Edition des séances{% endblock %}
+{% block title %}Edition des séances
+{% endblock %}
 
 {% block body %}
-<div class="container">
+	<div class="container">
 
-    {% include('admin/_partials/_menu.html.twig') %}
-<div class="cares_container">
-    <h1>Edition des séances</h1>
+		{% include('admin/_partials/_menu.html.twig') %}
+		<div class="cares_container">
+			<h1>Edition des séances</h1>
 
-    {{ include('admin/cares/_form.html.twig', {'button_label': 'Changement'}) }}
-    
+			{{ include('admin/cares/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <div class="a_back_cares">
-    <a href="{{ path('cares_index') }}">Retour</a>
-    </div>
 
-    
-    </div>
-    </div>
+			<div class="a_back_cares">
+				<a href="{{ path('cares_index') }}">Retour</a>
+			</div>
+
+
+		</div>
+	</div>
 {% endblock %}

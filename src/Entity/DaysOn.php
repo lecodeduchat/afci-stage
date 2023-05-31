@@ -8,6 +8,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: DaysOnRepository::class)]
+#[UniqueEntity(fields: ['date'], message: 'Il y a déjà un jour ouvré à cette date.')]
 class DaysOn
 {
     use CreatedAtTrait;
@@ -17,7 +18,7 @@ class DaysOn
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATE_MUTABLE, unique: true)]
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
