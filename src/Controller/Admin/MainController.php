@@ -22,46 +22,16 @@ class MainController extends AbstractController
     public function index(Request $request, AppointmentsRepository $appointmentsRepository, UsersRepository $usersRepository, DaysOnRepository $daysOnRepository, SendMailService $mail, CaresRepository $caresRepository): Response
     {
         // Je vérifie que l'utilisateur est bien connecté
-        // et qu'il a le rôle: ROLE_ADMIN
-        // $this->denyAccessUnlessGranted('ROLE_ADMIN');
-        // $user = $this->getUser();
-        // return $this->render('admin/index.html.twig', compact('user'));
-
-        // Je crée un nouveau rendez-vous
-        $appointment = new Appointments();
-        // Je crée un formulaire pour ajouter un rendez-vous
-        $form = $this->createForm(AdminAppointmentsType::class, $appointment);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            // TODO : Vérifier que le rendez-vous n'est pas déjà pris (si code javascript modifié par un hacker) ou pris entre temps par un autre utilisateur
-            $appointmentsRepository->save($appointment, true);
-            // Affichage d'un message flash à l'utilisateur
-            $this->addFlash('success', 'Le rendez-vous a été pris en compte. Vous allez recevoir un email de confirmation.');
-            // Envoye d'un mail de confirmation à l'utilisateur
-            $mail->send(
-                'no-reply@monsite.net',
-                $user->getEmail(),
-                'Email de confirmation de votre rendez vous',
-                'rendezvous',
-                compact('user', 'appointment')
-            );
-            $mail->send(
-                'no-reply@monsite.net',
-                'no-reply@monsite.net',
-                'Email de confirmation d\'un rendez vous',
-                'rendezvousclient',
-                compact('user', 'appointment')
-            );
-
-            return $this->redirectToRoute(
-                'admin_index',
-                [],
-                Response::HTTP_SEE_OTHER
-            );
+        if (!$this->getUser()) {
+            // Si non, je le redirige vers la page de connexion
+            return $this->redirectToRoute('app_login');
         }
-
+        // Je vérifie qu'il a le rôle: ROLE_ADMIN
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            // Si non, je le redirige vers la page d'accueil
+            return $this->redirectToRoute('app_home');
+        }
+        // $this->denyAccessUnlessGranted('ROLE_ADMIN');
         // Je récupère la date du jour
         $today = new DateTime();
 
@@ -182,7 +152,6 @@ class MainController extends AbstractController
 
         return $this->render('admin/index.html.twig', [
             'data' => $data,
-            'form' => $form->createView(),
             'cares' => $caresRepository->findAll(),
         ]);
     }

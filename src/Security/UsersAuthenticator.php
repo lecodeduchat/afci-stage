@@ -49,21 +49,20 @@ class UsersAuthenticator extends AbstractLoginFormAuthenticator
         }
         $session = $request->getSession();
 
+        // Je récupère la route de redirection pour le user
         if ($session->get('redirect') !== null) {
             $path = $session->get('redirect');
         } else {
-            // $path = $this->urlGenerator->generate('appointments_new');
             $path = $this->urlGenerator->generate('profile_index');
         }
-        // dd($path);
+
         // Je teste si le user est un admin ou un user
         // Si admin, je redirige vers la page d'administration
         $user = $token->getUser();
         if ($user->getRoles()[0] === 'ROLE_ADMIN') {
             return new RedirectResponse($this->urlGenerator->generate('admin_index'));
         }
-        // Si user, je redirige vers la page de prise de rendez-vous
-        //! TODO Problème pour les rendez-vous enfants ????!!!!!
+        // Si user, je redirige vers la page de prise de rendez-vous ou la page de profil
         if ($user->getRoles()[0] === 'ROLE_USER') {
             // return new RedirectResponse($this->urlGenerator->generate('appointments_new'));
             return new RedirectResponse($path);
