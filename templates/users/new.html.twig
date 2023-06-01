@@ -10,7 +10,7 @@
 {% block body %}
 	<h1>Ajouter un enfant</h1>
 
-	{{ include('childs/_form.html.twig') }}
+	{{ include('users/_form.html.twig') }}
 
-	<a href="{{ path('profile_index') }}">Retour à la liste des enfants</a>
+	<a href="{{ path('profile_show') }}">Retour à la liste des enfants</a>
 {% endblock %}

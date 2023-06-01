@@ -3,6 +3,10 @@
 {% block title %}Votre profil
 {% endblock %}
 
+{% block stylesheets %}{# {{ parent() }} #}
+	{# <link rel="stylesheet" href="{{ asset('/assets/css/pages/profile.css') }}"> #}
+{% endblock %}
+
 {% block body %}
 	<div class="container">
 		<div class="content content_profile">
@@ -59,7 +63,7 @@
 			{# Je teste le tableau childs pour savoir si l'utilisateur à déjà des enfants #}
 			{% if childs %}
 				<h2>Enfant(s)</h2>
-				<table>
+				<table class="table_childs">
 					<thead>
 						<tr>
 							<th>Prénom</th>
@@ -73,20 +77,22 @@
 								<td>{{ child.firstname }}</td>
 								<td>{{ child.birthday|date("d/m/Y") }}</td>
 								<td>
-									<a href="{{ path('app_childs_edit' , {id: child.id}) }}">Modifier</a>
+									<a href="{{ path('app_users_edit' , {id: child.id}) }}">
+										<i class="fa-regular fa-pen-to-square"></i>
+									</a>
 								</td>
 							</tr>
 						{% endfor %}
 					</tbody>
 				</table>
 				<div class="edition_profile_action">
-					<a href="{{ path('app_childs_new') }}" class="btn btn-primary">Ajouter un enfant</a>
+					<a href="{{ path('app_users_new') }}" class="btn btn-primary">Ajouter un enfant</a>
 				</div>
 			{% else %}
 				<h2>Enfant</h2>
 				<p>Vous n'avez pas encore d'enfant, ajoutez-en un pour pouvoir réserver une séance.</p>
 				<div class="edition_profile_action">
-					<a href="{{ path('app_childs_new') }}" class="btn btn-primary">Ajouter un enfant</a>
+					<a href="{{ path('app_users_new') }}" class="btn btn-primary">Ajouter un enfant</a>
 				</div>
 			{% endif %}
 		</div>
