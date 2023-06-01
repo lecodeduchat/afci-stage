@@ -1,16 +1,9 @@
 <div class="profile_menu">
-	
-		
-				
-	{% if app.user %}	
-	<div class="profile_menu_salutation">
-	
-		
-	
-		Bonjour,
-		{{ app.user.firstname }}&nbsp;{{ app.user.lastname}}</div>
+	{% if app.user %}
+		<div class="profile_menu_salutation">
+			Bonjour,
+			{{ app.user.firstname }}&nbsp;{{ app.user.lastname}}</div>
 	{% endif %}
-	
 	<nav>
 		<div class="profile_menu_title">
 			<i class="fa-solid fa-user-gear"></i>

@@ -90,8 +90,10 @@ table.edition_profile tr {
 }
 
 .edition_profile_action {
-  text-align: right;
   margin-bottom: 36px;
+}
+.edition_profile_action .btn {
+  margin: 0 auto;
 }
 .appointment-child.next {
   display: block;
@@ -111,6 +113,25 @@ li.olds-appointments_item .color_care {
 /* MODIFIER VOTRE PROFIL */
 .form_users.edit_user {
   border-radius: 10px;
+}
+.table_childs {
+  width: 100%;
+  margin: 27px 0;
+  border-collapse: collapse;
+}
+.table_childs td,
+.table_childs th {
+  text-align: center;
+  padding: 6px 0;
+  border: 1px solid #ddd;
+}
+.table_childs tr td:first-child {
+  text-align: left;
+  padding-left: 9px;
+}
+.table_childs tr td:nth-child(2),
+.table_childs tr th:nth-child(2) {
+  display: none;
 }
 @media screen and (min-width: 640px) {
   .profile_list_appointments {
@@ -137,6 +158,10 @@ li.olds-appointments_item .color_care {
     width: 640px;
     margin: 0 auto;
     padding: 18px 0;
+  }
+  .table_childs tr td:nth-child(2),
+  .table_childs tr th:nth-child(2) {
+    display: table-cell;
   }
 }
 @media screen and (min-width: 1200px) {

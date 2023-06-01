@@ -32,20 +32,18 @@ class ProfileController extends AbstractController
         // Je récupère la date du jour
         $date = new \DateTime();
         //! TODO: Mystère à résoudre ma requête avec >= ne fonctionne pas !!! pour nextAppointments
-        // Je retire 1 jour à la date du jour car bug avec la date du jour
-        $date->modify('-1 day');
+        // Je retire 1 jour à la date du jour car bug avec la date du jour (le 01/06/2023 à 10h13 le bug n'est plus là)
+        // $date->modify('-1 day');
 
         // Je vérifie si l'utilisateur a des enfants
         $childs = $usersRepository->findChildsByUser($user->getId(), '["ROLE_CHILD"]');
 
-        // Je récupère l'historique des rendez-vous de l'utilisateur connecté
-        $oldAppointments = $appointmentsRepository->findOldAppointmentByUser($user->getId(), $date);
-        // dd($oldAppointments);
+        // Je récupère l'historique des rendez-vous de l'utilisateur connecté, on affiche 5 rendez-vous par page
         $pagination = $paginator->paginate(
             $appointmentsRepository->paginationQueryAppointmentsUser($user->getId(), $date),
             // je recupère la page et par defaut je lui met la 1
             $request->query->get('page', 1),
-            10
+            5
         );
 
         // Je récupère les rendez-vous à venir de l'utilisateur connecté
@@ -74,7 +72,7 @@ class ProfileController extends AbstractController
 
         // Je vérifie si l'utilisateur a des enfants
         $childs = $usersRepository->findChildsByUser($user->getId(), '["ROLE_CHILD"]');
-        dd($childs);
+        // dd($childs);
         return $this->render('profile/show.html.twig', [
             'user' => $user,
             'childs' => $childs,

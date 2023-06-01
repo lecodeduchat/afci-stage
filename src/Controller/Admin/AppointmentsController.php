@@ -4,16 +4,12 @@ namespace App\Controller\Admin;
 
 use App\Entity\Users;
 use App\Classes\Slots;
-use App\Entity\Childs;
-use App\Form\ChildsType;
-use App\Form\UsersFormType;
 use App\Entity\Appointments;
 use App\Service\SendMailService;
 use App\Form\AdminUsersShortType;
 use App\Form\AdminAppointmentsType;
 use App\Repository\CaresRepository;
 use App\Repository\UsersRepository;
-use App\Repository\ChildsRepository;
 use App\Repository\DaysOnRepository;
 use App\Repository\DaysOffRepository;
 use App\Repository\AppointmentsRepository;
@@ -34,7 +30,7 @@ class AppointmentsController extends AbstractController
         UsersRepository $userRepository,
         CaresRepository $caresRepository,
         SendMailService $mail,
-        ChildsRepository $childsRepository,
+
     ): Response {
 
         // Initialisation d'un patient
@@ -45,17 +41,6 @@ class AppointmentsController extends AbstractController
             $userRepository->save($user, true);
             // Affichage d'un message flash à l'utilisateur
             $this->addFlash('success', 'Le patient a été ajouté avec succès.');
-            return $this->redirectToRoute('admin_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        // Initialisation d'un enfant
-        $child = new Childs();
-        $childForm = $this->createForm(ChildsType::class, $child);
-        $childForm->handleRequest($request);
-        if ($childForm->isSubmitted() && $childForm->isValid()) {
-            $childsRepository->save($child, true);
-            // Affichage d'un message flash à l'utilisateur
-            $this->addFlash('success', 'L\'enfant a été ajouté avec succès.');
             return $this->redirectToRoute('admin_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -115,7 +100,6 @@ class AppointmentsController extends AbstractController
             'appointment' => $appointment,
             'appointmentForm' => $appointmentForm,
             'userForm' => $userForm,
-            'childForm' => $childForm,
             'cares' => $caresRepository->findAll(),
             'slots' => $slots,
             'months' => Slots::MONTHS,

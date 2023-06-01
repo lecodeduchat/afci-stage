@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Enfant édition
+{% endblock %}
+
+{% block body %}
+	<h1>Enfant édition</h1>
+
+	{{ include('users/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+	<a href="{{ path('profile_show') }}">Retour à la liste</a>
+
+	{# {{ include('users/_delete_form.html.twig') }} #}
+{% endblock %}
