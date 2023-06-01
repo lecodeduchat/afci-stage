@@ -270,36 +270,36 @@ p {
 
 /* css changement de mot de passe */
 
-.requestform{
+.requestform {
   height: 200px;
-
 }
-.requesPassForm_email,.PassForm_password{
+.requesPassForm_email,
+.PassForm_password {
   margin-left: 40px;
-
 }
 
-.requestform div,.passForm div{
+.requestform div,
+.passForm div {
   display: flex;
   flex-direction: column;
   width: 250px;
-  
 }
 
-#reset_password_request_form_email,#reset_password_form_password{
+#reset_password_request_form_email,
+#reset_password_form_password {
   height: 20px;
   margin-bottom: 30px;
   margin-top: 10px;
 }
 
-.btn_requestPassForm{
+.btn_requestPassForm {
   margin-left: 40px;
 }
 
-.passForm{
+.passForm {
   height: 200px;
 }
 
-.btn_passForm{
+.btn_passForm {
   margin-left: 40px;
 }

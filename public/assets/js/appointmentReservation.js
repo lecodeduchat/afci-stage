@@ -1,4 +1,17 @@
 "use strict";
+// J'affiche la carte de réservation sur la page de connexion seulement si je viens du parcours de prise de rendez-vous
+// De même pour le login message concernant la réservation
+// Je récupère l'url de la page
+let pathname = window.location.pathname;
+let testParcours =
+  pathname == "/connexion" && localStorage.getItem("date") ? true : false;
+if (testParcours) {
+  const reservationCard = document.querySelector(".reservation");
+  const loginMessage = document.querySelector(".login_message");
+  reservationCard.classList.remove("hidden");
+  loginMessage.classList.remove("hidden");
+}
+
 /**
  * Fonction qui permet de mettre la première lettre d'une chaine de caractère en majuscule
  * @param {*} string
@@ -47,9 +60,6 @@ timeDiv.textContent = `${hours}h${minutes}`;
 
 // Affichage des informations de la séance ----------------------------------
 const lastStep = document.querySelector(".last-step");
-
-// Je récupère l'url de la page
-let pathname = window.location.pathname;
 
 for (let key in dataCares) {
   if (dataCares[key].id == careId) {
