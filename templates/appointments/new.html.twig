@@ -8,7 +8,7 @@
 		{% if childs %}
 dataChilds = {{ childs|raw }};{% endif %}let dataCares = {{ cares|raw }};
 console.log(dataCares);
-console.log(dataChilds);
+console.log("twig: dataChilds: ", dataChilds[0]);
 	</script>
 	<script src="/assets/js/appointmentReservation.js" defer></script>
 	<script src="/assets/js/appointmentStepNew.js" defer></script>

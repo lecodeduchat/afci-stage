@@ -127,3 +127,12 @@ if (reservation) {
     }
   }
 }
+// Je vide le local storage quand je suis sur la page d'accueil
+// Cela évite de garder en mémoire la date d'un rendez-vous qui n'a pas été pris
+if (window.location.pathname == "/") {
+  localStorage.setItem("time", "");
+  localStorage.setItem("date", "");
+  localStorage.setItem("nameDay", "");
+  localStorage.setItem("careId", "");
+  localStorage.setItem("childId", "");
+}

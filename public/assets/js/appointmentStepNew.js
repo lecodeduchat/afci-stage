@@ -61,9 +61,12 @@ optionsYear.forEach((option) => {
   }
 });
 let childId = localStorage.getItem("childId");
+
+console.log("stepNew: ", dataChilds[0]);
+
 if (childId == "newChild") {
-  console.log(childs.pop());
-  childId = childs.pop();
+  let child = dataChilds.pop();
+  childId = child.id;
 } else {
   childId = localStorage.getItem("childId");
 }

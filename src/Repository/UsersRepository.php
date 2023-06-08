@@ -95,6 +95,17 @@ class UsersRepository extends ServiceEntityRepository implements PasswordUpgrade
             ->getResult();
     }
 
+    public function findPatientBy($email, $firstname, $lastname, $role): ?Users
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.email = :email AND u.firstname = :firstname AND u.lastname = :lastname AND u.roles LIKE :role')
+            ->setParameter('email', $email)
+            ->setParameter('firstname', $firstname)
+            ->setParameter('lastname', $lastname)
+            ->setParameter('role', $role)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
     // public function findLastChildByUser($userId): ?Users
     // {
     //     return $this->createQueryBuilder('u')
