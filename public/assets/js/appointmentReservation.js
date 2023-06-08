@@ -45,14 +45,19 @@ let time = localStorage.getItem("time");
 let date = localStorage.getItem("date");
 let nameDay = localStorage.getItem("nameDay");
 let careId = localStorage.getItem("careId");
-let day = date.slice(8, 10);
-let month = date.slice(5, 7);
-let monthName = months[month - 1];
-let year = date.slice(0, 4);
-let hours = time.slice(0, 2);
-let minutes = time.slice(3, 5);
+let day, month, monthName, year, hours, minutes;
+if (date != null) {
+  day = date.slice(8, 10);
+  month = date.slice(5, 7);
+  monthName = months[month - 1];
+  year = date.slice(0, 4);
+  hours = time.slice(0, 2);
+  minutes = time.slice(3, 5);
+}
 // Mettre la première lettre en majuscule
-nameDay = capitalizeFirstLetter(nameDay);
+if (nameDay != null) {
+  nameDay = capitalizeFirstLetter(nameDay);
+}
 
 // Affichage de la date et de l'heure du rendez-vous
 dateDiv.textContent = `${nameDay} ${day} ${monthName} ${year}`;
@@ -63,16 +68,24 @@ const lastStep = document.querySelector(".last-step");
 
 for (let key in dataCares) {
   if (dataCares[key].id == careId) {
-    if (careId == 2 || (careId == 5 && pathname == "/rendez-vous/nouveau")) {
+    if ((careId == 2 || careId == 5) && pathname == "/rendez-vous/nouveau") {
       // Je récupère le prénom de l'enfant lorsque je suis sur la page /rendez-vous/nouveau
       let childId = localStorage.getItem("childId");
+      console.log(childId);
       if (childId == "newChild") {
-        childId = dataChilds.pop();
-        careName.textContent =
-          dataCares[key].name + " pour " + dataChilds[childId].firstname;
+        // Je récupère le dernier enfant enregistré
+        let child = dataChilds.pop();
+        // Je le réinjecte dans le tableau pour pouvoir l'utiliser dans la suite du programme
+        dataChilds.push(child);
+        careName.textContent = dataCares[key].name + " pour " + child.firstname;
       } else {
-        careName.textContent =
-          dataCares[key].name + " pour " + dataChilds[childId].firstname;
+        // Je récupère le prénom de l'enfant dans le tableau dataChilds
+        for (let child in dataChilds) {
+          if (dataChilds[child].id == childId) {
+            careName.textContent =
+              dataCares[key].name + " pour " + dataChilds[child].firstname;
+          }
+        }
       }
     } else {
       careName.textContent = dataCares[key].name;

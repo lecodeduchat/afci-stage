@@ -14,6 +14,9 @@ h1.admin {
   height: 40px;
   justify-content: center;
 }
+.header_logo:hover {
+  cursor: pointer;
+}
 .header_logo-img {
   height: 40px;
   width: 40px;

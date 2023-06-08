@@ -179,33 +179,26 @@ class AppointmentsController extends AbstractController
 
         // Je vérifie si il s'agit d'un rendez-vous pour un enfant
         $is_child = $session->get('is_child');
+        $childs = [];
         if ($is_child == true) {
             $enfants = $usersRepository->findChildsByUser($user->getId(), '["ROLE_CHILD"]');
-            $childs = [];
+            $i = 0;
             foreach ($enfants as $enfant) {
-                $childs[$enfant->getId()] = [
+                $childs[$i] = [
                     'id' => $enfant->getId(),
                     'firstname' => $enfant->getFirstname(),
                     'lastname' => $enfant->getLastname(),
                 ];
+                $i++;
             }
             $childs = json_encode($childs);
         } else {
             $childs = [];
         }
-
-        // Je récupère la liste des soins
-        $cares = $caresRepository->findAll();
-        $soins = [];
-        foreach ($cares as $care) {
-            $soins[$care->getId()] = [
-                'id' => $care->getId(),
-                'name' => $care->getName(),
-                'duration' => $care->getDuration()->format('H:i'),
-                'price' => $care->getPrice(),
-            ];
-        }
-        $cares = json_encode($soins);
+        // dd($childs);
+        // Je récupère la liste des soins pour la carte réservation
+        $soins = new Soins($caresRepository);
+        $cares = $soins->getSoins();
 
         $form = $this->createForm(AppointmentsType::class, $appointment);
         $form->handleRequest($request);

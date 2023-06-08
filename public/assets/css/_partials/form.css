@@ -75,11 +75,17 @@ input[type="password"] {
   height: 0px;
   font-size: 0;
 }
+.form_patients {
+  display: none;
+  padding: 18px;
+}
 .form_users {
   position: relative;
   padding-bottom: 88px;
 }
-.form_users label {
+.form_users label,
+.form_patients label {
+  display: inline-block;
   margin-bottom: 9px;
   padding-left: 10px;
 }

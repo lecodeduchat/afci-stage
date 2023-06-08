@@ -4,7 +4,7 @@
 const selectCares = document.querySelector("#cares");
 let careId = localStorage.getItem("careId");
 
-// Je vérifie si le choix du type de séance n'a pas été modifié ------
+// J'ajoute l'attribut selected à l'option choisie stockée dans le local storage
 if (selectCares) {
   const options = selectCares.querySelectorAll("option");
   options.forEach((option) => {
@@ -12,6 +12,7 @@ if (selectCares) {
       option.setAttribute("selected", "selected");
     }
   });
+  // Je vérifie si le choix du type de séance n'a pas été modifié
   selectCares.addEventListener("change", function () {
     localStorage.setItem("careId", selectCares.value);
   });

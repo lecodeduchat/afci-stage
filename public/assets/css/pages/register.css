@@ -1,0 +1,24 @@
+.registration {
+  padding: 18px;
+}
+.registration h3,
+.form_patients h3 {
+  font-size: 20px;
+}
+.form_patients h3 {
+  margin-bottom: 18px;
+}
+.registration_items {
+  display: flex;
+  flex-direction: row;
+}
+.registration_item-radio:first-child {
+  margin-right: 18px;
+}
+@media screen and (min-width: 768px) {
+  .registration,
+  .form_patients {
+    width: 768px;
+    margin: 0 auto;
+  }
+}

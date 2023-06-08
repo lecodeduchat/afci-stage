@@ -1,0 +1,44 @@
+.profile_menu {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 18px;
+  line-height: 50px;
+}
+.profile_menu_content {
+  display: none;
+}
+.profile_menu_content--open {
+  position: absolute;
+  bottom: -154px; /* 50px * nb de li + px de gradient-color-bar */
+  right: 0;
+  display: block;
+  background-color: var(--main-bg-color-purple);
+  list-style: none;
+  z-index: 10;
+}
+.profile_menu_content li {
+  padding: 0 18px;
+  line-height: 50px;
+  text-align: left;
+  color: white;
+  border-bottom: 1px solid white;
+}
+.profile_menu_salutation {
+  font-weight: bold;
+  color: var(--main-color-purple);
+}
+.profile_menu_title {
+  font-weight: bold;
+  font-family: "Montserrat";
+}
+.profile_menu_title:hover {
+  cursor: pointer;
+}
+@media screen and (min-width: 1200px) {
+  .profile_menu {
+    width: 1200px;
+    margin: 0 auto;
+  }
+}

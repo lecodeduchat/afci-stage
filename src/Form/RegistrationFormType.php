@@ -3,10 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Users;
-use Karser\Recaptcha3Bundle\Form\Recaptcha3Type;
-use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3;
+
 use Symfony\Component\Form\AbstractType;
+use Karser\Recaptcha3Bundle\Form\Recaptcha3Type;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -14,7 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Validator\Constraints\Regex;
+use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3;
 
 class RegistrationFormType extends AbstractType
 {
@@ -61,20 +62,20 @@ class RegistrationFormType extends AbstractType
                     ])
                 ],
             ])
-            ->add('home_phone', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => '03.20.77.88.99'
-                ],
-                'label' => 'Téléphone fixe',
-                'constraints' => [
-                    new Regex([
-                        'pattern' => '/^0[1-68]([.]?[0-9]{2}){4}$/',
-                        'message' => 'Le numéro de téléphone doit être valide.'
-                    ])
-                ],
+            // ->add('home_phone', TextType::class, [
+            //     'attr' => [
+            //         'class' => 'form-control',
+            //         'placeholder' => '03.20.77.88.99'
+            //     ],
+            //     'label' => 'Téléphone fixe',
+            //     'constraints' => [
+            //         new Regex([
+            //             'pattern' => '/^0[1-68]([.]?[0-9]{2}){4}$/',
+            //             'message' => 'Le numéro de téléphone doit être valide.'
+            //         ])
+            //     ],
 
-            ])
+            // ])
             ->add('cell_phone', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',

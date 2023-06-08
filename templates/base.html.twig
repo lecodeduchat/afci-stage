@@ -35,6 +35,7 @@
 	<body>
 		{% block header %}
 			{{ include('/_partials/_header.html.twig') }}
+			{{ include('/_partials/_menu-users.html.twig') }}
 		{% endblock %}
 		{% if app.user and app.user.isVerified == false %}
 			<div class="warning" role="alert">

@@ -4,8 +4,15 @@ const childsSelect = document.querySelector("#childs");
 const formChild = document.querySelector(".formChild");
 const btnValidateChild = document.querySelector(".choiceChild");
 
+// Dans le cas d'un premier rendez-vous d'enfant si aucun enfant n'est déjà enregistré
+// Je dois initialiser childId à newChild car on ne passera pas par le select
+let childId = "newChild";
+localStorage.setItem("childId", childId);
+
+// Si il y a déjà au moins un enfant, le select s'affiche
 if (childsSelect) {
-  let childId = childsSelect.value;
+  childId = childsSelect.value;
+  console.log("stepChild: ", childId);
   localStorage.setItem("childId", childId);
   childsSelect.addEventListener("change", function () {
     if (childsSelect.value == "newChild") {

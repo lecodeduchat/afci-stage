@@ -3,18 +3,21 @@
 namespace App\Controller;
 
 use App\Entity\Users;
-use App\Form\RegistrationFormType;
-use App\Repository\UsersRepository;
-use App\Security\UsersAuthenticator;
 use App\Service\JWTService;
 use App\Service\SendMailService;
+use App\Form\RegistrationFormType;
+use App\Repository\UsersRepository;
+use App\Form\PatientsSearchFormType;
+use App\Security\UsersAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
+use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
 class RegistrationController extends AbstractController
 {
@@ -26,15 +29,59 @@ class RegistrationController extends AbstractController
         UsersAuthenticator $authenticator,
         EntityManagerInterface $entityManager,
         SendMailService $mail,
-        JWTService $jwt
+        JWTService $jwt,
+        UsersRepository $usersRepository,
+        TokenGeneratorInterface $tokenGeneratorInterface
     ): Response {
         $user = new Users();
-        // $created_at ajouté manuellement car il manquait la fonction construct dans Users !!!
-        // $created_at = new \DateTimeImmutable();
-        // $user->setCreatedAt($created_at);
 
-        // Injections des rôles par défaut
-        $user->setRoles(['ROLE_USER']);
+        $patientsSearchForm = $this->createForm(PatientsSearchFormType::class);
+        $patientsSearchForm->handleRequest($request);
+
+        if ($patientsSearchForm->isSubmitted() && $patientsSearchForm->isValid()) {
+            $patient = $patientsSearchForm->getData();
+            $email = $patient->getEmail();
+            $firstname = $patient->getFirstname();
+            $lastname = $patient->getLastname();
+            $user = $usersRepository->findPatientBy($email, $firstname, $lastname, '["ROLE_PATIENT"]');
+            // TODO: Si un patient est trouvé, on lui envoie un email avec un lien sécurisé pour qu'il puisse mettre à jour son profil et créer son mot de passe
+            if ($user) {
+                // generation du jwt de l'utilisateur
+                $header = [
+                    'typ' => 'JWT',
+                    'alg' => 'HS256'
+                ];
+                $payload = [
+                    'user_id' => $user->getId()
+                ];
+                $token = $jwt->generate($header, $payload, $this->getParameter('app.jwtsecret'));
+
+                $user->setResetToken($token);
+                $entityManager->persist($user);
+                $entityManager->flush();
+
+                // generation d'un lien de réinitialisation du mot de passe
+                $url = $this->generateUrl('app_register_patient', ['token' => $token], UrlGeneratorInterface::ABSOLUTE_URL);
+
+                // creation des donnée du mail
+                $context = compact('url', 'user');
+
+                // on envoie le mail
+                $mail->send(
+                    'no-reply@site.fr',
+                    $user->getEmail(),
+                    'Création de votre espace patient',
+                    'inscription_patient',
+                    $context
+                );
+                $this->addFlash('success', 'Email envoyé avec succès');
+                return $this->redirectToRoute('app_login');
+            }
+            $this->addFlash('danger', 'Un problème est survenue');
+            return $this->redirectToRoute('app_login');
+        } else {
+            // Si pas de patient trouvé, on affiche un message flash et on invite le patient à s'inscrire
+        }
 
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -59,20 +106,6 @@ class RegistrationController extends AbstractController
         $cell_phone = ltrim($cell_phone, '0');
         $user->setCellPhone($cell_phone);
 
-        // Vérification de la date de naissance
-        $birthday = $user->getBirthday();
-        if ($birthday) {
-            $year = $birthday->format('Y');
-            $month = $birthday->format('m');
-            $day = $birthday->format('d');
-            if ($year < 1900 || $year > 2021 || $month < 1 || $month > 12 || $day < 1 || $day > 31) {
-                // dump($birthday);
-                $this->addFlash('danger', 'La date de naissance est incorrecte');
-                // TODO : Trouver comment rediriger vers la page d'inscription avec les données déjà saisies
-                return $this->redirectToRoute('app_register');
-            }
-        }
-        // dd($user);
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $user->setPassword(
@@ -109,8 +142,48 @@ class RegistrationController extends AbstractController
             );
         }
         return $this->render('registration/register.html.twig', [
+            'patientsSearchForm' => $patientsSearchForm->createView(),
             'registrationForm' => $form->createView(),
             'user' => ''
+        ]);
+    }
+
+    #[Route('/inscription-patient/{token}', name: 'app_register_patient')]
+    public function registerPatient($token, JWTService $jwt, UsersRepository $usersRepository, EntityManagerInterface $em, Request $request, UserPasswordHasherInterface $userPasswordHasher,): Response
+    {
+
+        if ($jwt->isValid($token) && !$jwt->isExpired($token) && $jwt->check($token, $this->getParameter('app.jwtsecret'))) {
+
+            $payload = $jwt->getPayload($token);
+            $user = $usersRepository->find($payload['user_id']);
+
+            $form = $this->createForm(RegistrationFormType::class, $user);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $user->setIsVerified(true);
+                $user->setResetToken('');
+                $user->setRoles(['ROLE_USER']);
+                $user->setPassword(
+                    $userPasswordHasher->hashPassword(
+                        $user,
+                        $form->get('plainPassword')->getData()
+                    )
+                );
+                $usersRepository->update($user, true);
+
+                $this->addFlash('success', 'Votre espace patient a bien été créé.');
+
+                return $this->redirectToRoute('profile_show');
+            }
+        } else {
+            $this->addFlash('danger', 'Le token est invalide ou a expiré');
+            return $this->redirectToRoute('app_login');
+        }
+
+        return $this->render('registration/register_patient.html.twig', [
+            'user' => $user,
+            'userForm' => $form->createView(),
         ]);
     }
 
