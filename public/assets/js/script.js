@@ -136,3 +136,16 @@ if (window.location.pathname == "/") {
   localStorage.setItem("careId", "");
   localStorage.setItem("childId", "");
 }
+
+function formatPhone(phone) {
+  if (phone.length == 9) {
+    phone = "0" + phone;
+  } else {
+    phone = "Non renseigné";
+  }
+  let phoneFormated = phone.replace(
+    /(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/,
+    "$1.$2.$3.$4.$5"
+  );
+  return phoneFormated;
+}

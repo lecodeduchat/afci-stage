@@ -6,6 +6,10 @@
   padding: 0 18px;
   line-height: 50px;
 }
+.profile_menu nav {
+  width: 40%;
+  text-align: right;
+}
 .profile_menu_content {
   display: none;
 }
@@ -26,8 +30,11 @@
   border-bottom: 1px solid white;
 }
 .profile_menu_salutation {
+  width: 60%;
   font-weight: bold;
   color: var(--main-color-purple);
+  line-height: 22px;
+  padding-top: 3px;
 }
 .profile_menu_title {
   font-weight: bold;
@@ -35,6 +42,17 @@
 }
 .profile_menu_title:hover {
   cursor: pointer;
+}
+@media screen and (min-width: 768px) {
+  .profile_menu_salutation {
+    display: flex;
+    flex-direction: row;
+    line-height: 50px;
+    padding-top: 0;
+  }
+  .profile_menu_salutation div:first-child {
+    margin-right: 9px;
+  }
 }
 @media screen and (min-width: 1200px) {
   .profile_menu {

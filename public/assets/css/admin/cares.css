@@ -1,5 +1,7 @@
 .cares_container {
-  width: 80%;
+  width: 100%;
+  padding: 0 9px;
+  margin: 0 auto;
 }
 .cares_form,
 .btn_delete_cares_show,
@@ -9,12 +11,37 @@
 /* index */
 .table_admin {
   height: 400px;
-  text-align: center;
+  text-align: left;
+  margin: 0 auto 36px auto;
+}
+.table_admin th,
+.table_admin td {
+  padding: 9px;
+  line-height: 22px;
+}
+.table_admin,
+tr,
+td {
+  border: 1px solid #ddd;
+  border-collapse: collapse;
+}
+thead th {
+  padding: 8px;
+}
+.btn_index_cares a.btn {
   margin: 0 auto;
 }
 /* show */
 .table_cares_show {
   border-spacing: 15px;
+}
+.table_admin.cares_list thead tr th:nth-of-type(2),
+.table_admin.cares_list thead tr th:nth-of-type(3),
+.table_admin.cares_list thead tr th:nth-of-type(4),
+.table_admin.cares_list tbody tr td:nth-of-type(2),
+.table_admin.cares_list tbody tr td:nth-of-type(3),
+.table_admin.cares_list tbody tr td:nth-of-type(4) {
+  display: none;
 }
 .table_cares_show td {
   align-self: left;
@@ -52,6 +79,20 @@
   .table_admin_show {
     margin: 0 auto;
   }
+  .table_admin {
+    text-align: center;
+  }
+  .table_admin.cares_list thead tr th:nth-of-type(2),
+  .table_admin.cares_list thead tr th:nth-of-type(3),
+  .table_admin.cares_list thead tr th:nth-of-type(4),
+  .table_admin.cares_list tbody tr td:nth-of-type(2),
+  .table_admin.cares_list tbody tr td:nth-of-type(3),
+  .table_admin.cares_list tbody tr td:nth-of-type(4) {
+    display: table-cell;
+  }
+  .cares_container {
+    width: 80%;
+  }
   .cares_form {
     display: flex;
     justify-content: center;
@@ -61,17 +102,5 @@
     display: flex;
     justify-content: center;
     margin-top: 20px;
-  }
-  .table_admin,
-  tr,
-  td {
-    border: 1px solid var(--main-color-purple);
-    border-collapse: collapse;
-  }
-  h1 {
-    padding: 30px;
-  }
-  thead th {
-    padding: 8px;
   }
 }

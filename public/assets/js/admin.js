@@ -14,3 +14,17 @@ linkSite.addEventListener("click", () => {
   console.log("click");
   document.location.href = "/";
 });
+
+// Animation du menu admin
+const subMenuParameters = document.querySelector("ul.submenu.parameter_items");
+const subMenuTools = document.querySelector("ul.submenu.tools_items");
+const itemParameters = document.querySelector(".menu_item.parameters");
+const itemTools = document.querySelector(".menu_item.tools");
+
+itemParameters.addEventListener("click", () => {
+  subMenuParameters.classList.toggle("submenu_open");
+});
+
+itemTools.addEventListener("click", () => {
+  subMenuTools.classList.toggle("submenu_open");
+});

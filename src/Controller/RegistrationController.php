@@ -74,7 +74,7 @@ class RegistrationController extends AbstractController
                     'inscription_patient',
                     $context
                 );
-                $this->addFlash('success', 'Email envoyé avec succès');
+                $this->addFlash('success', 'Un email vous a été envoyé avec un lien pour finaliser votre Espace patient.');
                 return $this->redirectToRoute('app_login');
             }
             $this->addFlash('danger', 'Un problème est survenue');
@@ -159,6 +159,14 @@ class RegistrationController extends AbstractController
 
             $form = $this->createForm(RegistrationFormType::class, $user);
             $form->handleRequest($request);
+
+            // Vérification du numéro de téléphone portable
+            $cell_phone = $user->getCellPhone();
+            // Suppression des points
+            $cell_phone = str_replace('.', '', $cell_phone);
+            // J'enlève le premier 0 s'il y en a un
+            $cell_phone = ltrim($cell_phone, '0');
+            $user->setCellPhone($cell_phone);
 
             if ($form->isSubmitted() && $form->isValid()) {
                 $user->setIsVerified(true);
