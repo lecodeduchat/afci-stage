@@ -96,3 +96,12 @@ for (let key in dataCares) {
     carePrice.textContent = dataCares[key].price + ",00";
   }
 }
+// Le fait d'avoir une date dans le local storage signifie que je viens du parcours de prise de rendez-vous
+// Je modifie donc le texte du bouton de connexion
+if (pathname == "/connexion" && localStorage.getItem("date")) {
+  console.log("test modif bouton login");
+  const loginButton = document.querySelector(".btn-login");
+  loginButton.textContent = "Se connecter et finaliser votre rendez-vous";
+  loginButton.style.width = "290px";
+  loginButton.style.height = "100px";
+}
