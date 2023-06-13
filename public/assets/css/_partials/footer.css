@@ -236,6 +236,14 @@ a {
   .footer_content_i {
     padding-top: 0;
   }
+  .footer_content_info div {
+    display: flex;
+    flex-direction: column;
+  }
+  .footer_content_info div ul {
+    width: 100%;
+    padding-left: 18px;
+  }
   @media screen and (min-width: 1200px) {
     .footer_container {
       background-color: var(--main-bg-color-gray);

@@ -158,6 +158,20 @@ h1.admin {
   .submenu_item:hover {
     cursor: pointer;
   }
+  .menu_item.parameters:hover,
+  .menu_item.tools:hover{
+  background-color: transparent;
+}
+  .parameter_items,
+.tools_items {
+  width: auto;
+  display: block;
+  position: relative;
+  left: auto;
+  bottom: auto;
+  background-color: #284a6d;
+  text-align: left;
+}
   /* index user admin */
   .table_admin,
   .table_admin_show {

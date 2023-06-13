@@ -92,6 +92,9 @@ ul.search_results {
   max-height: 200px;
   overflow-y: scroll;
 }
+ul.search_results li:hover {
+  cursor:pointer;
+}
 ul.search_results.search_results--open {
   height: auto;
   border: 1px solid #ddd;

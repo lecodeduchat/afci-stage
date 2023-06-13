@@ -72,8 +72,8 @@ class AppointmentsController extends AbstractController
 
         if ($appointmentForm->isSubmitted() && $appointmentForm->isValid()) {
 
-            // TODO : Vérifier que le rendez-vous n'est pas déjà pris (si code javascript modifié par un hacker) ou pris entre temps par un autre utilisateur
             $appointmentsRepository->save($appointment, true);
+            dump($appointment);
             // Affichage d'un message flash à l'utilisateur
             $this->addFlash('success', 'Le rendez-vous a été pris en compte. Vous allez recevoir un email de confirmation.');
             // Envoye d'un mail de confirmation à l'utilisateur
