@@ -56,10 +56,11 @@ class RegistrationController extends AbstractController
                 ];
                 $token = $jwt->generate($header, $payload, $this->getParameter('app.jwtsecret'));
 
+                
                 $user->setResetToken($token);
                 $entityManager->persist($user);
+                
                 $entityManager->flush();
-
                 // generation d'un lien de réinitialisation du mot de passe
                 $url = $this->generateUrl('app_register_patient', ['token' => $token], UrlGeneratorInterface::ABSOLUTE_URL);
 

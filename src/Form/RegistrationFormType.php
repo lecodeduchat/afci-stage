@@ -31,7 +31,7 @@ class RegistrationFormType extends AbstractType
                 'constraints' => [
                     new Regex([
                         'pattern' => '/^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-zA-Z]{2,4}$/',
-                        'message' => 'L\'adresse e-mail doit être valide.'
+                        'message' => 'L\'adresse e-mail n\'est pas valide.'
                     ])
                 ],
             ])
@@ -45,7 +45,7 @@ class RegistrationFormType extends AbstractType
                 'constraints' => [
                     new Regex([
                         'pattern' => '/^[a-zéèë]+[ \-\']?[[a-zéèë]+[ \-\']?]*[a-zéèë]+$/i',
-                        'message' => 'Le nom doit être valide.'
+                        'message' => 'Le nom n\'est pas valide.'
                     ])
                 ],
             ])
@@ -58,7 +58,7 @@ class RegistrationFormType extends AbstractType
                 'constraints' => [
                     new Regex([
                         'pattern' => '/^[a-zéèë]+[ \-\']?[[a-zéèë]+[ \-\']?]*[a-zéèë]+$/i',
-                        'message' => 'Le prénom doit être valide.'
+                        'message' => 'Le prénom n\'est pas valide.'
                     ])
                 ],
             ])
@@ -168,7 +168,7 @@ class RegistrationFormType extends AbstractType
                 'constraints' => [
                     new Regex(
                         '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{12,}$/',
-                        "Le mot de passe doit contenir au moins 14 caractères dont une majuscule, une minuscule, un chiffre et un caractère spécial (#?!@$%^&*-)"
+                        "Le mot de passe doit contenir au moins 12 caractères dont une majuscule, une minuscule, un chiffre et un caractère spécial (#?!@$%^&*-)"
                     )
                 ],
             ])

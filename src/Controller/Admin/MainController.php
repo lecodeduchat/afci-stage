@@ -5,7 +5,6 @@ namespace App\Controller\Admin;
 use DateTime;
 use App\Classes\Calendar;
 use App\Entity\Appointments;
-use App\Service\SendMailService;
 use App\Form\AdminAppointmentsType;
 use App\Repository\CaresRepository;
 use App\Repository\UsersRepository;
@@ -21,7 +20,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class MainController extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function index(Request $request, AppointmentsRepository $appointmentsRepository, UsersRepository $usersRepository, DaysOnRepository $daysOnRepository, DaysOffRepository $daysOffRepository, SendMailService $mail, CaresRepository $caresRepository): Response
+    public function index(Request $request, AppointmentsRepository $appointmentsRepository, UsersRepository $usersRepository, DaysOnRepository $daysOnRepository, DaysOffRepository $daysOffRepository, CaresRepository $caresRepository): Response
     {
         // Je vérifie que l'utilisateur est bien connecté
         if (!$this->getUser()) {
