@@ -42,6 +42,10 @@ h2.fc-toolbar-title {
   font-size: 1.5rem;
   padding: 8px;
 }
+td.fc-day-past{
+  background-color: #a19ed7;
+}
+
 @media screen and (min-width: 900px) {
   #calendar {
     width: calc(100% - 36px);

@@ -19,6 +19,11 @@ class Invoices
     #[ORM\Column(length: 50)]
     private ?string $reference = null;
 
+    public function __construct()
+    {
+       $this->created_at = new \DateTimeImmutable();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
