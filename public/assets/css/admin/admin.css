@@ -1,7 +1,7 @@
 body {
   position: relative;
-  height: 100vh;
-  width: 100vw;
+  height: 100dvh;
+  width: 100dvw;
 }
 h1.admin {
   font-size: 22px;
@@ -84,18 +84,15 @@ h1.admin {
   padding-left: 18px;
   line-height: 50px;
 }
-
 /*  HOME */
 .home_container {
   background-color: red;
   height: 600px;
 }
-
 /* index cares user admin */
 .btn-trash {
   border: none;
 }
-
 .btn_action {
   display: flex;
   flex-direction: row;
@@ -107,7 +104,6 @@ h1.admin {
     width: 20%;
   }
 }
-
 @media screen and (min-width: 900px) {
   body {
     height: 100vh;
