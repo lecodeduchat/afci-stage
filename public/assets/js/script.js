@@ -70,13 +70,14 @@ function initMap() {
     '<div id="content_marker">' +
     '<div id="siteNotice">' +
     "</div>" +
-    '<h4 id="firstHeading" class="firstHeading">Charlotte vandermersch</h4>' +
     '<div id="bodyContent">' +
+    '<h5 id="firstHeading" class="firstHeading">Charlotte vandermersch</h5>'+
     "<p>Horaires:<br> Lundi: 9:30-19h00<br>" +
     "Mardi: 9h30-19h00<br>" +
     "Mercredi: 9h30-19h00<br>" +
     "Jeudi: 9h30-19h00<br>" +
-    "Vendredi:9h30-19h00";
+    "Vendredi:9h30-19h00<br>"+
+    "Samedi:9h30-13h30"
   "</p>" + "</div>" + "</div>";
 
   const infowindow = new google.maps.InfoWindow({
