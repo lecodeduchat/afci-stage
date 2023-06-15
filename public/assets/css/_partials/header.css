@@ -137,13 +137,6 @@ header {
   );
   z-index: 6;
 }
-/* .test {
-  height: 10px;
-  position: fixed;
-  top: 50px;
-  left: 0;
-  z-index: 6;
-} */
 .gradient-color-bar--fixed-mobile {
   position: fixed;
   top: 50px;
@@ -159,7 +152,6 @@ header {
   .header_content-btnRdv {
     width: 200px;
   }
-
   .main_menu {
     grid-column: 1/2;
   }

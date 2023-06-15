@@ -47,8 +47,9 @@ class Calendar
             $end = $end->format('Y-m-d H:i:s');
             // Je récupère le nom du patient
             $userId = $appointment->getUserId();
-            // dd($userId);
+            
             $user = $this->usersRepository->find($userId);
+           
             $user = $user->getFirstname() . ' ' . $user->getLastname();
             // Je récupère l'intitulé du soin
             $care = $appointment->getCare()->getName();

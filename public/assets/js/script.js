@@ -4,6 +4,7 @@
 // window.addEventListener("load", () => {
 //   loader.classList.add("fondu-out");
 // });
+
 // Ouverture et fermeture du menu principale ---------------------------------
 const btnMainMenu = document.querySelector(".main_menu-btn");
 const mainMenu = document.querySelector(".main_menu-list");
