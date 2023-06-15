@@ -1,4 +1,19 @@
 "use strict";
+const registrationBtnRadio = document.querySelectorAll(".registration-radio");
+const formUsers = document.querySelector(".form_users");
+const formPatients = document.querySelector(".form_patients");
+registrationBtnRadio.forEach((elt) => {
+  elt.addEventListener("change", function () {
+    if (elt.value == "no") {
+      formUsers.style.display = "block";
+      formPatients.style.display = "none";
+    }
+    if (elt.value == "yes") {
+      formUsers.style.display = "none";
+      formPatients.style.display = "block";
+    }
+  });
+});
 // Vérification de la date de naissance --------------------------------------
 const birthday = document.querySelector("#registration_form_birthday");
 const errorBirthday = document.querySelector(".error.birthday");

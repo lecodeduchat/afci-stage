@@ -1,7 +1,7 @@
 body {
   position: relative;
-  height: 100vh;
-  width: 100vw;
+  height: 100dvh;
+  width: 100dvw;
 }
 h1.admin {
   font-size: 22px;
@@ -13,6 +13,9 @@ h1.admin {
   margin-top: 0;
   height: 40px;
   justify-content: center;
+}
+.header_logo:hover {
+  cursor: pointer;
 }
 .header_logo-img {
   height: 40px;
@@ -52,34 +55,59 @@ h1.admin {
   color: white;
 }
 .menu_item {
-  width: 15%;
+  width: 20%;
   text-align: center;
   border-right: 1px solid #ddd;
+}
+.menu_item:hover,
+.submenu_item:hover {
+  background-color: var(--main-color-blue);
+  cursor: pointer;
 }
 .menu_item span {
   display: none;
 }
-.parameter_items {
+.parameter_items,
+.tools_items {
+  width: 100%;
   display: none;
+  position: absolute;
+  left: 0px;
+  bottom: 52px;
+  background-color: #284a6d;
+  text-align: left;
+}
+.submenu_open {
+  display: block;
+}
+.submenu_item {
+  padding-left: 18px;
+  line-height: 50px;
 }
 /*  HOME */
 .home_container {
   background-color: red;
   height: 600px;
 }
-
 /* index cares user admin */
 .btn-trash {
   border: none;
 }
-
 .btn_action {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
 }
-
+@media screen and (min-width: 678px) {
+  .parameter_items,
+  .tools_items {
+    width: 20%;
+  }
+}
 @media screen and (min-width: 900px) {
+  body {
+    height: 100vh;
+  }
 }
 @media screen and (min-width: 1200px) {
   body {
@@ -89,6 +117,9 @@ h1.admin {
     display: flex;
     flex-direction: row;
     height: calc(100% - 42px);
+  }
+  .content {
+    width: 80%;
   }
   .menu_container {
     position: relative;
@@ -123,10 +154,20 @@ h1.admin {
   .submenu_item:hover {
     cursor: pointer;
   }
-
-  .cares_container {
-    width: 80%;
-  }
+  .menu_item.parameters:hover,
+  .menu_item.tools:hover{
+  background-color: transparent;
+}
+  .parameter_items,
+.tools_items {
+  width: auto;
+  display: block;
+  position: relative;
+  left: auto;
+  bottom: auto;
+  background-color: #284a6d;
+  text-align: left;
+}
   /* index user admin */
   .table_admin,
   .table_admin_show {
@@ -134,8 +175,8 @@ h1.admin {
     border-collapse: collapse;
   }
   .table_admin tr td {
-    border: 1px solid var(--main-color-purple);
-    padding: 8px;
+    border: 1px solid #ddd;
+    padding: 9px;
   }
   .btn_index_admin {
     display: flex;
@@ -195,7 +236,6 @@ h1.admin {
     border-radius: 5px;
     margin: 0 2px;
   }
-
   .pagination_admin span.current {
     background-color: var(--main-color-purple);
     color: white;

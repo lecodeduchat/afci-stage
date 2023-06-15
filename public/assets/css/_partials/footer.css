@@ -20,7 +20,7 @@ footer h4 {
 }
 .footer_img_facade {
   width: 100%;
-  height: 100px;
+  height: 150px;
   background: url("/assets/images/facade-cabinet.jpg") center/cover no-repeat;
 }
 .footer_container_cabinet {
@@ -121,19 +121,21 @@ a {
   color: #ffffff;
 }
 .footer_content_end {
-  width: 200px;
+  width: 230px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .footer_content_end span {
   line-height: 26px;
+  text-align: center;
 }
 /*   première média query    */
 /* Pourquoi min-width: 532px ?!!! */
 @media screen and (min-width: 760px) {
   .footer_img_facade {
-    height: 190px;
+    height: 250px;
   }
   .footer_content {
     display: flex;
@@ -202,6 +204,10 @@ a {
     align-items: center;
     justify-content: space-around;
   }
+  .footer_content_end {
+    width: auto;
+    margin: auto;
+  }
 }
 /* deuxième media query */
 @media screen and (min-width: 900px) {
@@ -229,6 +235,14 @@ a {
   }
   .footer_content_i {
     padding-top: 0;
+  }
+  .footer_content_info div {
+    display: flex;
+    flex-direction: column;
+  }
+  .footer_content_info div ul {
+    width: 100%;
+    padding-left: 18px;
   }
   @media screen and (min-width: 1200px) {
     .footer_container {

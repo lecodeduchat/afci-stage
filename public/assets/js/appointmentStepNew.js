@@ -61,8 +61,14 @@ optionsYear.forEach((option) => {
   }
 });
 let childId = localStorage.getItem("childId");
+
+console.log("stepNew: ", dataChilds[0]);
+
 if (childId == "newChild") {
-  childId = lastChildId;
+  let child = dataChilds.pop();
+  childId = child.id;
+} else {
+  childId = localStorage.getItem("childId");
 }
 const inputChildId = document.querySelector("#appointments_child_id");
 inputChildId.setAttribute("value", childId);

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Classes\Soins;
 use App\Form\ResetPasswordFormType;
 use App\Form\ResetPasswordRequestFormType;
 use App\Repository\CaresRepository;
@@ -26,18 +27,27 @@ class SecurityController extends AbstractController
         if ($this->getUser()) {
             return $this->redirectToRoute('app_home');
         }
-        // dd($_SESSION);
+        
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
+        // Je remplace le message d'erreur par défaut par un message personnalisé en français!!!
+        if($error !== null){
+            $error = "";
+            $this->addFlash('danger', 'Identifiants incorrects. Veuillez réessayer.');
+        }
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
+
+        // Je récupère la liste des soins pour la carte de réservation
+        $soins = new Soins($caresRepository);
+        $soins = $soins->getSoins();
 
         return $this->render(
             'security/login.html.twig',
             [
                 'last_username' => $lastUsername,
                 'error' => $error,
-                'cares' => $caresRepository->findAll(),
+                'soins' => $soins,
                 'user' => $user,
             ],
         );
@@ -90,8 +100,6 @@ class SecurityController extends AbstractController
             $this->addFlash('danger', 'Un problème est survenue');
             return $this->redirectToRoute('app_login');
         }
-
-
 
         return $this->render(
             'security/reset_password_request.html.twig',

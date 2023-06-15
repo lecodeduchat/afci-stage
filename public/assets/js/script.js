@@ -1,4 +1,9 @@
 "use strict";
+// LOADER --------------------------------------------------------------------
+// const loader = document.querySelector(".loader");
+// window.addEventListener("load", () => {
+//   loader.classList.add("fondu-out");
+// });
 
 // Ouverture et fermeture du menu principale ---------------------------------
 const btnMainMenu = document.querySelector(".main_menu-btn");
@@ -97,19 +102,6 @@ function initMap() {
   });
 }
 
-// Initialisation de datepicker ---------------------------------------------
-// const datepicker = document.querySelector(".js-datepicker");
-// if (datepicker) {
-//   $(document).ready(function () {
-//     console.log("coucou datepicker");
-//     // you may need to change this code if you are not using Bootstrap Datepicker
-//     $(".js-datepicker").datepicker({
-//       format: "dd/MM/yyyy",
-//       placeholder: "jj/mm/aaaa",
-//     });
-//   });
-// }
-
 // bouton fermeture des message
 const closeMessage = document.querySelectorAll(".alertClose");
 
@@ -137,5 +129,25 @@ if (reservation) {
     }
   }
 }
-// Déclaration des variables pour la page new rendez-vous -------------------
-let firstnameChild, childs, firstnameLastChild;
+// Je vide le local storage quand je suis sur la page d'accueil
+// Cela évite de garder en mémoire la date d'un rendez-vous qui n'a pas été pris
+if (window.location.pathname == "/") {
+  localStorage.setItem("time", "");
+  localStorage.setItem("date", "");
+  localStorage.setItem("nameDay", "");
+  localStorage.setItem("careId", "");
+  localStorage.setItem("childId", "");
+}
+
+function formatPhone(phone) {
+  if (phone.length == 9) {
+    phone = "0" + phone;
+  } else {
+    phone = "Non renseigné";
+  }
+  let phoneFormated = phone.replace(
+    /(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/,
+    "$1.$2.$3.$4.$5"
+  );
+  return phoneFormated;
+}

@@ -11,8 +11,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-
-
 class UsersFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -40,7 +38,7 @@ class UsersFormType extends AbstractType
                 'label' => 'Nom',
                 'constraints' => [
                     new Regex([
-                        'pattern' => '/^[a-z]+[ \-\']?[[a-z]+[ \-\']?]*[a-z]+$/i',
+                        'pattern' => '/^[a-zéèë]+[ \-\']?[[a-zéèë]+[ \-\']?]*[a-zéèë]+$/i',
                         'message' => 'Le nom doit être valide.'
                     ])
                 ],
@@ -53,7 +51,7 @@ class UsersFormType extends AbstractType
                 'label' => 'Prénom',
                 'constraints' => [
                     new Regex([
-                        'pattern' => '/^[a-z]+[ \-\']?[[a-z]+[ \-\']?]*[a-z]+$/i',
+                        'pattern' => '/^[a-zéèë]+[ \-\']?[[a-zéèë]+[ \-\']?]*[a-zéèë]+$/i',
                         'message' => 'Le prénom doit être valide.'
                     ])
                 ],

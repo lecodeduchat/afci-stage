@@ -1,8 +1,8 @@
 <div class="profile_menu">
 	<div class="profile_menu_salutation">
 		{% if app.user %}
-			Bonjour,
-			{{ user.firstname }}&nbsp;{{ user.lastname}}
+			<div>Bonjour,</div>
+			<div>{{ user.firstname }}&nbsp;{{ user.lastname}}</div>
 		{% endif %}
 	</div>
 	<nav>
@@ -11,7 +11,8 @@
 				<i class="fa-solid fa-user-gear"></i>
 				Mon compte
 			{% else %}
-				<a href="{{ path('app_login') }}">Me connecter</a>
+				<a href="{{ path('app_login') }}">
+					<i class="fa-solid fa-user"></i>&nbsp;&nbsp;Espace patient</a>
 			{% endif %}
 		</div>
 		<ul class="profile_menu_content">

@@ -40,7 +40,6 @@ class JWTService
     }
 
     //On vérifie que le token est valide (correctement formé)
-
     public function isValid(string $token): bool
     {
         return preg_match(
@@ -82,7 +81,7 @@ class JWTService
 
         return $payload['exp'] < $now->getTimestamp();
     }
-
+    
     // On vérifie la signature du Token
     public function check(string $token, string $secret)
     {

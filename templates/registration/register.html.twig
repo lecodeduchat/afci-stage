@@ -1,13 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 	<link rel="stylesheet" href="/assets/css/_partials/form.css">
+	<link rel="stylesheet" href="/assets/css/pages/register.css">
 {% endblock %}
 
 
 {% block javascripts %}
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="/assets/js/register.js" defer></script>
 {% endblock %}
 
@@ -29,8 +28,30 @@
 				<div class="tabs_item active">Je crée mon compte</div>
 			</div>
 			<div class="form_users-bg bg-white">
-				<div class="form_users">
+				<div class="registration">
+					<h3>Êtes-vous patient du cabinet ?</h3>
+					<div class="registration_items">
+						<div class="registration_item-radio">
+							<input class="registration-radio" type="radio" name="registration" id="registration_no" value="no" checked>
+							<label for="registration_no">Non</label>
+						</div>
+						<div class="registration_item-radio">
+							<input class="registration-radio" type="radio" name="registration" id="registration_yes" value="yes">
+							<label for="registration_yes">Oui</label>
+						</div>
+					</div>
+				</div>
+				<div class="form_patients">
+					<h3>Recevoir un email avec un lien temporaire afin de créer votre espace patient.</h3>
+					{{ form_start(patientsSearchForm) }}
+					{{ form_row(patientsSearchForm.email) }}
+					{{ form_row(patientsSearchForm.firstname) }}
+					{{ form_row(patientsSearchForm.lastname) }}
+					<button type="submit" class="btn btn-inscription">Envoyer</button>
+					{{ form_end(patientsSearchForm) }}
+				</div>
 
+				<div class="form_users">
 					{{ form_start(registrationForm) }}
 					{{ form_row(registrationForm.firstname) }}
 					{{ form_row(registrationForm.lastname) }}
@@ -41,7 +62,7 @@
 					{{ form_row(registrationForm.plainPassword, {
             label: 'Mot de passe'
         }) }}
-					{{ form_row(registrationForm.home_phone) }}
+					{# {{ form_row(registrationForm.home_phone) }} #}
 					{{ form_row(registrationForm.cell_phone) }}
 					{{ form_row(registrationForm.address) }}
 					{{ form_row(registrationForm.zipcode) }}

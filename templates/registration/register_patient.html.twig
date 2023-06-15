@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="/assets/css/_partials/form.css">
+{% endblock %}
+{% block javascripts %}
+	<script src="/assets/js/register_patient.js" defer></script>
+{% endblock %}
+
+{% block title %}Votre profil
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="content content">
+			<h2>Modifier ou compléter votre profil</h2>
+			<div class="form_users-bg bg-white">
+				<div class="form_users edit_user">
+					{{ form_start(userForm) }}
+					{{ form_row(userForm.firstname) }}
+					{{ form_row(userForm.lastname) }}
+					{{ form_row(userForm.birthday) }}
+					{{ form_row(userForm.email) }}
+					{# {{ form_row(userForm.home_phone) }} #}
+					{{ form_row(userForm.cell_phone) }}
+					{{ form_row(userForm.address) }}
+					{{ form_row(userForm.zipcode) }}
+					{{ form_row(userForm.city) }}
+					{{ form_row(userForm.country) }}
+					{{ form_row(userForm.plainPassword, {label: 'Mot de passe'}) }}
+					{{ form_row(userForm.RGPDConsent) }}
+					<button type="submit" class="btn btn-inscription">Mettre à jour mon profil</button>
+					{{ form_end(userForm) }}
+				</div>
+			</div>
+
+		</div>
+	</div>
+{% endblock %}

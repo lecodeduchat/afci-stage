@@ -1,41 +1,3 @@
-.profile_menu {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0 18px;
-  line-height: 50px;
-}
-.profile_menu_content {
-  display: none;
-}
-.profile_menu_content--open {
-  position: absolute;
-  bottom: -154px; /* 50px * nb de li + px de gradient-color-bar */
-  right: 0;
-  display: block;
-  background-color: var(--main-bg-color-purple);
-  list-style: none;
-  z-index: 10;
-}
-.profile_menu_content li {
-  padding: 0 18px;
-  line-height: 50px;
-  text-align: left;
-  color: white;
-  border-bottom: 1px solid white;
-}
-.profile_menu_salutation {
-  font-weight: bold;
-  color: var(--main-color-purple);
-}
-.profile_menu_title {
-  font-weight: bold;
-  font-family: "Montserrat";
-}
-.profile_menu_title:hover {
-  cursor: pointer;
-}
 .profile_list_appointments h3 {
   background-color: var(--main-bg-color-purple);
   color: white;
@@ -90,8 +52,10 @@ table.edition_profile tr {
 }
 
 .edition_profile_action {
-  text-align: right;
   margin-bottom: 36px;
+}
+.edition_profile_action .btn {
+  margin: 0 auto;
 }
 .appointment-child.next {
   display: block;
@@ -99,8 +63,11 @@ table.edition_profile tr {
 li.olds-appointments_item {
   text-align: left;
   padding-left: 18px;
+  line-height: 28px;
 }
-
+li.olds-appointments_item > strong {
+  display: block;
+}
 li.olds-appointments_item .color_care {
   font-size: 12px;
   margin-right: 6px;
@@ -109,12 +76,31 @@ li.olds-appointments_item .color_care {
 .form_users.edit_user {
   border-radius: 10px;
 }
+.table_childs {
+  width: 100%;
+  margin: 27px 0;
+  border-collapse: collapse;
+}
+.table_childs td,
+.table_childs th {
+  text-align: center;
+  padding: 6px 0;
+  border: 1px solid #ddd;
+}
+.table_childs tr td:first-child {
+  text-align: left;
+  padding-left: 9px;
+}
+.table_childs tr td:nth-child(2),
+.table_childs tr th:nth-child(2) {
+  display: none;
+}
 @media screen and (min-width: 640px) {
   .profile_list_appointments {
     width: 640px;
-    margin: 0 auto;
+    margin: 36px auto;
   }
-  li.olds-appointments_item > span:nth-child(2) {
+  li.olds-appointments_item > strong {
     display: inline-block;
     width: 250px;
   }
@@ -135,10 +121,13 @@ li.olds-appointments_item .color_care {
     margin: 0 auto;
     padding: 18px 0;
   }
+  .table_childs tr td:nth-child(2),
+  .table_childs tr th:nth-child(2) {
+    display: table-cell;
+  }
+}
+.empty_list {
+  height: 100px;
 }
 @media screen and (min-width: 1200px) {
-  .profile_menu {
-    width: 1200px;
-    margin: 0 auto;
-  }
 }

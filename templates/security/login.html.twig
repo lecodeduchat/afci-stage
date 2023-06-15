@@ -5,10 +5,12 @@
 	<link rel="stylesheet" href="/assets/css/pages/appointment.css">
 {% endblock %}
 {% block javascripts %}
+	<script>
+		dataCares = {{ soins|raw }};
+	</script>
 	<script src="/assets/js/appointmentReservation.js" defer></script>
-	<script src="https://www.google.com/recaptcha/api.js?render=6LfhAlwmAAAAABkY8ssrGY_uLMmnDa5R7I8Cosq8" defer></script>
+	<script src="https://www.google.com/recaptcha/api.js?render=" defer></script>
 	<script src="/assets/js/recaptcha.js" defer></script>
-	
 {% endblock %}
 
 {% block title %}Connexion
@@ -18,7 +20,7 @@
 	<div class="container login_container">
 		<div class="content login_content">
 			<h3 class="login_title">Identifiez-vous</h3>
-			<div class="login_message">Votre réservation n'est pas encore validée</div>
+			<div class="login_message hidden">Votre réservation n'est pas encore validée</div>
 			<div class="tabs">
 				<div class="tabs_item">J'ai déjà un compte</div>
 				<div class="tabs_item">
@@ -27,7 +29,7 @@
 			</div>
 			<form method="post" class="login_form">
 				{% if error %}
-					<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security.fr') }}</div>
+					<div class="alert alert-danger">{{ error }}</div>
 				{% endif %}
 
 				{% if app.user %}
@@ -51,10 +53,10 @@
 				<a href="{{path('forgotten_password')}}" class="login_form-link link">Mot de passe oublié ?</a>
 				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 				<button class="btn btn-login" type="submit">
-					Se connecter et finaliser votre rendez-vous
+					Se connecter
 				</button>
 			</form>
-			<div class="reservation">
+			<div class="reservation hidden">
 				<h3>Votre réservation</h3>
 				<div class="reservation_date">
 					<span class="appointment_date"></span>
@@ -75,17 +77,5 @@
 				</div>
 			</div>
 		</div>
-		<table class="cares hidden">
-			<tbody class="hidden">
-				{% for care in cares %}
-					<tr class="hidden">
-						<td class="hidden">{{ care.id }}</td>
-						<td class="hidden">{{ care.name }}</td>
-						<td class="hidden">{{ care.duration|format_datetime('none','short', locale='fr') }}</td>
-						<td class="hidden">{{ care.price }}</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
 	</div>
 {% endblock %}

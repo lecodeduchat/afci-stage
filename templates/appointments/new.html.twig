@@ -6,15 +6,13 @@
 {% block javascripts %}
 	<script>
 		{% if childs %}
-lastChildId = `{{ lastChildId }}`;
-firstnameLastChild = `{{ firstnameLastChild }}`;
-console.log('prénom: ', firstnameLastChild);
-childs = {{ childs|raw }};
-console.log(childs);{% endif %}let dataCares = {{ cares|raw }};
+dataChilds = {{ childs|raw }};{% endif %}let dataCares = {{ cares|raw }};
 console.log(dataCares);
+console.log("twig: dataChilds: ", dataChilds[0]);
 	</script>
 	<script src="/assets/js/appointmentReservation.js" defer></script>
 	<script src="/assets/js/appointmentStepNew.js" defer></script>
+
 {% endblock %}
 
 {% block title %}Rendez-vous

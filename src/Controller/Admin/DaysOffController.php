@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/indisponibilites', name: 'daysOff')]
+#[Route('/admin/indisponibilites', name: 'daysOff')]
 class DaysOffController extends AbstractController
 {
     #[Route('/', name: '_index', methods: ['GET'])]

@@ -7,7 +7,7 @@
 
 {% block javascripts %}
 	<script>
-		let cares = {{ cares|raw }};
+		let dataCares = {{ soins|raw }};
 	</script>
 	<script src="/assets/js/appointmentReservation.js" defer></script>
 	<script src="/assets/js/appointmentStepChild.js" defer></script>
@@ -30,11 +30,11 @@
 						<option value="newChild">Ajouter un enfant</option>
 					</select>
 					<div class="formChild">
-						{% include('childs/_form.html.twig') %}
+						{% include('users/_form.html.twig') %}
 					</div>
 					<a href="{{ path('appointments_new')}}" class="btn link choiceChild">Valider</a>
 				{% else %}
-					{% include('childs/_form.html.twig') %}
+					{% include('users/_form.html.twig') %}
 				{% endif %}
 			</div>
 			<div class="reservation">

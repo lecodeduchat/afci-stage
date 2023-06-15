@@ -92,6 +92,9 @@ ul.search_results {
   max-height: 200px;
   overflow-y: scroll;
 }
+ul.search_results li:hover {
+  cursor:pointer;
+}
 ul.search_results.search_results--open {
   height: auto;
   border: 1px solid #ddd;
@@ -121,9 +124,37 @@ ul.search_results.search_results--open {
   margin: 0 auto;
   margin-bottom: 60px;
 }
+.content {
+  padding: 18px 0;
+}
+.admin_appointment_form label {
+  display: inline-block;
+  width: 150px;
+  padding-bottom: 18px;
+}
 @media screen and (min-width: 1200px) {
-  .modal_content {
-    width: 300px;
-    height: 500px;
+  .content {
+    padding: 18px;
+  }
+  .container_appointment {
+    padding: 0;
+  }
+  .container_appointment .content h1 {
+    text-align: center;
+  }
+  .datas_user {
+    height: 60%;
+    margin: 0px 18px 18px 18px;
+  }
+  .datas_user-header > div {
+    width: 50%;
+  }
+  .datas_user-header .new_user {
+    width: 50%;
+    justify-content: left;
+  }
+  form[name="admin_users_short"] {
+    display: flex;
+    flex-direction: column;
   }
 }
