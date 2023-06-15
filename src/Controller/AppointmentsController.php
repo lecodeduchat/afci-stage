@@ -201,20 +201,20 @@ class AppointmentsController extends AbstractController
             $this->addFlash('success', 'Votre rendez-vous a été pris en compte. Vous allez recevoir un email de confirmation.');
             // Envoi d'un email de confirmation de rendez-vous
 
-            // $mail->send(
-            //     'no-reply@monsite.net',
-            //     $user->getEmail(),
-            //     'Email de confirmation de votre rendez vous',
-            //     'rendezvous',
-            //     compact('user', 'appointment')
-            // );
-            // $mail->send(
-            //     'no-reply@monsite.net',
-            //     'no-reply@monsite.net',
-            //     'Email de confirmation de votre rendez vous',
-            //     'rendezvousclient',
-            //     compact('user', 'appointment')
-            // );
+            $mail->send(
+                'no-reply@monsite.net',
+                $user->getEmail(),
+                'Email de confirmation de votre rendez vous',
+                'rendezvous',
+                compact('user', 'appointment')
+            );
+            $mail->send(
+                'no-reply@monsite.net',
+                'no-reply@monsite.net',
+                'Email de confirmation de votre rendez vous',
+                'rendezvousclient',
+                compact('user', 'appointment')
+            );
 
             return $this->redirectToRoute('profile_index', [], Response::HTTP_SEE_OTHER);
         }
