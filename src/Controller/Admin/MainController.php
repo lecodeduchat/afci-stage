@@ -51,11 +51,17 @@ class MainController extends AbstractController
         foreach ($data as $elt) {
             $datas[] = $elt;
         }
+        $appointments = [];
+        foreach ($rdvs as $rdv) {
+            $appointments[] = $rdv;
+        }
         // dd($datas);
         $datas = json_encode($datas);
+        $appointments = json_encode($appointments);
 
         return $this->render('admin/index.html.twig', [
             'data' => $datas,
+            'appointments' => $appointments,
             'cares' => $caresRepository->findAll(),
         ]);
     }
