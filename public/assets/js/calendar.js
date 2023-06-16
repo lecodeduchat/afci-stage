@@ -1,7 +1,42 @@
 "use strict";
+let width = window.innerWidth;
+let events;
+// Je récupère les rendez-vous en base de données
+// Si je suis sur mobile, la vue étant par défaut en mode liste je n'affiche que les rendez-vous
+// Si je suis sur desktop, la vue étant par défaut en mode semaine j'affiche les rendez-vous et heures d'indisponibilité
+if (width < 768) {
+  events = appointments;
+  console.log(events);
+} else {
+  events = datas;
+}
+// Je modifie le tableau events en fonction de la vue
+const btnsView = document.querySelectorAll(".fc-button-group button");
+console.log("test btnsView", btnsView[0]);
+btnsView.forEach((btn) => {
+  console.log("test btn", btn);
+  btn.addEventListener("click", (e) => {
+    updateEvents(e.target.textContent);
+    console.log("test clic view", events);
+  });
+});
+function updateEvents(view) {
+  switch (view) {
+    case "Jour":
+    case "Semaine":
+      events = datas;
+      break;
+    case "Mois":
+    case "Liste":
+      events = appointments;
+      break;
+  }
+  calendar.render();
+  console.log("test updateEvents", events);
+}
 
 // Je teste la taille de l'écran pour afficher le calendrier en mode liste ou en mode grille
-let width = window.innerWidth;
+
 let calendarElt = document.getElementById("calendar");
 let view, calendar;
 if (width < 768) {
@@ -359,10 +394,13 @@ let marge = 8;
 menuCalendarMobile.addEventListener("click", function () {
   itemsMenu.classList.toggle("open-menu-calendar-mobile");
   buttonsView = document.querySelectorAll(".fc-button-group button");
+  console.log("test buttonsView mobile", buttonsView[0]);
   // Je mets un écouteur d'évènement sur chaque bouton de vue du calendrier
   buttonsView.forEach((button) => {
-    button.addEventListener("click", () => {
+    button.addEventListener("click", (e) => {
       getDateTime(marge);
+      updateEvents(e.target.textContent);
+      console.log(e.target.textContent);
     });
   });
 });
