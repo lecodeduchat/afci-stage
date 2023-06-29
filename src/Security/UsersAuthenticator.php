@@ -36,6 +36,7 @@ class UsersAuthenticator extends AbstractLoginFormAuthenticator
             new UserBadge($email),
             new PasswordCredentials($request->request->get('password', '')),
             [
+                // permet de vérifier que le formulaire est bien envoyé par notre site et non par un autre
                 new CsrfTokenBadge('authenticate', $request->request->get('_csrf_token')),
             ]
         );

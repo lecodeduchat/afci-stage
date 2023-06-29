@@ -12,7 +12,6 @@ if (width < 768) {
 }
 // Je modifie le tableau events en fonction de la vue
 const btnsView = document.querySelectorAll(".fc-button-group button");
-console.log("test btnsView", btnsView[0]);
 btnsView.forEach((btn) => {
   console.log("test btn", btn);
   btn.addEventListener("click", (e) => {
@@ -72,7 +71,6 @@ if (width < 768) {
     firstDay: 1,
     // Je fais disparaître le dimanche
     hiddenDays: [0],
-    //! TODO: chercher comment modifier titleFormat en fonction de la vue (mois, semaine, jour)
     titleFormat: {
       year: "numeric",
       month: "long",
@@ -107,8 +105,6 @@ if (width < 768) {
     events: events,
     // Je rends les événements modifiables en les déplaçants
     editable: true,
-    // Je rends les événements redimensionnables
-    // eventResizableFromStart: true,
     eventClick: function (infos) {
       console.log(infos.event.start);
       console.log(infos.event.end);
@@ -458,8 +454,20 @@ function getDateTime(marge) {
           localStorage.setItem("time", time);
         }
       });
-      // modal.style.display = "block";
+
       document.location.href = "/admin/rendez-vous/nouveau";
+      getDateTime(marge);
     });
   });
 }
+
+// ------------------------------------------------------------------------------------------------------
+// Ecouteurs d'évènements sur les boutons de navigation du calendrier prev et next
+const prev = document.querySelector(".fc-prev-button");
+const next = document.querySelector(".fc-next-button");
+prev.addEventListener("click", () => {
+  getDateTime(marge);
+});
+next.addEventListener("click", () => {
+  getDateTime(marge);
+});

@@ -15,7 +15,10 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use CreatedAtTrait;
 
+    // les annotations sont des attributs de php 8
+    // clé primaire
     #[ORM\Id]
+    // auto-increment
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
