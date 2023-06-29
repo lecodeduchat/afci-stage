@@ -9,12 +9,9 @@
 	<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.6/index.global.min.js'></script>
 	<script>
 		let datas = {{ data|raw }};
-console.log(datas);
 let appointments = {{ appointments|raw }};
-console.log(appointments);
 	</script>
 	<script src="/assets/js/calendar.js" defer></script>
-	<script src="/assets/js/admin.js" defer></script>
 {% endblock %}
 
 {% block title %}Administration

@@ -70,7 +70,7 @@ class Slots
                 $is_open_morning = false;
                 $startDay = $dayOn->getStartAfternoon()->format("H:i");
             }
-            
+
             // Je vérifie si l'après-midi est ouvert
             if ($dayOn->getStartAfternoon()->format("H:i") != "00:00") {
                 $endDay = $dayOn->getEndAfternoon()->format("H:i");
@@ -123,7 +123,6 @@ class Slots
             // Je mets à jour la fin de journée en fonction de la dernière indisponibilité si le tableau n'est pas vide
             if (!empty($hoursOff)) {
                 $end = end($hoursOff);
-                // dd($endDay, $end["end"]);
                 if ($endDay < $end["end"]) {
                     $endDay = $end["end"];
                 }

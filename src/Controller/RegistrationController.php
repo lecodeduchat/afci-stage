@@ -56,10 +56,9 @@ class RegistrationController extends AbstractController
                 ];
                 $token = $jwt->generate($header, $payload, $this->getParameter('app.jwtsecret'));
 
-                
                 $user->setResetToken($token);
                 $entityManager->persist($user);
-                
+
                 $entityManager->flush();
                 // generation d'un lien de réinitialisation du mot de passe
                 $url = $this->generateUrl('app_register_patient', ['token' => $token], UrlGeneratorInterface::ABSOLUTE_URL);
@@ -83,6 +82,7 @@ class RegistrationController extends AbstractController
         } else {
             // Si pas de patient trouvé, on affiche un message flash et on invite le patient à s'inscrire
         }
+
 
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -136,6 +136,8 @@ class RegistrationController extends AbstractController
                 'register',
                 compact('user', 'token')
             );
+
+            // On identifie l'utilisateur comme étant connecté directement après son inscription
             return $userAuthenticator->authenticateUser(
                 $user,
                 $authenticator,

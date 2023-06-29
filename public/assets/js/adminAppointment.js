@@ -1,5 +1,4 @@
 "use strict";
-
 // Initialisation des variables ---------------------------------------------
 const appointmentDate = document.querySelector("#dates");
 const appointmentTime = document.querySelector("#times");
@@ -177,7 +176,11 @@ function fillFormUser() {
     }
   });
 }
-
+/**
+ *
+ * @param {string} phone
+ * @returns Affiche le numéro de téléphone au format 00 00 00 00 00
+ */
 function formatPhone(phone) {
   if (phone.length == 9) {
     phone = "0" + phone;
