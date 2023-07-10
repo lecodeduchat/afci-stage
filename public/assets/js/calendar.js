@@ -454,7 +454,6 @@ function getDateTime(marge) {
           localStorage.setItem("time", time);
         }
       });
-
       document.location.href = "/admin/rendez-vous/nouveau";
       getDateTime(marge);
     });
