@@ -130,7 +130,7 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Ville',
                 'constraints' => [
                     new Regex([
-                        'pattern' => '/^[a-z]+[ \-\']?[[a-z]+[ \-\']?]*[a-z]+$/i',
+                        'pattern' => '/^[a-zéèë]+[ \-\']?[[a-zéèë]+[ \-\']?]*[a-zéèë]+$/i',
                         'message' => 'La ville doit être valide.'
                     ])
                 ],
@@ -144,7 +144,7 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Pays',
                 'constraints' => [
                     new Regex([
-                        'pattern' => '/^[a-z]+[ \-\']?[[a-z]+[ \-\']?]*[a-z]+$/i',
+                        'pattern' => '/^[a-zéèë]+[ \-\']?[[a-zéèë]+[ \-\']?]*[a-zéèë]+$/i',
                         'message' => 'Le pays doit être valide.'
                     ])
                 ],
